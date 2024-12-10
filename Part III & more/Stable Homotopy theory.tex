@@ -1,0 +1,205 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{enumerate,bbm}
+\usepackage{tikz,graphicx,color,mathrsfs,color,hyperref,boldline}
+\usepackage{caption,float}
+\usepackage[a4paper,margin=1in,footskip=0.25in]{geometry}
+
+\usepackage{listings}
+\usepackage{xcolor}
+
+\usepackage{tabularx,capt-of}
+
+\usepackage{blindtext}
+%Image-related packages
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage[export]{adjustbox}
+\usepackage{lipsum}
+
+%hyperref setup
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    }
+
+%New colors defined below
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+%Code listing style named "mystyle"
+\lstdefinestyle{mystyle}{
+  backgroundcolor=\color{backcolour}, commentstyle=\color{codegreen},
+  keywordstyle=\color{magenta},
+  numberstyle=\tiny\color{codegray},
+  stringstyle=\color{codepurple},
+  basicstyle=\ttfamily\footnotesize,
+  breakatwhitespace=false,         
+  breaklines=true,                 
+  captionpos=b,                    
+  keepspaces=true,                 
+  numbers=left,                    
+  numbersep=5pt,                  
+  showspaces=false,                
+  showstringspaces=false,
+  showtabs=false,                  
+  tabsize=2
+}
+
+%"mystyle" code listing set
+\lstset{style=mystyle}
+
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}
+\newtheorem{remS}[section]{defn}
+%\newtheorem{lem}[defn]{Lemma}
+\theoremstyle{plain}
+\newtheorem{thm}[defn]{Theorem}
+\newtheorem{prop}[defn]{Proposition}
+\newtheorem{fact}[defn]{Fact}
+\newtheorem{crly}[defn]{Corollary}
+\newtheorem{conj}[defn]{Conjecture}
+\newtheorem{example}[defn]{Example}
+\newtheorem{lem}[defn]{Lemma}
+%\newtheorem*{programming*}{Programming Task}
+
+%\newtheorem{innercustomgeneric}{\customgenericname}
+%\providecommand{\customgenericname}{}
+%\newcommand{\newcustomtheorem}[2]{%
+%  \newenvironment{#1}[1]
+%  {%
+%   \renewcommand\customgenericname{#2}%
+%   \renewcommand\theinnercustomgeneric{##1}%
+%   \innercustomgeneric
+%  }
+%  {\endinnercustomgeneric}
+%}
+
+%\newcustomtheorem{question}{Question}
+%\newcustomtheorem{programming}{Programming Task}
+
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\PP}{\mathbb{P}}
+\newcommand{\FF}{\mathbb{F}}
+
+\newcommand{\calD}{\mathcal{D}}
+
+\newcommand{\sol}{\textit{Solution: }}
+\newcommand{\Res}{\operatorname{Res}}
+
+\title{Introduction to Stable Homotopy Theory}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+\section{Simplicial Homotopy Theory}
+\begin{defn}
+    $\Delta$ is the category of finite non-empty totally ordered sets with morphisms non-decreasing maps.
+\end{defn}
+The typical object of $\Delta$ is $[n]=\{0<1<...<n\}$. We have three important examples of morphisms.
+\begin{itemize}
+    \item $s:[n]\to[0]$ which collapses everything to $0$.
+    \item ($i$th face map) $\partial_i:[n]\to[n+1]$ which omits the value $i$, i.e.,
+    \[\partial_i(j)=\begin{cases}
+        j & j< i\\
+        j+1 & j\ge i
+    \end{cases}\]
+    \item ($i$th degeneracy map) $s_i:[n]\to[n-1]$ which identifies two adjacent values, i.e.,
+    \[s_i(j)=\begin{cases}
+        j & j<i\\
+        j-1 & j\ge i
+    \end{cases}\]
+\end{itemize}
+\begin{rem}
+    By $\mathbf{Top}$, we mean the category of compactly generated topological spaces.
+\end{rem}
+There is a functor $\Delta\to\mathbf{Top}$ sending $[n]$ to $|\Delta^n|=\{(t_0,...,t_{n+1})\in\RR^{n+1}\colon \sum_it_i=1, t_i\ge 0\}$, the geometric $n$-simplex. To see functoriality, simply note that if $f:[n]\to[m]$ is order-preserving, then
+$f$ induces a map $f:|\Delta^n|\to|\Delta^m|$ by extending the map of basis linearly, i.e.,
+\[f(t_0,...,t_n)=\left(\sum_{i\in f^{-1}(0)}t_i,...,\sum_{i\in f^{-1}(m)}t_i\right)\]
+So, the $i$th face map induces the inclusion of a face of a simplex; the $i$th degeneracy map projects everythign down to a face.
+\begin{defn}
+    A \textbf{simplicial set} is a functor $X:\Delta^{\text{op}}\to\mathbf{Set}$.
+\end{defn}
+\begin{example}
+    Let $X$ be a topological space. $\operatorname{Sing}(X)$ is the simplicial set $[n]\mapsto \operatorname{Hom}_{\mathbf{Top}}(|\Delta^n|,X)$
+\end{example}
+\begin{rem}
+    Slogan: $\operatorname{Sing}(X)$ knows all about the homotopy type of $X$.
+\end{rem}
+Inspired by the example above, we often refer to $X[0]$ as the set of points of $X$ and $X[1]$ as the set of paths in $X$ (more generally $X[n]$ the set of $n$-simplices).
+\begin{example}
+    Can define $C_\ast(X)_n=$ free abelian group generated by $X[n]$, with boundary maps given by $\partial=\sum_i(-1)^i\partial_i$,
+\end{example}
+
+We now look at more examples of simplicial sets.
+\begin{example}
+    Suppose $\mathbf{C}$ is a category, then we define its \textbf{nerve} as the simplicial set $N\mathbf{C}:[n]\mapsto \operatorname{Fun}([n],\mathbf{C})$ ($[n]$ seen as a poset). Then, $N\mathbf{C}_0$ is the collection of objects in $\mathbf{C}$; $N\mathbf{C}_1$ the collection of arrows in $\mathbf{C}$; and $N\mathbf{C}_2$ the collection of composable pairs of arrows in $\mathbf{C}$.
+\end{example}
+\begin{example}
+    Can also define $\Delta^n$ as the simplicial set $N([n])$, where $[n]$ is seen as a poset, meaning that $\Delta^n:[m]\mapsto\operatorname{Hom}([m],[n])$. This is the simplicial analog of $|\Delta^n|$. This comes with some important simplicial subsets. For instance, $\partial\Delta^n=\text{``the union of }\partial_i\Delta^n\text{ ''}:[m]\mapsto\{f\in\operatorname{Hom}([m],[n]):f\text{ not onto}\}$. For $0\le i\le n$, one can also take the \textbf{horn}, defined as $\Lambda_i^n:[m]\mapsto\{f\in\operatorname{Hom}([m],[n]):\operatorname{im}(f)\not\supseteq\{0,...,\hat{i},...,n\}\}$ (every face except the $i$th one).
+\end{example}
+\begin{prop}
+    The functor $\operatorname{Sing}:\mathbf{Top}\to\mathbf{sSet}$ has a left adjoint $|-|:\mathbf{sSet}\to\mathbf{Top}$ called geometric realization, and $\operatorname{Hom}_{\mathbf{SSet}}(X,\operatorname{Sing}(Y))\cong\operatorname{Hom}_{\mathbf{Top}}(|X|,Y)$. An explicit formula of $|-|$ is given by
+    \[|X|=\left(\bigsqcup_{n\ge 0}X[n]\times|\Delta^n|\right)\Bigg/(\forall f:[n]\to[m],\forall x\in X[n]),\forall t\in|\Delta^n|,(f^\ast(x),t)\sim(x,f(t))\]    
+\end{prop}
+\begin{example}
+    $|\Delta^n|=|\Delta^n|$ trivially.
+
+    $|-|$ preserves colimits: $|\partial \Delta^n|=$union of the proper faces in $|\Delta^n|$.
+\end{example}
+\begin{proof}
+    A map $X\to\operatorname{Sing}(Y)$ is a natural transformation $x\in X[n]\mapsto \sigma_x:|\Delta^n|\to Y$. For all $f:[n]\to[m]$ and for all $x\in X[m]$, we have $\sigma_{f^\ast(x)}=f\circ\sigma_x$, where $f:|\Delta^n|\to|\Delta^m|$, if and only if the map $\bigsqcup_{n\ge0}X[n]\times|\Delta^n|\to Y$ induced from this preserves equiv relation, if and only if we have a map $|X|\to Y$.
+\end{proof}
+Let's examine $|\Delta^1\times\Delta^1|$. The simplices of $\Delta^1\times\Delta^1$ are paris of maps $(f_i:[n]\to[1],g_{i'}:[n]\to[1])$, where $f_i(j)=0$ if $j<i$ and $f_i(j)=1$ if $j\ge i$. We claim that $\Delta^1\times\Delta^1=\Delta^2\cup_{\Delta^1}\Delta^2$. It's two dimensional as every higher simplex factors through one/two dim simplices. Can interpret this as $|\Delta^1\times\Delta^1|\to|\Delta^1|\times|\Delta^1|$ being a homeo.
+\begin{prop}
+    Let $X,Y$ be simplicial sets. The map $|X\times Y|\to|X|\times|Y|$ is a homeomorphism
+\end{prop}
+\begin{proof}
+    (Sketch)
+    Reduction to $X=\Delta^n$, $Y=\Delta^m$ and do a combinatorial argument.
+
+    First assume $Y=\Delta^n$. Consider the poset of simplicial subsets of $X$, i.e., the collection of $A\subseteq X$, s.t. $|A\times\Delta^n|\to|A|\times|\Delta^n|$ is a homeo. By Zorn's lemma, this has a maximal element $A$ [\textit{we're using compact generation to show that $-\times|\Delta^n|$ commutes with colimits}]. Let $A$ be such a maximal element. If $A=X$ then we are done, if $A\neq X$, then we can find a simplex $\sigma\in X[m]$ not in $A$ of minimal dim. Note that $\sigma$ has to be non-degenerate due to minimality of its dimension. We take $A'=A\cup_{\partial\Delta^m}\Delta^m$. Using the fact that $|-\times\Delta^n|$ and $|-|\times|\Delta^n|$ commutes with pushout, we get a contradiction.
+
+    Then to prove it for general $Y$, fix $X$ and consider the poset $B\subseteq Y$ s.t. $|X\times B|\cong|X|\times |B|$. 
+
+    For details of the combinatorial argument, see Gabriel-Zisman Thm 3.1 of \textit{Calculus of Fractions and Homotopy Theory}.
+\end{proof}
+\begin{rem}
+    We are using the following fact. If $Z$ is a compactly generated topological space. The functor $-\times Z$ has a left adjoint $\operatorname{Maps}(Z,-)$, which implies that the product functor commutes with colimits. Specializing to pushouts, we have $(A\cup_B C)\times Z\cong (A\times Z)\cup_{B\times Z}(C\times Z)$. The general statement is that $|X\times Y|\to(|X|\times|Y|)^{cg}$ is a homeo, where the product $|X|\times |Y|$ is not compactly generated in general, so we take its k-ification.
+\end{rem}
+
+\subsection{Homotopy groups}
+The next goal is to define $\pi_n(X,x)$. To achieve this we need something more from $X$. To illustrate that simplicial set is not sufficient, consider $\pi_0(X)$. Ideally we want to take $X[0]$ and quotient by the relation $x\sim y$ if there is a path from $x$ to $y$, i.e., $\exists \gamma\in X[1]$ s.t. $\partial_1\gamma=x,\partial_0\gamma=y$. However, $\sim$ is not an equiv relation in general. For instance, let $X=\Delta^1$. We have $0\sim 1$ but $1\not\sim 0$. Transitivity is not guaranteed. if $\gamma:x\to y$ and $\delta:y\to z$, then we want to fill the horn $\Delta^1\cup_{\Delta^0}\Delta^1=\Lambda_1^2$ to obtain a path $x\to z$, but this is not possible in general.
+\begin{defn}
+    $X\in\mathbf{sSet}$ is a \textbf{Kan complex} if $\forall n\ge0,\forall 0\le i\le n,\forall f:\Lambda_i^n\to X$, there exists an extension $\tilde f:\Delta^n\to X$.
+\end{defn}
+\begin{example}
+    Let $Y$ be a topological space, then $\operatorname{Sing}(Y)$ is a Kan complex.
+    \begin{proof}
+        a map $\Lambda_i^n\to\operatorname{Sing}(Y)$ is the same thing as a map $|\Lambda_i^n|\to Y$. Our goal is to extend it to $|\Delta^n|\overset{|\tilde f|}{\to} Y$. The inclusion $|\Lambda_i^n|\subseteq|\Delta^n|$ has a retraction (sending the barycenter of the $i$th face to the $i$th vertex and extend linearly). Then we just define $|\tilde{f}|=|f|\circ r$, where $r$ is the retraction.
+    \end{proof}
+    We note that this is how we define composition of path.
+\end{example}
+\begin{rem}
+    If $X$ is a Kan complex, the relation $\sim$ on $X[0]$ defined above is an equivalence relation.
+\end{rem}
+\begin{example}
+    Let $X, Y$ be topological spaces [not necessarily compactly generated in this situation]. Take $\operatorname{Maps}(X,Y)$ as the simplicial set $[n]\mapsto \operatorname{Hom}_{\mathbf{Top}}(X\times |\Delta^n|, Y)$. Then $\operatorname{Maps}(X,Y)$ is a Kan complex. Notice that points are continuous maps and paths are homotopies. If $X,Y$ are compactly generated, then this is seen as the mapping space. Have $\pi_0(\operatorname{Maps}(X,Y))=[X,Y]$.
+\end{example}
+\end{document}

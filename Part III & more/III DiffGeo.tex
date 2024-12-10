@@ -1,0 +1,358 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{enumerate,bbm}
+\usepackage{tikz,graphicx,color,mathrsfs,color,hyperref,boldline}
+\usepackage{caption,float}
+\usepackage[a4paper,margin=1in,footskip=0.25in]{geometry}
+
+\usepackage{listings}
+\usepackage{xcolor}
+
+\usepackage{tabularx,capt-of}
+
+\usepackage{blindtext}
+%Image-related packages
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage[export]{adjustbox}
+\usepackage{lipsum}
+
+%hyperref setup
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    }
+
+%New colors defined below
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+%Code listing style named "mystyle"
+\lstdefinestyle{mystyle}{
+  backgroundcolor=\color{backcolour}, commentstyle=\color{codegreen},
+  keywordstyle=\color{magenta},
+  numberstyle=\tiny\color{codegray},
+  stringstyle=\color{codepurple},
+  basicstyle=\ttfamily\footnotesize,
+  breakatwhitespace=false,         
+  breaklines=true,                 
+  captionpos=b,                    
+  keepspaces=true,                 
+  numbers=left,                    
+  numbersep=5pt,                  
+  showspaces=false,                
+  showstringspaces=false,
+  showtabs=false,                  
+  tabsize=2
+}
+
+%"mystyle" code listing set
+\lstset{style=mystyle}
+
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{example}[defn]{Example}
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}
+\newtheorem{remS}[section]{defn}
+\newtheorem{lem}[defn]{Lemma}
+\theoremstyle{plain}
+\newtheorem{thm}[defn]{Theorem}
+\newtheorem{prop}[defn]{Proposition}
+\newtheorem{fact}[defn]{Fact}
+\newtheorem{crly}[defn]{Corollary}
+\newtheorem{conj}[defn]{Conjecture}
+
+%\newtheorem*{programming*}{Programming Task}
+
+%\newtheorem{innercustomgeneric}{\customgenericname}
+%\providecommand{\customgenericname}{}
+%\newcommand{\newcustomtheorem}[2]{%
+%  \newenvironment{#1}[1]
+%  {%
+%   \renewcommand\customgenericname{#2}%
+%   \renewcommand\theinnercustomgeneric{##1}%
+%   \innercustomgeneric
+%  }
+%  {\endinnercustomgeneric}
+%}
+
+%\newcustomtheorem{question}{Question}
+%\newcustomtheorem{programming}{Programming Task}
+
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\PP}{\mathbb{P}}
+\newcommand{\FF}{\mathbb{F}}
+\newcommand{\HH}{\mathbb{H}}
+
+\newcommand{\calD}{\mathcal{D}}
+
+\newcommand{\sol}{\textit{Solution: }}
+\newcommand{\Res}{\operatorname{Res}}
+
+\title{III Differential Geometry}
+\author{Kevin}
+\date{October 2024}
+
+\begin{document}
+\maketitle
+\section{Manifolds}
+\begin{defn}
+    Let $M$ be a top. space. A local chart on $M$ is a homeo $\varphi:U\subseteq M\to V=\varphi(U)\subseteq \RR^d$. $U$ is called a coordinate neighborhood in $M$.
+\end{defn}
+\begin{defn}
+    A smooth structure in $M$ is a collection of charts (called an atlas) $\varphi_\alpha:U_\alpha\to V_\alpha\subseteq\RR^d$ s.t.
+    \begin{enumerate}
+        \item $M=\bigcup_\alpha U_\alpha$
+        \item (compatibility) $\forall\alpha,\beta$, $\varphi_\beta\circ\varphi_\alpha^{-1}$ is smooth on $\varphi(U_\alpha\cap U_\beta)$.
+        \item (maximality) If $\varphi$ is compatible with all $\varphi_\alpha$, then $\varphi$ is also in the collection.
+    \end{enumerate}
+\end{defn}
+\begin{rem}
+    Can show that 1 and 2 determine a unique maximal atlas. 2 implies that $\varphi_\beta\circ\varphi_\alpha^{-1}:\varphi_\alpha(U_\alpha\cap U_\beta)\to \varphi_\beta(U_\alpha\cap U_\beta)$ is a diffeo.
+\end{rem}
+\begin{defn}
+    A (smooth) manifold is a Hausdorff, 2nd countable topological space $M$ with a smooth structure.
+\end{defn}
+In practice, we may induce a topology from a smooth structure, i.e., charts are bijections, and each $D\subseteq M$ is open iff $\varphi_\alpha(U_\alpha\cap D)$ is open in $\RR^d$.
+\begin{rem}
+    Can use $C^k$ ($k>0$) in place of $C^\infty$. [When $k=0$, get the definition of topological manifolds.]
+    If we replace $\RR^{2n}$ with $\CC^n$ and holomorphic maps in place of $C^\infty$-maps, we get the definition of complex manifold. Non-hausdorff manifolds arise in examples (e.g. moduli spaces)
+\end{rem}
+\begin{example}
+    $S^n\subseteq\RR^{n+1}$ charts are given by stereographic projections
+    \[\varphi_\pm(x)=\dfrac{1}{1\pm x_0}(x_1,...,x_n)\]
+    The transition maps can be computed. If $v=\varphi_-(x)$ and $u=\varphi_+(x)$, then $v=u/\Vert u\Vert^2$, which is smooth if $u\neq 0$.
+\end{example}
+\begin{example}
+    Open subsets of manifolds are manifolds, and products of manifolds are manifolds.
+\end{example}
+\begin{rem}
+    Convention: $\varnothing$ is not a manifold.
+\end{rem}
+\begin{example}
+    $\RR P^n$. Define charts $(\varphi_i, U_i)$, where $U_i=\{[x_0:...:x_n]:x_i\neq 0\}$, $i=0,1,...,n$. 
+    \begin{align*}
+        \varphi[x_0:...:x_n]=\left(\dfrac{x_0}{x_i},....,\hat{i},...,\dfrac{x_n}{x_i}\right)
+    \end{align*}
+    For $i<j$, 
+    \begin{align*}
+        \varphi_j\circ\varphi_i^{-1}:(y_1,...,y_n)\mapsto\left(\dfrac{y_1}{y_j},...,\dfrac{1}{y_j},...,\hat{j},...,\dfrac{y_n}{y_j}\right)
+    \end{align*}
+    which is smooth if $y_j\neq 0$. Similarly, one can define $\CC P^n$ and left/right $\HH P^n$.
+\end{example}
+\begin{example}
+    Grassmannians over $\RR$ or $\CC$. $\operatorname{Gr}(k,n)=\{\text{all }k\text{-dim subspaces in }n\text{-dim vector space}\}$. Note that $\RR P^{n-1}=\operatorname{Gr}(1,n)$. $\operatorname{Gr}(k,n)$ is a manifold of dimension $k(n-k)$ if over $\RR$ and dimension $2k(n-k)$ if over $\CC$.
+
+    \textbf{Sketch of construction:} Example of a coord nbd $U=U_{1,2,...,k}=\{\text{k-subspaces obtained by spanning set of row of k by n matrix of a certain form}\}$ The matrix is in the following form.
+    \begin{align*}
+        \begin{pmatrix}
+        I\mid \ast
+        \end{pmatrix}
+    \end{align*}
+    The $\ast$ part is in bijection with $\RR^{k(n-k)}$. In general have $U_{i_1<...<i_k}$
+\end{example}
+\begin{example}
+    Non-examples: $\sim$ generated by $(x,y)\sim(\lambda x,y/\lambda)$ for $\lambda\neq 0$ on $\RR^2$, then $\RR^2/\sim$ is a space with three origins. The charts $\varphi_i:U_i=(-\infty,0)\cup\{o^{(i)}\cup(0,\infty)\to\RR$ gives a valid smooth structure, but the induced topology is not Hausdorff.
+
+    For a non 2nd countable example, see ES1.
+\end{example}
+
+\begin{defn}
+    Let $M,N$ be smooth manifolds. A continuous map $f:M\to N$ is smooth if $\forall p\in M$, there exists charts $(\varphi, U)$ of $p$ in $M$ and $(\psi,V)$ of $f(p)$ in $N$ s.t. $\psi\circ f\circ\varphi^{-1}$ is smooth on $\varphi(U\cap f^{-1}(V))$.
+\end{defn}
+\begin{rem}
+    Note that for any other charts $\tilde\psi,\tilde\varphi$ of $p$ and $f(p)$, we can deduce the smoothness of
+    \[\tilde\psi\circ f\circ\tilde\varphi^{-1}=(\tilde\psi\circ\psi^{-1})\circ(\psi\circ f\circ\varphi^{-1})\circ(\varphi\circ\tilde\varphi^{-1})\]
+    as it's a composition of smooth maps. Hence, it is not necessary to say ``for all charts'' in the definition above.
+\end{rem}
+Note that the existence of $C^\infty$ structure on $M$ implies that $\operatorname{id}_M$ is smooth.
+\begin{defn}
+    A smooth map $f:M\to N$ is a diffeomorphism if $f$ is bijective and $f^{-1}$ is smooth. In this situation, we say that $M,N$ are diffeomorphic.
+\end{defn}
+\begin{rem}
+    Here are some properties of smooth maps of manifolds
+    \begin{itemize}
+        \item $f:U\subseteq\RR^n\to\RR^m$ is smooth iff smooth in the sense of multivariate calculus;
+        \item Every chart $\varphi:U\subseteq M\to\varphi(U)\subseteq\RR^n$ is a diffeomorphism.
+        \item Compositions of smooth maps are smooth.
+    \end{itemize}
+\end{rem}
+
+\subsection{Lie Groups}
+$GL(n,\RR)$ is an open subset of $\RR^{n^2}$ since $\det$ is a smooth map. Matrix multiplication is smooth since entries are given by polynomials. The same is true for $GL(n,\CC)$.
+\begin{defn}
+    A group $G$ is a Lie group if $G$ is a manifold and the map $(\sigma,\tau)\in G\mapsto\sigma\tau^{-1}\in G$ is smooth.
+\end{defn}
+Some preliminary definitions are needed. For $A=(a_{ij})$ an $n\times n$ complex matrix, we define $|A|=n\max_{i,j}|a_{ij}|$. This satisfies $|AB|\le|A||B|$. We define $\exp(A)$ by the usual power series. Note that one can estimate \[\left|\dfrac{A^n}{n!}\right|\le \dfrac{|A|^n}{n!}\] so the series converges uniformly on every bounded set, so $\exp(-)$ is continuous.
+
+Consider $f_k=A^k$, then this is differentiable with $|(df_k)_A|\le k|A|^{k-1}$, so the series obtained by term-by-term differentiation converges absolutely uniformly by Weierstrass M-test, so $\exp(A)$ is continuously differentiable on $\operatorname{Mat}(n,\CC)$. Similarly, can check the higher order derivatives and show that $\exp(A)$ is $C^\infty$ on $\operatorname{Mat}(n,\CC)$.
+
+Further, can verify the following properties:
+\begin{itemize}
+    \item $\exp(A^t)=(\exp(A))^t$
+    \item $\exp(C^{-1}AC)=C^{-1}\exp(A)C$
+\end{itemize}
+However, it is not generally true that $\exp(A+B)=\exp(A)\exp(B)$. A sufficient condition is that $AB=BA$.
+Hence, we have \begin{itemize}
+    \item $\exp(-A)=\exp(A)^{-1}$.
+\end{itemize}
+
+Similarly can define $\log(I+A)=\sum_{k=1}^\infty (-1)^{k+1}\frac{A^k}{k}$ for $|A|<1$, which is smooth on the open unit disk of $\operatorname{Mat}(n,\CC)$. We have
+\begin{itemize}
+    \item $\exp(\log(A))=A$ for $|A-I|<1$. Can expand and manipulate terms since the double-indexed series converges absolutely.
+    \item $\log(\exp(A))\neq A$ in general (e.g., $A=\begin{pmatrix}
+        0&-2\pi\\ 2\pi&0
+    \end{pmatrix}$ then $\exp(A)=I$ and $\log(I)=0$) but it's sufficient to require $|A|<\log 2$ for the equality to hold as then $|\exp|A|-1|<1$ and the double-indexed series converges absolutely.
+\end{itemize}
+Consider $O(n)$. Let $A\in O(n)$ with $|A-I|<1$, then $B=\log(A)$ is well-defined, so $e^B=A$. Now, $\exists 0<\epsilon<1$ s.t. for all $|A-I|<\epsilon$, $B<\log 2$. Then $e^Be^{B^t}=AA^t=I$, so $e^B=e^{-B^t}$. Take log, we get $B=-B^t$ (skew-symmetric). Conversely, if $B=-B^t$ and $|B|<\log 2$, then $e^{B^t}=(e^B)^{-1}$, which implies $A=e^B\in O(n)$.
+
+This allows us to define charts on $O(n)$. Put $V_0=\{B\in\operatorname{Mat}(n,\RR):B^t=-B,|B|<\log 2\}$ and $U=\exp(V_0)$. $U$ is an open nbd of $I$ in $O(n)$.
+\begin{prop}
+    $O(n)$ has a $C^\infty$-structure making it into a manifold and a Lie group of dimension $n(n-1)/2$.
+\end{prop}
+\begin{proof}
+Define $h:U\to V_0$ by $A\mapsto \log(A)$. This is a well-defined homeo, where $V_0\subseteq\RR^{n(n-1)/2}$ (identified as the space of skew-symmetric matrices). Then for all $C\in O(n)$, put $U_C=\{CA:A\in U\}$ and $h_C:U_C\to V_0$, $A\mapsto \log(C^{-1}A)$.
+These maps give an atlas.
+
+The transition maps are given by 
+\[h_{C_2}\circ h_{C_1}^{-1}(B)=h_{C_2}(C_1e^B)=\log(C_2^{-1}C_1e^B)\]
+which is smooth in $B$.
+If $A_1,A_2\in O(n)$, define $F(A_1,A_2)=A_1A_2^{-1}$. In local coords, this becomes
+\[F_{\text{loc}}(B_1,B_2)=h_{(C_1C_2)^{-1}}(F(h_{C_1}^{-1}(B_1),h_{C_2}^{-1}(B_2)))=\log((C_1C_2)^{-1}C_1e^{B_1}e^{-B_2}C_2^{-1})\]
+which is again smooth.
+\end{proof}
+
+\subsection{Tangent Spaces to Manifolds}
+\begin{defn}
+    A tangent vector $\Vec{a}$ to a manifold $M^n$ at $p\in M^n$ is an assignment to each chart $(U,\varphi)$ with $p\in U$ an $n$-tuple of coordinates $(a_1,...,a_n)\in \RR^n$ so that if $(U',\varphi')$ is another chart, $p\in U'$ and $(x_i), (x_i)'$ local coordinates in $U,U'$, then 
+    \[a_i'=\sum_{j=1}^n\left(\dfrac{\partial x_i'}{\partial x_j}\right)_pa_j\]
+\end{defn}
+\begin{defn}
+    The tangent space $T_pM$ is the set of all tangent vectors at $p$.
+\end{defn}
+The transformation law ensures that $T_pM$ is a vector space of dimension $n$. A choice of chart near $p$ induces a linear isomorphism $T_pM\to\RR^n$. Denote by $(\partial/\partial x_i)_p$ the basis of $T_pM$ corresponding to the standard basis of $\RR^n$ under this isomorphism.
+
+By linear algebra, \[
+\left(\dfrac{\partial}{\partial x_i}\right)_p=\sum_j\left(\dfrac{\partial x_j'}{\partial x_i}\right)\dfrac{\partial}{\partial x_j'}
+\]
+
+\textbf{An alternative view:}
+Let $\Vec{a}=\sum_i\sum a_i\left(\frac{\partial}{\partial x_i}\right)_p\in T_pM$. Then a first order derivation at $p$ is 
+\[a:f\in C^\infty(M)\mapsto a(f)=\sum_ia_i\dfrac{\partial f}{\partial x_i}(p)\]
+which is a well-defined map independent of local coordinates (can check with chain rule)
+A derivation $a$ satisfies the Leibniz rule, i.e., $a(fg)=a(f)g(p)+a(g)f(p)$ for all $f,g\in C^\infty(M)$. Conversely, can check that linear maps $C^\infty\to\RR$ satisfying the Leibniz rule arises as some $\Vec{a}\in T_pM$.
+\begin{defn}
+    A Lie algebra is a vector space with a bilinear multiplication (Lie bracket) $[\bullet,\bullet]$ s.t.
+    \begin{enumerate}
+        \item (antisymmetric) $[a,b]=-[b,a]$;
+        \item (Jacobi identity) $[[a,b],c]+[[b,c],a]+[[c,a],b]=0$.
+    \end{enumerate}
+\end{defn}
+\begin{thm}[Lie algebra of a Lie group]
+    Let $G$ be a Lie group of $n\times n$ matrices over $\RR$ or $\CC$ s.t. $\log(-)$ defines a chart near $I\in G$. Thus $\mathfrak{g}=T_IG$ is identified with a real subspace of $\operatorname{Mat}(n,\CC)$. Then $\mathfrak{g}$ is a Lie algebra with $[B_1,B_2]=B_1B_2-B_2B_1$ called the Lie algebra of $G$, denoted $\mathfrak{g}=\operatorname{Lie}(G)$.
+\end{thm}
+\begin{proof}
+    The proposed Lie bracket is antisymmetric and satisfies the Jacobi identity (nothing better than direct computation). We need to show that the image lies in $\mathfrak{g}$.
+
+    Consider a smooth path 
+    \[A(t)=e^{B_1t}e^{B_2t}e^{-B_1t}e^{-B_2t}\]
+    for sufficiently small $\epsilon$ so that the following operations are valid.
+    Expand each term to the $t^2$ power, then one may compute and obtain
+    \[A(t)=I+[B_1,B_2]t^2+o(t^2)\]
+    Then $B(t)=\log(A(t))=[B_1,B_2]t^2+o(t^2)$ and $\exp(B(t))=A(t)$ holds. So $B(t)\in\mathfrak{g}$ as it's in the image of the log chart, so $B(t)/t^2\in\mathfrak{g}$ (for $t$ small) by vector space structure. Hence the limit $\lim_{t\to 0}B(t)/t^2=[B_1,B_2]\in\mathfrak{g}$.
+\end{proof}
+\begin{rem}
+    The proof suggests that the Lie bracket for the associated Lie algebra of a Lie group is actually an infinitesimal version of the commutator in the Lie group. 
+\end{rem}
+Thus, if $G=O(n)$, then $\mathfrak{o}=\operatorname{Lie}(O(n))=\operatorname{Skew}(n,\RR)$.
+\begin{defn}
+    Let $M$ be a smooth manifold. $TM=\bigsqcup_{p\in M}T_pM$ is called the tangent bundle of $M$.
+\end{defn}
+\begin{thm}
+    TM has a natural smooth structure making it into a manifold of dimension $2\dim M$.
+\end{thm}
+\begin{proof}
+    Let $U\subseteq M$ be a coord nbd and $\varphi:U\to\RR^n$ a chart. Denote $\varphi(p)=(x_1,...,x_n)$ so that $\Vec{a}\in T_pM$ can be written as $\sum_ia_i(\partial/\partial x_i)_p$ in local coord.
+
+    Consider $U_T=\bigsqcup_{p\in U}T_pM$ and $\varphi_T:a\in U_T\mapsto (\varphi(p),(a_i))\in\varphi(U)\times\RR^n$. If $(U',\varphi')$ is another chart on $M$ with local coordinates $(x_i')$ and $\varphi_T'$ defined similarly, then
+    \[\varphi_T'\circ\varphi_T^{-1}(\Vec{x},\Vec{a})=(\Vec{x'},\Vec{a'})\] for $(\Vec{x},\Vec{a})\in\varphi(U\cap U')\times\RR^n$.
+    We have $\Vec{x'}=\varphi'\circ\varphi^{-1}(\Vec{x})$ and $a_i'=\sum_j\frac{\partial x_j'}{\partial x_i}(\Vec{x})a_j'$. So this gives a smooth structure.
+
+    Can verify that the induced topology is indeed Hausdorff, second countable as $M$ and $\RR^n$ have these properties.
+\end{proof}
+
+Define $\pi:TM\to M$ s.t. $\pi(T_pM)=\{p\}$ for all $p\in M$.
+\begin{prop}
+    $\pi$ is smooth.
+\end{prop}
+\begin{proof}
+    In loc. coord. $(x,a)\mapsto x$ for $x\in U\subset M$, $a\in \RR^n$.
+\end{proof}
+\begin{rem}
+    $TM$ is not diffeo to the trivial bundle in general
+\end{rem}
+\begin{defn}
+    A (smooth) vector field on a manifold $M$ is a smooth map $X:M\to TM$ s.t. $X(p)\in T_pM$ for all $p\in M$.
+\end{defn}
+\begin{example}
+    $X$ supported on a compact subset of a coord chart
+\end{example}
+Note that $X$ is smooth iff for all coord nbd $U$, $X|_U$ is expressed as $\sum_ia_i(x)\frac{\partial}{\partial x_i}$ with $a_i\in C^\infty(U)$.
+\begin{thm}
+    $M$ mfd. $\dim M=n$, If $X^{(1)},...,X^{(n)}$ are vec. field in $M$ s.t. $\forall p\in M$, $X^{(i)}(p)$ form a basis of $T_pM$, then $M$ is isomorphic to the trivial bundle.
+\end{thm}
+\begin{proof}
+    Let $a\in TM$ s.t. $\pi(a)=p$. Have $a\in \sum_ia_iX^{(i)}(p)$ with $a_i$ unique. Put $\Phi(a)=(\pi(a),(a_1,...,a_n))$ This is clearly bijective and restricts to linear iso on each fiber.
+
+    Consider chart $\varphi$ on $U\subseteq M$ and $\varphi_T$ the associated chart on $U_T=\pi^{-1}(U)$. $(\varphi,\operatorname{id}_{\RR^n})\circ\Phi\circ\varphi_T^{-1}(x,(b_i)_1^n)\mapsto(x,(a_i)_1^n)$.
+    Can write $a$ in two ways, namely
+    \[\sum_ia_iX^{(i)}(p)=\sum_jb_j\left(\dfrac{\partial}{\partial x_j}\right)_p\]
+    AND,
+    \[X^{(i)}|_U=\sum_jX_j^{(i)}\dfrac{\partial}{\partial j}\]
+    Hence,
+    \[b_j=\sum_i a_i X^{(i)}_j(x)\]
+    So $\Phi^{-1}$ is smooth. The matrix $(X^{(i)}_j)$ is the change of basis from $\{\partial/\partial x_i\}$ to $\{X^{(i)}(p)\}$, so is invertible and has inverse matrix which is smooth, so $\Phi$ is smooth as it can be expressed as $b_jC_j^i(x)$.
+\end{proof}
+\begin{rem}
+    The converse also holds (Composing with $\Phi$ makes the vector fields on $M$ into smooth functions to $\RR^n$).
+\end{rem}
+\begin{defn}
+    $F:M\to N$ a smooth map. The differential of $F$ at $p\in M$ is a linear map $(dF)_p:T_pM\to T_{F(p)}N$ s.t. if $\varphi$ is a chart of $p$ with coprd $(x_i)$ and  chart $\psi$ of $F(p)$ with coord $y_j$, then $y=y(x)=\psi F\varphi^{-1}$ then $(dF)_p:(\partial/\partial x_i)_p\mapsto \sum_j\frac{\partial y_j}{\partial x_i}(x(p))(\frac{\partial}{\partial y_j})_{F(p)}$.
+\end{defn}
+This is independent of charts
+Recall that
+\begin{align*}
+    \left(\dfrac{\partial }{\partial x_k'}\right)_p&=\sum_i\dfrac{\partial x_i}{\partial x_k'}(x')\left(\dfrac{\partial }{\partial x_i}\right)_p\\
+    \left(\dfrac{\partial }{\partial y_j}\right)_{F(p)}=\sum_l\dfrac{\partial y_l'}{\partial y_j}(y)\left(\dfrac{\partial}{\partial y_l'}\right)_{F(p)}
+\end{align*}
+This implies that (by chain rule)
+\[\left(\dfrac{\partial }{\partial x_k'}\right)_p=\sum_{i,j,l}\dfrac{\partial x_i}{\partial x_k'}\dfrac{\partial y_j}{\partial x_i}\dfrac{\partial y_l'}{\partial y_j}\left(\dfrac{\partial}{\partial y_l'}\right)_{F(p)}\]
+Geometers chain rule is the following: if $M\overset{F}{\to}N\overset{G}{\to}Z$ is a sequence of smooth maps, then
+\[d(G\circ F)_p=(d G)_{F(p)}\circ(dF)_p\]
+
+If $F:M\to N$ is a diffeo, and $X$ is a vec field on $M$, then $(dF)\circ X$ is a vector field on $N$ which acts by $(dF(X))_{F(p)}=(dF)_pX(p)$.
+\begin{rem}
+    Need $F^{-1}$ to be smooth since otherwise $(dF)X$ may fail to be smooth. For instance $t\mapsto t^3$ with vector field $\partial/\partial t$.
+\end{rem}
+Every vector field $X$ on $M$ is a linear map $X:C^\infty(M)\to C^\infty(M)$. The 1st order derivation $Xh$ locally is given by 
+\[\sum_i X_i(x)\dfrac{\partial h}{\partial x_i}(x)\]
+for $h\in C^\infty(M)$ and $X=\sum_iX_i(x)\partial/\partial x_i$.
+Now, let $f\in C^\infty(N)$, so $f\circ F\in C^\infty(M)$ (in loc. coords $(x_i')$ on $M$ and $(y_j)$ on $N$) is 
+\[\dfrac{\partial}{\partial x_i}(f\circ F)=\sum_j\dfrac{\partial f}{\partial y_j}(y(F(p)))\dfrac{\partial y}{\partial x_i}(x(p))\]
+Apply $\sum_iX_i$ to both sides, get a coords-free formula
+\[X(f\circ F)=[((dF)X)f]\circ F\]
+This holds for all vector field $X$ on $M$, diffeo $F$, and smooth maps $f\in C^\infty(M)$.
+\end{document}

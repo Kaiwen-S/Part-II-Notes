@@ -1,0 +1,275 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{enumerate,bbm}
+\usepackage{tikz,graphicx,color,mathrsfs,color,hyperref,boldline,tikz-cd}
+\usepackage{caption,float}
+\usepackage[a4paper,margin=1in,footskip=0.25in]{geometry}
+
+\usepackage{listings}
+\usepackage{xcolor}
+
+\usepackage{tabularx,capt-of}
+
+\usepackage{blindtext}
+%Image-related packages
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage[export]{adjustbox}
+\usepackage{lipsum}
+
+%hyperref setup
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    }
+
+%New colors defined below
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+%Code listing style named "mystyle"
+\lstdefinestyle{mystyle}{
+  backgroundcolor=\color{backcolour}, commentstyle=\color{codegreen},
+  keywordstyle=\color{magenta},
+  numberstyle=\tiny\color{codegray},
+  stringstyle=\color{codepurple},
+  basicstyle=\ttfamily\footnotesize,
+  breakatwhitespace=false,         
+  breaklines=true,                 
+  captionpos=b,                    
+  keepspaces=true,                 
+  numbers=left,                    
+  numbersep=5pt,                  
+  showspaces=false,                
+  showstringspaces=false,
+  showtabs=false,                  
+  tabsize=2
+}
+
+%"mystyle" code listing set
+\lstset{style=mystyle}
+
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{example}[defn]{Example}
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}
+\newtheorem{remS}[section]{defn}
+\newtheorem{lem}[defn]{Lemma}
+\theoremstyle{plain}
+\newtheorem{thm}[defn]{Theorem}
+\newtheorem{prop}[defn]{Proposition}
+\newtheorem{fact}[defn]{Fact}
+\newtheorem{crly}[defn]{Corollary}
+\newtheorem{conj}[defn]{Conjecture}
+
+%\newtheorem*{programming*}{Programming Task}
+%\newtheorem{innercustomgeneric}{\customgenericname}
+%\providecommand{\customgenericname}{}
+%\newcommand{\newcustomtheorem}[2]{%
+%  \newenvironment{#1}[1]
+%  {%
+%   \renewcommand\customgenericname{#2}%
+%   \renewcommand\theinnercustomgeneric{##1}%
+%   \innercustomgeneric
+%  }
+%  {\endinnercustomgeneric}
+%}
+
+%\newcustomtheorem{question}{Question}
+%\newcustomtheorem{programming}{Programming Task}
+
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\PP}{\mathbb{P}}
+\newcommand{\FF}{\mathbb{F}}
+
+\newcommand{\calD}{\mathcal{D}}
+
+\newcommand{\sol}{\textit{Solution: }}
+\newcommand{\Res}{\operatorname{Res}}
+
+\title{III Algebraic Topology}
+\author{Kevin}
+\date{October 2024}
+
+\begin{document}
+
+\maketitle
+
+\section{Homotopy}
+\begin{defn}
+    A \textbf{homotopy} between continuous maps $f,g:X\to Y$ is a continuous map $H:X\times I\to Y$ s.t. $H(x,0)=f(x)$, $H(x,1)=g(x)$ for all $x\in X$. Notation: $f\simeq g$
+\end{defn}
+Note that ``$\sim$'' defines an equivalence relation on $\operatorname{Maps}(X,Y)$.
+\begin{defn}
+    A map $f:X\to Y$ is a homotopy equivalence if $\exists$ a map $g:Y\to X$ s.t $fg\simeq \operatorname{id}_Y$ and $gf\simeq \operatorname{id}_X$. Notation: $X\sim Y$.
+\end{defn}
+\begin{example}
+    Homeomorphisms; the inclusion $\{0\}\hookrightarrow\RR^n$; the inclusion $S^{n-1}\hookrightarrow\RR^n$. For the latter two, we have obvious retractions and the homotopy is given by straight line homotopy (interpolating linearly).
+\end{example}
+\begin{defn}
+    A space $X$ is contractible if $X\simeq \{\ast\}$.
+\end{defn}
+
+\section{Singular (co)homology}
+\subsection{Chain complexes}
+\begin{defn}
+    A chain complex is a sequence of abelian groups and homomorphisms (called differentials or boundary maps), denoted $(C_\bullet,d)$ s.t. $d_n\circ d_{n-1}=0$. Elements in $C_n$ are called $n$-chains.
+\end{defn}
+\begin{defn}
+    The homology of $(C_\bullet,d)$ is 
+    \[H_n(C)=\ker d_n/\operatorname{im}(d_{n-1})\]
+\end{defn}
+\begin{defn}
+    A chain map $f:(C_\bullet,d^C)\to(D_\bullet,d^D)$ is a family of homomorphisms $f_n:C_n\to D_n$ s.t. $f_{n-1}\circ d_n^C=d_{n}^D\circ f_n$.
+\end{defn}
+\begin{lem}
+    A chain map induces a well-defined homomorphism on homology $H_n(C)\overset{f_\ast}{\to}H_n(D), [x]\mapsto[f_n(x)]$.
+\end{lem}
+\begin{proof}
+If $[x]\in H_n(C)$, then $f_n(x)$ is a cycle by direct computation. If $[x]=[y]$, then $x-y=d_{n+1}^C(z)\implies f(x)-f(y)=d_{n+1}(f(z))$, so $[f_n(x)]=[f_n(y)]$.
+\end{proof}
+\subsection{Singular chain complex \& Singular homology}
+Define $\Delta^n\colon=\{(t_0,...,t_n)\in\RR^{n+1}\colon\forall i\ge0, t_i\ge 0, \sum_it_i=1\}$ to be the standard $n$-simplex. We have standard maps $\delta^i:\Delta^{n-1}\to \Delta^n$ given by
+\[(t_0,...,t_{n-1})\mapsto (t_0,...,t_{i-1},0,t_i,...,t_{n-1})\]
+which embeds the $\Delta^{n-1}$ as the $i$th face of $\Delta^n$ which is opposite of the $i$th vertex.
+\begin{defn}
+    Let $X$ be a topological space.
+    \begin{itemize}
+        \item A singular $n$-simplex in $X$ is a map $\sigma:\Delta^n\to X$.
+        \item The singular chain complex of $X$ is given by $C_n(X):=\text{ free abelian grp over the }n\text{- simplices of }X$ with boundary maps $d_n(\sigma)=\sum_{i=0}^n(-1)^i(\sigma\circ\delta^i)$.
+    \end{itemize}
+\end{defn}
+\begin{lem}
+    $(C_\bullet(X),d)$ is a chain complex
+\end{lem}
+We first observe that the following diagram commutes.
+\begin{center}
+    % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRAB12ARGBnOgHrAwAWgBMAXxATS6TLnyEUARnJVajFm048+g4SOVSZc7HgJExa6vWatEHbr34DCE9TCgBzeEVAAzACcIAFskMhAcCCRVDTttdlg9AH0sEGoGOgAjXgAFeXMlEAYYfxx0kBywKCQAZmITECDQ8OoomJtNe0ck-mTgACtDKQzsvILFNkCsLwALcuoqmsQResbmsMRY9sQrOK0HTl66VIrMnIZ8s0mHabmFyphqpFWG2Sbgze3o3c74w8SzhOAzOY0uEwsDhKZQqSzqDQoEiAA
+\begin{tikzcd}
+\Delta^{n-2} \arrow[r, "\delta_i", bend left] \arrow[r, "\delta_{j-1}"', bend right] & \Delta^{n-1} \arrow[r, "\delta_i"', bend right] \arrow[r, "\delta_j", bend left] & \Delta^n
+\end{tikzcd}
+\end{center}
+\begin{proof}
+    Let $\sigma\in C_n(X)$.
+    \begin{align*}
+        d_{n-1}(d_n(\sigma))&=\sum_{i=0}^{n-1}(-1)^i\sum_{j=0}^n(-1)^j(\sigma\circ\delta_j\delta_i)\\
+        &=\sum_{i<j}(-1)^{i+j}(\sigma\circ\delta_j\circ\delta_i)+\sum_{i\ge j}(-1)^{i+j}(\sigma\circ\delta_j\circ\delta_i)\\
+        &=\sum_{l\le k}(-1)^{l+k+1}(\sigma\circ\delta_l\circ\delta_k)+\sum_{i\ge j}(-1)^{i+j}(\sigma\circ\delta_j\circ\delta_i)\\
+        &=0
+    \end{align*}
+    where we used the substitution $k=j-1$ and $l=i$ in the second to last line.
+\end{proof}
+\begin{defn}[Singular homology]
+    $H_i(X):=H_i(C(X))$.
+\end{defn}
+We have functoriality. If $f:X\to Y$ is a map, then it induces a chain map $f_\#:C(X)\to C(Y),\sigma\mapsto f\circ\sigma$, so one gets $f_\ast:H_\ast(X)\to H_\ast(Y)$.
+
+\subsection{Computations}
+\begin{example}
+    $H_n(pt)=\ZZ$ if $n=0$ and $0$ otherwise. Observe that for all $n$, there is a unique singular $n$-simplex, denoted $\sigma_n$ which is the constant simplex, and 
+    \[d_n(\sigma_n)=\sum_{i=0}^n(-1)^i(\sigma_n\circ\delta_i)=\sum_{i=0}^n(-1)^i\sigma_{n-1}=\begin{cases}
+        \sigma_{n-1}& n\text{ even}\\
+        0 & n\text{ odd}
+    \end{cases}\]
+\end{example}
+\begin{example}
+    If $X=\bigsqcup_{\alpha\in I}X_\alpha$, then $C_n(X)=\bigoplus_{\alpha\in I}C_n(X_\alpha)$, which implies that $H_n(X)\cong\bigoplus_{\alpha\in I}H_n(X_\alpha)$.
+\end{example}
+\begin{example}
+    If $X\neq\varnothing$ and is path-connected, then $H_0(X)\cong \ZZ$.
+    \begin{proof}
+        Observe that $C_0(X)=\ZZ\langle X\rangle$. Define an augmentation map $\epsilon:C_0(X)\to\ZZ$ by $\sum h_\sigma\sigma\mapsto\sum h_\sigma$. This is clearly surjective. We want to show that $\ker(\epsilon)=\operatorname{im}(d_1)$. Clearly $\ker\epsilon\supseteq\operatorname{im}d_1$ as $(\epsilon\circ d_1)(\sigma)=\epsilon(\sigma(1)-\sigma(0))=1-1=0$. Conversely, if $\epsilon(\sum h_\sigma\sigma)=0$, then $\sum h_\sigma=0$. For each $\sigma$ in the summation, choose $\tau_\sigma:\Delta^1\to X$ s.t. $\tau_\sigma(0)=x_0$ and $\tau_\sigma(1)=\sigma$ (a point). This is possible by path-connectedness. By direct computation, we get
+        \begin{align*}
+            d_1\sum h_\sigma\sigma=\sum h_\sigma(\sigma-x_0)=\sum h_\sigma\sigma-\sum h_\sigma x=\sum h_\sigma\sigma
+        \end{align*}
+        so $\sum h_\sigma\sigma$ is a boundary, and we are done.
+    \end{proof}
+\end{example}
+\begin{crly}
+    If $X$ is any space, then $H_0(X)=\ZZ\langle\text{path components of }X\rangle$.
+\end{crly}
+\subsection{Singular cohomology}
+A cochain complex is of the form $0\to C^0\overset{d^0}{\to} C^1\overset{d^1}{\to}C^2\to....$ s.t. $d^nd^{n-1}=0$. Define $H^n(C^\bullet,d)=\ker d^n/\operatorname{im}d^{n-1}$. 
+\begin{defn}
+    The singular cochain complex of a topological space $X$ is $C^n(X)=\operatorname{Hom}(C_n(X),\ZZ)$ with $d^n(\varphi)=\varphi\circ d_{n+1}$. The singular cohomology of $X$ is defined to be the cohomology of the singular cochain complex.
+\end{defn}
+Note that a map $f:X\to Y$ induces $f^\#:C^\bullet(Y)\to C^\bullet(X)$, $\varphi\mapsto\varphi(f\circ - )$, so induces $f^\ast: H^\ast(Y)\to H^\ast(X)$.
+
+\section{Four Major Tools for Computation}
+\begin{thm}[Homotopy invariance] If $f\simeq g:X\to Y$, then $f_\ast=g_\ast$ and $f^\ast=g^\ast$.
+\end{thm}
+\begin{thm}[Mayer-Vietoris Sequence]
+    $X=A\cup B$ with $A,B$ open. There is a natural homomorphism $\partial_{MV}:H_n(X)\to H_{n-1}(A\cap B)$ s.t.
+    \begin{center}
+        % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRADpOQBfU9TXPkIoAjOSq1GLNgAkA+sDABqEdwAUADQCUPPiAzY8BIgCZx1es1aIQ8sGoCCAHScBjOmgAEAIR29+hkJEAMzmklaycvYOWi4QaMxwnnZqvroBgsYoACxhltI2Kdrp+gJGwsgArHlS1hxc3BIwUADm8ESgAGYAThAAtkhkIDgQSGLhBWBMDAzUDHQARjAMAAplQTYMMJ04JT39Y9QjSGYTdS5odN14jAoAsgBq3CBzi8trgVkgWzt7vQOIU7HRChM5sNRYOQxOQuOhwHAuPB9eAQuS+GFOOG7V5LVbrL4-Xb+ED7AGg4G5ME2NQAKyhWgxWIAtLS0QzYfCXt83njPsJvtsiXpSUhKcDqlSpjMce98fzCTwKNwgA
+\begin{tikzcd}
+... \arrow[r] & H_{n+1}(X) \arrow[r, "\partial_{MV}"] & H_n(A\cap B) \arrow[r, "(i_A)_\ast\times(i_B)_\ast"] & H_n(A)\oplus H_n(B) \arrow[r, "(j_A)_\ast-(j_B)_\ast"] & H_n(X) \arrow[r] & ...
+\end{tikzcd}
+    \end{center}
+    is exact.
+\end{thm}
+\begin{rem}
+    \begin{itemize}
+        \item Naturality means the the connecting homomorphism commutes with maps fo the form $f:(X;A,B)\to (Y;U,V)$, where $X=A\cup B$ and $Y=U\cup V$, $f(A)\subseteq U, f(B)\subseteq V$.
+        \item If $\alpha\in H_n(X)$ is s.t. $\alpha=[a+b]$ where $a\in C_n(A), b\in C_n(B)$, then $\partial_{MV}\alpha=[d_na]=-[d_nb]$.
+    \end{itemize}
+\end{rem}
+Have an SES $0\to C_\bullet(A)\overset{i}{\hookrightarrow} C_\bullet(X)\overset{q}{\to}C_\bullet(X,A)\to 0$.
+\begin{thm}[Homology exact sequence]
+There is a natural hom $\partial:H_n(X,A)\to H_{n-1}(A)$ s.t. the sequence
+\begin{center}
+    % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRADpOQBfU9TXPkIoAjOSq1GLNgAkA+sDABqEdwAUADVIBBAJQ8+IDNjwEiAJnHV6zVohDywavQf4mhRAMxXJt2XKcNfV43QTMUABYfG2l7R00dYMNjMOFkAFZoqTsOLm4JGCgAc3giUAAzACcIAFskMhAcCCQxX1iwJgYGagY6ACMYBgAFAVNhEAYYcpxXECraluompEs2nIAddbQ6SrxGEB7+wZH3cImpmZC56rrEVeXEbzW2LDlNujgZw4Hh0Y97SbTWbzW5PB5RZ72ACOb3WHy+EyOv1O40Bl0MIKQEIemUhHS632OfzOaJ4FG4QA
+\begin{tikzcd}
+... \arrow[r] & {H_{n+1}(X,A)} \arrow[r, "\partial"] & H_n(A) \arrow[r, "i_\ast"] & H_n(X) \arrow[r, "q_\ast"] & {H_n(X,A)} \arrow[r] & ...
+\end{tikzcd}
+\end{center}
+is exact. Moreover, if $[x]\in C_n(X,A)$ is a relative cycle, then $d_b[x]=[d_nx]=0\in C_{n-1}(X,A)$, so $d_nx\in C_{n-1}(A)$, so $\partial[[x]]=[d_nx]\in H_{n-1}(A)$.
+\end{thm}
+\begin{rem}
+    In this case, $\partial$ is natural w.r.t. maps of pairs.
+\end{rem}
+\begin{thm}[Excision Theorem]
+Let $(X,A)$ be a pair and $Z\subseteq A$ s.t. $\overline{Z}\subseteq A^\circ$, then the inclusion $(X\setminus Z,A\setminus Z)\hookrightarrow (X,A)$ induces  isomorphisms \[H_n(X\setminus Z,A\setminus Z)\overset{\sim}{\to}H_n(X,A)\]
+and
+\[H^n(X\setminus Z,A\setminus Z)\overset{\sim}{\leftarrow}H^n(X,A)\]
+\end{thm}
+The cohomological version is analogous.
+
+\subsection{Degree}
+\begin{defn}
+    Degree of a map $S^n\to S^n$ is the integer multiplication in the induced map on top homology.
+\end{defn}
+\begin{thm}[Brower's fixed point theorem]
+    Self maps $D^n\to D^n$ has a fixed point.
+\end{thm}
+\begin{proof}
+    This is equivalent to the no retraction theorem.
+\end{proof}
+\begin{prop}
+    A reflection $r:S^n\to S^n$ has degree $-1$.
+\end{prop}
+\begin{proof}
+    Decompose $S^n$ as the union of two hemispheres and use naturality of MV sequence to perform induction.
+\end{proof}
+\begin{crly}[Hairy ball theorem]
+    $S^n$ has a nowhere vanishing vector field iff $n$ odd.
+\end{crly}
+\begin{proof}
+    If $n=2k+1$ odd, then $S^{2k+1}\subseteq \CC^{n+1}$, then $v(x)=ix$ gives a valid vector field.
+
+    If $v:S^n\to \RR^{n+1}$ is a non-vanishing vector field, then can define $w(x)=v(x)/|v(x)|$. Have a homotopy $H:S^n\times[0,\pi]\to \RR^{n+1}, (x,t)\mapsto \cos(t)x+\sin(t)w(x)$. So the antipodal map is homotopic to the identity, so $n$ must be odd.
+\end{proof}
+\end{document}

@@ -1,0 +1,573 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{enumerate,bbm}
+\usepackage{tikz,graphicx,color,mathrsfs,color,hyperref,boldline}
+\usepackage{caption,float}
+\usepackage[a4paper,margin=1in,footskip=0.25in]{geometry}
+
+\usepackage{listings}
+\usepackage{xcolor}
+
+\usepackage{tabularx,capt-of}
+
+\usepackage{blindtext}
+%Image-related packages
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage[export]{adjustbox}
+\usepackage{lipsum}
+
+%hyperref setup
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    }
+
+%New colors defined below
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+%Code listing style named "mystyle"
+\lstdefinestyle{mystyle}{
+  backgroundcolor=\color{backcolour}, commentstyle=\color{codegreen},
+  keywordstyle=\color{magenta},
+  numberstyle=\tiny\color{codegray},
+  stringstyle=\color{codepurple},
+  basicstyle=\ttfamily\footnotesize,
+  breakatwhitespace=false,         
+  breaklines=true,                 
+  captionpos=b,                    
+  keepspaces=true,                 
+  numbers=left,                    
+  numbersep=5pt,                  
+  showspaces=false,                
+  showstringspaces=false,
+  showtabs=false,                  
+  tabsize=2
+}
+
+%"mystyle" code listing set
+\lstset{style=mystyle}
+
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem*{defn*}{Definition}
+\newtheorem{example}[defn]{Example}
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}
+\newtheorem{remS}[section]{defn}
+\newtheorem{lem}[defn]{Lemma}
+\theoremstyle{plain}
+\newtheorem{thm}[defn]{Theorem}
+\newtheorem*{thm*}{Theorem}
+\newtheorem{prop}[defn]{Proposition}
+\newtheorem{fact}[defn]{Fact}
+\newtheorem{crly}[defn]{Corollary}
+\newtheorem{conj}[defn]{Conjecture}
+
+%\newtheorem*{programming*}{Programming Task}
+
+%\newtheorem{innercustomgeneric}{\customgenericname}
+%\providecommand{\customgenericname}{}
+%\newcommand{\newcustomtheorem}[2]{%
+%  \newenvironment{#1}[1]
+%  {%
+%   \renewcommand\customgenericname{#2}%
+%   \renewcommand\theinnercustomgeneric{##1}%
+%   \innercustomgeneric
+%  }
+%  {\endinnercustomgeneric}
+%}
+
+%\newcustomtheorem{question}{Question}
+%\newcustomtheorem{programming}{Programming Task}
+
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\PP}{\mathbb{P}}
+\newcommand{\FF}{\mathbb{F}}
+
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\calD}{\mathcal{D}}
+
+\newcommand{\sol}{\textit{Solution: }}
+\newcommand{\Res}{\operatorname{Res}}
+
+\title{Galois Theory}
+\author{Kevin}
+\date{October 2024}
+
+\begin{document}
+\maketitle
+\section{Field extensions}
+A field $k$ contains a smallest subfield (prime subfield) isomorphic to $\FF_p$ if $k$ as characteristic $p$ or $\QQ$ if $k$ has characteristic $0$.
+\begin{lem}
+    Let $K$ be a field, $0\neq f\in k[X]$, then $f$ has $\le\deg f$ roots in $k$
+\end{lem}
+\begin{defn*}
+Let $L$ be a field and $K\subseteq L$ a subfield. We say that $L$ is an extension of $K$, written $L/K$.
+\end{defn*}
+Note that $L, K$ necessarily have the same characteristic.
+\begin{example}
+    \begin{itemize}
+        \item $\CC/\RR$, $\QQ(\sqrt{2})/\QQ$, $\RR/\QQ$
+        \item (Adjoining a root of an irreducible polynomial) Let $K$ be a field and $f\in k[X]$ irreducible. Recall that $k[X]$ is a PID, so $(f)$ is a maximal ideal. Then $L=k[X]/(f)$ is a field extension of $K$ and $\alpha=X+(f)$ is a root of $f$ in $L$.
+    \end{itemize}
+\end{example}
+Let $L/K$ be a field extension. Then $L$ can be regarded as a $K$-vector space.
+\begin{defn*}
+    Let $L/K$ be a field extension. Say $L/K$ is finite if $L$ is a finite dimensional $K$-vector space. We write $[L:K]=\dim_KL$ for its dimension which is called the degree of $L/K$. If note, then $L/K$ is an infinite extension and write $[L:K]=\infty$.
+\end{defn*}
+We say that $L/K$ is a quadratic (cubic, quartic, etc.) extension if $[L:K]=2$ ($3,4,....$). When $K=\QQ$, we simply say $L/K$ is quadratic, cubic, etc.
+\begin{example}
+    $[\CC:\RR]=2$, $[\RR:\QQ]=\infty$
+    If $L=K[X]/(f)$, $f$ irred. over $K$, then $[L:K]=\deg f$.
+\end{example}
+\begin{rem}
+    Let $K,L$ be field and $\phi:K\to L$ ring hom. $\ker\phi=\{0\}$ is forced as a field only has two ideals, so $\phi$ is an embedding, meaning that we can identify $K$ as a subfield of $L$, i.e., we get a field extension.
+\end{rem}
+\begin{prop}
+    Let $K$ be a finite field of characteristic $p$, then $|K|=p^n$, where $n=[K:\FF_p]$.
+\end{prop}
+\begin{proof}
+    $K\cong\FF_p^n$ as an $\FF_p$-vector space.
+\end{proof}
+Later will show that up to iso, there exists a unique fiel of order $p^n$ for each prime $p$.
+\begin{prop}
+    If $K$ is a field then any finite subgroup $G\le K^\ast$ is cyclic.
+\end{prop}
+\begin{proof}
+    By structure theorem, $G\cong C_{d_1}\times...\times C_{d_t}$ where $1<d_1\mid...\mid d_t$. If not cyclic then pick a prime $p\mid d_1$ and $G$ contains a subgroup isomorphic to $C_p\times C_p$. Count the elements of order $p$ (roots of $x^p-1$), we get a contradiction.
+\end{proof}
+\begin{prop}
+    Let $R$ be a ring of char $p$ prime, Then the Frobenius map $\phi:R\to R$, $x\mapsto x^p$ is a ring hom.
+\end{prop}
+\begin{proof}
+    Expand $(x+y)^p$ and use characteristic. We get $(x+y)^p=x^p+y^p$ which proves additivity. The rest is trivial.
+\end{proof}
+\begin{rem}
+    Have $\phi(a)=a$ for all $a\in\FF_p\subseteq R$. So Fermat's little theorem is a trivial consequence of the proposition above.
+\end{rem}
+\begin{thm}[Tower law]
+Let $M/L$ and $L/K$ be field extensions. $M/K$ is finite $\Leftrightarrow$ $M/L$ and $L/K$ are both finite. In this situation, $[M:K]=[M:L][L:K]$
+\end{thm}
+\begin{proof}
+    ``$\Rightarrow$'': As an $L$-vector sapce, $M$ is finite dim, and $L$ is a $K$-subspace of $M$ so also finite dim over $K$.
+
+    ``$\Leftarrow$'': Let $v_1,...,v_n$ be a $K$-basis of $L$ and $w_1,...,w_m$ an $L$-basis for $M$. We claim that $\{v_iw_j\}$ is a $K$-basis of $M$.
+    \begin{itemize}
+        \item (Spanning) If $x\in M$, then $x=\sum\lambda_j w_j=\sum\mu_{ij}v_iw_j$ by spanning properties of the given basis.
+        \item (Independence) If $\sum\mu_{ij}v_iw_j=0$, then $\sum_j\left(\sum_i\mu_{ij}v_i\right)w_j=0$, so $\sum_i\mu_{ij}v_i=0$ for all $j$, so $\mu_{ij}=0$ for all $i,j$.
+    \end{itemize}
+\end{proof}
+\begin{defn*}
+    Let $L/K$ be a field extension. Let $\alpha_1,...,\alpha_n\in L$, then $K[\alpha_1,...,\alpha_n]$ is the samllest subring of $L$ containint $K$ and $\alpha_1,...,\alpha_n$. $K(\alpha_1,...,\alpha_n)=\{\frac{f(\alpha_1,...,\alpha_n)}{g(\alpha_1,...,\alpha_n)}:f,g\in K[x_1,...,x_n]\}$ is the smallest subfield of $L$ containing $K$ and $\alpha_i$.
+\end{defn*}
+Observe that $K(\alpha_1,...,\alpha_n)$ is the field of fractions of $K[\alpha_1,...,\alpha_n]$.
+\begin{defn*}
+    A field extension $L/K$ is said to be simple if $L=K(\alpha)$ for some $\alpha\in L$.
+\end{defn*}
+Observe that the evaluation map $\phi:K[X]\to L$ is a ring hom and is the unique ring hom such that $\phi(c)=c$ for all $c\in K$, and $\phi(X)=\alpha$.
+\begin{defn*}
+    Let $(f)=\ker\phi$. $\alpha$ is algebraic if $f\neq 0$. Otherwise $\alpha$ is said to be transcendental.
+\end{defn*}
+If $\alpha$ is algebraic, then $f$ is irreducible and unique up to units. We scale $f$ to make it monic.
+\begin{defn*}
+    This monic $f$ is called the minimal polynomial of $\alpha$ over $K$.
+\end{defn*}
+By 1st isomorphism theorem, $K[X]/(f)=K[\alpha]$, so in this case $K(\alpha)=K[\alpha]$. Moreover, $[K(\alpha);K]=\deg f$.
+\begin{rem}
+    If we want to compute the inverse of $\alpha\in L$ which is algebraic over $K$ with min polynomial $f$ over $K$, then choose $0\neq\beta\in K(\alpha)$ and we have $\beta=g(\alpha)$ for some $g\in K[X]$. Since $f$ is irreducible and $\beta\neq 0$, $f,g$ are coprime, then can run Euclidean algorithm.
+\end{rem}
+\begin{defn*}
+    A field extension $L/K$ is algebraic if for all $\alpha\in L$, $\alpha$ is algebraic over $K$.
+\end{defn*}
+\begin{rem}
+    $[K(\alpha):K]<\infty$ iff $\alpha$ is algebraic over $K$.
+    If $[L:K]<\infty$, then $L/K$ is algebraic.
+\end{rem}
+\begin{example}
+    $K=\QQ$, $L=\bigcup_n\QQ(\sqrt[2^n]{2})$ is an infinite algebraic extension.
+\end{example}
+\begin{lem}
+    Let $L/K$ be a field extension and $\alpha_1,...,\alpha_n\in L$, then $\alpha_1,...,\alpha_n$ are algebraic over $K$ iff $[K(\alpha_1,...,\alpha_n):K]<\infty$.
+\end{lem}
+\begin{proof}
+``only if'':
+Adjoin a single $\alpha_i$ at a time and observe that each step gives a finite extension.
+\end{proof}
+\begin{crly}
+    Let $L/K$ be a field extension. $\{\alpha\in L:\alpha\text{ algebraic over }K\}$ is a subfield of $L$
+\end{crly}
+\begin{proof}
+    If $\alpha,\beta$ are algebraic, then $\alpha\pm\beta,\alpha\beta,1/\alpha$ ($\alpha\neq 0$) are elements of $K(\alpha,\beta)$ which is an algebraic extension by the preceding lemma.
+\end{proof}
+\begin{prop}
+    $M/L$, $L/K$ are field extensions. Then $M/K$ is algebraic iff $M/L$ and $L/K$ are both algebraic
+\end{prop}
+\begin{proof}
+    ``only if'': Clear (by definition).
+
+    ``if'': If $\alpha\in M$, then there exists $f=c_0+c_1X+...+c_nX^n\in L[X]$ s.t. $f(\alpha)=0$. Let $L_0=K(c_0,...,c_n)$. Since each $c_i$ is algebraic over $K$, $[L_0:K]<\infty$. Also, $[L_0(\alpha):L_0]\le\deg f<\infty$. So $[L_0(\alpha):K]<\infty$ by tower law, so $\alpha$ is algebraic over $K$.
+\end{proof}
+\begin{example}
+    \begin{itemize}
+        \item Let $f(x)=x^d-n$, where $n,d\in\ZZ, d\ge 2, n\neq 0$. Suppose there exists $p$ prime s.t. $n=p^em$, $p\nmid m$ and $(d,e)=1$, then we claim that $f$ is irreducible over $\QQ$ and $[\QQ(\alpha):\QQ]=d$, where $\alpha=\sqrt[d]{n}$.
+
+        By Bezout's lemma, can find $r,s\in\ZZ$ s.t. $rd+se=1$. We may arrange so that $s>0$. Then $p^{dr}n^s=p^{dr}(p^em)^s=pm^s$. We put $\beta=p^r\alpha^s$ so that $\beta^d=pm^s$, then $\beta$ is a root of $g(x)=x^d-pm^s$, which is irreducible over $\ZZ$ by Eisenstein's criterion and hence irreducible over $\QQ$ by Gauss's lemma. So $[\QQ(\beta):\QQ]=d$ and $[\QQ(\alpha):\QQ]\le d$, but $\QQ(\beta)\subseteq\QQ(\alpha)$, so in fact $\QQ(\alpha)=\QQ(\beta)$ and $[\QQ(\alpha):\QQ]=d$.
+        \item Let $\zeta_p$ be a primitive $p$th root of unity, where $p$ is an odd prime. Let $\alpha=\zeta_p+\zeta_p^{-1}$. We want to compute the degree of $\QQ(\alpha)/\QQ$. $\zeta_p$ is a root of $(x^p-1)/(x-1)$ which is irreducible (GRM), so $[\QQ(\zeta_p):\QQ]=p-1$. Observe that over $\QQ(\alpha)$, $\zeta_p$ is a root of $g(x)=x^2-\alpha x+1$. So $[\QQ(\zeta_p):\QQ(\alpha)]=1,2$. It can't be one since one contains complex numbers and the other is real, so $[\QQ(\alpha):\QQ]=(p-1)/2$ by tower law.
+        \item $\QQ(\alpha)$, $\alpha=\sqrt{m}+\sqrt{n}$, $m,n,mn$ not squares. Clearly, $\QQ(\alpha)\subseteq\QQ(\sqrt{m},\sqrt{n})$. Conversely, can write $m=\alpha^2-2\alpha\sqrt{n}+n$, so $\sqrt{n}=(\alpha^2-m+n)/(2\alpha)$, so $\QQ(\alpha)=\QQ(\sqrt{m},\sqrt{n})$. $[\QQ(\sqrt{m},\sqrt{n}):\QQ(\sqrt{n})]\le 2$ as $\sqrt{m}$ is a root of $X^2-m$. Can show by squaring and rationality that $\sqrt{m}\not\in\QQ(\sqrt{n})$, so $[\QQ(\alpha):\QQ]=4$ by tower law.
+    \end{itemize}
+\end{example}
+
+\section{Ruler and Compass Construction}
+Given a finite set of points $S\subseteq\RR^2$, the following operations are allowed.
+\begin{enumerate}
+    \item Draw a straight line through two points in $S$.
+    \item Draw a circle with center $x\in S$ and radius the distance between two points in $S$.
+    \item Enlarge $S$ by adjoining the intersection of two discint lines/circles.
+\begin{defn*}
+    $(x,y)\in\RR^2$ is constructible from $S$ if one can enlarge $S$ to contain $(x,y)$ by a finite sequence of operations above. We say that $x\in\RR$ is constructible if $(x,0)$ can be constructed from $\{(0,0),(1,0)\}$.
+\end{defn*}
+\begin{defn*}
+    A subfield $K\subseteq\RR$ is constructible if there exists $n\ge 0$ and a sequence of subfields of $\RR$, $\QQ=F_0\subseteq F_1\subseteq...\subseteq F_n$ s.t. $K\subseteq F_n$.
+\end{defn*}
+\begin{rem}
+    By tower law, $[K:\QQ]$ is a power of $2$.
+\end{rem}
+\begin{thm}
+    If $x\in\RR$ is contructible then $\QQ(x)$ is a constructible subfield of $\RR$.
+\end{thm}
+\begin{proof}
+    Suppose $S\subseteq\RR^2$ is a finite set of points all of whose coordinates belong to a constructible subfield $K$. It suffices to show that if we adjoin $(x,y)\in\RR^2$ to $S$ by using allowed operations, then $K(x,y)$ is also constructible.
+
+    Note that $(x,y)$ is a point of intersection of two lines/circles, so $x=r+s\sqrt{v}, y=t+u\sqrt{v}$ (all coeff are in $K$). Then, $(x,y)\in K(\sqrt{v})\subseteq F_n(\sqrt{v})$, where $F_n$ is the last subfield in the increasing sequence ($K\subseteq F_n$). So $F_n(\sqrt{v})$ is a degree 1 or 2 extension of $F_n$, so $K(x,y)$ is constructible.
+\end{proof}
+\begin{rem}
+    It can be shown that $(x\pm y,0), (x/y,0),$ and $(\sqrt{x},0)$ are constructible from $(0,0),(1,0),(x,0),(y,0)$. Also, the converse of the theorem holds, i.e., $\QQ(x)$ constructible  $\implies$ $x$ constructible. (why?)
+\end{rem}
+\begin{crly}
+    If $x\in\RR$ is constructible then $x$ is algebraic over $\QQ$ and $[\QQ(x):\QQ]$ is a power of $2$.
+\end{crly}
+
+\begin{example}
+    Some classical problems:
+    \begin{itemize}
+        \item Constructing a square with equal area as a circle with random radius is impossible since this amounts to constructing $\sqrt{\pi}$
+        \item Construdcting a cube whose volume is twice that of a give cube is impossible as this amounts to constructing $\sqrt[3]{2}$, which has degree $3$ over $\QQ$.
+        \item There is no general method of trisecting an angle. For instance when the angle is $2\pi/3$. If $2\pi/9$ is constructible then $\cos(2\pi/9)$ is constructible, but we see that $2\cos(2\pi/9)$ has minimal polynomial $X^3-3X+1$ (Use $\cos3\theta=4\cos^3\theta-3\cos\theta$). Degree $3$, not a power of $2$. This also shows that regular $9$-gon can't be constructed by ruler \& compass.
+    \end{itemize}
+\end{example}
+
+\end{enumerate}
+
+\section{Splitting Fields}
+\begin{defn*}
+    Let $K$ be a field, and let $0\neq f\in K[X]$. An extension $L/K$ is called a splitting field of $f$ over $K$ if
+    \begin{enumerate}
+        \item $f$ splits into linear factors over $L$.
+        \item $L=K(\alpha_1,...,\alpha_n)$ where $\alpha_i$ are the roots of $f$.
+    \end{enumerate}
+\end{defn*}
+\begin{rem}
+    The 2nd condition is equivalent to saying $f$ doesn't split into linear factors over any subfield of $L$. The 2nd condition implies $[L:K]<\infty$.
+\end{rem}
+\begin{thm}[Existence of splitting field]
+    If $f\in K[X]$ is a non-zero polynomial, then there exists a splitting field of $f$ over $K$.
+\end{thm}
+\begin{proof}
+    Perform induction on $\deg f$. If $f$ is linear then we are done by setting $L=K$. Assume that every poly of degree $<\deg f$ has a splitting field, and let $g$ be an irreducible factor fo $f$ and let $K_1=K[X]/(g)$ and $\alpha_1=X+(g)$. Then $f(X)=(X-\alpha_1)f_1(X)$ for some $f_1\in K_1[X]$ with strictly smaller degree. By induction, there exists a splitting field for $f_1$ over $K_1$, say $L=K_1(\alpha_2,...,\alpha_n)$. We claim that $L$ is a splitting field of $f$ over $K$. Obviously $f$ splits as linear factors, and $L\cong K(\alpha_1,...,\alpha_n)$.
+\end{proof}
+\begin{defn*}
+    $L/K$, $M/K$ field extensions. A $K$-homomorphism (or equivalently, $K$-embedding) of $L$ into $M$ is a ring hom, $L\to M$ which is the identity on $K$.
+\end{defn*}
+\begin{thm}
+    Let $L=K(\alpha)$ for some algebraic $\alpha$ with min poly $f$. Let $M/K$ be any field extension. Then there is a bijection
+    \[\{K\text{-hom }L\to M\}\leftrightarrow\{\alpha\in M:f(\alpha)=0\}\]
+    given by $\tau\mapsto \tau(\alpha)$.
+\end{thm}
+\begin{proof}
+    The correspondence is well-defined by direct computation, i.e., $\tau(\alpha)$ is indeed a root. To see injectivity, note that any $K$-hom is uniquely determined by $\tau(\alpha)$ since $L=K[X]/(f)$ which has basis $\{1,\alpha,...,\alpha^n\}$. To see surjectivity, note that evalutation at $\alpha$ gives an iso $K[X]/(f)\to L$ by $X+(f)\mapsto\alpha$. Let $\beta\in M$ be a root of $f$. Since $f$ is irred, it's the min poly for $\beta\in K$. Evaluation at $\beta$ and 1st iso gives another iso of the same form. Since both are $K$-embeddings composing one with the inverse of the other gives a $K$-hom such that $\tau(\alpha)=\beta$.
+\end{proof}
+\begin{example}
+    There are exactly 2 $\QQ$-homs $\QQ(\sqrt 2)\to\QQ(\sqrt 2)$.
+\end{example}
+\begin{defn*}
+    Let $L/K$, $M/K$ be field extensions and let $\sigma:K\to K'$ be  afield embedding. A $\sigma$-embedding (or $\sigma$-hom) $\tau:L\to M$ is an embedding s.t. $\tau(x)=\sigma(y)$ for all $x\in K$.
+\end{defn*}
+Note that taking $\sigma=\operatorname{id}_K$ recovers the defn of $K$-hom.
+\begin{thm}
+     Let $L=K(\alpha)$, where $\alpha$ is algebraic over $K$ with min poly $f$. $\sigma:K\to K'$ embedding and $M/K'$ field extn. Then there is a bijection
+     \[\{\sigma\text{-hom }L\to M\}\leftrightarrow\{\alpha\in M:\sigma f(\alpha)=0\}\]
+     So in particular, the number of $\sigma$-homs $L\to M$ is $\le [L:K]$.
+\end{thm}
+Note: If $f=\sum_ic_iX^i$ with $c_i\in K$, then $\sigma f=\sum_i\sigma(c_i)X^i$.
+\begin{example}
+    $K=\QQ(\sqrt 2)$. $L=K(\sqrt{1+\sqrt{2}})$. (Exercise: $1+\sqrt{2}$ is not a square in $K$) There are $2$ $K$-embeddings $L\to\RR$ from theorem 3.5. However, if $\sigma:K\to K$ is the non-trivial map $a+b\sqrt{2}\mapsto a-b\sqrt{2}$, then there is no $\sigma$-beddings $L\to\RR$.
+\end{example}
+\begin{thm}
+    $0\neq f\in K[X]$, $L$ splitting field of $f$ over $K$ and $\sigma:K\to M$ any field embedding s.t. $\sigma f\in M[X]$ splits into linear factors. Then
+    \begin{enumerate}
+        \item $\exists$ a $\sigma$-embedding $\tau:L\to M$
+        \item If $M$ is a splitting field of $f$ over $K$ then $\tau$ is an isomorphism
+    \end{enumerate}
+\end{thm}
+\begin{proof}
+    To prove 1, we proceed by induction on $n=[L:K]$. The base case $n=1$ is trivial. Suppose $n>1$ and $g$ is a irreducible factor of $f$ of degree $>1$. Let $\alpha\in L$ be a root of $g$ and $\beta\in M$ a root of $\sigma g$. By Thm 3.7, $\sigma$ extends to an embedding $\sigma_1:K(\alpha)\to M$ s.t. $\alpha\mapsto\beta$ and $[L:K(\alpha)]< n$.
+    Now, $[L:K(\alpha)]<n$, so by induction hypothesis can further extend $\sigma_1$ to a $\tau:L\to M$.
+
+    To prove 2, pick $\tau:L\to M$ (by(i)) and $\alpha_1,...,\alpha_n$ roots of $f$ in $L$, $\tau(\alpha_1),...,\tau(\alpha_n)$ roots of $\sigma f$ in $M$. Then $M$ is a splitting field of $\sigma f$ over $\sigma K$, so $M=\sigma K(\tau(\alpha_1),...,\tau(\alpha_n))=\tau(K(\alpha_1,...,\alpha_n))=\tau(L)$. If $L/K$, $M/K$ are splitting field over of $f$ over $K$ and $\sigma:K\to M$ inclusion, then (i) and (ii) gives a $K$-iso $L\cong M$.
+\end{proof}
+\begin{example}
+    $X^3-2$ over $\FF_7$. Splitting field $\FF_7(\alpha)$, $\alpha^3=2$ as $X^3=(X-\alpha)(X-2\alpha)(X-4\alpha)$.
+\end{example}
+\begin{defn*}
+    A field $K$ is algebraically closed if every non-constant poly over $K[X]$ has a root in $K$.
+\end{defn*}
+\begin{lem}
+    A field $K$ field. TFAE
+    \begin{enumerate}
+        \item $K$ alg-closed
+        \item If $L/K$ extn and $\alpha\in L$ is alg over $K$ then $\alpha\in K$
+        \item $L/K$ algebraic implies that $L=K$
+        \item $L/K$ finite implies $L=K$.
+    \end{enumerate}
+\end{lem}
+\begin{defn*}
+     If $L/K$ is algebraic and $L$ is algebraically closed, then we say that $L$ is an algebraic closure of $K$.
+\end{defn*}
+\begin{lem}
+    If $L/K$ is algebraic extn s.t. every poly $f\in K[X]$ splits over $L$. Then $L$ is algebraically closed.
+\end{lem}
+\begin{proof}
+    If not, then there eixsts an extension $M/L$ algebraic with $[M:L]>1$, so $M/K$ is algebraic. Pick  any $\alpha\in M$. $f$ its min poly over $K$, then $f$ splits in $L$, which implies that $\alpha\in L$, so $M=L$.
+\end{proof}
+
+\begin{thm}
+    If (i) $K\subseteq\CC$ OR (ii) $K$ is contructible, then $K$ has an algebraic closure.
+\end{thm}
+\begin{proof}
+    (i) If $K\subseteq \CC$, then $L=\{\alpha\in\CC:\alpha\text{ algebraic over }K\}$ works.
+
+    (ii) If $K$ is constructible, then so is $K[X]$. Enumerate monic irreducible polynomials $f_1,f_2,...$ and construct a chain $K=L_0\subset L_1\subset L_2\subset...$ where $L_i$ is the splitting field of $f_i$ over $L_{i-1}$. Define $L=\bigcup_nL_n$.
+\end{proof}
+\begin{rem}
+    If $K=\QQ$, then the proof of (i) implies that $\bar\QQ$ (the set of algebraic numbers) is algebraically closed.
+\end{rem}
+
+\section{Symmetric Polynomials}
+Motivation: $f(X)=X^3+aX^2+bX+c$. Sub $X-a/3$ in place of $X$ so can wlog assume $a=0$. Get a system of of roots $\alpha,\beta,\gamma$. We have
+\[\alpha=\dfrac{1}{3}[(\alpha+\beta+\gamma)+(\alpha+\omega\beta+\omega^2\gamma)+(\alpha+\omega^2\beta+\omega\gamma)]\]
+Write $\alpha+\omega\beta+\omega^2\gamma=u$ and $\alpha+\omega^2\beta+\omega\gamma=v$ can show that $u^3+v^3=-27c$ and $uv=-3b$. Then can solve for $u^3$ and $v^3$ using the quadratic $X^2+27cX-27b^3$ and get the cubic formula.
+
+\begin{defn*}
+    $R$ ring, $f\in R[X_1,...,X_n]$ is symmetric if $f(X_{\sigma(1)},...,X_{\sigma(n)})=f(X_1,...,X_n)$ for all $\sigma\in S_n$.
+\end{defn*}
+Clearly, the set of symmetric polynomials is a subring of $R[X_1,...,X_n]$.
+\begin{defn*}
+    Elementary symmetric functions are the polynomials $s_1,...,s_n$ in $\ZZ[X_1,...,X_n]$ s.t.
+    \[\prod_{i=1}^n(T+X_i)=T^n+s_1T^{n-1}+...+s_{n-1}T+s_n\]
+    i.e.,
+    \[s_r=\sum_{i_1<...<i_r}X_{i_1}...X_{i_r}\]
+\end{defn*}
+\begin{thm}[Symmetric function theorem]
+    \begin{enumerate}
+        \item Every symmetric polynomial over $R$ can be written as a polynomial (coeff in $R$) in the elementary symmetric function.
+        \item There are no non-trivial relations between $S_r$. (Hence the expression obtained in (i) is unique)
+    \end{enumerate}
+\end{thm}
+\begin{proof}
+    Let $f\in R[X_1,...,X_n]$, $f\in\sum_df_d$ for $f_d$ homogeneous of degree $d$. Then $f$ being symmetric implies all $f_d$ being symmetric. So WLOG assume $f$ is homogeneous. Impose a lexicographic ordering by insisting that $X_1^{i_1}...X_n^{i_n}>X_1^{j_1}...X_n^{j_n}$ if $i_k=j_k$ for all $k\le r-1$ and $i_r>j_r$. This is a total ordering. Pick the largest monomial $X_{1}^{i_1}...X_n^{i_n}$ that appear in $f$ with non-zero coefficient $c\neq 0$. Then $X_{\sigma(1)}^{i_1}...X_{\sigma(n)}^{i_n}$ is in $f$ for all $\sigma\in S_n$ by symmetry. Up to permutation of indices, we may assume that $i_1\ge i_2\ge...\ge i_n$. So
+    \[X_1^{i_1-i_2}(X_1X_2)^{i_2-i_3}...(X_1X_2...X_n)^{i_n}\]
+    Let $g=s_1^{i_1-i_2}s_2^{i_2-i_3}...s_n^{i_n}$. Then $f,g$ have the same largest monomial of degree $d$, so $f-cg$ is either zero or a sym homogeneous poly of degree $d$ with strictly smaller leading monomial. Now we simply note that there are only finitely many monomials of degree $d$ in $R[X_1,...,X_n]$, so the result follows from induction on degrees.
+\end{proof}
+We can rephrase the preceding theorem.
+\begin{thm*}[Symmetric function theorem (*)]
+    There is a ring hom $\theta:R[Y_1,...,Y_n]\to R[X_1,...,X_n]$ given by $Y_i\mapsto s_i$.
+    \begin{enumerate}
+        \item $\operatorname{im}\theta=\{\text{sym polys on }R[X_1,...,X_n]\}$;
+        \item $\theta$ is injective.
+    \end{enumerate}
+\end{thm*}
+\begin{proof}
+We only need to prove the second part. Let $s_{r,n}=s_r$, where $n$ denotes the number of variables. Suppose $G\in R[Y_1,...,Y_n]$ with $G(s_{1,n},...,s_{n,n})=0$. Perform induction on $n$. The case $n=1$ is clear. We write $G=Y_n^kH$ where $Y_n\nmid H$ and $k\ge0$. Since $s_{n,n}$ is not a zero divisor in the poly ring, we have $H(s_{1,n},...,s_{n,n})=0$, so wlog assume $Y_n\nmid G$ if $G$ is non-zero. Replacing $X_n=0$ reduces the number of variables, and we observe that 
+\[s_{r,n}(X_1,...,X_{n-1},0)=\begin{cases}
+    s_{r,n-1} & r<n\\
+    0 & r=n
+\end{cases}\]
+So this implies that $G(s_{1,n-1},...,s_{n-1,n-1},0)=0$. By induction hypothesis, we have $G(Y_1,...,Y_{n-1},0)=0$, so $Y_n\mid G$. So $G=0$ is forced, proving injectivity.
+\end{proof}
+\begin{example}
+    Can use the algorithm to show that $\sum_{i\neq j}X_i^2X_j=s_1s_2-s_3$. Note that the leading term is $X_1^2X_2$.
+\end{example}
+\begin{example}
+The discriminant of a poly can be written as a poly on the coefficients of the poly by symmetric function theorem.
+\end{example}
+
+\section{Normal and Separable Extensions}
+\begin{defn*}
+An extension $L/K$ is normal if it's algebraic and the minimal poly of every $\alpha\in L$ splits into linear factors over $L$. (i.e., if $f\in K[X]$ is irred over $K$ and has a root in $L$, then it splits into linear factors over $L$.)
+\end{defn*}
+\begin{thm}
+Let $[L:K]<\infty$. Then $L/K$ is normal iff $L$ is the splitting field for some $f\in K[X]$.
+\end{thm}
+\begin{proof}
+``$\Rightarrow$'': Write $L=K(\alpha_1,...,\alpha_n)$. Let $f_i$ be the min poly of $\alpha_i$ over $K$. Being normal implies that $f_i$ splits, so $L$ is the splitting field of $f_1f_2...f_n$ by definition of splitting fields.
+
+``$\Leftarrow$'': Suppose $L$ is the splitting field of $f\in K[X]$. Let $\alpha\in L$ with min poly $g$ over $K$. Let $M/L$ be a splitting field of $g$. WTS that $\beta\in M$ is a root of $g$ implies $\beta\in L$.
+
+$L(\alpha)$ is a splitting field of $f$ over $K(\alpha)$; $L(\beta)$ is a splitting field of $f$ over $K(\beta)$. Since $\alpha,\beta$ have the same min poly, $K(\alpha)$ and $K(\beta)$ are $K$-isomorphic. By uniqueness of splitting field, $L(\alpha)=L$ and $L(\beta)$ are $K$-isomorphic. So $[L(\beta):L]=1$, so $\beta\in L$.
+\end{proof}
+
+Define the formal derivative for poly over arbitrary fields.
+
+\begin{lem}
+    $f\in K[X]$, $\alpha\in K$ root of $f$. Then $\alpha$ is a simple root iff $f'(\alpha)\neq 0$.
+\end{lem}
+\begin{proof}Just compute
+\end{proof}
+
+\begin{lem}
+    Let $f,g\in K[X]$, and let $L/K$ be any field extension. Then $\gcd(f,g)$ is the same when computed in $K[X]$ and in $L[X]$.
+\end{lem}
+\begin{proof}
+    Over $K$, the gcd is given by Eulicd's algorithm. The result is clearly identical over $L$ as $L/K$ is a field extension.
+\end{proof}
+\begin{defn*}
+    A poly $f\in K[X]$ is separable if it splits into distinct linear factors in its splitting field. (inseparable = not separable)
+\end{defn*}
+\begin{lem}
+    $0\neq f\in K[X]$ is separable iff $\gcd(f,f')=1$.
+\end{lem}
+\begin{proof}Work in the splitting field of $f$. (Lemma 5.3 says this is fine.)
+\end{proof}
+
+\begin{thm}
+Let $f\in K[X]$ be irreducible. Then $f$ is either separable or $f(X)=g(X^p)$ for some $g\in K[X]$. The second possibility may occur if $\operatorname{char}(K)=p>0$.
+\end{thm}
+\begin{proof}
+    WLOG assume that $f$ is monic. If $f$ is irred. then $\gcd(f,f')=1$ or $f$. If $f'\neq 0$, then $\gcd(f,f')=1$, so separable. If $f'=0$, then Write $f=\sum c_ix_i$, $f'=\sum ic_ix_i$. We see that $ic_i=0$ for $i\ge 1$. So $p\mid ic_i$ for all $i$. If $p\nmid i$, then $p\mid c_i$, i.e., $c_i=0$ in field of char $p$. If $c_i\neq 0$ in $K$, then $p\mid i$, so $f(X)=g(X^p)$ for some $g\in K[X]$.
+\end{proof}
+\begin{defn*}
+    Let $L/K$ be a field extension. Then
+    \begin{enumerate}
+        \item $\alpha\in L$ is separable over $K$ if it's algebraic and its min poly over $K$ is separable.
+        \item $L/K$ separable if for all $\alpha\in L$, $\alpha$ is separable over $K$. (In particular, the definition implies that $L/K$ is algebraic.)
+    \end{enumerate}
+\end{defn*}
+\begin{thm}[Theorem of the primitive elements]
+    If $L/K$ is finite and separable, then $L=K(\theta)$ for some $\theta\in L$.
+\end{thm}
+\begin{proof}
+Write $L=K(\alpha_1,...,\alpha_n)$ smoe $\alpha_i\in L$. It is sufficient to deal with the case $L=K(\alpha,\beta)$, where $f,g$ are minpolys of $\alpha,\beta$ over $K$. Work in splitting fields of $fg$, say $M$ over $L$. Over $M$, write $f(X)=\prod_{i=1}^r(X-\alpha_i),g(X)=\prod_{i=1}^s(X-\beta_i)$, where $\alpha=\alpha_1$, $\beta=\beta_1$.
+$L/K$ separable $\implies \beta$ separable $\implies \beta_1,...,\beta_s$ distinct. Pick $c\in K$ and let $\theta=\alpha+c\beta$. Define $F(X)=f(\theta-cX)\in K(\theta)[X]$. Then $F(\beta)=0$.
+Consider $\gcd(F,g)$.
+\begin{itemize}
+    \item If $\beta_2,...,\beta_s$ are not roots of $F$, then $\gcd(F,g)=(X-\beta)$ over $M$, so $\gcd(F,g)=X-\beta$ over $K(\theta)$ by Lemma 5.3, so $\beta\in K(\theta)$. Then $\alpha=\theta-c\beta\in K(\theta)$, so $K(\alpha,\beta)=K(\theta)$.
+    \item If $F(\beta_j)=0$ for some $2\le j\le s$, then $f(\theta-c\beta_j)=0$ implies that $\alpha_i+c\beta_j=\alpha+c\beta$. We can solve for $c$, so if $|K|=\infty$, then we can always make another choice to avoid this. If $|K|<\infty$, then $|L|<\infty$, and Proposition 1.4 implies that $L^\times $ is cyclic, generated by some $\theta$, then $L=K(\theta)$.
+\end{itemize}
+\end{proof}
+\begin{rem}
+    Thm 5.5, 5.6 $\implies$ If $[K:\QQ]<\infty$ then $K=\QQ(\alpha)$ for some $\alpha\in K$.
+\end{rem}
+
+We introduce some notation. Let $\Hom_K(L,M)$ be the set of all $K$-embeddings $L\hookrightarrow M$, where $L/K, M/K$ are field extensions.
+
+\begin{lem}
+    Let $[L:K]<\infty$, $L=K(\alpha)$, $f$ min poly of $\alpha$ over $K$. $M/K$ any field extension. Then $|\Hom_K(L,M)|\le [L:K]$ with equality iff $f$ splits into distinct linear factors over $M$.
+\end{lem}
+\begin{proof}
+    Thm 3.4 implies that $\Hom_k(L,M)\leftrightarrow\{\text{roots of }f\text{ in }M\}\le[L:K]$ with equality iff $f$ splits as distinct linear factors over $M$.
+\end{proof}
+\begin{thm}
+    Let $[L:K]<\infty$, $L=K(\alpha_1,...,\alpha_n)$ and $f_i$ min poly over $\alpha_i$ over $K$. $M/K$ any field extension. Then, $|\Hom_K(L,M)|\le[L:K]$ with equality iff each $f_i$ splits into distinct linear factors.
+\end{thm}
+We can generalize this theorem to $\sigma$-embeddings.
+\begin{thm*}
+    With the same hypothesis, $\#\sigma$-embeddings $L\hookrightarrow M\le [L:K]$ with equality iff each $\sigma(f_i)$ splits into distinct linear factors over $M.$
+\end{thm*}
+\begin{proof}
+    Induction on $n$. 
+    \begin{itemize}
+        \item If $n>1$, then let $K_1=K(\alpha_1)$. Then Thm 5.7 implies that $|\Hom_K(K_1,K)|\le[K_1:K]$.
+        \item The induction hypothesis implies $|\{\sigma\text{-embeddings }K(\alpha_2,...,\alpha_n)\hookrightarrow M\}|\le[L:K_1]$.
+    \end{itemize}
+    The tower law implies that $\Hom_K(L,M)\le [L:K]$ with equality iff equality holds in both places. Now use Lemma 5.7. 
+    However, there is a slight little wrinkle for the second point. If each $f_i$ splits into distinct linear factors over $M$, then for $2\le i\le n$ min poly $\alpha_i$ over $K_1$ may change but still divide $f_i$, so still splits into distinct linear factors so equality holds in the second point.
+\end{proof}
+
+\begin{crly}
+    Let $[L:K]<\infty$. Let $L=K(\alpha_1,...,\alpha_n)$, $f_i$ min poly of $\alpha_i$ over $K$. Let $M/K$ be any field extension in which $\prod_if_i$ splits into linear factors. The TFAE,
+    \begin{enumerate}
+        \item $L/K$ separable
+        \item Each $\alpha_i$ separable over $K$
+        \item Each $f_i$ separable over $K$
+        \item $|\Hom_K(L,M)|=[L:K]$.
+    \end{enumerate}
+\end{crly}
+\begin{proof}
+    $1)\implies 2)\implies 3)\overset{5.8}{\implies}4)$. 
+    Assume $4)$ is true. Let $\beta\in L$, then Thm 5.8 applied to $L=K(\alpha_1,...,\alpha_n,\beta)$ implies that $\beta$ is separable over $K$. Since $\beta$ is arbitrary, we get $1)$.
+\end{proof}
+\begin{rem}
+    $1)\Leftrightarrow 4)$ is a useful characterization of separable extensions.
+\end{rem}
+\begin{example}
+    Let $K$ be a field, $n\ge 2$. Then $[K(X):K(X^n)]=n$. It suffices to show that $[K(X):K(X^n)]\ge n$. We observe that $1,X,X^2,...,X^{n-1}$ are linearly independent, so if there exists rational functions $g_0,...,g_{n-1}\in K(X^n)$ s.t. $\sum g_jX^j=0$, then clearing denominators, we get $g_j=0$ for all $j$. Alternatively, we show that $T^n-Y$ is irreducible in $K[Y,T]$. Gauss's lemma implies that $T^n-Y$ is irreducible in $K(Y)[T]$, so $T^n-X^n$ is irreducible over $K(X^n)[T]$ as $X^n$ is transcendental over $K$ (c.f. ES1 Q8).
+\end{example}
+\begin{example}
+    We produce an example of inseparable extension. Let $p$ be a prime, and $K=\FF_p$ and $n=p$ int he previous example. Then $\FF_p(X)/\FF_p(X^p)$ is inseparable. The min poly f $X$ over $\FF_p(X^p)$ is $T^p-X^p=(T-X)^p$.
+\end{example}
+
+\section{Galois Extensions}
+\begin{defn*}
+    A $K$-automorphism of $L/K$ is an element $\sigma\in\Aut(L)$ s.t. $\sigma|_K=\operatorname{id}_K$. We write this group as $\Aut(L/K)$.
+\end{defn*}
+\begin{rem}
+    \begin{itemize}
+        \item $\Aut(L/K)=\Aut(L)$ if $K$ is the prime subfield of $L$.
+        \item If $[L:K]<\infty$, then any $K$-embedding $L\to L$ is surjective, so rank-nullity implies that $\Hom_K(L,L)=\Aut(L/K)$.
+    \end{itemize}
+\end{rem}
+\begin{lem}
+    Let $L/K$ be a finite extension. Then $|\Aut(L/K)|\le [L:K]$
+\end{lem}
+\begin{proof}
+    By Thm 5.8
+\end{proof}
+\begin{defn*}
+    If $S\subseteq\Aut(L)$, then define the fixed field of $S$ to be $L^S=\{x\in L:\forall\sigma\in S,\sigma(x)=x\}$.
+\end{defn*}
+\begin{defn*}
+    A field extension $L/K$ is Galois if it's algebraic and $L^{\Aut(L/K)}=K$.
+\end{defn*}
+\begin{example}
+    $\CC/\RR$, $\QQ(\sqrt{2})/\QQ$. Any finite extension $K/\FF_p$ is Galois since the elements fixed by the Frobenius map are precisely roots of $X^p-X$, i.e., $\FF_p$.
+
+    However, $\QQ(\sqrt[3]{2})/\QQ$ is not Galois.
+\end{example}
+\begin{thm}[Classification of finite Galois extension]
+    $L/K$ field extension and $G=\Aut(L/K)$. TFAE,
+    \begin{enumerate}
+        \item $L/K$ Galois
+        \item $L/K$ normal and separable
+        \item $L$ is the splitting field of a separable poly over $K$
+        \item $|G|=[L:K]$ (c.f. Lemma 6.1).
+    \end{enumerate}
+\end{thm}
+\begin{proof}
+    
+\end{proof}
+\end{document}

@@ -1,0 +1,404 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{enumerate,bbm}
+\usepackage{tikz,graphicx,color,mathrsfs,color,hyperref,boldline}
+\usepackage{caption,float}
+\usepackage[a4paper,margin=1in,footskip=0.25in]{geometry}
+
+\usepackage{listings}
+\usepackage{xcolor}
+
+\usepackage{tabularx,capt-of}
+
+\usepackage{blindtext}
+%Image-related packages
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage[export]{adjustbox}
+\usepackage{lipsum}
+
+%hyperref setup
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    }
+
+%New colors defined below
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+%Code listing style named "mystyle"
+\lstdefinestyle{mystyle}{
+  backgroundcolor=\color{backcolour}, commentstyle=\color{codegreen},
+  keywordstyle=\color{magenta},
+  numberstyle=\tiny\color{codegray},
+  stringstyle=\color{codepurple},
+  basicstyle=\ttfamily\footnotesize,
+  breakatwhitespace=false,         
+  breaklines=true,                 
+  captionpos=b,                    
+  keepspaces=true,                 
+  numbers=left,                    
+  numbersep=5pt,                  
+  showspaces=false,                
+  showstringspaces=false,
+  showtabs=false,                  
+  tabsize=2
+}
+
+%"mystyle" code listing set
+\lstset{style=mystyle}
+
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{example}[defn]{Example}
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}
+\newtheorem{remS}[section]{defn}
+\newtheorem{lem}[defn]{Lemma}
+\theoremstyle{plain}
+\newtheorem{thm}[defn]{Theorem}
+\newtheorem{prop}[defn]{Proposition}
+\newtheorem{fact}[defn]{Fact}
+\newtheorem{crly}[defn]{Corollary}
+\newtheorem{conj}[defn]{Conjecture}
+
+%\newtheorem*{programming*}{Programming Task}
+
+%\newtheorem{innercustomgeneric}{\customgenericname}
+%\providecommand{\customgenericname}{}
+%\newcommand{\newcustomtheorem}[2]{%
+%  \newenvironment{#1}[1]
+%  {%
+%   \renewcommand\customgenericname{#2}%
+%   \renewcommand\theinnercustomgeneric{##1}%
+%   \innercustomgeneric
+%  }
+%  {\endinnercustomgeneric}
+%}
+
+%\newcustomtheorem{question}{Question}
+%\newcustomtheorem{programming}{Programming Task}
+
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\PP}{\mathbb{P}}
+\newcommand{\FF}{\mathbb{F}}
+
+\newcommand{\calD}{\mathcal{D}}
+
+\newcommand{\sol}{\textit{Solution: }}
+\newcommand{\Res}{\operatorname{Res}}
+
+\title{Representation theory}
+\author{Kevin}
+\date{October 2024}
+
+\begin{document}
+\maketitle
+\section{Revision of LA}
+\section{Definitions}
+\begin{defn}
+    $G$ is a group, $V$ a vector space over a field $k$, a representation of $G$ on $V$ is a group homomorphism $\rho:G\to GL(V)$
+\end{defn}
+\begin{rem}
+    Synonym 1: $G$ acts on $V$ by linear transformations
+    Synonym 2: $V$ is a $kG$-module...
+\end{rem}
+\begin{defn}
+    The degree of $\rho$ is $\dim V$.
+\end{defn}
+\begin{example}
+\begin{enumerate}
+    \item $G=\ZZ_2=\{\pm 1\}$, $V=\RR^2$, $1\mapsto I$, $-1\mapsto \begin{pmatrix}
+        -1&\\
+        &1
+    \end{pmatrix}$
+    \item (Trivial representation) $G$ any group, $V=k$, $\rho(g)=1\in k^\ast$.
+    \item $G=\ZZ$, $V$ vector space. We have 
+    \[\{\text{rep of }\ZZ\}\leftrightarrow\{\text{invertible linear transformation}\}\]
+    given by $\rho\mapsto \rho(1)$. (This follows from definition)
+    \item $G=\ZZ_N$, then similarly, we have
+    \[\{\text{rep of }\ZZ_N\}\leftrightarrow\{\text{invertible linear maps }f\text{ s.t. }f^N=I\}\]
+\end{enumerate}
+\end{example}
+\begin{rem}
+    If $G$ has group presentation $\langle g_1,...,g_k\mid r_1,...,r_l\rangle$, then
+    \begin{align*}
+        \{\text{reps of }G\text{ on }V\}\leftrightarrow\{(f_1,...,f_k)\in GL(V)\mid \forall i,\rho(r_i)=I\}
+    \end{align*}
+\end{rem}
+\begin{example}
+    $G=S_3$, $V=\RR^2$. Given $g\in G$ make it act on an equilateral triangle by permuting vertices and extending linearly. This gives a representation by definition.
+\end{example}
+
+\section{Category of representations}
+Problem: too many reps. We want to
+\begin{itemize}
+    \item know when two reps are the ``same'';
+    \item break up reps into ``smaller'' reps.
+\end{itemize}
+\begin{defn}
+    Let $\rho:G\to\operatorname{Aut}(V)$, $\rho':G\to V'$ are isomorphic if there is an isomorphism $\varphi:V\to V'$ as vector spaces s.t. $\varphi\circ\rho(g)=\rho'(g)\circ\varphi$ for all $g\in G$.
+\end{defn}
+Note that in the definition above, $\varphi$ is independent of $g$.
+
+\textbf{Terminology:} $\varphi$ intertwines $\rho,\rho'$. This is the same as saying $\varphi^{-1}$ intertwines $\rho',\rho$.
+\begin{example}
+    $\rho:\ZZ\to\operatorname{Aut}(V)$ and $\rho':\ZZ\to\operatorname{Aut}(V')$ are isomorphic iff there exists a basis of $V$ and a basis of $V'$ s.t. 
+    \[\begin{bmatrix}\text{matrix of }\rho(1)\text{ basis of }V\end{bmatrix}=\begin{bmatrix}
+        \text{matrix of }\rho'(1)\text{ wrt to basis of }V'
+    \end{bmatrix}\]
+    As a corollary, isomorphism classes of reps of $\ZZ$ on $V$ is in bijection correspondence with rational canonical forms.
+\end{example}
+\begin{rem}
+    If two representations $\rho,\rho'$ are isomorphic, then $\dim\rho=\dim\rho'$, but the converse is false, e.g., $\rho:\ZZ\to GL_1(\RR),1\mapsto 1$ and $\rho:\ZZ\to GL_1(\RR), 1\mapsto -1$. Another example is if $G=\ZZ_2$, then the matrices $\operatorname{diag}(-1,1),\operatorname{diag}(1,-1)$ and "off-diag"(1,1) define isomorphic reps which are different from $\operatorname{diag}(-1,-1)$ and $I$.
+\end{rem}
+    Let $\rho:G\to\operatorname{Aut}(V)$ be a rep. Suppose $W\le V$ is preserved by $G$, i.e., $gW\subseteq W$ for all $g\in G$ (implies $gW=W$ as $g$ is invertible). Then $G$ acts on $W$ and we get $\tilde{rho}: G\to\operatorname{Aut}(W)$ and we say that $\tilde{\rho}$ is a subrepresentation of $\rho$.
+\begin{defn}
+    A $G$-invariant subspace $W\le V$ is called a subrepresentation. If $W=0$ or $W=V$ then we say the subrep is trivial. Otherwise we say the subrep is non-trivial
+\end{defn}
+\begin{defn}
+    If there are no non-trivial subreps of $V$ then we say that $V$ is irreducible (simple).
+\end{defn}
+ \begin{example}
+     \begin{itemize}
+         \item Any 1-dim rep is irred.
+         \item $G=\ZZ_2$, $1\mapsto\operatorname{diag}(1,-1)$ is not irreducible because it has exactly two non-trivial subreps.
+         \item $S^3$ acts on an equilateral triangle by permuting vertices, one can extend linearly to $\CC^2$. This rep is irreducible by noting the fact that an invariant subspace is a complex line which corresponds to common eigenvectors.
+         \item $G=\ZZ$, $V$ vec. space over $\CC$, $\rho(1)=A$. Can check that the invariant subspaces are precisely defined by Jordan blocks of $A$ when written in JNF. Suppose wrt to some basis $e_1,...,e_n$ one has $A$ in JNF, then $\langle e_1\rangle,..,\langle e_1,...,e_n\langle$ are all invariant subspaces, so the only irreducible rep of $\ZZ$ on vector space over $\CC$ are the $1$-dim reps.
+     \end{itemize}
+ \end{example}
+ \begin{prop}
+     Let $\rho:G\to\operatorname{Aut}(V)$ be a rep and $W\le V$ a subspace. Then $W$ is a subrep if and only if for every basis $v_1,...,v_a$ of $W$ and its extension $v_1,...,v_d$ which is a basis of $V$, the matrix of $\rho(g)$ is of the form
+     \begin{align*}
+     \begin{pmatrix}
+         A & B\\ 0&C
+     \end{pmatrix}
+     \end{align*} for all $g\in G$
+ \end{prop}
+ \begin{proof}
+ Trivial.
+ \end{proof}
+ \begin{defn}
+     A rep $V$ of $G$ is a direct sum of $W,W'$ if 
+     \begin{itemize}
+         \item they are invariant subspaces
+         \item and $V=W\oplus W'$ as a vector space.
+     \end{itemize}
+ \end{defn}
+ \begin{prop}
+     $V$ is a direct sum of $W,W'$ if and only if for every basis $v_1,...,v_a$ of $W$ and basis $v_{a+1},...,v_{d}$ of W', the matrix of $\rho(g)$ is of the form
+     \begin{align*}
+         \begin{pmatrix}
+             A&0\\0&B
+         \end{pmatrix}
+     \end{align*} for all $g\in G$
+ \end{prop}
+ \begin{proof}
+     Trivial.
+ \end{proof}
+ One can define external direct sums $\rho\oplus\rho'$ as well by requiring the action to be componentwise.
+ \begin{defn}
+     Given any rep $V$ of $G$ (abuse of notation), write it as a direct sum $V=W_1\oplus...\oplus W_r$, where $W_i$ is $G$-invariant and does not itself break up into direct sum. Such a $W$ is called indecomposable
+ \end{defn}
+ An example is given by JNF.
+ \begin{rem}
+     Indecomposable $\not\implies$ Irreducible.
+ \end{rem}
+ \begin{defn}
+     Let $\rho:G\to\operatorname{Aut}(V)$, $\rho':G\to\operatorname{Aut}(V')$ be reps of $G$. A morphism (or $G$-equivariant map) from $\rho$ to $\rho'$ is a linear map $\varphi:V\to V'$ s.t. $\varphi\rho(g)=\rho'(g)\varphi$.
+
+     We write $\operatorname{Hom}_G(V,V')$ for the set of these $G$-equivariant maps. This is a vector space.
+     \begin{itemize}
+         \item If $\varphi$ is an iso, then $V,V'$ are isomorphic reps;
+         \item If $\varphi$ is injective, then $V$ is a subrep of $V'$
+         \item If $\varphi$ is surjective, then $V'$ is a quotient rep of $V$.
+     \end{itemize}
+ \end{defn}
+ \begin{example}
+     Suppose $G$ acts on a set $X$, then we can lienarize the action and get a representation on $k[X]$ which is the vector space with basis $\{e_x\}_{x\in X}$. Note that this rep is never irreducible.
+
+     Exercise:
+     \begin{itemize}
+         \item Show that if $X=\{x_1,...,x_d\}$, then $W=\langle e_{x_1}+...+e_{x_d}\rangle$ and $W'=\{\sum a_ix_i\mid \sum_ia_i=0\}$ are both subreps of $k[X]$ and if $\operatorname{char}(k)=0$, $k[X]=W\oplus W'$.
+         \item Can you find an example where $W'$ is not irred.
+         \item Is $W\oplus W'=k[X]$ true if $\operatorname{char}(k)=p$ prime?
+     \end{itemize}
+ \end{example}
+
+\textbf{Clarification:} If $\varphi\in\operatorname{Hom}_G(V,V')$ is surjective, then $V/\ker\varphi\cong V'$, so we say that $V'$ is a quotient rep of $V$.
+
+If $G$ acts on a set $X$ and $X=X_1\sqcup X_2$ and $GX_i=X_i$, then $k[X]=k[X_1]\oplus k[X_2]$ (direct sum as rep). More generally, $X=\bigsqcup O_i$ where $O_i$ are orbits. If $y\in O_i$, then $G/\operatorname{Stab}(y)$ is in bijective correspondence with $O_i$. Then, $k[X]=\bigoplus_i k[O_i]$. These are called permutation reps
+
+\begin{example}
+    $S_3$ acts on $\{1,2,3\}$ then $k[X]=k^3$ and the action is by permuting standard basis vectors.
+\end{example}
+\begin{defn}
+    $\rho:G\to GL(V)$ rep, then $\rho$ is faithful if $\ker\rho$ is trivial.
+\end{defn}
+\begin{crly}
+    If $G$ is simple, then any non-trivial rep is faithful. Every finite group can be embedded as the subgroup of some $GL(V)$ so admits a faithful rep.
+\end{crly}
+\begin{proof}
+    1st part is trivial. The 2nd part uses Cayley's theorem and linear extension to make it an action on vector spaces.
+\end{proof}
+\begin{rem}
+    Can compose $\rho$ rep with a group hom to get new reps. When the group hom is an inclusion, we say that the resulting rep is the restriction to the subgroup.
+\end{rem}
+
+\section{Complete Reducibility}
+\begin{thm}
+Let $G$ be a be a finite group. $V$ a vector space over field $k$ s.t. $\operatorname{char}(k)=0$. Suppose $W\le V$ is a $G$-invariant subspace. Then $\exists$ a $G$-invariant complement $W'$ s.t. $V=W\oplus W'$ as reps of $G$.
+\end{thm}
+We will prove this theorem later. We now discuss some consequences of this theorem.
+\begin{crly}
+    In the situation of the preceding theorem, $V\cong W_1\oplus...\oplus W_r$ as reps s.t. $W_i$ is irreducible.
+\end{crly}
+\begin{proof}
+    Induction on dimension.
+\end{proof}
+\begin{example}
+    $G=\ZZ_N$, $k$ algebraically closed field with characteristic $0$. We can invoke JNF.
+     If $V$ is indecomposable as a rep of $G$, then it's also indecomposable as a rep of $\ZZ$ by precomposing with the projection map, and the matrix of $\rho(1)=A$ is a Jordan block $J_\lambda$. We may compute $J_\lambda^i$ to conclude that $d=1$ and $\lambda^N=1$. So the only Jordan blocks that occur in a finite dim rep of $\ZZ_N$ are $1\times 1$ blocks with e-values $N$th roots of unity, i.e., diagonal. Exercise: write down all invariant subspaces of $V$ is $\rho(1)$ is as above.
+
+     If $k=\FF_p$, $G=\ZZ_p$, then $G$ acts on $\FF_p^2$ by $1\mapsto \begin{pmatrix}
+         1&a\\0&1
+     \end{pmatrix}$ Show that there is no complement to the invariant line $\langle e_1\rangle$.
+\end{example}
+\textbf{Exercise:}  prove the theorem if $G$ is abelian and $V$ a v.s. over $\CC$. [Pick a $g\in G$ and find an e-value $\lambda$. Now any $h\in G$ preserves the $\lambda$-eigenspace by commutativity. Induction.]
+
+Recall relevant knowledge on Hermitian inner product. [linear in the 1st argument and conjugate-linear in the 2nd argument.]
+
+\begin{lem}
+If $W\le V$ is a $G$-invariant subsapce and $\langle-,-\rangle$ a $G$-invariant inner product on $V$, then $W^\perp$ is $G$-invariant.
+\end{lem}
+\begin{proof}
+    If $x\in W^\perp$ and $g\in G$, then $\langle gx,w\rangle=\langle g^{-1}gx,g^{-1}w\rangle=\langle x,g^{-1}w\rangle=0$.
+\end{proof}
+\begin{lem}
+    $G$ finite group acting on a vector space $V$ over $\CC$. Then there exists a $G$-invariant Hermitian inner product on $V$.
+\end{lem}
+\begin{proof}
+    Choose any Hermitian inner product and denote it $\langle-,-\rangle$. Define a new inner product 
+    \[(v,w)=|G|^{-1}\sum_{g\in G}\langle gv,gw\rangle\]
+    Most properties are trivial. We check $G$-invariance and non-degeneracy. Let $h\in G$, then
+    \[(hv,hw)=|G|^{-1}\sum_{g\in G}\langle ghv,ghw\rangle=|G|^{-1}\sum_{g'\in G}\langle g'v,g'w\rangle=(v,w)\]
+    where we use the change of index $g'=gh$. For non-degeneracy, note that $(v,v)=0\leftrightarrow\langle gv,gv\rangle=0$ for all $g\in G$ $\Leftrightarrow v=0$.
+\end{proof}
+\begin{defn}
+    A rep $V$ of $G$ is completely reducible if it's isomorphic to a direct sum of irreducible reps.
+\end{defn}
+\begin{crly}
+    Representations of finite group $G$ on vector space $V$ over $\CC$ are completely reducible.
+\end{crly}
+\begin{crly}
+    If $G\le GL_n(\CC)$ is finite, then $G$ is conjugate to a subgroup of $U(n)$.
+\end{crly}
+\begin{proof}
+    Recall that if $(-,-)$ is any Hermitian inner product, then can choose a basis $v_1,...,v_n$ of $\CC^n$ s.t. $(v_i,v_j)=\delta_{ij}$. Let $X$ be the change of basis matrix from $\{v_1,...,v_n\}$ to the standard basis, then $\langle x,y\rangle=(Xx,Xy)$. Apply this to a $G$-invariant inner product, then 
+    \[\langle X^{-1}gXx,X^{-1}gXy\rangle = (gXx,gXy)=(Xx,Yy)=\langle x,y\rangle\]
+    so $\{X^{-1}gX:g\in G\}\le U(n)$.
+\end{proof}
+\begin{crly}
+    If $A\in GL_n(\CC)$ and $A^n=I$, then $A$ is diagonalizable.
+\end{crly}
+\begin{proof}
+    $A$ defines a rep of $\ZZ_n$. We have three variants of the same proof.
+    \begin{itemize}
+        \item $A$ is conjugate to a unitary matrix, so diagonalizable by the preceding corollary.
+        \item $v\in\CC^n$ e-vector for $A$. Complete reducibility implies that $\CC^n=\CC v\oplus W$ as reps. Done by induction on dimensions.
+        \item The only irreducible reps are one dimensional (e-vectors exist in $\CC$), so $\CC^n$ splits as the direct sum of $A$-invariant lines, so $A$ is diagonal in some basis.
+    \end{itemize}
+\end{proof}
+\begin{thm}[Complete reducibility]
+    Let $G$ be a finite group, $V$ a vector space over field $k$ such that $\operatorname{char}(k)\nmid |G|$. If $W\le V$ is $G$-invariant, then there exists a $G$-invariant complement.
+\end{thm}
+\begin{proof}
+    Pick any $W'$ which is a complement of $W$. Let $q:V\to W$ be the projection onto $W$ with $\ker q=W$. We then have $gq(w)=gw=qgw$ for all $w\in W$. Now define $\Bar{q}(v)=|G|^{-1}\sum_{g\in G}gqg^{-1}v$
+    then $\Bar{q}$ has several properties.
+    \begin{itemize}
+        \item $\Bar{q}(V)=W$ as $q(V)=W$.
+        \item $gq(v)\in W$ for all $v\in V$ as $W$ is $G$-stable
+        \item If $w\in W$, then $\Bar{q}(w)=|G|^{-1}\sum_{g\in G}gqg^{-1}w=|G|^{-1}\sum_{g\in G}gg^{-1}w=w$, so $\Bar{q}$ projects onto $W$.
+        \item $\ker\bar{q}$ is $G$-stable because for $h\in G$, $h\bar{q}(v)=|G|^{-1}\sum_{g'\in G}g'qg^{-1}hv=\bar{q}hv$ where $g'=gh$.
+        \item Finally, can prove that $\ker\bar q\oplus\operatorname{im}\bar q=V$ using properties of projection (idempotency).
+    \end{itemize}
+    So we have found a $G$-invariant subspace.
+\end{proof}
+Illuminating exercise: Do this process for $G=\ZZ_2$.
+What fails when $\operatorname{char}(k)\mid G$?
+
+\section{Characters}
+\begin{defn}
+    $\rho:G\to\operatorname{Aut}(V)$, $V$ a vec. space over $k$. The character of $\rho$ is a function $\chi:G\to k$, $g\mapsto\operatorname{tr}(\rho(g))$.
+\end{defn}
+\begin{rem}
+    It is clear that $\chi$ satisfies the following properties.
+    \begin{itemize}
+        \item $\chi(g)$ doesn't depend on the choice of basis of $V$.
+        \item If $\rho,\rho'$ are isomorphic reps via a linear iso represented by matrix $X$, then $\operatorname{tr}(\rho'(g))=X\rho(g) X^{-1}$ for all $g\in G$.
+    \end{itemize}
+\end{rem}
+\begin{lem}
+    $\rho$ rep of $G$ on $V$ (over $\CC$).
+    \begin{itemize}
+        \item $\chi(1)=\dim V$
+        \item $\chi(g)=\chi(hgh^{-1})$ for all $h,g\in G$
+        \item $\chi(g^{-1})=\chi(g)^\ast$ if $G$ is finite.
+        \item If $\chi'$ is the character of $\rho'$ then $\chi_{\rho\oplus\rho'}=\chi+\chi'$ defined as $g\mapsto\chi(g)+\chi'(g)$.
+    \end{itemize}
+\end{lem}
+\begin{proof}
+    Trivial.
+\end{proof}
+\begin{defn}
+    The set of class functions is $\mathcal{C}_G=\{f:G\to\CC:\forall h,g\in G, f(ghg^{-1})=f(h)\}$.
+\end{defn}
+Note that $\mathcal{C}_G$ is a vector space over $\CC$ with basis the functions \[\delta_{\mathcal{O}}:G\to\CC,g\mapsto \begin{cases}1&g\in\mathcal{O}\\ 0&g\not\in\mathcal{O}\end{cases}\]
+where $\mathcal{O}$ is a conjugacy class.
+
+Write $G$ as a disjoint union of conj. classes, then $\chi\in\mathcal{C}_G$ if $V$ is a complex rep of $G$.
+
+Define a Hermitian inner product on $\mathcal{C}_G$ by
+\[\langle f,f'\rangle=|G|^{-1}\sum_{g\in G}f(g)\overline{f'(g)}=\sum_{1}^r\dfrac{1}{|Z_G(x_i)|}f(x_i)\overline{f'(x_i)}\]
+where $x_i$ are in distinct orbits.
+\begin{thm}
+    If $V,V'$ are irreducible complex of a finite group $G$ with character $\chi,\chi'$, then
+    \[\langle\chi,\chi'\rangle=\begin{cases}
+        1 & V\cong V'\\
+        0 & \text{o/w}
+    \end{cases}\]
+\end{thm}
+Proof deferred.
+\begin{crly}
+    The number of distinct irred. reps of $G$ = the number of distinct irred. reps?????
+\end{crly}
+\begin{thm}
+    There are as many irred. complex reps as conj. classes in $G$ (finite), i.e., $\{\chi_V: V\text{ irred.}\}$ is an orthonormal basis of $\mathcal{C}_G$.
+\end{thm}
+
+\begin{crly}
+    If $\rho',\rho'$ are two complex reps of $G$ with the same character, then $\rho\cong\rho'$
+\end{crly}
+Proof deferred.
+
+
+We introduce some notation. If $\rho$ is a rep of $G$, then write $n\rho$ for the $n$-fold direct sum of $\rho$, whose character is then denoted by $n\chi_\rho$. So if $\rho$ is isomorphic to a direct sum of reps, i.e., $\rho=n_1\rho_1\oplus...\oplus n_r\rho_r$, $\rho_i$ irred (complete reducibility) so that $\chi=n_1\chi+...+n_r\chi_r$. But $\langle\chi_i,\chi_j\rangle=\delta_{ij}$, so $\langle\chi_i,\chi_j\rangle=n_i$, so have an expansion in terms of the orthonormal basis $\{\chi_i\}$.
+
+In particular, in any decomposition of a rep $V$ into direct summand of irred. reps, the multiplicity with which the irred. reps occur is $\langle\chi,\chi_i\rangle$, which is independent of the decomposition.
+
+
+
+\end{document}
