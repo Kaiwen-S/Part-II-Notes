@@ -3,7 +3,8 @@
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath,amsfonts,amssymb,amsthm}
 \usepackage{enumerate,bbm}
-\usepackage{tikz,graphicx,color,mathrsfs,color,hyperref,boldline}
+\usepackage{tikz,graphicx,color,mathrsfs,color,hyperref,boldline,MnSymbol}
+\usepackage{stmaryrd}
 \usepackage{caption,float}
 \usepackage[a4paper,margin=1in,footskip=0.25in]{geometry}
 
@@ -100,6 +101,7 @@
 
 \newcommand{\Hom}{\operatorname{Hom}}
 \newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\Gal}{\operatorname{Gal}}
 \newcommand{\calD}{\mathcal{D}}
 
 \newcommand{\sol}{\textit{Solution: }}
@@ -568,6 +570,39 @@ We can generalize this theorem to $\sigma$-embeddings.
     \end{enumerate}
 \end{thm}
 \begin{proof}
-    
+    $1)\implies 2)$: Let $\alpha\in L$. Suppose $\{\sigma(\alpha):\sigma\in G\}=\{\alpha_1,...,\alpha_m\}$ and $f(X)=\prod_{i=1}^m(X-\alpha_i)$. Note that $\sigma$ acts on $L[X]$ (on coeff of each poly) and $\sigma(f)=f$ for all $\sigma$. Since $L/K$ is Galois, we must have $f\in K[X]$. Let $g$ be the min poly of $\alpha$ over $K$, then $g\mid f$ since $g(\sigma(\alpha))=\sigma(g(\alpha))$, so every root of $f$ is a root of $g$. By construction, $f$ is separable, so $f=g$, so $g$ splits into distinct linear factors over $L$, so $L/K$ is normal and separable.
+
+    $2)\implies 3)$: Thm 5.1 says $L$ is the splitting field of some $f\in K[X]$. Wlog, suppose $f$ is monic and write $f=\prod_{i=1}^mf_i^{e_i}$ (factorize into distinct irreducible factors in $K[X]$). $L/K$ seprable implies that each $f_i$ is separable. Moreover, if $i\neq j$, then $\gcd(f_i,f_j)=1$ over $K$, so Lemma 5.3 implies that they are coprime over $L$. Replace $e_i=1$, then we see that $L$ is the splitting field of a separable poly.
+
+    $3)\implies 4)$: Let $L$ be the splitting field of a separable poly $f\in K[X]$. Then $L=K(\alpha_1,...,\alpha_n)$, where $\alpha_i$ are roots of $f$. Then the min poly $f_i$ of each $\alpha_i$ divides $f$, so also splits into linear factors over $L$. Apply Thm 5.8.
+
+    $4)\implies 1)$: Note that $G\subseteq\Aut(L/L^G)\subseteq\Aut(L/K)=G$, so $G=\Aut(L/L^G)$, and $|G|=|\Aut(L/L^G)|\le[L:L^G]$. Apply tower law to the tower $K\subseteq L^G\subseteq L$.
+\end{proof}
+
+\begin{defn*}
+    If $L/K$ is Galois, we write $\Gal(L/K)$ for $\Aut(L/K)$.
+\end{defn*}
+\begin{rem}
+    In the proof of $1)\implies 2)$, we see that if $L/K$ is Galois and $\alpha\in L$, then $\alpha$ has min poly $\prod_{i=1}^m(X-\alpha_i)$ where $\alpha_i$ are the distinct Galois conjugates of $\alpha$.
+\end{rem}
+\begin{thm}[Fundamental Theorem of Galois Theory]
+    Let $L/K$ be a finite Galois extension. $G=\Gal(L/K)$.
+    \begin{enumerate}
+        \item Let $F$ be an intermediate field, i.e., $K\subseteq F\subseteq L$. Then $L/F$ is Galois and $\Gal(L/F)\le G$.
+        \item (Galois Correspondence) There is a bijection 
+        \begin{align*}
+            \{\text{intermediate subfield }K\subseteq F\subseteq L\}&\longleftrightarrow\{\text{subgroups } H\le G\}\\
+            F&\longmapsto\Gal(L/F)\\
+            L^H&\longmapsfrom H\le G
+        \end{align*}
+        \item If $K\subseteq L\subseteq L$, then $F/K$ is Galois $\Leftrightarrow$ $\sigma F=F$ for all $\sigma\in G$ $\Leftrightarrow$ $\Gal(L/F)\trianglelefteq G$. And In this situation, the restriction $G\to \Gal(F/K), \sigma\mapsto \sigma|_F$ is surjective with kernel $H$, so $\Gal(F/K)=G/H$.
+    \end{enumerate}
+\end{thm}
+\begin{proof}
+    $1)$: Thm 6.2 $\implies$ $L$ is a splitting field of some separable poly $f\in K[X]$. Then $L$ is a splitting field of $f$ over $F$, so $L/F$ is Galois, and it is clear that $\Gal(L/F)\le G$. 
+
+    $2)$: It is clear that $F=L^{\Gal(L/F)}$. To prove that the other composition is the identity, we first note that $H\subseteq\Gal(L/L^H)$. Conversely, Let $F=L^H$. As $L/F$ is finite and separable, the thm of primitive elements implies that $L=F(\alpha)$ for some $\alpha\in L$. Then $\alpha$ is a root of $f(X)=\prod_{\sigma\in H}(X-\sigma(\alpha))$ which has coefficients in $F$, so $|\Gal(L/F)|=[L:L^H]=[F(\alpha):F]\le\deg(f)=|H|$, so $\Gal(L/L^H)\subseteq H$. So $H=\Gal(L/L^H)$.
+
+    $3)$: \textbf{We claim that $F/K$ is Galois $\Leftrightarrow$ $\sigma F=F$ for all $\sigma\in G$.} Supppose $F/K$ is Galois. Let $\alpha\in F$ with min poly $f$ over $K$. Then $\sigma(\alpha)$ is a root of $f$ for every $\sigma\in G$. $F/K$ is normal, so $\sigma(\alpha)\in F\implies \sigma F\subseteq F$. Done by rank-nullity. Conversely, let $\alpha\in F$. Remark
 \end{proof}
 \end{document}
