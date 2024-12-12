@@ -65,8 +65,9 @@
 \theoremstyle{remark}
 \newtheorem{rem}{Remark}
 \newtheorem{remS}[section]{defn}
-\newtheorem{lem}[defn]{Lemma}
+
 \theoremstyle{plain}
+\newtheorem{lem}[defn]{Lemma}
 \newtheorem{thm}[defn]{Theorem}
 \newtheorem*{thm*}{Theorem}
 \newtheorem{prop}[defn]{Proposition}
@@ -603,6 +604,21 @@ We can generalize this theorem to $\sigma$-embeddings.
 
     $2)$: It is clear that $F=L^{\Gal(L/F)}$. To prove that the other composition is the identity, we first note that $H\subseteq\Gal(L/L^H)$. Conversely, Let $F=L^H$. As $L/F$ is finite and separable, the thm of primitive elements implies that $L=F(\alpha)$ for some $\alpha\in L$. Then $\alpha$ is a root of $f(X)=\prod_{\sigma\in H}(X-\sigma(\alpha))$ which has coefficients in $F$, so $|\Gal(L/F)|=[L:L^H]=[F(\alpha):F]\le\deg(f)=|H|$, so $\Gal(L/L^H)\subseteq H$. So $H=\Gal(L/L^H)$.
 
-    $3)$: \textbf{We claim that $F/K$ is Galois $\Leftrightarrow$ $\sigma F=F$ for all $\sigma\in G$.} Supppose $F/K$ is Galois. Let $\alpha\in F$ with min poly $f$ over $K$. Then $\sigma(\alpha)$ is a root of $f$ for every $\sigma\in G$. $F/K$ is normal, so $\sigma(\alpha)\in F\implies \sigma F\subseteq F$. Done by rank-nullity. Conversely, let $\alpha\in F$. Remark
+    $3)$: \textbf{We claim that $F/K$ is Galois $\Leftrightarrow$ $\sigma F=F$ for all $\sigma\in G$.} Supppose $F/K$ is Galois. Let $\alpha\in F$ with min poly $f$ over $K$. Then $\sigma(\alpha)$ is a root of $f$ for every $\sigma\in G$. $F/K$ is normal, so $\sigma(\alpha)\in F\implies \sigma F\subseteq F$. Done by rank-nullity. Conversely, let $\alpha\in F$. Remark 12 implies that the min poly of $\alpha$ over $K$ is $\prod_{i=1}^n(X-\alpha_i)$, where $\alpha_i=\sigma(\alpha)$ for some $\sigma\in G$. [Note that we are really using the fact that $L/K$ is Galois to deduce the min poly of $\alpha$.] Since $\sigma(F)=F$, all $\alpha_i$ are elements of $F$, so $F/K$ is normal and separable. [$\alpha_i$'s are distinct Galois conjugates of $\alpha$.] So $F/K$ is Galois.
+
+    To prove the second equivalence, we use Galois correspondence, i.e., $H\le G\leftrightarrow F=L^H$. Then for each $\sigma\in G$, we compute
+    \begin{align*}
+        L^{\sigma H\sigma^{-1}}&=\{x\in L:\forall\tau\in H,\sigma\tau\sigma^{-1}(x)=x\}\\
+        &=\{x\in L:\forall\tau\in H,\tau\sigma^{-1}=\sigma(x)\}\\
+        &=\{x\in L:\sigma^{-1}(x)\in L^H=F\}\\
+        &=\sigma(F)
+    \end{align*}
+    so that $\sigma(F)=F\Leftrightarrow (\forall\sigma\in G,\ L^{\sigma H\sigma^{-1}}=L^H)\Leftrightarrow(\forall\sigma\in G,\ \sigma H\sigma^{-1}=G)\Leftrightarrow H\trianglelefteq G$.
+
+    In this situation, we clearly have $\ker(\Gal(L/K)\overset{\operatorname{res}}{\longrightarrow}\Gal(F/K))=\Gal(L/F)=H$. The desired isomorphism $\Gal(F/K)\cong G/H$ then follows from 1st iso.
 \end{proof}
+\begin{example}
+    $\Gal(\QQ(\sqrt2,\sqrt3)/\QQ)\cong C_2\times C_2$. The automorphisms are uniquely determined by the images of $\sqrt2$ and $\sqrt3$.
+\end{example}
+
 \end{document}

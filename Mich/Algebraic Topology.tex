@@ -3,7 +3,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath,amsfonts,amssymb,amsthm}
 \usepackage{enumerate,bbm}
-\usepackage{tikz,graphicx,color,mathrsfs,color,hyperref,boldline}
+\usepackage{tikz,tikz-cd, graphicx,color,mathrsfs,color,hyperref,boldline}
 \usepackage{caption,float}
 \usepackage[a4paper,margin=1in,footskip=0.25in]{geometry}
 
@@ -63,8 +63,9 @@
 \theoremstyle{remark}
 \newtheorem{rem}{Remark}
 \newtheorem{remS}[section]{defn}
-\newtheorem{lem}[defn]{Lemma}
+
 \theoremstyle{plain}
+\newtheorem{lem}[defn]{Lemma}
 \newtheorem{thm}[defn]{Theorem}
 \newtheorem{prop}[defn]{Proposition}
 \newtheorem{fact}[defn]{Fact}
@@ -98,6 +99,9 @@
 
 \newcommand{\calD}{\mathcal{D}}
 
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\Hom}{\operatorname{Hom}}
+
 \newcommand{\sol}{\textit{Solution: }}
 \newcommand{\Res}{\operatorname{Res}}
 
@@ -125,7 +129,161 @@ A finite cell complex (CX) is a space $X$ obtained by
 
 \section{Homotopy and the Fundamental Group}
 \subsection{Homotopy}
-\begin{defn}
-    
+\begin{defn}[Homotopy]
+    Two maps $f,g:X\to Y$ are homotopic if there exists a map $H:X\times I\to Y$ s.t. $H|_{X\times{0}}=f$ and $H|_{X\times\{1\}}=g$. We write $f\simeq_H g$. If $A\subseteq X$ is a subset, then we say that $f\simeq_H g$ rel $A$ if in addition $\forall t\in I,\ \forall a\in A,\ H(a,t)=f(a)=g(a)$.
 \end{defn}
+\begin{prop}
+    ``$\simeq$ rel $A$'' on $\Hom_{\mathbf{Top}}(X,Y)$ is an equivalence relation.
+\end{prop}
+\begin{proof}
+    Trivial. Just compute.
+\end{proof}
+\begin{defn}[Homotopy Equivalence]
+    Say a map $f:X\to Y$ is a homotopy equivalence if there exists $g:Y\to X$ s.t. $fg\simeq \id_Y$ and $gf\simeq id_X$. In this situation we say that $X\simeq Y$ ($X$ is homotopy equivalent to $Y$.)
+\end{defn}
+\begin{defn}
+    $X$ is contractible if $X$ is htpy equiv. to a singleton.
+\end{defn}
+\begin{lem}
+    If $f_0,f_1:X\to Y$, $g_0,g_1:Y\to Z$ are maps s.t. $f_0\simeq_H f_1$ and $g_0\simeq_G g_1$, then $g_0f_0\simeq g_1f_1$.
+\end{lem}
+\begin{proof}
+    Observe $g_0f_0\simeq_{g_0H}g_0f_1\simeq_{G\circ(f_1\times\id_I))}g_1f_1$.
+\end{proof}
+\begin{prop}
+    Homotopy equivalence is an equiv. rel. on top. spaces.
+\end{prop}
+\begin{defn}
+    $X$ a top. space, and $A\subseteq X$ a subspace. A deformation retraction from $X$ to $A$ is a map $r:X\to A$ s.t. $r\circ i=\id_A$ and $i\circ r\simeq \id_X$. If the homotopy is rel $A$ then we say that this is a strong deformation retraction.
+\end{defn}
+\subsection{Paths}
+\begin{itemize}
+    \item \textbf{Notation}: a path $\gamma:I\to X$ from $x_0$ to $x_1$ is denoted $\gamma:x_0\rightsquigarrow x_1$.
+    \item \textbf{Concatenation}: If $\gamma:x_0\rightsquigarrow x_1$ and $\gamma':x_1\rightsquigarrow x_2$, then $\gamma\cdot\gamma':x_0\rightsquigarrow x_2$ is defined in the obvious way, i.e., traverse through $\gamma$ at double the original speed and then traverse through $\gamma'$ at double the speed. One can easily figure out an explicit formula in terms of $\gamma$ and $\gamma'$.
+    \item \textbf{Inverse}: $\gamma^{-1}(t)=\gamma(1-t)$;
+    \item \textbf{Constant path}: $c_{x_0}$ is the trivial path from $x_0$ to itself.
+    \item \textbf{The set of path components:} $\pi_0(X)$.
+\end{itemize}
+\begin{prop}
+    $\pi_0$ is a (covariant) functor $\pi_0:\mathbf{Top}\to \mathbf{Set}$. In fact, $\pi_0$ factors through $\mathbf{HoTop}$.
+\end{prop}
+\begin{defn}
+    Two paths $\gamma,\gamma':x_0\rightsquigarrow x_1$ are path-homotopic if $\gamma\simeq\gamma'$ rel $\partial I$.
+\end{defn}
+\begin{lem}
+    If $\gamma_0,\gamma_1:x_0\rightsquigarrow$ are path-homotopic and $\gamma_0',\gamma_1':x_1\rightsquigarrow x_2$ are also path-homotopic, then $\gamma_0\cdot\gamma_0'$ and $\gamma_1\cdot\gamma_1'$ are path-homotopic.
+\end{lem}
+\begin{proof}
+    c.f. lemma 2.5.
+\end{proof}
+\begin{prop}
+    Path concatenation has the following properties.  Suppose $\gamma_i:x_i\rightsquigarrow x_{i+1}$ for $i=0,1,2$. Then,
+    \begin{enumerate}
+        \item $(\gamma_0\cdot\gamma_1)\cdot\gamma_2\simeq\gamma_0\cdot(\gamma_1\cdot\gamma_2)$ rel $\partial I$.
+        \item $c_{x_0}\cdot\gamma_0\simeq \gamma_0$ rel $\partial I$ and $\gamma_0\cdot c_{x_1}\simeq \gamma_0$ rel $\partial I$.
+        \item $\gamma_0\cdot\gamma_0^{-1}\simeq c_{x_0}$ rel $\partial I$, $\gamma_0^{-1}\cdot\gamma_0\simeq c_{x_1}$ rel $\partial I$.
+    \end{enumerate}
+\end{prop}
+\begin{proof}
+    Not hard, will include later.
+\end{proof}
+The above proposition gives us an object called the fundamental groupoid. [A category in which objects are points of the space and morphisms between objects are given by the set of homotopy classes of paths. Obviously every morphism is invertible.]
+
+\subsection{The fundamental groups}
+\begin{defn}
+    Let $(X,x_0)$ be a pointed topological space. We define the its fundamental group of $X$ based at $x_0$, denoted $\pi_1(X)$, as the group of homotopy classes of loops, i.e., $[(I,\partial I),(X,x_0)]$.
+\end{defn}
+It is indeed a group. The group operation is given by concatenation of loops. Alternatively, one can also define the fundamental group $\pi_1(X,x_0)$ as the group $[(S^1,\ast),(X,x_0)]$.
+\begin{prop}
+    $\pi_1$ is a functor $\mathbf{Top}_\ast\to\mathbf{Grp}$ which factors through $\mathbf{HoTop}_\ast$.
+\end{prop}
+\begin{proof}
+    Just need to check a few things.\begin{enumerate}
+        \item Check that the induced map is indeed a well-defined homomorphism.
+        \item If two maps are based homotopic, then they induce the same hom on $\pi_1$.
+        \item $\pi_1(\id_X)=\id_{\pi_1(X,x_0)}$;
+        \item Functoriality
+    \end{enumerate}
+\end{proof}
+\begin{prop}
+    If $u:x_0\rightsquigarrow x_1$ is a path in $X$, then it induces a group isomorphism $u_\#:\pi_1(X,x_0)\to\pi_1(X,x_1)$ given by conjugating each loop by the path. This group iso has the following properties
+    \begin{enumerate}
+        \item If $u\simeq u'$ as paths, then $u_\#=u'_\#$.
+        \item $(c_{x_0})_\#=\id_{\pi(X,x_0)}$.
+        \item If $v:x_1\rightsquigarrow x_2$ then $(u\cdot v)_\#=v_\#\circ u_\#$.
+        \item If $f:X\to Y$ is a map w/ $f(x_0)=y_0$, $f(x_1)=y_1$, then the following diagram commutes.
+        \begin{center}
+            % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRAB120sB9ARgAUADVIAPHsQCUIAL6l0mXPkIo+5KrUYs2nbvwEBNUgE8J0uQux4CRMnw31mrRBy69BI8X3PyQGK8pEavbUjtouuu6GJvzmGjBQAObwRKAAZgBOEAC2SGQgOBBIappObGk8nHRwOCDUDHQARjAMAAqK1iogDDBptRYgmTl51IVIAEyhWs4gTJXsAMR13U0t7QE2Lj19sr5DuYglY4gAzFNlLgJpnADGWBk3AARMkvPVtfWrbR2BW739eyyB0mBSKp3O4UGbxqywazW+Gy6236FBkQA
+\begin{tikzcd}
+{\pi_1(X,x_0)} \arrow[r, "f_\ast"] \arrow[d, "u_\#"] & {\pi_1(Y,y_0)} \arrow[d, "(f\circ u)_\ast"] \\
+{\pi_1(X,x_1)} \arrow[r, "f_\ast"]                   & {\pi_1(Y,y_1)}                             
+\end{tikzcd}
+        \end{center}
+    \end{enumerate}
+\end{prop}
+\begin{proof}
+    $1)$-$3)$ are trivial. $4)$ follows from a direct computation.
+\end{proof}
+\begin{lem}
+    Let $f,g:X\to Y$ be maps s.t. $f\simeq_H g$. Let $u=H(x_0,-)$. Then, the following diagram commutes.
+    \begin{center}
+        % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRAB120sB9ARgAUADVIAPHsQCUIAL6l0mXPkIo+5KrUYs2nbvwEBNUgDMB4qdLkLseAkTV8N9Zq0QcuvQUYDmZiZMsNGChveCJQYwAnCABbJDIQHAgkNU0XNmMeTjo4HFl5ECjYlOokpAAmamdtNyYs9gBifIjouMQEssRKtJqQb3qcvJkKGSA
+\begin{tikzcd}
+{\pi_1(X,x_0)} \arrow[r, "f_\ast"] \arrow[rd, "g_\ast"] & {\pi_1(Y,f(x_0))} \arrow[d, "u_\#"] \\
+                                                        & {\pi_1(Y,g(x_0))}                  
+\end{tikzcd}
+    \end{center}
+\end{lem}
+\begin{proof}
+The idea of the proof is the homotopy given by the following diagram. Take a loop $\gamma:I\to X$, then the homotopy $H$ and a deformation retraction $I\times I\to I\times\{0\}\cup\partial I\times I$ allows one to fill in the square and construct a homotopy $g\circ\gamma\simeq u^{-1}\cdot(f\circ\gamma)\cdot u$.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.5\linewidth]{Mich/pictures/algtop-lemma2.15.PNG}
+    \end{figure}
+\end{proof}
+One can be more explicit and write down a formula for the homotopy.
+\begin{defn}
+    $X$ is simply connected if it is path-connected and $\pi_1(X,x_0)$ is trivial.
+\end{defn}
+\begin{lem}
+    $X$ is simply connected $\Leftrightarrow$ for each pair $x_0,x_1\in X$, there is a unique homotopy class of paths between them.
+\end{lem}
+\begin{proof}
+    ``$\Rightarrow$'': Path-connectedness implies the existence of such class. Trivial $\pi_1$ (the base point does not matter due to path-connectedness) implies that any two paths $\gamma,\mu:x_0\rightsquigarrow x_1$ are path homotopic as $[\gamma\cdot\mu^{-1}]=[c_{x_0}]$.
+
+    ``$\Leftarrow$'': Existence of such homotopy class implies pathconnectedness. By uniqueness, given any loop, we can break it up into the concatenation of two paths then use the unique path homotopy class to deduce that the loop must be homotopically trivial.
+\end{proof}
+
+\section{Covering Spaces}
+\begin{defn}
+    A space $\Tilde{X}$ is a covering space of $X$ with covering map $p:\Tilde{X}\to X$ if $\forall x\in X$, there exists an open nbd $U$ of $x$ s.t. $p^{-1}(U)=\bigsqcup_{\alpha\in A} V_\alpha$ for open subsets $V_\alpha\subseteq \Tilde{X}$ and $p|_{V_\alpha}:V_\alpha\to U$ is a homeo. (In this case we say that $U$ is evenly covered.)
+\end{defn}
+\begin{defn}
+    Let $f:Y\to X$ be a map. A lift of $f$ along $p:\Tilde{X}\to X$ is a solution to the following problem.
+    \begin{center}
+        % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBoBGAXVJADcBDAGwFcYkQBNEAX1PU1z5CKcqWLU6TVuwA6MvI1gACABo8+IDNjwEioqjQYs2iEGu4SYUAObwioAGYAnCAFskokDghIATIakTTXVHF3dEMi8fRH9JY3YHEJBnNyRI7w8aRiwwIKh6OAALKxAA+NM5BWVEi24gA
+\begin{tikzcd}
+                                                & \tilde X \arrow[d, "p"] \\
+Y \arrow[r, "f"] \arrow[ru, "\tilde f", dashed] & X                      
+\end{tikzcd}
+    \end{center}
+    i.e., if there exists $\tilde f:X\to \tilde X$ s.t. the above diagram commutes.
+\end{defn}
+\begin{lem}
+    Let $p:\tilde X\to X$ be a covering map. Suppose we have two solutions to the lifting problem, i.e, there exists $\tilde f_0,\tilde f_1:Y\to\tilde X$ s.t. the following diagram commutes
+    \begin{center}
+        % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBoBGAXVJADcBDAGwFcYkQBNEAX1PU1z5CKcqWLU6TVuwA6MvI1gACABo8+IDNjwEioqjQYs2iEGu4SYUAObwioAGYAnCAFskokDghIATIakTTXVHF3dEMi8fRH9JY3YHEBpGegAjGEYABQEdYRAnLGsACxwQkGc3JEjvD2SsMCC4CEYsKCS46VM5BWUHAH1idvSwNsQAZmJeUMqImhrETxT0rJyhdgLi0oD4rvksRRglfvIeSm4gA
+\begin{tikzcd}
+                                                                                & \tilde X \arrow[d, "p"] \\
+Y \arrow[r, "f"'] \arrow[ru, "\tilde f_0", bend left] \arrow[ru, "\tilde f_1"'] & X                      
+\end{tikzcd}
+    \end{center}
+    Then the set $S=\{y\in Y:\tilde f_0(y)=\tilde f_1(y)\}$ is clopen in $Y$.
+\end{lem}
+\begin{proof}
+    
+\end{proof}
+\begin{lem}[Homotopy lifting lemma]
+    
+\end{lem}
 \end{document}
