@@ -97,6 +97,7 @@
 \newcommand{\FF}{\mathbb{F}}
 
 \newcommand{\calD}{\mathcal{D}}
+\newcommand{\id}{\operatorname{id}}
 
 \newcommand{\sol}{\textit{Solution: }}
 \newcommand{\Res}{\operatorname{Res}}
@@ -392,7 +393,7 @@ We have seen the map $T:l_1\to l_2$ with dense image but not all of $l_2$. For i
 \end{rem}
 \begin{proof}
     \begin{enumerate}
-        \item Given $y\in Y$ with unit norm. Seek $x\in X$ with $Tx=y$ and $\Vert x\Vert\le 2$. $T(B_X)$ is dense in $B_X$, so $\exists x_1\in X$ s.t. $\Vert x_1\Vert\le1$ and $\Vert y-Tx_1\Vert\le 1/2$. Also, $T(\frac{1}{2}B_X)$ is dense in $1/2B_Y$, so $\exists x_2\in X$ with $\Vert x_2\Vert\le 1/2$ s.t. $\Vert y-T(x_1+x_2)\Vert\le 1/4$. Continue, obtain $x=\sum x_n$ which is Cauchy, hence convergent, and $\Vert y-Tx\Vert=0$, so $Tx=y$.
+        \item Given $y\in Y$ with unit norm. Seek $x\in X$ with $Tx=y$ and $\Vert x\Vert\le 2$. $T(B_X)$ is dense in $B_Y$, so $\exists x_1\in X$ s.t. $\Vert x_1\Vert\le1$ and $\Vert y-Tx_1\Vert\le 1/2$. Also, $T(\frac{1}{2}B_X)$ is dense in $1/2B_Y$, so $\exists x_2\in X$ with $\Vert x_2\Vert\le 1/2$ s.t. $\Vert y-T(x_1+x_2)\Vert\le 1/4$. Continue, obtain $x=\sum x_n$ which is Cauchy, hence convergent, and $\Vert y-Tx\Vert=0$, so $Tx=y$.
         \item Given $(y_n)$ Cauchy in $Y$. WLOG assume $\Vert y_n-y_{n-1}\Vert\le 2^{-n}$ (by passing to a subsequence if necessary). For each $n\ge 2$, choose $x_n\in X$ s.t. $\Vert x_n\Vert\le 2^{-n+1}$ with $Tx_n=y_n-y_{n+1}$. Also, choose $x_1\in X$ with $Tx_1=y_1$ (surjectivity). Thus $T(x_1+...+x_n)=y_n$. Put $x=\sum x_n$ which is Cauchy hence convergent. Then $Tx=\lim_n T(\sum_1^n x_i)=\lim y_n$, so $y_n$ converges. 
     \end{enumerate}
 \end{proof}
@@ -475,7 +476,7 @@ $X$ Banach, $Y$ normed. Let $T_1,T_2,...,\in L(X,Y)$. If $(T_n)$ is pointwise bo
     $X,Y$ Banach, $T\in L(X,Y)$ surjective. Then $T$ is an open map [$\exists R$ s.t. $\forall y\in Y$ $\exists x\in X$ s.t. $Tx=y$ with $\Vert x\Vert \le R\Vert y\Vert$.]
 \end{thm}
 \begin{proof}
-    Next time
+    $T$ is surjective, so $\bigcup_n\overline{T(nB_X)}=Y$ which each $\overline{T(nB_X)}$ closed. Baire $\implies$ that some $T(nB_X)$ contains a ball $B(y,\epsilon)$. WLOG, $n=1$, so $T(B_X)$ is dense in $B(y,\epsilon)$. Now for all $z\in Y$ with $\|z\|<\epsilon$, we have $y+z,y-z\in B(y,\epsilon)$, so there exists $x,x'\in B_X$ with $\| Tx-(y+z)\|<\delta$ and $\|Tx'-T(y-z)\|<\delta$, which implies that $\frac{x-x'}{2}\in B_X$ and $\| T((x-x')/2)-z\|<\delta/2+\delta/2=\delta$. So $T(B_X)$ is dense in $B(0,\epsilon)$. By open mapping lemma (applied to the operator $T/\epsilon$), there exists $x\in X$ with $Tx=\epsilon y$ with $\|x\|\le 2\|y\|$, i.e., $T(x/\epsilon)=y$ and $\|x/\epsilon\|\le \frac{2}{\epsilon}\|y\|$.
 \end{proof}
 \begin{crly}[Inversion Theorem]
     $X,Y$ Banach. $T\in L(X,Y)$ bijective, Then $T$ is an isomorphism
@@ -483,4 +484,101 @@ $X$ Banach, $Y$ normed. Let $T_1,T_2,...,\in L(X,Y)$. If $(T_n)$ is pointwise bo
 \begin{proof}
     $T$ surjective, so $T$ is open by open mapping thm, so $\exists k$ s.t. $\forall y\in Y$, $\Vert T^{-1}y\Vert\le k\Vert y\Vert$, so $T^{-1}$ is cts.
 \end{proof}
+\begin{crly}[Comparability theorem]
+    Let $\|\ \|_1$, $\|\ \|_2$ be complete norms on $V$. If $\exists c>0$ s.t. $\forall x,\ \|x\|_2\le c\|x\|_1$. Then these two norms are equivalent.
+\end{crly}
+\begin{proof}
+    Note that $\id:(V,\|\ \|_1)\to(V,\|\ \|_2)$ is a continuous bijection. Done by inversion theorem.
+\end{proof}
+\begin{thm}[Closed graph theorem (CGT)]
+    $X,Y$ Banach, $T\in L(X,Y)$. Then $T$ is cts iff $\operatorname{Graph}(T)$ is closed.
+\end{thm}
+\begin{rem}
+    This has an important consequence. $T$ has closed graph $\Leftrightarrow$ If $(x_n,Tx_n)\to (x,y)$, then $y=Tx$. $\Leftrightarrow$ If $x_n\to x$ and $Tx_n\to y$, then $y=Tx$. $\Leftrightarrow$ If $x_n\to 0,\ Tx_n\to y$, then $y=0$.
+
+    CGT $\implies$ to show $T$ cts, it suffices to show that if $x_n\to 0$ and $Tx_n\to y$ (can assume the existence of this limit) then $y=0$.
+\end{rem}
+\begin{proof}
+    ``$\Rightarrow$'': Trivial.
+
+    ``$\Leftarrow$'': Let $G(T)$ denote the graph of $T$. $G(T)$ is closed in $X\times Y$ (with $\|\ \|_1$ say) by assumption, so $G(T)$ is complete. Define $S:X\to G(T),\ x\mapsto (x,Tx)$ WTS that $S$ is bounded. Clearly $S$ is a bijection and $S^{-1}$ is cts ($\|x\|\le \|x\|+\|Tx\|$), so we are done by inversion theorem.
+\end{proof}
+\subsubsection{Existence of a cts nowhere differentiable function}
+$f\in C[0,1]$ is diffrentiable at $x$ iff $\frac{f(x+t)-f(x)}{t}\to 0$ as $t\to 0$. In particular the difference quotient is bounded for all $t\neq 0$ small. Define $E_n=\{f\in C[0,1]:\exists x,\ \forall t,\ |(f(x+t)-f(x))/t|\le n\}$
+
+\textbf{Claim: $E_n$ is closed}: Suppose $(f_i)\in E_n$ with $f_i\to f$ unif. For each $i$, there exists $x_i$ s.t. $|(f_i(x_i+t)-f_i(x_i))/t|\le n$ for all $t$. By passing to a convergent subsequence if necessary, we may assume $x_i\to x$ as $i\to\infty$ for some $x\in [0,1]$. Then have
+\[\dfrac{f_i(x_i+t)-f_i(x_i)}{t}-\dfrac{f(x+t)-f(x)}{t}\]
+for all $t$. Thus, $|(f(x+t)-f(x))/t|\le n$ for all $t$, so $f\in E_n$.
+
+\textbf{Claim: $E_n$ is nowhere dense (ND).} Given $f\in E_n$ and $\epsilon>0$, we need $g\in B(f,3\epsilon)$ with $g\not\in E_n$. By uniform continuity of $f$, we can find $\delta>0$ s.t. $|x-y|<\delta\implies |f(x)-f(y)|<\epsilon$. Take the following function. to be $g$.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Mich/pictures/LA-non-diff-func.PNG}
+\end{figure}
+Then we are done by Baire.
+
+\section{Spaces of Continuous Functions}
+\subsection{Existence of Continuous Functions}
+\begin{defn}
+    A Hausdorff space $X$ is normal if any two disjoint closed sets can be separated by two disjoint open sets.
+\end{defn}
+\begin{prop}
+    Compact Hausdorff $\implies$ Normal.
+\end{prop}
+\begin{proof}
+    Part IB Analysis and Topology ES3 Q8.
+\end{proof}
+\begin{thm}[Urysohn's lemma]
+    Let $X$ be normal, $A,B\subseteq X$ be disjoint closed sets. Then $\exists$ a cts function $f:X\to[0,1]$ s.t. $f\equiv 0$ on $A$ and $f\equiv 1$ on $B$. 
+\end{thm}
+\begin{rem}
+    \begin{itemize}
+        \item Usually use normality in the following equivalent form. For $A\subseteq V$ where $A$ is closed and $V$ is open, there exists an open $U$ with $A\subseteq U$ and $\bar U\subseteq V$.
+        \item If $X$ is Hausdorff and has the property in Urysohn lemma, then $X$ is normal. Take $f^{-1}(\{1/4\})$ and $f^{-1}(\{3/4\})$, so this characterizes normal spaces.
+        \item This is trivial for metric spaces. Take $f(x)=\frac{d(x,A)}{d(x,A)+d(x,B)}$.
+        \item If $K$ is compact Hausdorff (and infinite), then $C(K)$ is infinite dimensional. Pick an infinite sequence $(x_n)$ with distinct terms (possible as the set is infinite). For $n\ge 2$, pick $f_n\in C(K)$ with $f_n=0$ on $\{x_1,...,x_n\}$ and $f_n=1$ on $\{x_{n+1}\}$. It's easy to see that $\{f_n\}$ is an L.I. set.
+     \end{itemize}
+\end{rem}
+\begin{proof}
+    Let $A,B\subseteq X$ be disjoint closed sets. Let $V=B^c$. Find $O_{1/2}$ open s.t. $A\subseteq O_{1/2}$ and $\bar O_{1/2}\subseteq V$. Continue, find $O_{1/4}, O_{3/4}$ with $A\subseteq O_{1/4},\ \bar O_{1/4}\subseteq O_{1/2}$ and $\bar O_{1/2}\subseteq O_{3/4},\ \bar O(3/4)\subseteq V$. Continue, we get $O_q$ for all dyadic rational $q\in (0,1]$. The family $\{Q_q\}$ has the properties that
+    \begin{itemize}
+        \item $A\subseteq O_q\subseteq V$ for all $q$;
+        \item $\bar O_q\subseteq O_r$ if $q<r$;
+        \item Define $O_1=X$.
+    \end{itemize}
+    Define $f(x)=\inf\{q:x\in O_q\}$. To show continuity, it is enough to consider the preimages of $(-\infty,a)$ and $(-\infty,a)$. for $a\in(0,1)$.
+    \begin{itemize}
+        \item $f(x)<a\Leftrightarrow x\in O_q$ for some $q<a$, $\Leftrightarrow x\in\bigcup_{q<a}O_q$ which is open;
+        \item $f(x)>a\Leftrightarrow x\not\in O_q$ for some $q>a$, i.e., $x\not\in\bar O_r$ for some $r>a$ $\Leftrightarrow x\in\bigcup_{r>a}\bar O_r^c$ open.
+    \end{itemize}
+\end{proof}
+\begin{thm}[Tietze extension theorem]
+    $X$ normal, $Y\subseteq X$ closed, $f:Y\to \RR$ bounded cts. Then $f$ extends to a cts function $g:X\to \RR$ with $\|g\|_\infty=\|f\|_\infty$.
+\end{thm}
+\begin{rem}
+    \begin{itemize}
+        \item The condition $\|g\|=\|f\|$ is trivial. If $g:X\to\RR$ extends to $f$ with $\|f\|=1$, then the map \[g'(x)=\begin{cases}
+            g(x) & g(x)\in[-1,1]\\
+            1 & g(x)>1\\
+            -1 & g(x)<-1
+        \end{cases}\]
+        also extends $f$ ctsly.
+        \item $Y$ being closed is necessary, e.g., $\sin(1/x)$ on $(0,1]\subseteq[0,1]$.
+        \item Tietze extends the result of Urysohn lemma.
+    \end{itemize}
+\end{rem}
+\begin{proof}
+    WLOG, $\|f\|=1$. Let $A=\{x\in Y:f(x)<-1/3\}$, $B=\{x\in Y:f(x)>1/3\}$. By Urysohn, there exists a cts $g_1:X\to [-1/3,1/3]$ with $g_1=-1/3$ on $A$ and $g_1=1/3$ on $B$. Note that $|f(x)-g_1(x)|\le 2/3$ for all $x\in Y$, so $\|f-g_1\|_\infty\le2/3$. Repeat the process with $(f-g)$ in place of $f$ to obtain $g_2:X\to[-2/9,2/9]$ s.t. $\|f-g_1-g_2\|\le (2/3)^2$. We thus get a sequence of cts functiosn $g_1,g_2,...:X\to\RR$, s.t. $\|g_n\|\le\frac13(\frac23)^{n-1}$ and $\|f-\sum_{i=1}^ng_i\|_\infty\le(\frac23)^n\to0$ as $n\to\infty$. Let $g=\sum_ig_i$ which converges (being uniformly Cauchy). Have $\|g\|_\infty\le 1$ (can bound this by a geometric series), and $\|f-g|_Y\|=0$, so $f=g|_Y$.
+\end{proof}\
+\begin{proof}
+    One can also proceed slightly differently by applying Riesz's lemma and open mapping lemma. The image of the restriction map is dense, and each function in the image of some function of the same sup norm. Open mapping lemma then implies that the restriction map is surjective.
+\end{proof}
+
+\subsection{Compactness in $C(K)$}
+\begin{defn}
+    For $K$ compact Hausdorff and $S\subseteq C(K)$, $S$ is equicontinuous at $x$ if 
+    \[\forall\epsilon>0,\ \exists\text{ nbd } N\ni x\text{ s.t. }\forall f\in S,\ y\in N\implies |f(x)-f(y)<\epsilon\]
+    We say that $S$ is equicontinuous if it is equicontinuous at $x$ for every $x\in K$.
+\end{defn}
+
 \end{document}

@@ -189,7 +189,7 @@ A finite cell complex (CX) is a space $X$ obtained by
 \end{proof}
 The above proposition gives us an object called the fundamental groupoid. [A category in which objects are points of the space and morphisms between objects are given by the set of homotopy classes of paths. Obviously every morphism is invertible.]
 
-\subsection{The fundamental groups}
+\subsection{The Fundamental Groups}
 \begin{defn}
     Let $(X,x_0)$ be a pointed topological space. We define the its fundamental group of $X$ based at $x_0$, denoted $\pi_1(X)$, as the group of homotopy classes of loops, i.e., $[(I,\partial I),(X,x_0)]$.
 \end{defn}
@@ -255,6 +255,7 @@ One can be more explicit and write down a formula for the homotopy.
 \end{proof}
 
 \section{Covering Spaces}
+\subsection{Definition and Basic Properties}
 \begin{defn}
     A space $\Tilde{X}$ is a covering space of $X$ with covering map $p:\Tilde{X}\to X$ if $\forall x\in X$, there exists an open nbd $U$ of $x$ s.t. $p^{-1}(U)=\bigsqcup_{\alpha\in A} V_\alpha$ for open subsets $V_\alpha\subseteq \Tilde{X}$ and $p|_{V_\alpha}:V_\alpha\to U$ is a homeo. (In this case we say that $U$ is evenly covered.)
 \end{defn}
@@ -281,9 +282,34 @@ Y \arrow[r, "f"'] \arrow[ru, "\tilde f_0", bend left] \arrow[ru, "\tilde f_1"'] 
     Then the set $S=\{y\in Y:\tilde f_0(y)=\tilde f_1(y)\}$ is clopen in $Y$.
 \end{lem}
 \begin{proof}
-    
+    \textbf{Open:} Let $y\in S$. Then $f(y)$ is evenly covered by $\{V_\alpha\}$ where each $V_\alpha$ is open in $\tilde X$. Since $y\in S$, we must have $\tilde f_0(y)=\tilde f_1(y)\in V_\beta$ for some fixed $\beta$, Define $N=\tilde f_0^{-1}(V_\beta)\cap\tilde f_1^{-1}(V_\beta)$. Then $f|_N=\tilde f_0\circ p|_{V_\beta}=\tilde f_1\circ p|_{V_\beta}$. Since $p|_{V_\beta}$ is a homeo. We must have $\tilde f_0|_N=\tilde f_1|_N$, so $N\subseteq S$.
+
+    \textbf{Closed:} Suppose $y\in \bar S$ but $y\not\in S$. Then $\tilde f_0(y)\in V_\beta$ and $\tilde f_1(y)\in V_\gamma$, where $\beta\neq \gamma$. Define $N=\tilde f_0^{-1}(V_\beta)\cap \tilde f_1^{-1}(V_\gamma)$ we see that $N\cap S\neq\varnothing$. Then there exists $y'\in N$ s.t. $\tilde f_0(y')=\tilde f_1(y')$, so $V_\beta\cap V_\gamma\neq\varnothing$, contradiction.
 \end{proof}
 \begin{lem}[Homotopy lifting lemma]
-    
+    Covering maps satisfy the homotopy lifting property (HLP) (This means that the following diagram admits a diagonal filler), and moreover, the filler is unique.
+    \begin{center}
+        % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRAE0QBfU9TXfIRQBGclVqMWbADrS8DWAAIAGt14gM2PASJlh4+s1aIOsvAFt4igJJq+WwUVH7qhqSdVdxMKAHN4RKAAZgBOEOZIZCA4EEiiEkYyclgKMIpBAPrEdiCh4XHUMUgAzK6Sxho5eRGIUUWIAEyFdClsABYQEADWIGWJJlhZvSAMdABGMAwACvzaQiAhWL5tOFVhNU3RsYilCe4gABLDoxPTs44mi8urPMHrSJv18QxYYBVQdHBtPsNuFWYpJRHLxcIA
+\begin{tikzcd}
+Y \arrow[r, "\tilde f_0"] \arrow[d, "i_0"', hook]        & \tilde X \arrow[d, "p"] \\
+Y\times I \arrow[r, "H"'] \arrow[ru, "\tilde H", dashed] & X                      
+\end{tikzcd}
+    \end{center}
+    Given a homotopy $H:Y\times I\to X$, and a lift $\tilde f_0$ of $H(-,0)$. There exists a \textbf{unique} homotopy $\tilde H:Y\times I\to \tilde X$ s.t. $H|_{Y\times\{0\}}=\tilde f_0$ and $p\circ\tilde H=H$.
 \end{lem}
+\begin{proof}
+    $X$ is covered by a collection of open sets $\{V_{i}\}_{i\in I}$ which are evenly covered by $p:\tilde X\to X$. Pulling back along $H$, we obtain an open cover $\{U_i=H^{-1}(V_i)\}_{i\in I}$ of $Y\times I$. By Lebesgue number lemma ($I$ is a compact metric space), we pick $N$ sufficiently large so that for $k=0,1,...,N-1$, $\{y_0\}\times[k/N,(k+1)/N]\subseteq U_{i_k}$ for some $i_k\in I$. For each $k$, we can write $U_{i_k}=\bigcup_{j\in J_k}A_{k,j}\times B_{k,j}$ for $A_{k,j}\subseteq Y$ open and $B_{k,j}\subseteq I$ open. Now, since $\{y_0\}\times[k/N,(k+1)/N]\subseteq U_{i_k}$, this gives an open cover of a compact subsets, so by passing to a finite subcover, we may assume $\{y_0\}\times[k/N,(k+1)/N]\subseteq\bigcup_{m=1}^{n_k}A_{k,j_m}\times B_{k,j_m}$. Define $C_k=\bigcap_{m=1}^{n_k}A_{k,j_m}$. Then we have constructed a tubular nbd of $\{y_0\}\times [k/N,(k+1)/N]$ contained in $U_{i_k}$. Define $W_{y_0}=\bigcap_{k=0}^{N-1}C_k$. Then $W_{y_0}\times I$ is a tubular nbd of $\{y_0\}\times I$ s.t. for all $k$, $W_{y_0}\times [k/N,(k+1)/N]\subseteq U_{i_k}$. 
+
+    We start lifting. 
+    \begin{itemize}
+        \item We have $H:W_{y_0}\times[0,1/N]\to V_{i_1}$ by hypothesis. Define $\tilde H:W_{y_0}\times[0,1/N]\to V_{i_1}\to Z_\beta$, where $p|_{Z_\beta}:Z_\beta\to V_{i_1}$ is a homeo and $\tilde f_0(W_{y_0})\subseteq Z_\beta$. Note that $W_{y_0}$ does satisfy this additional requirement since $H(W_{y_0}\times\{0\})$ lies entirely in $V_{i_1}\subseteq X$ which is a trivializing open set.
+        \item We perform the same argument to define $\tilde H$ on $W_{y_0}\times [k/N,(k+1)/N]$ for all $k$. At each stage, we are essentially solving an IVP with initial condition given by the end point of the preceding lift.
+        \item We repeat this process as $y_0$ runs through all points of $Y$. We need to check that this is compatible. Note that on $(W_{y_0}\cap W_{y_1})\times I$ we get two lifts with the same initial condition given by $\tilde f_0|_{W_{y_0}\cap W_{y_1}}$, so Lemma 3.3 implies that they must agree on $(W_{y_0}\cap W_{y_1})\times I$ by connectedness.
+    \end{itemize}
+    So now we get the existence of $\tilde H$. The uniqueness of $\tilde H$ follows from the fact that along each strip $W_{y_0}\times I$, the lift is uniquely determined by the initial condition given by $\tilde f_0$.
+\end{proof}
+\subsection{Applications of Covering Spaces}
+
+\subsection{The Existence of Universal Covering Spaces}
+\subsection{Galois Correspondence}
 \end{document}

@@ -3,7 +3,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath,amsfonts,amssymb,amsthm}
 \usepackage{enumerate,bbm}
-\usepackage{tikz,graphicx,color,mathrsfs,color,hyperref,boldline}
+\usepackage{tikz,tikz-cd,graphicx,color,mathrsfs,color,hyperref,boldline}
 \usepackage{caption,float}
 \usepackage[a4paper,margin=1in,footskip=0.25in]{geometry}
 
@@ -63,8 +63,8 @@
 \theoremstyle{remark}
 \newtheorem{rem}{Remark}
 \newtheorem{remS}[section]{defn}
-\newtheorem{lem}[defn]{Lemma}
 \theoremstyle{plain}
+\newtheorem{lem}[defn]{Lemma}
 \newtheorem{thm}[defn]{Theorem}
 \newtheorem{prop}[defn]{Proposition}
 \newtheorem{fact}[defn]{Fact}
@@ -95,6 +95,9 @@
 \newcommand{\CC}{\mathbb{C}}
 \newcommand{\PP}{\mathbb{P}}
 \newcommand{\FF}{\mathbb{F}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\id}{\operatorname{id}}
 
 \newcommand{\calD}{\mathcal{D}}
 
@@ -107,8 +110,97 @@
 
 \begin{document}
 \maketitle
-\section{Revision of LA}
-\section{Definitions}
+\section{Some Linear Algebra}
+\textit{It was supposed to be a revision of IB linear algebra, but we have a solid understanding of linear algebra, so we will not include redundant stuff in this section.}
+
+We define the tensor product of two vector spaces $V$ and $W$. 
+\begin{defn}
+    Given two $K$-vector spaces $V,W$, the tensor product $V\otimes_K W$ is the vector space with basis vectors $v\otimes w$, $v\in V, w\in W$ modulo the following relations:
+    \begin{itemize}
+        \item $(v_1+v_2)\otimes w=v_1\otimes w+ v_2\otimes w$.
+        \item $v\otimes (w_1+w_2)=v\otimes w_1+v\otimes w_2$.
+        \item For all $k\in K$, $(kv)\otimes w=v\otimes (kw)=k(v\otimes w)$.
+    \end{itemize}
+\end{defn}
+When the underlying field is clear, we can drop the subscript and write $V\otimes W$.
+\begin{prop}[Universal Property]
+    For any bilinear map $V\times W\to U$, there exists a unique linear map $V\otimes W\to U$ which makes the following diagram commutes.
+    \begin{center}
+        % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRADUAdTvAW3gAEAdRABfUuky58hFAEZyVWoxZsAqmIkgM2PASJk5S+s1aIO3CH0EjRSmFADm8IqABmAJwi8kZEDggkBWVTNjdNdy8fRAAmagCg6gYsMDMQKDo4AAsHEGoTVXNuPAZYAXDxSO9feMDY-JU0gEc8kAY6ACMYBgAFKT1ZEA8sRyycMQpRIA
+\begin{tikzcd}
+V\times W \arrow[r, "f"] \arrow[d, "q"']  & U \\
+V\otimes W \arrow[ru, "\tilde f", dashed] &  
+\end{tikzcd}
+    \end{center} where $q$ is the quotient map.
+\end{prop}
+\begin{proof}
+    
+\end{proof}
+\begin{prop}
+    Let $\{v_1,...,v_m\}$, $\{w_1,...,w_n\}$ be basis of $V$ and $W$ respectively. Then $\{v_i\otimes w_j\}_{i,j}$ is a basis of $V\otimes W$.
+\end{prop}
+\begin{proof}
+   We claim that the vectors $v_i\otimes w_j$ span the tensor product. Given $v\otimes w$, we can express $v$ in $\{v_i\}$ and $w$ in $\{w_j\}$ then use the relations. 
+   
+   We now show that $\{v_i\otimes w_j\}$ is a linearly independent set. Consider the linear functional $\epsilon_i:V\to K$ and $\phi_j:W\to K$ which are dual to $v_i$, $w_j$ respectively. We define $L_{p,q}:V\times W\to K, (v,w)\mapsto \epsilon_p(v)\phi_q(w)$. Note that this map is bilinear, so it descends to a well-defined map $\tilde L_{p,q}:V\otimes W\to K,\ v\otimes w\mapsto \epsilon(v)\phi(w)$.  One can check that $\tilde L_{p,q}$ is actually a linear map and $\tilde L_{p,q}(v_i\otimes w_j)=\delta_{ip}\delta_{jq}$. This implies linear independence.
+\end{proof}
+\begin{prop}
+    There are natural isomorphisms $U\otimes(V\otimes W)\cong (U\otimes V)\otimes W$, and $(U\oplus V)\otimes W\cong (U\otimes W)\oplus (V\otimes W)$.
+\end{prop}
+\begin{proof}
+    Consider the maps $u\otimes (v\otimes w)\mapsto (u\otimes v)\otimes w$ and $(u,v)\otimes w\mapsto (u\otimes w,v\otimes w)$. These clearly preserve the tensor relations and induce linear maps.
+\end{proof}
+\begin{prop}
+    There are natural isomorphisms $W\otimes V^\ast\cong \Hom(V,W)$ and $\Hom(U\otimes V,W)\cong\Hom(U,\Hom(V,W))$.
+\end{prop}
+
+Consider linear operators $\alpha\in\operatorname{End}(V)$ and $\beta\in \operatorname{End}(W)$. We can define an operator $\alpha\otimes \beta\in\operatorname{End}(V\otimes W)$ by $(\alpha\otimes \beta)(v\otimes w)=(\alpha v)\otimes (\beta w)$ and extending by linearity to all vectors in $V\otimes W$. Note that the extension is possible as the definition clearly preserves the tensor relations. If we assume that $A_{ij}$ is the matrix of $\alpha$ w.r.t. $\{v_1,...,v_m\}$ and $B_{kl}$ is the matrix of $\beta$ w.r.t. $\{w_1,...,w_n\}$, then $\alpha\otimes \beta$ has matrix $(A\otimes B)_{(i,k)(j,l)}=A_{ij}B_{kl}$. This can be checked by applying $\alpha\otimes\beta$ to each basis vectors. We spell them out here.
+\begin{align*}
+    (\alpha\otimes\beta)(v_j\otimes w_l)&=(\alpha v_j)\otimes (\beta w_l)\\
+    &=\sum_{i,k}(A_{ij}v_i)\otimes(B_{kl}w_k)\\
+    &=\sum_{i,k}A_{ij}B_{kl}(v_i\otimes w_k)
+\end{align*}
+\begin{prop}
+    \begin{enumerate}
+        \item The eigenvalues of $\alpha\otimes\beta$ are $\lambda_i\mu_k$ where $\lambda_i$ are e-values of $\alpha$ and $\mu_k$ are evalues of $\mu_k$.
+        \item $\operatorname{Tr}(A\otimes B)=\operatorname{Tr}(A)\operatorname{Tr}(B)$
+        \item $\det(A\otimes B)=\det(A)^n\det(B)^m$.
+    \end{enumerate}
+\end{prop}
+\begin{proof}
+    Non-trivial.
+\end{proof}
+We can construct $n$-fold tensor product $V^{\otimes n}$, and $S_n$ acts on $V^{\otimes n}$ by permuting factors, i.e., $\sigma\cdot (u_1\otimes\cdots\otimes u_n)=u_{\sigma(1)}\otimes \cdots\otimes u_{\sigma(n)}$.
+\begin{defn}[Symmetric/exterior power of $V$]
+Let $V$ be a $K$-vector space.
+    \begin{itemize}
+        \item The $n$th symmetric power of $V$ is
+        \[\{S^nV=\{a\in V^{\otimes n}:\forall \sigma\in S_n,\ \sigma\cdot a=a\}\]
+        \item The $n$th exterior power of $V$ is
+        \[\Lambda^nV=\{a\in V^{\otimes n}:\forall\sigma\in S_n\ \sigma\cdot a=\operatorname{sgn}(\sigma)a\}\]
+    \end{itemize}
+\end{defn}
+\begin{prop}
+    If $\{v_1,...,v_m\}$ is a basis for $V$, then 
+    \begin{itemize}
+        \item $\{\frac1n\sum_{\sigma\in S_n}v_{k_{\sigma(1)}}\otimes\cdots\otimes v_{k_{\sigma(n)}}:1\le k_1\le\cdots\le k_n\le m\}$ is a basis for $S^nV$
+        \item $\{\frac1n\sum_{\sigma\in S_n}\operatorname{sgn}(\sigma)v_{k_{\sigma(1)}}\otimes\cdots\otimes v_{k_{\sigma(n)}}:1\le k_1<\cdots<k_n\le m\}$ is a basis for $\Lambda^nV$.
+    \end{itemize}
+\end{prop}
+\begin{proof}
+    Sheet 3.
+\end{proof}
+\begin{crly}
+    Let $V$ be a $d$-dimensional vector space, then $\dim S^nV=\binom{d+n-1}{n}$, $\dim\Lambda^nV=\binom{d}{n}$.
+\end{crly}
+\begin{prop}
+    $V\otimes V\cong S^2V\oplus\Lambda^2V$.
+\end{prop}
+\begin{proof}
+    The union of basis is a basis for $V\otimes V$, and count the number.
+\end{proof}
+
+\section{Basic Stuff}
 \begin{defn}
     $G$ is a group, $V$ a vector space over a field $k$, a representation of $G$ on $V$ is a group homomorphism $\rho:G\to GL(V)$
 \end{defn}
@@ -143,7 +235,6 @@
     $G=S_3$, $V=\RR^2$. Given $g\in G$ make it act on an equilateral triangle by permuting vertices and extending linearly. This gives a representation by definition.
 \end{example}
 
-\section{Category of representations}
 Problem: too many reps. We want to
 \begin{itemize}
     \item know when two reps are the ``same'';
@@ -165,7 +256,17 @@ Note that in the definition above, $\varphi$ is independent of $g$.
 \begin{rem}
     If two representations $\rho,\rho'$ are isomorphic, then $\dim\rho=\dim\rho'$, but the converse is false, e.g., $\rho:\ZZ\to GL_1(\RR),1\mapsto 1$ and $\rho:\ZZ\to GL_1(\RR), 1\mapsto -1$. Another example is if $G=\ZZ_2$, then the matrices $\operatorname{diag}(-1,1),\operatorname{diag}(1,-1)$ and "off-diag"(1,1) define isomorphic reps which are different from $\operatorname{diag}(-1,-1)$ and $I$.
 \end{rem}
-    Let $\rho:G\to\operatorname{Aut}(V)$ be a rep. Suppose $W\le V$ is preserved by $G$, i.e., $gW\subseteq W$ for all $g\in G$ (implies $gW=W$ as $g$ is invertible). Then $G$ acts on $W$ and we get $\tilde{rho}: G\to\operatorname{Aut}(W)$ and we say that $\tilde{\rho}$ is a subrepresentation of $\rho$.
+    
+ \begin{defn}
+     A rep $V$ of $G$ is a direct sum of $W,W'$ if 
+     \begin{itemize}
+         \item they are invariant subspaces
+         \item and $V=W\oplus W'$ as a vector space.
+     \end{itemize}
+ \end{defn}
+
+\subsection{Subreps}
+Let $\rho:G\to\operatorname{Aut}(V)$ be a rep. Suppose $W\le V$ is preserved by $G$, i.e., $gW\subseteq W$ for all $g\in G$ (implies $gW=W$ as $g$ is invertible). Then $G$ acts on $W$ and we get $\tilde{\rho}: G\to\operatorname{Aut}(W)$ and we say that $\tilde{\rho}$ is a subrepresentation of $\rho$.
 \begin{defn}
     A $G$-invariant subspace $W\le V$ is called a subrepresentation. If $W=0$ or $W=V$ then we say the subrep is trivial. Otherwise we say the subrep is non-trivial
 \end{defn}
@@ -191,13 +292,7 @@ Note that in the definition above, $\varphi$ is independent of $g$.
  \begin{proof}
  Trivial.
  \end{proof}
- \begin{defn}
-     A rep $V$ of $G$ is a direct sum of $W,W'$ if 
-     \begin{itemize}
-         \item they are invariant subspaces
-         \item and $V=W\oplus W'$ as a vector space.
-     \end{itemize}
- \end{defn}
+
  \begin{prop}
      $V$ is a direct sum of $W,W'$ if and only if for every basis $v_1,...,v_a$ of $W$ and basis $v_{a+1},...,v_{d}$ of W', the matrix of $\rho(g)$ is of the form
      \begin{align*}
@@ -240,6 +335,8 @@ Note that in the definition above, $\varphi$ is independent of $g$.
 
 \textbf{Clarification:} If $\varphi\in\operatorname{Hom}_G(V,V')$ is surjective, then $V/\ker\varphi\cong V'$, so we say that $V'$ is a quotient rep of $V$.
 
+\subsection{Permutation Reps}
+
 If $G$ acts on a set $X$ and $X=X_1\sqcup X_2$ and $GX_i=X_i$, then $k[X]=k[X_1]\oplus k[X_2]$ (direct sum as rep). More generally, $X=\bigsqcup O_i$ where $O_i$ are orbits. If $y\in O_i$, then $G/\operatorname{Stab}(y)$ is in bijective correspondence with $O_i$. Then, $k[X]=\bigoplus_i k[O_i]$. These are called permutation reps
 
 \begin{example}
@@ -252,11 +349,56 @@ If $G$ acts on a set $X$ and $X=X_1\sqcup X_2$ and $GX_i=X_i$, then $k[X]=k[X_1]
     If $G$ is simple, then any non-trivial rep is faithful. Every finite group can be embedded as the subgroup of some $GL(V)$ so admits a faithful rep.
 \end{crly}
 \begin{proof}
-    1st part is trivial. The 2nd part uses Cayley's theorem and linear extension to make it an action on vector spaces.
+    1st part is trivial. The 2nd part uses Cayley's theorem and the fact that $S_n$ embeds in $GL_n(K)$ as the subgroup of permutation matrices.
 \end{proof}
 \begin{rem}
     Can compose $\rho$ rep with a group hom to get new reps. When the group hom is an inclusion, we say that the resulting rep is the restriction to the subgroup.
 \end{rem}
+
+\subsection{Dual, Hom, and Tensor Products}
+Let $(\rho, V),\ (\sigma, W)$ be reps of $G$.
+\begin{defn}
+    We can make $\Hom_k(V,W)$ a representation of $G$ by letting $g$ act on $\Hom_k(V,W)$ by $g\cdot f=\sigma(g)\circ f\circ\rho(g^{-1})$.
+\end{defn}
+In particular, we can construct the dual $V^\ast$ by letting $g\cdot f=f\circ\rho(g^{-1})$.
+\begin{defn}[Tensor product]
+    We can define their tensor product $(\rho\otimes\sigma,V\otimes W)$ by $(\rho\otimes \sigma)(g)(v\otimes w)=\rho(g)(v)\otimes\sigma(g)(w)$ and extend by linearity.
+\end{defn}
+This construction clearly preserves the tensor relations so the extension by linearity is well-defined. Note that this also satisfies the axioms of representations.
+
+More generally, if $(\rho,V)$ is a rep of $G$ and $(\sigma, W)$ is a rep of $H$ (both over the field $K$), then we can define $\rho\otimes\sigma : G\times H\to \operatorname{GL}(V\otimes W),\ (g,h)\mapsto \rho(g)\otimes \sigma(h)$. This is a representation of $G\times H$. The tensor product operation defined above can be realized as the special case given by precomposing with the diagonal embedding
+\[G\overset{\Delta}{\longrightarrow} G\times G\overset{\rho\otimes \sigma}{\longrightarrow}\operatorname{GL}(V\otimes W)\]
+\begin{prop}
+    We have some natural isomorphisms of representations.
+    \begin{enumerate}
+        \item $\Hom_k(V,W)\cong W\otimes V^\ast$
+        \item $\Hom_k(U\otimes V,W)\cong\Hom_k(U,\Hom_k(V,W))$
+    \end{enumerate}
+    where $U,V,W$ are representations of a group $G$.
+\end{prop}
+\begin{proof}
+    The underlying vector spaces are naturally isomorphic by Proposition 1.4, so it suffices to check that the isomorphisms proposed in the proof are $G$-equivariant.
+\end{proof}
+
+
+\section{Category of representations}
+\begin{prop}
+    There is a natural bijection between $K[G]$-modules and representations of $G$ on vector spaces over $K$.
+\end{prop}
+\begin{proof}
+    Given a rep $(\rho,V)$ of $G$, we can make it a $K[G]$-module by letting the group algebra act on $V$ in the obvious way, i.e., given an element $\sum_{g\in G}\lambda_gg$, where $\lambda_g\in K$ for all $g$,
+    \[\left(\sum_{g\in G}\lambda_gg\right)\cdot v=\sum_g\lambda_g\rho(g)(v)\]
+    Moreover, if $\phi:V\to W$ intertwines two representations $(\rho, V),\ (\sigma,W)$, i.e., $\forall g\in G$, $\phi\circ\rho(g)=\sigma(g)\circ\phi$, then it is easy to check that
+    \[\left(\sum_g\lambda_gg\right)\cdot \phi(v)=\phi\left(\left(\sum_g\lambda_gg\right)\cdot v\right)\]
+    i,e., $\phi$ is a module homomorphism. We can check that this gives a functor from the category of representations of $G$ on vector spaces over $K$ to the category of $K[G]$-modules.
+    
+    Conversely, given a $K[G]$-module $M$, we can define an action of $G$ on $M$ regarded as a $K$-vector space. [Just let $K\langle e\rangle$ act.] Embed $G$ in $K[G]$ in the obvious way, then the action of $K[G]$ on $M$ yields a representation. Each $K[G]$-module homomorphism induces a morphism between representations under this construction. We can check that this defines a functor from the category of $K[G]$-modules to the category of $K$-representations of $G$.
+
+    It is clear that these two processes are inverses of each other.
+\end{proof}
+So studying representations is the same as studying $K[G]$-modules.
+
+
 
 \section{Complete Reducibility}
 \begin{thm}
@@ -287,15 +429,15 @@ If $W\le V$ is a $G$-invariant subsapce and $\langle-,-\rangle$ a $G$-invariant 
 \begin{proof}
     If $x\in W^\perp$ and $g\in G$, then $\langle gx,w\rangle=\langle g^{-1}gx,g^{-1}w\rangle=\langle x,g^{-1}w\rangle=0$.
 \end{proof}
-\begin{lem}
+\begin{lem}[Weyl's unitary trick]
     $G$ finite group acting on a vector space $V$ over $\CC$. Then there exists a $G$-invariant Hermitian inner product on $V$.
 \end{lem}
 \begin{proof}
     Choose any Hermitian inner product and denote it $\langle-,-\rangle$. Define a new inner product 
     \[(v,w)=|G|^{-1}\sum_{g\in G}\langle gv,gw\rangle\]
-    Most properties are trivial. We check $G$-invariance and non-degeneracy. Let $h\in G$, then
+    Most properties hold trivially. We check $G$-invariance and non-degeneracy. Let $h\in G$, then
     \[(hv,hw)=|G|^{-1}\sum_{g\in G}\langle ghv,ghw\rangle=|G|^{-1}\sum_{g'\in G}\langle g'v,g'w\rangle=(v,w)\]
-    where we use the change of index $g'=gh$. For non-degeneracy, note that $(v,v)=0\leftrightarrow\langle gv,gv\rangle=0$ for all $g\in G$ $\Leftrightarrow v=0$.
+    where we use the change of index $g'=gh$. For non-degeneracy, note that $(v,v)=0\Leftrightarrow\langle gv,gv\rangle=0$ for all $g\in G$ $\Leftrightarrow v=0$.
 \end{proof}
 \begin{defn}
     A rep $V$ of $G$ is completely reducible if it's isomorphic to a direct sum of irreducible reps.
@@ -303,6 +445,9 @@ If $W\le V$ is a $G$-invariant subsapce and $\langle-,-\rangle$ a $G$-invariant 
 \begin{crly}
     Representations of finite group $G$ on vector space $V$ over $\CC$ are completely reducible.
 \end{crly}
+\begin{proof}
+    Any complex rep can be given a unitary structure, i.e., a $G$-invariant Hermitian inner product on $V$, so any subrep has an orthogonal complement. Proceed by induction on $\dim V$.
+\end{proof}
 \begin{crly}
     If $G\le GL_n(\CC)$ is finite, then $G$ is conjugate to a subgroup of $U(n)$.
 \end{crly}
@@ -322,7 +467,7 @@ If $W\le V$ is a $G$-invariant subsapce and $\langle-,-\rangle$ a $G$-invariant 
         \item The only irreducible reps are one dimensional (e-vectors exist in $\CC$), so $\CC^n$ splits as the direct sum of $A$-invariant lines, so $A$ is diagonal in some basis.
     \end{itemize}
 \end{proof}
-\begin{thm}[Complete reducibility]
+\begin{thm}[Complete reducibility, Maschke's theorem]
     Let $G$ be a finite group, $V$ a vector space over field $k$ such that $\operatorname{char}(k)\nmid |G|$. If $W\le V$ is $G$-invariant, then there exists a $G$-invariant complement.
 \end{thm}
 \begin{proof}
@@ -339,6 +484,45 @@ If $W\le V$ is a $G$-invariant subsapce and $\langle-,-\rangle$ a $G$-invariant 
 \end{proof}
 Illuminating exercise: Do this process for $G=\ZZ_2$.
 What fails when $\operatorname{char}(k)\mid G$?
+\section{Schur's Lemma}
+\begin{thm}[Schur's lemma]
+    Let $V, W$ be irreducible reps of a group $G$, where $V, W$ are vector spaces over a field $K$. Then
+    \begin{enumerate}
+        \item Any $G$-equivariant map $\phi:V\to W$ is either $0$ or an iso.
+        \item If in addition $K$ is algebraically closed, then $\dim \Hom_G(V,W)=0,1$. 
+    \end{enumerate}
+\end{thm}
+\begin{proof}
+    We prove $1)$. Note that if $\phi$ is non-zero, then $\ker\phi\neq V$ and $\ker\phi$ is an invariant subspace of $V$. Similarly $\im\phi\neq \{0\}$ is also an invariant subspace. Since both $V,W$ are irred reps, we must have $\ker\phi=0$ and $\im\phi=W$, i,e., $\phi$ is an iso.
+
+    Now we prove $2)$. Suppose $\phi_1,\phi_2\in\Hom_G(V,W)$ are non-zero. By $1)$, they are isomorphisms, i.e., invertible, so consider $\phi_1^{-1}\circ\phi_2\in\operatorname{End}_G(V)$. Since $K$ is algebraically closed, we can find an eigenvalue $\lambda\in K$ of $\phi_1^{-1}\circ\phi_2$. Then consider $\ker(\phi_1^{-1}\circ\phi_2-\lambda\id_V)$, which is a non-trivial invariant subspace of $V$. By irreducibility of $V$ we must have $\phi_1^{-1}\circ\phi_2=\lambda\id_V$, i.e., $\phi_2=\lambda\phi_1$, i.e., $\Hom_G(V,W)=K\langle\phi_1\rangle\cong K$.
+\end{proof}
+\begin{crly}
+    Let $K$ is algebraically closed. Suppose $V=\bigoplus_i V_i$ is a decomposition of a rep $V$ into irred components. Then, for each irreducible rep $W$ of $G$,
+    \[|\{i:V_i\cong W\}|=\dim\Hom_G(V,W)=\dim\Hom_G(W,V)\]
+\end{crly}
+\begin{proof}
+    This is immediate from Schur's lemma and properties of $\Hom_G(-,-)$.  
+\end{proof}
+\begin{crly}
+    If $G$ admits a faithful irred rep over an algebraically closed field $K$, then $Z(G)$ is cyclic.
+\end{crly}
+\begin{proof}
+    Let $(\rho,V)$ be such a rep and $z\in Z(G)$. By definition, $zg=gz$ for all $g\in G$, so $\rho(z)\rho(g)=\rho(g)\rho(z)$ for all $g\in G$, i.e., $\rho(z)$ is $G$-equivariant, i.e., $\rho(z)\in\operatorname{End_G(V)}$, and $\rho(z)\neq 0$. By Schur's lemma, $\rho(z)=\lambda\id_V$ for some $\lambda\in K^\times$, so $Z(G)$ embeds as a subgroup of $K^\times$, so $Z(G)$ must be cyclic.
+\end{proof}
+\subsection{Isotypical Decomposition}
+\begin{defn}
+    Let $V$ be a completely reducible rep of $G$, and let $W$ be any irred rep, then the $W$-isotypical component of $V$ is the smallest subrep of $V$ containing all subreps of $V$ isomorphic to $W$.
+
+    We say that $V$ has a unique isotypical decomposition if it is the direct sum of $W$-isotypical components as $W$ runs through all irred reps of $G$.
+\end{defn}
+\begin{thm}
+    If $G$ is a finite group, then every complex rep of $G$ has a unique isotypical decomposition
+\end{thm}
+\begin{proof}
+    ES2. The proof uses character theory, we will give the proof in the next section.
+\end{proof}
+
 
 \section{Characters}
 \begin{defn}
@@ -369,36 +553,193 @@ What fails when $\operatorname{char}(k)\mid G$?
 Note that $\mathcal{C}_G$ is a vector space over $\CC$ with basis the functions \[\delta_{\mathcal{O}}:G\to\CC,g\mapsto \begin{cases}1&g\in\mathcal{O}\\ 0&g\not\in\mathcal{O}\end{cases}\]
 where $\mathcal{O}$ is a conjugacy class.
 
-Write $G$ as a disjoint union of conj. classes, then $\chi\in\mathcal{C}_G$ if $V$ is a complex rep of $G$.
+Write $G$ as a disjoint union of conj. classes, then $\chi_V\in\mathcal{C}_G$ if $V$ is a complex rep of $G$.
 
 Define a Hermitian inner product on $\mathcal{C}_G$ by
-\[\langle f,f'\rangle=|G|^{-1}\sum_{g\in G}f(g)\overline{f'(g)}=\sum_{1}^r\dfrac{1}{|Z_G(x_i)|}f(x_i)\overline{f'(x_i)}\]
+\[\langle f,f'\rangle_G=|G|^{-1}\sum_{g\in G}f(g)\overline{f'(g)}=\sum_{i=1}^r\dfrac{1}{|C_G(x_i)|}f(x_i)\overline{f'(x_i)}\]
 where $x_i$ are in distinct orbits.
-\begin{thm}
+
+\begin{lem}
+Let $V,W$ be (unitary) complex reps of a finite group $G$, then
+    $\chi_{\Hom_k(V,W)}(g)=\overline{\chi_V(g)}\chi_W(g)$
+\end{lem}
+\begin{proof}
+    Given $g\in G$, choose eigenbasis for $\{v_1,...,v_n\}$ of $V$ and $\{w_1,...,w_m\}$ of $W$. This is always possible since $G$ is finite. We get a basis $\{\alpha_{ij}\}$ of $\Hom_k(V,W)$, where $\alpha_{ij}(v_k)=\delta_{jk}w_i$ (extend $k$-lienarly). We have
+    \begin{align*}
+        (g\cdot\alpha_{ij})(v_k)&=\rho(g)\circ\alpha_{ij}\circ\rho(g)^{-1}(v_k)\\
+        &=\rho(g)(\alpha_{ij}(\lambda_k^{-1}v_k))\\
+        &=\rho(g)(\lambda_k^{-1}\delta_{jk}w_i)\\
+        &=\mu_i\lambda_k^{-1}\delta_{jk}w_i\\
+        &=\mu_i\lambda_k^{-1}\alpha_{ij}(v_k)
+    \end{align*}
+    So $\chi_{\Hom_k(V,W)}(g)=\sum_{i,j}\mu_i\lambda_j^{-1}=\overline{\chi_V(g)}\chi_W(g)$.
+\end{proof}
+\begin{lem}
+    Let $V,W$ be reps of a finite group $G$. Recall that $V^G=\{v\in V:\forall g\in G,\ g\cdot v=v\}\le V$. Then
+    \begin{itemize}
+        \item $\dim V^G=|G|^{-1}\sum_{g\in G}\chi(g)=\langle1_G,\chi_V\rangle_G$.
+        \item $\dim\Hom_G(V,W)=\langle\chi_V,\chi_W\rangle_G$.
+    \end{itemize}
+\end{lem}
+\begin{proof}
+    To prove the first part, we note that $\pi:U\to U^G$, $u\mapsto |G|^{-1}\sum_{g\in G} g\cdot u$ is a projection, so $\dim U^G=\operatorname{tr}(\pi)=|G|^{-1}\sum_{g\in G}\chi(g)=\langle 1_G,\chi_V\rangle_G$.
+
+    To prove the second part we simply note that $\Hom_G(V,W)=\Hom_k(V,W)^G$.
+\end{proof}
+\subsection{Character Table}
+In this section, we assume that the group $G$ is finite and that every representation is over $\CC$.
+\begin{thm}[Orthogonality]
     If $V,V'$ are irreducible complex of a finite group $G$ with character $\chi,\chi'$, then
     \[\langle\chi,\chi'\rangle=\begin{cases}
         1 & V\cong V'\\
         0 & \text{o/w}
     \end{cases}\]
 \end{thm}
-Proof deferred.
-\begin{crly}
-    The number of distinct irred. reps of $G$ = the number of distinct irred. reps?????
-\end{crly}
-\begin{thm}
+\begin{proof}
+    This is a combination of the preceding lemma and Schur's lemma. For $V,V'$ irreducible, $\langle \chi,\chi'\rangle_G=\dim\Hom_G(V,V')$ by the preceding lemma, and $\dim\Hom_G(V,V')=0,1$ by Schur's lemma. The dimension is $1$ precisely when there exists an $G$-equivariant iso $V\cong V'$.
+\end{proof} 
+\begin{thm}[The character table is a square.]
     There are as many irred. complex reps as conj. classes in $G$ (finite), i.e., $\{\chi_V: V\text{ irred.}\}$ is an orthonormal basis of $\mathcal{C}_G$.
 \end{thm}
+\begin{proof}
+    It suffices to show that the set of irreducible characters span $\mathcal{C}_G$ as they clearly form an orthonormal set. Let $\{\chi_1,...,\chi_k\}$ be the complete list of irreducible characters. We can assume that this list is finite as orthogonality means that the cardinality is $\le$ the dimension of $\mathcal{C}_G$. Let $I=\langle\chi_1,...,\chi_k\rangle$. We will prove that $I^\perp=\{0\}$.
 
+    We begin with a general construction. Let $f\in\mathcal{C}_G$. For every representation $(\rho,V)$, we define
+    \[\varphi_{f,V}=|G|^{-1}\sum_{g\in G}\overline{f(g)}\rho(g)\in\Hom_k(V,V)\]
+    Moreover, we see that $\forall h\in G$,
+    \[\rho(h)\varphi_{f,V}\rho(h)^{-1}=|G|^{-1}\sum_{g\in G}\overline{f(g)}\rho(hgh^{-1})=\varphi_{f,V}\]
+    Note that conjugating by an element is an automorphism of $G$, so we may change the summing index and use that fact that $f$ is a class function. Hence, $\varphi_{f,V}\in\Hom_G(V,V)$.
+
+    Now we specialize to $f\in I^\perp$ and $V$ an irrep with character $\chi_i$. By Schur's lemma, $\varphi_{f,V}=\lambda\id_V$ for some $\lambda\in\CC$ and $\lambda\dim V=\operatorname{tr}(\varphi_{f,V})=\langle f,\chi_i\rangle_G=0$, so $\varphi_{f,V}=0$. By complete reducibility, every rep of $G$ breaks up into irred components, so $\varphi_{f,V}=0$ for all reps $V$. In particular, if take $V=\CC G$ to be the regular representation, then 
+    \[\varphi_{f,\CC G}(e)=|G|^{-1}\sum_{g\in G}\overline{f(g)}g=0\]
+    By linear independence, $\overline{f(g)}=0$ for all $g\in G$, so $f=0$.
+
+    Hence, $\{\chi_1,...,\chi_k\}$ form an orthonormal basis for $\mathcal{C}_G$, so $\dim \mathcal{C}_G=k=$ the number of conjugacy classes of $G$.
+\end{proof}
 \begin{crly}
     If $\rho',\rho'$ are two complex reps of $G$ with the same character, then $\rho\cong\rho'$
 \end{crly}
-Proof deferred.
-
 
 We introduce some notation. If $\rho$ is a rep of $G$, then write $n\rho$ for the $n$-fold direct sum of $\rho$, whose character is then denoted by $n\chi_\rho$. So if $\rho$ is isomorphic to a direct sum of reps, i.e., $\rho=n_1\rho_1\oplus...\oplus n_r\rho_r$, $\rho_i$ irred (complete reducibility) so that $\chi=n_1\chi+...+n_r\chi_r$. But $\langle\chi_i,\chi_j\rangle=\delta_{ij}$, so $\langle\chi_i,\chi_j\rangle=n_i$, so have an expansion in terms of the orthonormal basis $\{\chi_i\}$.
 
 In particular, in any decomposition of a rep $V$ into direct summand of irred. reps, the multiplicity with which the irred. reps occur is $\langle\chi,\chi_i\rangle$, which is independent of the decomposition.
+\subsubsection{Consequences}
+\begin{prop}[Column orthogonality]
+    Suppose $\chi_1,...,\chi_r$ is a complete list of irreducible of characters of $G$, then for each $g,h\in G$, we have
+    \[\sum_{i=1}^r\overline{\chi_i(g)}\chi_i(h)=\begin{cases}
+        C_G(g) & \text{ if }g,\ h\text{ are conjugate}\\
+        0 & \text{o/w}
+    \end{cases}\]
+    In particular, $|G|=\sum_i(\dim V_i)^2$.
+\end{prop}
+\begin{proof}
+    Let $D$ be the diagonal matrix such that $D_{ii}=1/|C_G(g_i)|$, where each $g_i$ represents a unique conjugacy class in $G$. Then by orthogonality of characters, we have
+    \begin{align*}
+        \delta_{ij}&=\langle\chi_i,\chi_j\rangle_G\\
+        &=\sum_k\dfrac{1}{D_{kk}}\overline{\chi_i(g_k)}\chi_j(g_k)\\
+        &=(\bar XD^{-1}X^T)_{ij}
+    \end{align*}
+    where $X_{pq}=\chi_p(g_q)$. Since $X$ is a square, the matrix
+\end{proof}
+We introduce the permutation representation of $G$.
+
+Suppose $G$ acts on a finite set $X$, then we can define a rep by letting $G$ act on the vector space $\CC X$ formally spanned by the basis $\{e_x:x\in X\}$. The action is given by linearly extending the action $g\cdot e_x=e_{g\cdot x}$.
+\begin{lem}
+    If $\chi$ is the character of $\CC X$ then $\chi(g)=|X^g|=|\{x\in X:gx=x\}|$.
+\end{lem}
+\begin{proof}
+    Since $X$ is finite, list all the elements $x_1,...,x_d$. Then w.r.t. the basis $\{e_{x_1},...,e_{x_d}\}$, the matrix of $g$ is given by a permutation matrix, i.e., the $(i,j)$-entry is $1$ if $gx_i=x_j$ and $0$ otherwise.
+\end{proof}
+
+\begin{prop}
+    Let $V_1,...,V_r$ be the complete list of irreducible representations of a finite group $G$, then as a representation, we have $\CC G\cong\bigoplus_{i=1}^r(\dim V_i)V_i$, where $\CC G$ is the regular representation.
+\end{prop}
+\begin{proof}
+    Note that $\chi_{\CC G}(g)=0$ if $g\neq e$, so by computing $\langle\chi_{\CC G},\chi_i\rangle_G=|G|^{-1}\overline{\chi_{\CC G}(e)}\chi_i(e)=\chi_i(e)=\dim V_i$.
+\end{proof}
+\begin{prop}[Burnside's lemma]
+    Let $G$ be a finite group acting on a finite set $X$, then $$\langle 1_G,\chi_{\CC X}\rangle_G=\#\text{ of $G$-orbit on $X$}$$
+\end{prop}
+\begin{proof}
+    If the action is not transitive, then we may write $X=\bigsqcup_iO_i$ as a disjoint union of orbits, then $\CC X$ breaks into subreps $\bigoplus_i \CC O_i$, then the dot product can be computed by linearity. Hence, we may wlog assume that $G$ acts transitively on $X$, then
+    \begin{align*}
+        |G|\langle1,\chi_{\CC X}\rangle_G&=\sum_{g\in G}\chi_{\CC X}(g)=\sum_{g\in G}|X^g|\\
+        &=|\{(g,x)\in G\times X:gx=x\}|\\
+        &=\sum_{x\in X}|\operatorname{Stab}_G(x)|\\
+        &=|X|\dfrac{|G|}{|X|}\\
+        &=|G|
+    \end{align*}
+\end{proof}
+
+\begin{crly}
+    If $G$ is a finite group acting on $X$ with permutation character $\chi$, then $\langle\chi,\chi\rangle_G$ is the number of $G$-orbit on the product action, where $G$ acts on $X\times X$ by $g\cdot (x,y)=(gx,gy)$.
+\end{crly}
+\begin{proof}
+    Note that $g$ fixes $(x,y)$ iff $g$ fixes both $x$ and $y$, so $\chi_{X\times X}=\chi^2$, the result then follows from properties of inner product and Burnside's lemma.
+\end{proof}
+\begin{rem}
+    NOte that the diagonal $\Delta=\{(x,x)\in X\times X\}$ is $G$-stable, so is the off-diagonal $\{(x,y)\in X\times X:x\neq y\}$.
+\end{rem}
+\begin{defn}
+    We say that $G$ acts on $X$ 2-transitively if its action on $X\times X$ has only two orbits. 
+\end{defn}
+
+\subsection{Character Ring}
+\begin{defn}
+    The character ring of a group $G$ is defined as
+\[R(G)=\{\chi_1-\chi_2:\text{ $\chi_1$, $\chi_2$ are characters of $G$}\}\subseteq\mathcal{C}_G\]
+\end{defn}
+Note that $R(G)$ is an additive subgroup of $\mathcal{C}_G$ with addition induced by taking direct sum of two reps. The trivial rep acts as the multiplicative identity of the multiplicative structure given by taking tensor product of two reps.
+
+Let $G,\ H$ be finite groups. The tensor product operation also gives a $\ZZ$-bilinear map
+$R(G)\times R(H)\to R(G\times H), (\chi_V,\chi_W)\mapsto \chi_{V\otimes W}$.
+\begin{prop}
+    Let $(\rho_i,V_i)$, $(\psi_j,W_j)$ be complete lists of complex irreps of $G$ and $H$ respectively, then $\rho_i\otimes\psi_j$ are irreps of $G\times H$ as $i,j$ runs through all possible indices, and every complex irrep of $G\times H$ arrises this way.
+\end{prop}
+\begin{proof}
+    By direct computation of characters, we see that $\{\rho_i\otimes\psi_j:i,j\}$ form an orthonormal set, and we have
+    \[\sum_{i,j}\dim(V_i\otimes W_j)^2=\sum_i(\dim V_i)^2\sum_j(\dim W_j)^2=|G||H|=|G\times H|\]
+    so the list is complete.
+\end{proof}
+We can also investigate the characters of symmetric/exterior powers. We can actually assemble the fomula into generating functions. (see ES3)
+
+\section{Induction and Restriction}
+
+\begin{defn}[Induced Rep]
+Let $G$ be a finite group and $H\le G$.
+Define $\mathcal{F}(G,W)=\{f:G\to W\}$. This can be made a rep of $G\times H$ via the action $(k,h)\cdot f=(g\mapsto \rho(h)f(k^{-1}gh))$. This can be given the structure of a rep of $G$ by the standard embedding $g\mapsto (g,e_H)$ and as a rep of $H$ by $h\mapsto(e_G,h)$. These two actions commute. Moreover, the $H$-invariant subspace $\mathcal{F}(G,W)^H$ is also $G$-invariant.
+    
+    The induced representation is $\operatorname{Ind}_H^GW=\mathcal{F}(G,W)^H$, where $G$ acts as described above.
+\end{defn}
+In terms of module,
+\begin{defn}
+    Consider a $KH$-module $W$, where $H$ is a subgroup of $G$. We can define a $KG$-module by $K[G]\otimes_{K[H]}W$. [This is essentially extending coefficient]
+\end{defn}
+We have $\mathcal{F}(G,W)\cong \Hom_K(K[G],W)\cong K[G]\otimes_K W^\ast\cong K[G]\otimes W$ as $K$-vector spaces. [Note that $W$ is finite dimensional, so $W^\ast\cong W$ by sending basis to dual basis.] The invariant condition can be transferred to give an isomorphism $K[G]\otimes_{K[H]}W\cong\mathcal{\Hom}_H(K[G],W)$ of $K[G]$-modules.
+
+\begin{prop}[Basic properties]
+    \begin{enumerate}
+        \item $\operatorname{Ind}(W_1\oplus W_2)\cong \operatorname{Ind}W_1\oplus\operatorname{Ind}W_2$
+        \item $\dim\operatorname{Ind}W=|G:H|\dim W$
+        \item $\operatorname{Ind}_{\{e\}}^G1$ is the left regular rep of $G$ over $K$.
+        \item (Transitivity) If $K\le H\le G$, and $W$ is a rep of $K$, then $\operatorname{Ind}_H^G\operatorname{Ind}_K^HW=\operatorname{Ind}_K^GW$.
+    \end{enumerate}
+\end{prop}
+\begin{proof}
+    
+\end{proof}
 
 
+\begin{thm}[Frobenius Reciprocity]
+    If $V$ is a rep of $G$ and $W$ is a rep of $H\le G$, then
+    \[\Hom_G(V,\operatorname{Ind}_H^GW)\cong\Hom_H(\operatorname{Res}^G_HV,W)\]
+    as reps. In the language of characters,
+    \[\langle\chi_V,\chi_{\operatorname{Ind}_H^GW}\rangle_G=\langle\chi_{\operatorname{Res}^G_HW},\chi_W\rangle_H\]
+    i.e., $\operatorname{Ind}_H^G$ and $\operatorname{Res}^G_H$ are adjoints.
+\end{thm}
+
+\subsection{Mackey's Theory}
+
+\subsection{Frobenius Groups}
 
 \end{document}
