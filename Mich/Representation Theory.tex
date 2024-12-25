@@ -3,6 +3,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath,amsfonts,amssymb,amsthm}
 \usepackage{enumerate,bbm}
+\usepackage{leftindex}
 \usepackage{tikz,tikz-cd,graphicx,color,mathrsfs,color,hyperref,boldline}
 \usepackage{caption,float}
 \usepackage[a4paper,margin=1in,footskip=0.25in]{geometry}
@@ -98,11 +99,12 @@
 \newcommand{\Hom}{\operatorname{Hom}}
 \newcommand{\im}{\operatorname{im}}
 \newcommand{\id}{\operatorname{id}}
+\newcommand{\Ind}{\operatorname{Ind}}
+\newcommand{\Res}{\operatorname{Res}}
 
 \newcommand{\calD}{\mathcal{D}}
 
 \newcommand{\sol}{\textit{Solution: }}
-\newcommand{\Res}{\operatorname{Res}}
 
 \title{Representation theory}
 \author{Kevin}
@@ -678,7 +680,7 @@ Suppose $G$ acts on a finite set $X$, then we can define a rep by letting $G$ ac
     Note that $g$ fixes $(x,y)$ iff $g$ fixes both $x$ and $y$, so $\chi_{X\times X}=\chi^2$, the result then follows from properties of inner product and Burnside's lemma.
 \end{proof}
 \begin{rem}
-    NOte that the diagonal $\Delta=\{(x,x)\in X\times X\}$ is $G$-stable, so is the off-diagonal $\{(x,y)\in X\times X:x\neq y\}$.
+    Note that the diagonal $\Delta=\{(x,x)\in X\times X\}$ is $G$-stable, so is the off-diagonal $\{(x,y)\in X\times X:x\neq y\}$.
 \end{rem}
 \begin{defn}
     We say that $G$ acts on $X$ 2-transitively if its action on $X\times X$ has only two orbits. 
@@ -706,7 +708,7 @@ We can also investigate the characters of symmetric/exterior powers. We can actu
 \section{Induction and Restriction}
 
 \begin{defn}[Induced Rep]
-Let $G$ be a finite group and $H\le G$.
+Let $G$ be a finite group and $H\le G$ and $(\rho, W)$ a rep of $H$.
 Define $\mathcal{F}(G,W)=\{f:G\to W\}$. This can be made a rep of $G\times H$ via the action $(k,h)\cdot f=(g\mapsto \rho(h)f(k^{-1}gh))$. This can be given the structure of a rep of $G$ by the standard embedding $g\mapsto (g,e_H)$ and as a rep of $H$ by $h\mapsto(e_G,h)$. These two actions commute. Moreover, the $H$-invariant subspace $\mathcal{F}(G,W)^H$ is also $G$-invariant.
     
     The induced representation is $\operatorname{Ind}_H^GW=\mathcal{F}(G,W)^H$, where $G$ acts as described above.
@@ -715,31 +717,207 @@ In terms of module,
 \begin{defn}
     Consider a $KH$-module $W$, where $H$ is a subgroup of $G$. We can define a $KG$-module by $K[G]\otimes_{K[H]}W$. [This is essentially extending coefficient]
 \end{defn}
-We have $\mathcal{F}(G,W)\cong \Hom_K(K[G],W)\cong K[G]\otimes_K W^\ast\cong K[G]\otimes W$ as $K$-vector spaces. [Note that $W$ is finite dimensional, so $W^\ast\cong W$ by sending basis to dual basis.] The invariant condition can be transferred to give an isomorphism $K[G]\otimes_{K[H]}W\cong\mathcal{\Hom}_H(K[G],W)$ of $K[G]$-modules.
+We have $\mathcal{F}(G,W)\cong K[G]\otimes_K W$ as $K$-vector spaces. [Note that $W$ is finite dimensional, so $W^\ast\cong W$ by sending basis to dual basis.] In this process, we pick a basis $\{w_1,...,w_n\}$ for $W$ so that $\{g\otimes w_i:g\in G, i=1,...,n\}$ is a basis for $K[G]\otimes_K W$. Each basis vector $g\otimes w_i$ is identified with the map which sends $g$ to $w_i$ and other elements to $0$. Under this identification the action of $G\times H$ becomes $(k,h)\cdot (g\otimes w_i)=kgh^{-1}\otimes\rho(h)w_i$. Given a general function $\sum_{g\in G} g\otimes w_g\in K[G]\otimes_KW$, the $H$-invariant condition is given by
+\begin{align*}
+    \sum_{g\in G}gh^{-1}\otimes \rho(h)w_g=\sum_{g\in G}g\otimes w_g
+\end{align*}
+Note that by renaming the index, the first sum can be written as $\sum_{g\in G}g\otimes \rho(h)w_{gh}$, so the invariance condition is
+\[\rho(h)w_{gh}=w_g\] for all  $h\in H$.
+
+Note that $K[G]$ can be regarded as a $K[H]$-module. Consider a subset $R=\{r_1,...,r_m\}\subseteq G$ of coset representatives. We claim that $R$ gives a $K[H]$-basis of $K[G]$. Clearly any $g$ belongs to a coset, so $R$ is a $K[H]$-generating set of $K[G]$. We need independence. Suppose there exists $\mu_r\in K[H]$ s.t.
+\[0=\sum_{r\in R}\mu_rr\]
+Then we can expand the sum to get
+\[0=\sum_{r\in R}\sum_{h\in H}\lambda_{r,h}hr\]
+where $\lambda_{r,h}\in K$. This forces $\lambda_{r,h}=0$ for all $r,h$ by $K$-linear independence.
+
+The invariant condition can be transferred to give an isomorphism $K[G]\otimes_{K[H]}W\cong\mathcal{F}(G,W)^H$ of $K[G]$-modules. Define the following maps
+\begin{align*}
+    \phi:&K[G]\otimes_{K[H]}W\to \mathcal{F}(G,W)^H,\\ &\left(\sum_{r\in R}r\otimes w_r\right)\mapsto (f:g=rh\mapsto \rho(h^{-1})w_r)
+\end{align*}
+where $r\in R$ and $h\in H$ are the unique elements such that $g=rh$.
+We can check that the image is indeed $H$-invariant. Let $\tilde h\in H$ and $g\in G$, $(\tilde h\cdot f)(g)=\rho(\tilde h)f(rh\tilde h)=\rho(\tilde h)\rho(\tilde h^{-1})\rho(h^{-1})w_r=f(g)$. 
+This map is clearly injective. To see that $\phi$ is surjective, we observe that any $H$-invariant function $f:G\to W$ satisfies the relation $f(gh)=\rho(h^{-1})f(g)$ for all $g\in G$, $h\in H$, i.e., $f$ only depends on the action $\rho$ and the coset. If the action is given, then $f$ is uniquely determined by its values on coset representatives. We also need to check that $\phi$ preserves the $K[G]$-module structure. It is clearly additive. To see that it is $K[G]$-linear, note that for all $k\in G$, we have
+\begin{align*}
+    \phi\left(k\cdot \sum_{r\in R}r\otimes w_r\right)=(g\mapsto f(k^{-1}g))=k\cdot f
+\end{align*}
+where $f=\phi\left(\sum_rr\otimes w_r\right)$. So $\phi$ is a $k[G]$-module isomorphism.
+
+Let $W_r\le \operatorname{Ind}_H^GW$ be the subspace of functions supported on $rH$ for each $r\in R$.
+\begin{prop}
+    Each vector space $W_r$ is isomorphic to $W$ and $\operatorname{Ind}_H^GW\cong\oplus_{r\in R}W_r$ as a vector space. In particular, $\dim \operatorname{Ind}_H^GW=|G:H|\dim W$
+\end{prop}
+\begin{proof}
+    For each $r\in R$, define 
+    \[w\in W\mapsto \sum_{h\in H}rh\otimes\rho(h^{-1})w\]
+    Clearly RHS is identified with $H$-invariant functions supported on $rH$ bijectively. Also, every $H$-invariant function can be uniquely written as a $K$-linear combination of $H$-invariant functions supported on $rH$, $r\in R$, so $\operatorname{Ind}_H^GW\cong \bigoplus_{r\in R}W_r$ as vector space.
+\end{proof}
 
 \begin{prop}[Basic properties]
     \begin{enumerate}
         \item $\operatorname{Ind}(W_1\oplus W_2)\cong \operatorname{Ind}W_1\oplus\operatorname{Ind}W_2$
         \item $\dim\operatorname{Ind}W=|G:H|\dim W$
         \item $\operatorname{Ind}_{\{e\}}^G1$ is the left regular rep of $G$ over $K$.
-        \item (Transitivity) If $K\le H\le G$, and $W$ is a rep of $K$, then $\operatorname{Ind}_H^G\operatorname{Ind}_K^HW=\operatorname{Ind}_K^GW$.
+        \item (Transitivity) If $P\le H\le G$, and $W$ is a rep of $P$, then $\operatorname{Ind}_H^G\operatorname{Ind}_P^HW=\operatorname{Ind}_P^GW$.
     \end{enumerate}
 \end{prop}
 \begin{proof}
-    
-\end{proof}
+    $1)$: Straightforward. $\operatorname{Ind}(W_1\oplus W_2)\cong K[G]\otimes_{K[H]}(W_1\oplus W_2)\cong (K[G]\otimes_{K[H]}W_1)\oplus (K[G]\otimes_{K[H]}W_2)$.
 
+    $2):$ Preceding proposition.
+
+    $3)$: We define a $K[G]$-module isomorphism $K[G]\otimes_{K\{e\}}K\cong K[G]$. Clearly, LHS is just $K[G]\otimes_K K$, and we have a vector space isomorphism $K[G]\otimes_KK\cong K[G]$ given by $K$-linearly extending $g\otimes 1_K\mapsto g$. It is easy to check that this map intertwines the induced action and the left regular action. [Just check every basis vector.]
+
+    $4)$: See ES3 for the complex case. More generally, over a field $K$, an elements in $\operatorname{Ind}_H^G\operatorname{Ind}_P^HW$ is an element of $\mathcal{F}(G,\mathcal{F}(H,W)^P)^H$, we can identify this with an element $\phi\in\mathcal F(G\times H,W)$ s.t.
+    \begin{itemize}
+        \item $\phi(gh',h)=\phi(g,h'h)$ for all $h'\in H$. (Invariance under the action of $H$)
+        \item $\phi(g,hp)=\rho(p^{-1})\phi(g,h)$ for all $p\in P$. (Invariance under the action of $P$)
+    \end{itemize}
+    The first relation says that $\phi$ is completely determined by its restriction to $G\times \{e\}$, which is a function $\psi:G\to W$ satisfying $\psi(gp)=\rho(p^{-1})\psi(g)$, i.e., $P$-invariant, i.e., an element in $\operatorname{Ind}_P^GW$. One can show that this is indeed a linear isomorphism, and hence an isomorphism of representations.
+\end{proof}
+\begin{defn}[Induced class function]
+    Let $\varphi\in\mathcal{C}_H$ we define $\operatorname{Ind}_H^G\varphi\in\mathcal{C}_G$ by
+    \[(\operatorname{Ind}_H^G\varphi)(g)=\sum_{r\in R}\varphi(r^{-1}gr)=|H|^{-1}\sum_{x\in G}\overset{\circ}{\varphi}(x^{-1}gx)\]
+    where $R$ is a set of left coset representatives and $\overset{\circ}{\varphi}$ is the extension of $\varphi$ by zero outside of $H$.
+\end{defn}
+\begin{thm}
+    Let $(\rho,W)$ be a rep of $H\le G$ with character $\chi_W$. We then have
+    $\operatorname{Ind}_H^G(\chi_W)=\chi_{\operatorname{Ind}_H^GW}$.
+\end{thm}
+
+\begin{proof}
+    Recall the vector space decomposition $\Ind_H^GW\cong\bigoplus_{r\in R}W_r$. It is clear from definition that the action of $G$ on $\Ind_H^GW$ permutes $W_r$ according to the action of $G$ on the left cosets $G/H$. [$W_r$ consists of functions supported on $rH$, then the left action of $G$ maps $W_r$ to $W_{gr}$, functions supported on $grH$] We need the trace of $g$. Note that the only contribution comes from cosets $rH$ s.t. $grH=rH$, i.e., $r^{-1}gr\in H$. We need to compute the trace of $g$ on $W_r$. Recall the vector space isomorphism $W\cong W_r$
+    \[w\mapsto \sum_{h\in H}rh\otimes\rho(h^{-1})w\]
+    We compute
+    \begin{align*}
+        g\cdot\left(\sum_{h\in H}rh\otimes\rho(h^{-1})w\right)&=\sum_{h\in H}grh\otimes \rho(h^{-1})w\\
+        &=\sum_{h\in H}rh'h\otimes\rho(h^{-1})w\\
+        &=\sum_{\tilde h\in H}r\tilde h\otimes\rho(\tilde h^{-1})\rho(h')w\\
+        &=\sum_{h\in H}rh\otimes\rho(h^{-1})\rho(h')w
+    \end{align*}
+    The second equality follows from the fact that $r^{-1}gr=h'\in H$. So $g$ acts on $W_r$ the same way as $r^{-1}gr$ acts on $W$ under the isomorphism constructed before, so $\operatorname{tr}(g)=\chi_{W}(r^{-1}gr)$. Sum over all $r$.
+\end{proof}
 
 \begin{thm}[Frobenius Reciprocity]
     If $V$ is a rep of $G$ and $W$ is a rep of $H\le G$, then
     \[\Hom_G(V,\operatorname{Ind}_H^GW)\cong\Hom_H(\operatorname{Res}^G_HV,W)\]
-    as reps. In the language of characters,
-    \[\langle\chi_V,\chi_{\operatorname{Ind}_H^GW}\rangle_G=\langle\chi_{\operatorname{Res}^G_HW},\chi_W\rangle_H\]
+    In the language of characters (if the reps are over $\CC$),
+    \[\langle\chi_V,\Ind_H^G\chi_{W}\rangle_G=\langle\chi_{V}|_H,\chi_W\rangle_H\]
     i.e., $\operatorname{Ind}_H^G$ and $\operatorname{Res}^G_H$ are adjoints.
 \end{thm}
 
+\begin{proof}
+  We will show that there is a natural isomorphism $\Hom_G(V,\Ind W)\cong\Hom_H(V,W)$.
+  Define
+  \begin{align*}
+      &\Theta:\Hom_G(V,\mathcal{F}(G,W)^H)\to\Hom_H(V,W)\\
+      &\Psi:\Hom_H(V,W)\to\Hom_G(V,\mathcal{F}(G,W)^H)
+  \end{align*}
+  by $\Theta(f)(v)=f(v)(e)$ and $\Psi(\beta)(v)(g)=\beta(g^{-1}v)$. These maps are clearly linear.
+  By direct computation, $(\Psi\Theta f)(v)(g)=\Psi(f(-)(e))(v)(g)=f(g^{-1}v)(e)=f(v)(g)$ by $G$-equivariance, and $(\Theta\Psi\beta)(v)=\Theta(\beta((\bullet)^{-1}-))(v)=\beta(e^{-1}v)=\beta(v)$. We just verified that these are indeed isomorphisms of vector spaces.
+
+  For reps over $\CC$, we can count the dimension and get $\dim\Hom_G(V,\Ind W)=\langle\chi_V,\Ind_H^G\chi_W\rangle_G=\langle\chi_V|_H,\chi_W\rangle_H=\dim\Hom_H(V,W)$.
+\end{proof}
+The second part of the proof (characters) can also be proved by directly checking the adjoint relation from the formula of induced characters.
+
 \subsection{Mackey's Theory}
+We want to study representations of the form $\Res^G_K\Ind_H^GW$ where $G$ is a finite group, $H,K\le G$ are subgroups, and $W$ is a rep of $H$.
+
+There is an action of $K$ on $G/H$ given by $k\cdot gH=kgH$.
+\begin{defn}
+    The union of orbit of the action above, i.e., $\bigcup_{k\in K}kgH$ is called a double coset, denoted $KgH$. We also say $K\backslash G/H=\{KgH:g\in G\}$.
+\end{defn}
+An alternative description is the $K\times H$-orbit on $G$, for the left action of $K$ and the right action of $H$.
+
+We introduce some notation: let $(\rho, W)$ be a rep of $H$.
+\begin{itemize}
+    \item $\leftindex^g{H}=gHg^{-1}\le G$
+    \item $(\leftindex^gH,\leftindex^gW)$ is the representation of $\leftindex^gH$ on $W$ given by $\leftindex^g\rho(ghg^{-1})=\rho(h)$.
+\end{itemize}
+\begin{thm}[Mackey's restriction formula]
+    If $G$ is a finite group with subgroups $H,K$, and $(\rho, W)$ is a rep of $H$, then
+    \[\Res^G_K\Ind_H^G W\cong \bigoplus_{KgH\in K\backslash G/H}\Ind^K_{K\cap\leftindex^gH}\Res^{\leftindex^gH}_{K\cap\leftindex^gH}\leftindex^gW\]
+    as reps.
+\end{thm}
+\begin{proof}
+    For each double coset $KgH$, we define a space
+    \[V_{KgH}=\{f\in\Ind_H^GW:\forall x\not\in KgH,\ f(x)=0\}\]
+    i.e., the space of functions $G\to W$ with support contained in $KgH$. This is a $K$-invariant subspace of $\Ind_H^GW$. [The action of $K$ preserves this coset $KgH$.] Thus, there is a decomposition of rep of $K$ given by
+    \[\Res^G_K\Ind_H^G W\cong\bigoplus_{KgH\in K\backslash G/H}V_{KgH}\]
+    We define $$\Theta: V_{KgH}\to\mathcal{F}(K,\leftindex^gW)^{K\cap\leftindex^gH}=\Ind_{K\cap\leftindex^gH}^K\Res^{\leftindex^gH}_{K\cap\leftindex^gH}\leftindex^gW,\ f\mapsto(k\mapsto f(kg))$$
+    \begin{itemize}
+        \item We need to check that the image is indeed $K\cap\leftindex^gH$-invariant. Suppose $ghg^{-1}\in K$, then by direct computation
+        \begin{align*}
+            \Theta(f)(kghg^{-1})=f(kghg^{-1}g)=f(kgh)=\rho(h^{-1})\Theta(f)
+        \end{align*}
+        where we used $H$-invariance of $f$ in the last equality.
+        \item We need to check that $\Theta$ is $K$-equivariant. Let $k'\in K$. We compute
+        \begin{align*}
+            (k'\cdot \Theta(f))(k)=f(k'^{-1}kg)=\Theta(k'\cdot f)(k)
+        \end{align*}
+        \item $\Theta$ is injective. Suppose $\Theta(f)=0$, i.e., $f(kg)=0$ for all $k\in K$. Then $f(kgh)=\rho(h^{-1})f(kg)=0$ for all $k\in K$ and all $h\in H$, so $f=0$ as we assumed that $f$ is supported in $KgH$.
+        \item We compute the dimension of these two spaces. By $H$-invariance, each $f\in V_{KgH}$ is uniquely determined by its values on left $H$-coset representatives, i.e., on $\operatorname{Orb}_{K}(gH)$, so 
+        \[\dim V_{KgH}=|\operatorname{Orb}_K(gH)|\dim W=\dfrac{|K|}{|\operatorname{Stab}_K(gH)|}\dim W=\dfrac{|K|}{|K\cap\leftindex^gW|}\dim W\]
+        [Note that $k\in K$ fixes $gH$ iff $k=ghg^{-1}$ for some $h\in H$.]
+        Also,
+        \[\dim\Ind_{K\cap\leftindex^gH}^K\Res^{\leftindex^gH}_{K\cap\leftindex^gH}\leftindex^gW=\dfrac{|K|}{|K\cap\leftindex^gW|}\dim W\]
+    \end{itemize} 
+    Hence, $\Theta$ is an isomorphism of rep.
+\end{proof}
+\begin{crly}[Character version of Mackey's formula]
+Suppose $\chi$ is the character of a rep $W$ of $H$, then 
+    \[\Res^G_K\Ind_H^G\chi=\sum_{KgH\in K\backslash G/H}\Ind_{K\cap\leftindex^gH}^K\leftindex^g\chi\]
+    where $\leftindex^g\chi(x)=\chi(g^{-1}xg)$ for all $x\in K\cap\leftindex^gH$.
+\end{crly}
+\begin{thm}[Mackey's irreducibility criterion]
+    If $H\le G$ and $W$ is a \textbf{complex} rep of $H$, then $\Ind_H^GW$ is irreducible if and only if
+    \begin{itemize}
+        \item $W$ is irreducible and
+        \item for each $g\in G\setminus H$, the two representations $\Res^{\leftindex^gH}_{H\cap\leftindex^gH}\leftindex^gW$ and $\Res^H_{H\cap\leftindex^gH}W$ have no irreducible factors in common, i.e., 
+    \end{itemize}
+\end{thm}
+\begin{proof}
+    Suppose $\chi$ is the character of $W$.
+    \begin{align*}
+        \langle\Ind_H^G\chi,\Ind_H^G\chi\rangle_G&=\langle\chi,\Res^G_H\Ind_H^G\chi\rangle_H\\
+        &=\sum_{HgH\in H\backslash G/H}\langle\chi,\Ind_{H\cap\leftindex^gH}^H\Res^H_{H\cap\leftindex^gH}\chi\rangle_H\\
+        &=\sum_{HgH\in H\backslash G/H}\langle\Res^H_{H\cap\leftindex^gH}\chi,\Res^H_{H\cap\leftindex^gH}\chi\rangle_{H\cap\leftindex^gH}
+    \end{align*}
+    by Frobenius reciprocity and Mackey's formula. $\Ind_H^GW$ is irreducible precisely when the sum above equals $1$. Observe that the term corresponding to $HeH$ is $\langle\chi,\chi\rangle_{H}\ge 1$, so irreducibility is equivalent to 
+    \begin{itemize}
+        \item $\langle\chi,\chi\rangle_H=1$, i.e., $W$ is irreducible and
+        \item all other terms in the sum vanishes.
+    \end{itemize}
+\end{proof}
+The result holds over any algebraically closed field (where character theory exists).
+\begin{crly}
+    If $H\trianglelefteq G$ and $W$ is an irrep of $H$, then $\Ind_H^GW$ is irreducible if and only if $\leftindex^g\chi_W\neq\chi_W$ for all $g\in G\setminus H$.
+\end{crly}
+\begin{proof}
+    Since $H$ is normal, $\leftindex^gH=H$ for all $g\in G$, and $\leftindex^g W$ is irreducible as $W$ is. [We cam compute the character.] The second condition in Mackey's criterion is equivalent to $\leftindex^gW\not\cong W$, i.e., $\leftindex^g\chi_W\neq\chi_W$.
+\end{proof}
 
 \subsection{Frobenius Groups}
+\begin{defn}[Frobenius group]
+    A finite group $G$ is a Frobenius group if it has a transitive action on a set $X$ with $|X|>1$ such that $|X^g|\le 1$ for all $g\neq e$ and $\operatorname{Stab}_G(x)\neq\{e\}$ for some (hence all) $x\in X$.
+\end{defn}
+\begin{lem}
+    A group $G$ is Frobenius if and only if $G$ has a proper subgroup $H$ s.t. $H\cap\leftindex^gH=\{e\}$ for all $g\in G\setminus H$.
+\end{lem}
+\begin{proof}
+    Suppose $G$ is Frobenius, so $G$ acts on a set $X$ in a way described in the definition. Let $H=\operatorname{Stab}_G(x)$ for some $x\in X$, then $\leftindex^gH=\operatorname{Stab}_G(gx)$. Since $|X^g|\le 1$, we must have $|\leftindex^gH\cap H|\le 1$ for all $g\neq e$, so $\leftindex^gH\cap H=\{e\}$.
 
+    Conversely, if such a proper subgroup $H$ exists, then consider the left coset action. It is transitive, and $\operatorname{Stab}_G(gH)=\leftindex^gH\neq \{e\}$ as $H$ is non-trivial. If there exists $g,r,r'\in G$ s.t. $grH=rH$ and $gr'H=r'H$, then $g\in\leftindex^{r'}H\cap\leftindex^rH$, so $g=e$. 
+\end{proof}
+\begin{thm}[Frobenius 1901]
+    Let $G$ be a finite group acting transitively on a set $X$. If each $g\in G\setminus\{e\}$ fixes at most one element of $X$, i.e., $|X^g|\le 1$ for all $g\neq e$, then
+    \[K=\{e\}\cup\{g\in G:X^g=\varnothing\}\]
+    is a normal subgroup of $G$ with $|K|=|X|$
+\end{thm}
+It follows Frobenius groups cannot be simple. The normal subgroup $K$ is called the Frobenius kernel, and the group $H$ (mentioned in the lemma) is the Frobenius complement.
+\begin{proof}
+    
+\end{proof}
+
+\section{Arithmetic Properties of Characters}
+\section{Topological Groups}
 \end{document}
