@@ -1223,7 +1223,34 @@ Define
 \[T=\left\{\begin{pmatrix}
     z&0\\0&z^{-1}
 \end{pmatrix}:z\in S^1\right\}\cong S^1\]
-This subgroup is called a maximal torus in $SU(2)$.
+This subgroup is called a maximal torus in $SU(2)$. We will try to understand the conjugacy classes in $SU(2)$ using this subgroup.
+
+Let \[s=\begin{pmatrix}
+    0&1\\-1&0
+\end{pmatrix}\]
+\begin{lem}
+    \begin{itemize}
+        \item $\forall t\in T$, $sts^{-1}=t^{-1}$
+        \item $N_{SU(2)}(T)=T\cup sT$
+    \end{itemize}
+\end{lem}
+\begin{proof}
+    Straightforward calculation.
+\end{proof}
+\begin{prop}
+\begin{enumerate}
+    \item Every conj. class $\mathcal O$ of $SU(2)$ contains an element of $T$. More precisely, there exists $t\in T$ s.t. $\mathcal O\cap T=\{t,t^{-1}\}$ for all $\mathcal O$.
+    \item There is a bijection
+    \[\{\text{conj. classes of }SU(2)\}\rightarrow[-1,1],\ A\mapsto \dfrac{1}{2}\operatorname{tr}(A)\]
+\end{enumerate}
+\end{prop}
+\begin{proof}
+    To prove $1)$, note that every matrix $A\in SU(2)$ is diagonalizable by unitary transformations, i.e., $\exists P\in U(2)$ s.t. $PAP^\dagger\in T$. [$T$ is precisely the set of all diagonal matrices in $SU(2)$.] Replace $P$ by $Q=\frac{1}{\sqrt{\det P}}P$ (any square root would suffice), then $Q\in SU(2)$. To see that $\mathcal O\cap T=\{t,t^{-1}\}$ for some $t$, we note that the diagonalized matrix is uniquely determined by its e-values, and we know that $sts^{-1}=t^{-1}$. [$T$ parametrizes the conj. classes of $SU(2)$.]
+
+    To see injectivity, if $\operatorname{tr}A=\operatorname{tr} B$, then $A,B$ have the same set of e-values as $\det A=\det B=1$, so the $A,B$ are conjugate by the first part of the proposition. Surjectivity is trivial, just consider the map restricted to $T$.
+\end{proof}
+Based on the above proposition, we introduce some notation for the conj. classes in $SU(2)$.
+Define $\mathcal O_x=\{A\in SU(2):\operatorname{tr}(A)=2x\}$ for some $x\in[-1,1]$.
 
 \section{Characters Table of $\operatorname{GL}_2(\FF_q)$}
 
