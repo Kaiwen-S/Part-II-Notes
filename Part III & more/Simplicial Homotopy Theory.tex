@@ -101,6 +101,11 @@
 \newcommand{\id}{\operatorname{id}}
 \newcommand{\Ind}{\operatorname{Ind}}
 \newcommand{\Res}{\operatorname{Res}}
+\newcommand{\btop}{\mathbf{Top}}
+\newcommand{\bdel}{\mathbf{\Delta}}
+\newcommand{\sing}{\operatorname{Sing}}
+\newcommand{\bset}{\mathbf{Set}}
+\newcommand{\Rmod}{\mathbf{Mod}_R}
 
 \newcommand{\calD}{\mathcal{D}}
 
@@ -112,5 +117,77 @@
 
 \begin{document}
 \maketitle
-\section{}
+\section{Introduction}
+Recall basic notions from category theory
+\begin{defn}
+    A category $\mathscr{C}$ consists of a collection of objects, denoted $\operatorname{ob}(\mathscr C)$, and for each pair of objects $A,B$, a collection of morphisms $\Hom_{\mathscr C}(A,B)$ such that
+    \begin{itemize}
+        \item [(i)] There is an associative composition law of morphisms.
+        \item[(ii)] For each $A\in\operatorname{ob}(\mathscr C)$, there is a distinguished element $\id_A\in\Hom_{\mathscr C}(A,A)$, which is left and right unital.
+    \end{itemize}
+\end{defn}
+\begin{defn}
+    A morphism is called an isomorphism if it has a two-sided inverse.
+\end{defn}
+
+Given a category $\mathscr{C}$, want to classify objects up to isomorphism.
+
+For the purpose of this course, $\mathbf{Top}$ will denote the category  with objects those topological spaces that are homeomorphic to a CW complex. Morphisms are cts functions. Isomorphisms are homeomorphisms. We might attempt to classify objects in $\mathbf{Top}$ up to homeo.
+
+A useful tool is a functor, for every integer $i$ and commutative irng $R$
+\[H_i(-;R):\mathbf{Top}\to\Rmod,\ X\mapsto H_i(X;R)\]
+A key ingredient in the defns of these functors is the study of cts maps from the n-simplex into $X$, as $n$ varies.
+
+There is a factorization of functors.
+\[H_i(-;R):\mathbf{Top}\to \mathbf{HoTop}\to\Rmod\]
+where $\mathbf{HoTop}$ is the full subcategory of $\mathbf{Top}$ obtained by forcing homotopic cts maps to be equal (so an isomoprhism in this category is a htpy equivalence). Homotopy theory is the study of $\mathbf{HoTop}$.
+\begin{rem}
+    Isomorphism classes in $\mathbf{HoTop}$ can be understood via the moduli stack of formal groups and other objects in arithmetic geometry.
+\end{rem}
+
+\textbf{Question: How to think about objects in $\mathbf{HoTop}$ up to isomorphism?}
+
+Roughly, a homotopy type consists of 
+\begin{itemize}
+    \item A collection of objects
+    \item For every pair of objects a collection of isomorphism between them
+    \item For every pair of parallel isomorphism $f,g:A\to B$ a collection of 2-isomorphisms between them.
+\end{itemize}
+\begin{example}
+    The following shows two different homotopy types.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.5\linewidth]{Lent/pictures/htpy_type_example.PNG}
+        \caption{Two different homotopy types}
+        \label{fig:1}
+    \end{figure}
+    On the top, we have a homotopy type consisting of two objects $A, B$ and an isomorphism between them (represented by the edge). This is isomorphic to a single object $A$ as we can (formally) contract the isomorphism to identify equivalent objects. It is also equivalent to a htpy type consisting of $A,B,C,D$ where $B,C,D$ are all isomorphic to $A$ via a unique isomorphism. It is also euqivalent to the htpy type consisting of two objects $A,B$, two isomorphisms $A\to B$ and a 2-isomorphism, i.e., an equivalence of these two isomorphisms.
+
+    On the bottom, we have another homotopy type with two objects and two non-equivalent isomorphisms. We may contract one isomoprhism and get a htpy type of consisting of a single object with an interesting automorphism.
+
+    Sets are homotopy types with no non-trivial isomoprhisms or 2-isomorphisms.
+
+    Groupoids, i.e., categories in which all morphisms are isomorphisms, are homotopy types with no non-trivial 2-isomorphisms and 3-isomorphisms, etc.
+\end{example}
+Given a topological space $X$, there is an associated homotopy type s.t.
+    \begin{itemize}
+        \item points of $X$ are objects. (cts maps from the $0$-simplex)
+        \item paths in $X$ are isomorphisms. (cts maps from the $1$-simplex)
+        \item A cts function $|\Delta^2|\to X$ is a 2-isomorphism. (Regard the map restricted to two edges of $|\Delta^2|$ as a concatenation of paths, then the map is essentially a homotopy rel the boundary of $|\Delta^1|$.)
+    \end{itemize}
+
+\begin{defn}
+    The simplex category $\mathbf{\Delta}$ has 
+    \begin{itemize}
+        \item objects $[n]$ for every integer $n\ge 0$
+        \item A morphism $[n]\to[m]$ is an order preserving function from $\{1\le2\le...\le n\}\to\{1\le 2\le...\le m\}$.
+    \end{itemize}
+\end{defn}
+There is a functor $\mathbf{\Delta}\to\mathbf{Top}$ sending $[n]\mapsto|\Delta^n|$.
+\begin{defn}
+    A simplicial set is a functor $\mathbf{\Delta}^{op}\to\mathbf{Set}$.
+\end{defn}
+\begin{example}
+    If $X$ is a topological space, there is an associated simplicial set $\sing(X):\mathbf{\Delta}^{op}\to \mathbf{Set}$ which sends $[n]$ to the set of continuous functions $|\Delta^n|\to X$.
+\end{example}
 \end{document}

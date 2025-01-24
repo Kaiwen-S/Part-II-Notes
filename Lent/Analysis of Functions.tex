@@ -112,5 +112,36 @@
 
 \begin{document}
 \maketitle
-\section{}
+\section{Review of Basic Concepts}
+q: (Owen's signature)\\
+\subsection{Probmeas}
+\begin{enumerate}
+    \item The Lebesgue measure is inner regular, i.e., for all $A\in B(\RR^n)$, $\mu(A)=\sup\{\mu(K):K\subseteq A,\ K\text{ compact}\}$.
+    \item Recall that $\mu$ extends to the $\mu$-completion of $\mathcal B$, which equals $M_\mu=\{B\cup A: B\in \mathcal B,A\in\mathcal N,\ \mu(A)=0\}$.
+    \item For measurable functions $f:E\to F$, if $(F,\mathcal F)=(\RR,\mathcal B)$ (or $(\CC,\mathcal B)$), then we say that $f$ is Borel. This extends to maps taking values $\pm\infty$ if $f^{-1}({\pm\infty})\in\mathcal E$. If $f$ takes values in $[0,\infty]$, then we say $f\ge 0$ (non-negative).
+    \item Recall MCT and DCT.
+\end{enumerate}
+\subsection{$L^p$-spaces and Approximation}
+For $f:(E,\mathcal E,\mu)\to \RR$ (or $\CC$), define
+\begin{align*}
+    &\|f\|_{L^p}=\left(\int_E |f|^pd\mu\right)^{1/p},\ 1\le p<\infty\\
+    &\|f\|_{L^\infty}=\operatorname{ess}\sup|f|=\int\{\lambda>0:|f|\le \lambda\ \text{a.e.}\}
+\end{align*}
+We use $\|\cdot\|_\infty$ to denote the usual sup-norm. Define $L^p(E,\mu)=\{f:E\to\RR:\text{meas. }\|f\|_{L^p}<\infty\}$
+
+Recall Riesz-Fischer Theorem. Also recall the spaces $C^k(\RR^n)$, the set of all functions on $\RR^n$ with continuous partial derivatives up to order $k$. We note that $C^\infty(\RR^n)=\bigcap_{k\ge 0}C^k(\RR^n)$. Note that this includes unbounded smooth functions. Use subscript $c$ to denote the linear subspaces consisting of compactly supported functions.
+
+\begin{rem}
+    $C_c^\infty(\RR^n)$ is non-empty, e.g.,
+    \begin{align*}
+        \psi(x)=\begin{cases}
+            e^{\frac{1}{|x|^2-1}} & |x|<1\\
+            0 & \text{o/w}
+        \end{cases}
+    \end{align*}
+\end{rem}
+\begin{thm}
+    $C^\infty_c(\RR^n)$ is dense in $L^p(\RR^n,dx)$ for $1\le p<\infty$.
+\end{thm}
+
 \end{document}

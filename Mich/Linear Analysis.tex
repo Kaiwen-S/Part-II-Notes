@@ -580,5 +580,46 @@ Then we are done by Baire.
     \[\forall\epsilon>0,\ \exists\text{ nbd } N\ni x\text{ s.t. }\forall f\in S,\ y\in N\implies |f(x)-f(y)<\epsilon\]
     We say that $S$ is equicontinuous if it is equicontinuous at $x$ for every $x\in K$.
 \end{defn}
+\begin{example}
+    $\{\sin(n+x):n\in\NN\}$ is equicontinuous since $|x-x'|<\epsilon\implies |f(x)-f(x')|<\epsilon$ (MVT + all derivatives $\le 1$). But $\{\sin(nx):n\in\NN\}$ is not equicontinuous at $0$.
+\end{example}
+\begin{thm}[Arzela-Ascoli]
+    Let $K$ be compact Hausdorff and $S\subseteq C(K)$. Then $S$ is compact if and only if $S$ is closed, bounded and equicontinuous.
+\end{thm}
+\begin{proof}
+    `$\Rightarrow$': If $S$ is compact, then it is closed and totally bounded (hence bounded) by IB analysis and topology. Let $\epsilon>0$ be given. Let $x\in K$. Since $S$ is totally bounded, we can find $f_1,...,f_n\in S$ s.t. $S\subseteq \bigcup_{i=1}^nB(f_i,\epsilon)$. For each $i$, $f_i$ is continuous at $x$, so there exists open $U_i$ with $x\in U_i$ s.t. $\forall y\in U_i,\ |f_i(y)-f_i(x)|<\epsilon$. Let $U=\bigcap_{i=1}^n U_i$. Then $U$ is an open nbd of $x$ and $\forall y\in U$ and $\forall i$, $|f_i(y)-f_i(x)|<\epsilon$. But then for any $f\in S$, we have $\|f-f_i\|_\infty<\epsilon$ for some $i$. Therefore $$\forall y\in U,\ |f(y)-f(x)|\le |f(y)-f_i(y)|+|f_i(y)-f_i(x)|+|f_i(x)-f(x)|<3\epsilon$$
 
+    `$\Leftarrow:$': Conversely $S$ is closed, so sufficient to prove total boundedness. Given $\epsilon>0$, we know that $S$ is equicontinuous, so $\forall x\in K$, there exists open $U_x\ni x$ s.t. $\forall f\in S$, $\forall y\in U_x$: $|f(y)-f(x)|<\epsilon$. Then $(U_x)_{x\in K}$ is an open cover of $K$. By compactness of $K$, we can reduce to a fintie subcover, say $K=U_{x_1}\cup...\cup U_{x_n}$. For $f\in S$ define $\hat f\in\RR^n$ by $\hat f=(f(x_1),...,f(x_n))$. $\hat f$ contains all the information of $f$ up to $\epsilon$. Let $\hat S=\{\hat f:f\in S\}\subseteq \RR^n$ equipped with the uniform norm $\|\cdot \|_\infty$. Then $\hat S$ is bounded as $S$ is bounded. Hence $\hat S$ is totally bounded as we are in a finite dimensional space. Hence $\hat S\subseteq B(\hat f_1,\epsilon)\cup...\cup B(\hat f_k,\epsilon)$ for some $f_1,...,f_k\in S$. Then $\forall f\in S$, we have $\hat f\in B(\hat f_r,\epsilon)$ for some $r$, i.e., $|f(x_i)-f_r(x_i)|<\epsilon$ for all $i$. So $\forall x\in K$, we have $x\in U_{x_i}$ for some $i$ so
+    \[|f(x)-f_r(x)|\le|f(x)-f(x_i)|+|f(x_i)-f_r(x_i)|+|f_r(x_i)-f_r(x)|<3\epsilon\]
+    This means that $f\in B(f_1,3\epsilon)\cup...\cup B(f_k,3\epsilon)$, i.e., $S$ is totally bounded.
+\end{proof}
+\begin{rem}
+    \begin{itemize}
+        \item[(i)] Identical proof works for $C_\CC(K)$.
+        \item[(ii)] Above proof shows that $S$ totally bounded iff $S$ bounded and equicontinuous.
+    \end{itemize}
+\end{rem}
+Arz\'ela-Ascoli s often useful in showing that operators to $C(K)$ are compact.
+\begin{example}[Integral Operators]
+    Let $g\in C([0,1]^2)$ be fixed. For $f\in C[0,1]$ define $T(f)\in C[0,1]$ by
+    \[T(f)(x)=\int_0^1g(x,t)f(t)dt\]
+    for $x\in[0,1]$. (e.g. $T(f)(x)=\int_0^1e^{-xt}f(t)dt$)
+    $T:C[0,1]\to C[0,1]$ is the integral operator with kernel $g$. We observe that $T$ is linear and continuous since $|Tf(x)|\le\|g\|_\infty\|f\|_\infty$.
+
+    \textbf{Claim: $T$ is compact}.
+    Proof of claim: Need to show image of unit ball is equicontinuous. Given $\epsilon>0$, there exists $\delta>0$ s.t. 
+    \[|x-x'|<\delta,\ t\in[0,1]\implies |g(x,t)-g(x',t)|<\epsilon\]
+    (This is uniform convergence of $g$)
+    So for $f\in C[0,1]$ with $\|f\|_\infty=1$, we have
+    \[|x-x'|<\delta\implies |Tf(x)-Tf(x')|\le\int_0^1|g(x,t)-g(x',t)||f(t)|dt\le\epsilon\]
+\end{example}
+
+\subsection{Density of $C(K)$}
+Let $K$ be compact Hausdorff.
+\begin{defn}
+    A subalgebra of $C(K)$ is a subspace such that $f,g\in A\implies fg\in A$.
+\end{defn}
+\begin{example}
+    
+\end{example}
 \end{document}

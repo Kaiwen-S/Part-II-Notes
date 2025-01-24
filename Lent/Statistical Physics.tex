@@ -3,8 +3,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath,amsfonts,amssymb,amsthm}
 \usepackage{enumerate,bbm}
-\usepackage{leftindex}
-\usepackage{tikz,tikz-cd,graphicx,color,mathrsfs,color,hyperref,boldline}
+\usepackage{tikz,graphicx,color,mathrsfs,color,hyperref,boldline}
 \usepackage{caption,float}
 \usepackage[a4paper,margin=1in,footskip=0.25in]{geometry}
 
@@ -64,8 +63,8 @@
 \theoremstyle{remark}
 \newtheorem{rem}{Remark}
 \newtheorem{remS}[section]{defn}
-\theoremstyle{plain}
 \newtheorem{lem}[defn]{Lemma}
+\theoremstyle{plain}
 \newtheorem{thm}[defn]{Theorem}
 \newtheorem{prop}[defn]{Proposition}
 \newtheorem{fact}[defn]{Fact}
@@ -96,43 +95,60 @@
 \newcommand{\CC}{\mathbb{C}}
 \newcommand{\PP}{\mathbb{P}}
 \newcommand{\FF}{\mathbb{F}}
-\newcommand{\Hom}{\operatorname{Hom}}
-\newcommand{\im}{\operatorname{im}}
-\newcommand{\id}{\operatorname{id}}
-\newcommand{\Ind}{\operatorname{Ind}}
-\newcommand{\Res}{\operatorname{Res}}
 
 \newcommand{\calD}{\mathcal{D}}
+\newcommand{\id}{\operatorname{id}}
 
 \newcommand{\sol}{\textit{Solution: }}
+\newcommand{\Res}{\operatorname{Res}}
 
-\title{Number Fields}
+\title{Statistical Physics}
 \author{Kevin}
 \date{January 2025}
 
 \begin{document}
 \maketitle
-\section{Section 1}
-(: (\textit{Owen's signature})
-\subsection{What?}
-Field Extension: \(L\vert K\)
+\section{}
+\begin{defn}
+    Isolated system: no exchange of energy/particles with the outside world.
+\end{defn}
+Assume QM, but applied to classical physics.
+Recall Schr\"odinger's eqn $\hat H\psi=E\psi$.
+\begin{defn}
+    A microstate: the actual (quantum) state of the system (max info allowed by QM). ``pure state''
 
+    A macrostate: specify a few macroscopically observable quantities, e.g., energy, volume, temperature, the number of particles, etc.
 
+    A mixed state: probability $p(n)$ for the state $|n\rangle$ (in some basis).
+\end{defn}
+One macrostate $\leftrightarrow$ many microstates. 
 
+The expectation value is 
+\[\langle\hat{\mathcal{O}}\rangle=\sum_np(n)\langle n|\hat{\mathcal O}|n\rangle\]
+Density matrix (combines QM and classical probability)
+\[\rho=\sum_n p(n)|n\rangle\langle n|\]
+Equilibrium: the probability distribution $p(n)$ (or $\rho$) is time-independent.
+
+\textbf{Fundamental Assumption:} For an isolated system in equilibrium, all accessible microstates are equally likely. For now, ``accessible'' $=$ ``same energy $E$''. More precisely, $E<E_n<E+\Delta E$ (there is a small range).
+\begin{defn}
+    Microcanonical ensemble: $\Omega(E)=\#$ of states with energy $E$. So
+    \[p(n)=\begin{cases}
+        1/\Omega(E) & \text{if }E<E_n<E+\Delta E\\
+        0 & \text{otherwise}
+     \end{cases}\]
+\end{defn}
+We can assume that the energy levels form a continuum since they are freely spread and $\Omega(E)$ is large.
 
 \begin{defn}
-    A number field is a subfield $K\subseteq \CC$ s.t. $[K:\QQ]<\infty$.
+    Boltzmann entropy of system (macrostate) is defined as 
+    $S(E)=k_B\ln\Omega(E)$, where $k_B\approx 1.381\times 10^{-23}J/K$ is Boltzmann constant.
 \end{defn}
-Let $\alpha$ be an algebraic number. There exists $f_\alpha\in\QQ[X]$ of minimal positive deg s.t. $f_\alpha(\alpha)=0$. 
-\begin{itemize}
-    \item (monic) min poly: leading coeff 1.
-    \item min poly in $\ZZ[X]$: clearing denominators.
-\end{itemize}
-$[\QQ(\alpha):\QQ]=\deg f_\alpha$. These are all the examples by primitive element theorem.
-\begin{example}
-    Quadratic fields, cyclotomic fields. 
-\end{example}
-\subsection{Why?}
-We don't care... (so why are we here?) idk
+e.g., gas of $10^{23}$ molecules, then $S/k_B\sim 10^{23}$, then $\Omega=e^{S/k_B}\sim 10^{10^{23}}$, so the choice of $\Delta E$ doesn't matter. If $\Delta(E)\mapsto 10^6\Delta E$, then $S\mapsto S+k_B\log(10^6)$. The difference is negligible.
+
+$S$ is additive: consider two (independent and isolated) systems, then $\Omega(E_1,E_2)=\Omega(E_1)\Omega(E_2)$ so $S(E_1,E_2)=S(E_1)+S(E_2)$.
+
+Now assume that these two systems exchange energy, $E^{\text{old}}_1\mapsto E_1$, $E_2^{\text{old}}\mapsto E_2$, $E_{\text{tot}}=E_1^{\text{old}}+E_2^{\text{old}}=E_1+E_2$. Then,
+\[\Omega(E_{\text{tot}})=\sum_{E_i}\Omega_1(E_i)\Omega_2(E_{\text{tot}}-E_i)=\sum_{E_i}\exp\left[\dfrac{S_1(E)}{k}+\dfrac{S_1(E_{\text{tot}}-E_i)}{k}\right]\]
+The system is dominated by $\max S$, so $\Delta S\ge 0$. (2nd Law)
 
 \end{document}

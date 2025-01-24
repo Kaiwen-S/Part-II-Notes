@@ -106,33 +106,66 @@
 
 \newcommand{\sol}{\textit{Solution: }}
 
-\title{Number Fields}
+\title{Logic and Set Theory}
 \author{Kevin}
 \date{January 2025}
 
 \begin{document}
 \maketitle
-\section{Section 1}
-(: (\textit{Owen's signature})
-\subsection{What?}
-Field Extension: \(L\vert K\)
-
-
-
-
+\section{Propositional Logic}
+\((\; :\langle\) (by Owen)
 \begin{defn}
-    A number field is a subfield $K\subseteq \CC$ s.t. $[K:\QQ]<\infty$.
+    The language of propositional logic consists of a set $P$ of primitive propositions and the set $L=L(P)$ of propositions (or compound propositions) built as follows
+    \begin{enumerate}
+        \item[(i)] $P\subseteq L$
+        \item[(ii)] $\bot\in L$ ($\bot$ is called `false' or `bottom')
+        \item[(iii)] If $p,q\in L$, then $(p\Rightarrow q)\in L$.
+    \end{enumerate}
 \end{defn}
-Let $\alpha$ be an algebraic number. There exists $f_\alpha\in\QQ[X]$ of minimal positive deg s.t. $f_\alpha(\alpha)=0$. 
-\begin{itemize}
-    \item (monic) min poly: leading coeff 1.
-    \item min poly in $\ZZ[X]$: clearing denominators.
-\end{itemize}
-$[\QQ(\alpha):\QQ]=\deg f_\alpha$. These are all the examples by primitive element theorem.
 \begin{example}
-    Quadratic fields, cyclotomic fields. 
+    Often $P=\{p_1,p_2,...\}$ (we need a countable infinity supply). Then $(p_1\Rightarrow p_2),\ (\bot\Rightarrow(p_1\Rightarrow p_2)),\ ((p_1\Rightarrow p_2)\Rightarrow(p_1\Rightarrow p_2))\in L$. Also, if $p\in L$, then $((p\Rightarrow \bot)\Rightarrow\bot)\in L$.
 \end{example}
-\subsection{Why?}
-We don't care... (so why are we here?) idk
+\begin{rem}\
+    \begin{itemize}
+        \item The set $L$ is built from $P$ and $\bot$ inductively, which means that $L=\bigcup_{n\in\NN}L_n$, where $L_1=P\cup\{\bot\}$ and for $n\in \NN$, $L_{n+1}=L_n\cup\{(p\Rightarrow q)\colon p,q\in L_n\}$
+        \item Every proposition is a finite string of symbols in the alphabet $P\cup\{\bot,\Rightarrow,(,)\}$. It's easy to check that $L$ is the smallest subset of the set $\Sigma$ of all such strings satsifying (i)-(iii). Note that $L\neq\Sigma$, e.g. $)\Rightarrow p$ is not a proposition.
+        \item Every proposition $p$ is built uniquely using (i)-(iii), i.e., either $p\in P$ or $p=\bot$ or $p=(q\Rightarrow r)$ for some unique $q,r\in L$.
+        \item We will introduce $\wedge,\ \vee$ later.
+    \end{itemize}
+\end{rem}
+\subsection{Semantic Entailment}
+\begin{defn}
+    A valuation on $L$ is a function $v:L\to\{0,1\}$ s.t. 
+    \begin{enumerate}
+        \item[(i)] $v(\bot)=0$
+        \item[(ii)] $v(p\Rightarrow q)=\begin{cases}
+            0 & v(p)=1 \text{ and } v(q)=0\\
+            1 & \text{o/w}
+        \end{cases}$
+    \end{enumerate}
+\end{defn}
+\begin{prop}\
+    \begin{enumerate}
+        \item[(i)] If $v,v'$ are valuations and $v|_P=v'|_P$, then $v=v'$.
+        \item[(ii)] For any function $w:P\to\{0,1\}$, there exists a valuation on $L$ s.t. $v|_P=w$.
+    \end{enumerate}
+\end{prop}
+\begin{proof}\
+    \begin{enumerate}
+        \item[(i)] We have $v(\bot)=v'(\bot)=0$ by definition, so $v|_{L_1}=v'|_{L_1}$. Continue inductively. If $v|_{L_n}=v'|_{L_{n}}$, then for all $p\in L_{n+1}\setminus L_n$, there exists unique $q,r\in L_n$ s.t. $p=(q\Rightarrow r)$. Then $v(q\Rightarrow r)=v'(q\Rightarrow r)$.
+        \item[(ii)] Define $v(p)=w(p)$ for all $p\in P$. Extend $v$ to $L$ inductively.
+    \end{enumerate}
+\end{proof}
+\begin{defn}
+    Let $t\in L$. We say that $t$ is a tautology if $v(t)=1$ for all valuations $v$ on $L$.
+\end{defn}
+\textbf{Notations:}
+\begin{itemize}
+    \item (true/top) $\top=(\bot\Rightarrow\bot)$
+    \item (not) $\neg p=(p\Rightarrow\bot)$
+    \item (or) $p\vee q=(\neg p\Rightarrow q)=((p\Rightarrow\bot)\Rightarrow q)$
+    \item (and) $p\wedge q=\neg (p\Rightarrow\neg q)$
+\end{itemize}
+
 
 \end{document}

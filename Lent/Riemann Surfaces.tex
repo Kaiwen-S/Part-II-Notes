@@ -112,5 +112,67 @@
 
 \begin{document}
 \maketitle
-\section{}
+\section{The Complex Plane}
+): (Owen's signature)
+\subsection{Review of Complex Analysis}
+\begin{itemize}
+    \item A domain $U\subseteq \CC$ is an open (non-empty) and connected (hence path-connected) subset. 
+    \item Disk centered at $z_0$ with radius $r$: $D(z_0,r)$.
+    \item Punctured disk $D'(z_0,r)$.
+\end{itemize}
+If $f:U\to\CC$ is complex-diff, then $\det J=|f'|^2$, where $J$ is the Jacobian of $f$ regarded as a function on $\RR^2$.
+\begin{defn}
+    $f:U\to\CC$, $U$ domain, is holo'c on $U$ if $f$ is $\CC$-diff for all $z_0\in U$.
+\end{defn}
+\begin{thm}[Taylor]
+    If $f$ is holo'c on $U$ and $D(z_0,r)\subseteq U$, then $f(z)=\sum_{n=0}^\infty a_n(z-z_0)^n$ converges on $D(z_0,r)$ with $a_n=f^{(n)}(z_0)/n!$. Then $f$ holo'c on $U$ implies that $f^{(n)}$ holo'c on $U$.
+\end{thm}
+\begin{thm}[Identity theorem]
+    $f,g$ be holo'c on a domain $U$, then either $f\equiv g$ or for all $z_0\in U$ there exists $r>0$ s.t. $f(z)\neq g(z)$ for all $z\in D'(z_0,r)\subseteq U$.
+\end{thm}
+
+Recall that if $f:D'(z_0,r)\to\CC$ is holo'c then $z_0$ is an isolated singularity.
+In this situation we have the (unique) Laurent expansion at $z_0$, $f(z)=\sum_{n=-\infty}^\infty a_n(z-z_0)^n$ on $D'(z_0,r)$.
+\begin{thm}
+    Exactly one occurs
+    \begin{itemize}
+        \item Removable
+        \item Pole
+        \item Isolated essential.
+    \end{itemize}
+\end{thm}
+\begin{defn}
+    $f:U\to\CC$ ($U$ domain) meromorphic if it's holo'c away from poles.
+\end{defn}
+\begin{thm}[Open mapping theorem]
+    $f$ holo'c on a domain $U$. Then $f$ is either constant or an open map.
+\end{thm}
+\begin{crly}[Inverse function theorem]
+    If $f$ is holo'c on a domain, then
+    \begin{enumerate}
+        \item $f$ injective $\implies$ $f^{-1}$ is holo'c with $(f^{-1})'(z)=1/f'(f^{-1}(z))$.
+        \item if $f'(z_0)\neq 0$ for some $z_0\in U$, then there exists an open nbd (nbd will always be open in this course) $N$ of $z_0$ s.t. $f:N\to f(N)$ is biholomorphic (i.e., $f$ and $f^{-1}$ are both holo'c).
+    \end{enumerate}
+\end{crly}
+
+\subsection{Continuation of Power Series}
+\textit{Notation: $\Delta:=D(0,1)$, and $T=\{z\mid |z|=1\}$.}
+
+Suppose we have power series with radius of convergence $R$ (not $0$ or $\infty$) so $f:D(z_0,R)\to\CC$ holo'c. WLOG, assume $R=1$ and power series as domain $\Delta$.
+\begin{defn}
+    A point $z\in T$ is regular if $\exists D(z,r)$ and $g:D(z,r)\to\CC$ holo'c s.t. $f\equiv g$ on $\Delta\cap D(z,r)$. Otherwise, we say that $z$ is singular.
+\end{defn}
+So $z$ being regular means that $f$ can be extended holomorphically to $\bar f$ on $\Delta\cup D(z,r)$.
+\begin{example}
+    \begin{enumerate}
+        \item[(i)] $f(z)=\sum_nz^n$ diverges on $T$ but the $f(z)=1/(1-z)$ means that $T\setminus\{1\}$ are regular points
+        \item[(ii)] Take $f(z)=\sum_{n\ge 2}\frac{z^n}{n(n-1)}$ is absolutely conv. on $T$. Note that $1$ is singular. If it's regular, then $f''$ extends but $f''$ is the geometric series.
+    \end{enumerate}
+\end{example}
+\begin{rem}
+    \begin{enumerate}
+        \item[(i)] The set of regular points is open in $T$.
+        \item[(ii)] For $w\in\Delta$, let $\rho(w)$ be radius of convergence of the Taylor series at $w$. For $z\in T$, have $z$ regular if and only if $\rho(z/2)>1/2$.
+    \end{enumerate}
+\end{rem}
 \end{document}
