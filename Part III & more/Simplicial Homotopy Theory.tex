@@ -176,6 +176,8 @@ Given a topological space $X$, there is an associated homotopy type s.t.
         \item A cts function $|\Delta^2|\to X$ is a 2-isomorphism. (Regard the map restricted to two edges of $|\Delta^2|$ as a concatenation of paths, then the map is essentially a homotopy rel the boundary of $|\Delta^1|$.)
     \end{itemize}
 
+We want to study homotopy types. These can be presented as topological spaces (that are homeo to CW complexes) up to homotopy equivalence. SInce spaces are complicated unwieldy objects, we will seek to describe homotopy types in combinatorial terms. We will desribe homotopy types as special sorts of simplicial sets up to an appropriate notion of equivalence.
+
 \begin{defn}
     The simplex category $\mathbf{\Delta}$ has 
     \begin{itemize}
@@ -183,11 +185,65 @@ Given a topological space $X$, there is an associated homotopy type s.t.
         \item A morphism $[n]\to[m]$ is an order preserving function from $\{1\le2\le...\le n\}\to\{1\le 2\le...\le m\}$.
     \end{itemize}
 \end{defn}
-There is a functor $\mathbf{\Delta}\to\mathbf{Top}$ sending $[n]\mapsto|\Delta^n|$.
+There is a functor $\mathbf{\Delta}\to\mathbf{Top}$ sending $[n]\mapsto|\Delta^n|$. This is a good way to visualize $\bdel$. We introduce some special notations for certain morphisms in $\bdel$.
+\begin{itemize}
+    \item Face maps: $\delta^i:[n-1]\to[n]$ is the order preserving injection that omits $i$.
+    \item Degeneracy maps: $\sigma^i:[n+1]\to[n]$ is the order preserving surjection that hits $i$ twice.
+\end{itemize}
+\begin{rem}
+    Every morphism in $\bdel$ is a composite of face and degeneracy maps.
+\end{rem}
+
 \begin{defn}
-    A simplicial set is a functor $\mathbf{\Delta}^{op}\to\mathbf{Set}$.
+    A simplicial set is a functor $\mathbf{\Delta}^{op}\to\mathbf{Set}$. A morphism of simplicial sets is a natural transformation. There is a category of simplicial sets, denoted $s\bset$.
 \end{defn}
+Explicitly, a simplicial set $X:\bdel^{op}\to \bset$ is a collection of sets $X_0,X_1,X_2,...$, where $X_i=X([i])$ with maps of sets $d_0,...,d_n:X_n\to X_{n-1}$ and $s_0,...,s_n:X_{n}\to X_{n+1}$ satisfying the following simplicial identities:
+\begin{align*}
+    &d_id_j=d_{j-1}d_i,\ \ i<j\\
+    &d_is_j=s_jd_{i-1},\ \ i<j\\
+    &d_is_j=s_{j}d_{i+1},\ \ i>j+1\\
+    &s_is_j=s_{j+1}s_i,\ \ i<j
+\end{align*}
 \begin{example}
-    If $X$ is a topological space, there is an associated simplicial set $\sing(X):\mathbf{\Delta}^{op}\to \mathbf{Set}$ which sends $[n]$ to the set of continuous functions $|\Delta^n|\to X$.
+    If $X$ is a topological space, there is an associated simplicial set $\sing(X):\mathbf{\Delta}^{op}\to \mathbf{Set}$ which sends $[n]$ to the set of continuous functions $|\Delta^n|\to X$. So $\sing(X)_n=\Hom_{\btop}(|\Delta^n|,X)$.
 \end{example}
+\begin{rem}
+    Not every simplicial set is $\sing$ of some topological space. $C_\ast^{\sing}(X;R)$ depends only on $\sing(X)$.
+\end{rem}
+
+\begin{defn}
+    For every integer $n\ge 0$, there is a simplicial set denoted $\Delta^n$ defined as $(\Delta^n)_m=\Hom_\bdel([n],[m])$.
+\end{defn}
+Yoneda lemma implies that $\Hom_{s\bset}(\Delta^n,X)\cong X_n$ as sets for any simplicial set $X$.
+\begin{rem}
+    If $\mathscr{C}$ is any (small) category, the category of presheaves on $\mathscr C$ is the category of functors $\mathscr C^{op}\to\bset$. The Yoneda embedding is a functor $y:\mathscr C\to\operatorname{Psh}(\mathscr C),\ c\mapsto (c'\mapsto \Hom_{\mathscr C}(c',c))$.
+
+    In this particular situation, $s\bset=\operatorname{Psh}(\bdel)$ and $\Delta^n=y([n])$.
+\end{rem}
+\begin{rem}
+    Another feature of presheaf categories is that any $X\in\operatorname{Ob}(\operatorname{Psh}(\mathscr C))$ can be written as a colimit of objects in the image of the Yoneda embedding. We will appl this to $s\bset$.
+\end{rem}
+Let $I$ denotes the category with objects maps $\Delta^n\to X$ for any $n$ and morphisms commuting diagrams:
+\begin{center}
+    % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRAB12ARGBnOgHqEAvqXSZc+QigCM5KrUYs2ADQD6nAEZMGDGDhCjx2PASJkZC+s1aIO3XvwEBbQwphQA5vCKgAZgBOEK6IZCA4EEgATNTWyohgOgzUDHSavAAKEqbSIHp+BkYggcFIYRFIcoo2SIm6KWmZ2VJs+YVixUEhMeGRiFVxtnXJeY0MWSYtdm1uwkA
+\begin{tikzcd}
+\Delta^n \arrow[d] \arrow[r] & X_\bullet \\
+\Delta^m \arrow[ru]          &          
+\end{tikzcd}
+\end{center}
+
+Now consider the functor $I\to\bdel$, $(\Delta^n\to X_\bullet)\mapsto [n]$. Compose this with the Yoneda functor $y:\bdel\to s\bset$. We then get a functor $F:I\to s\bset$. Then $X_\bullet=\operatorname{colim}(F)$.
+
+
+\begin{defn}
+    Geometric realization is a functor $|\cdot |:s\bset\to\btop$.
+\end{defn}
+\begin{rem}
+    It is the unique colimit preserving functor taking $\Delta^n$ to $|\Delta^n|$. (The previous discussion shows that if such functor exists then it's unique) We will construct this functor later.
+\end{rem}
+This functor will allow us to visualize simplicial sets constructed by combinatorial means.
+\begin{defn}
+    For every $n\ge0$, $\partial\Delta^n$ is a simplicial set with $(\partial \Delta^n)_m=\Hom_{s\bset}(\Delta^n,\partial\Delta^n)=\{\alpha:[m]\to[n]:\text{not surjective}\}$.
+\end{defn}
+
 \end{document}

@@ -113,6 +113,45 @@
 \begin{document}
 \maketitle
 \section{Review of Metric Spaces}
-...
-Notation: open ball of radius $\delta$: $B_\delta(x)$.
+Notation: open ball of radius $\delta$ will be denoted $B_\delta(x)$.
+
+Revised some results about metric spaces.
+
+A proof of IVT using a compactness argument:
+\begin{lem}[Discrete IVT]
+    Let $f:\{0,1,...,n\}\to\RR$ with $f(0)<0$ and $f(n)\ge 0$, then $\exists m$ s.t. $f(m-1)<0$, $f(m)\ge 0$.
+\end{lem}
+\begin{proof}
+    Can prove it using WOP.
+
+    Alternatively (an idea which will be useful later), define $g:\{0,...,n\}\to\RR$ by $g(m)=1$ if $f(m)\ge 0$ and $0$ if $f(m)<0$. Then $g(n)-g(0)=\sum_n(g(m)-g(m-1))$, so there exists $g(m)-g(m-1)>0$, and we are done. 
+\end{proof}
+Now can prove IVT. $F:[a,b]\to\RR$, $F(a)<0,\ F(b)>0$, consider $f_n:\{0,...,n\}\to\RR$ defined by $f_n(m)=F(a+\frac{m}{n}(b-a))$. Apply lemma, get a sequence $x_n$ s.t. $F(x_n)\ge 0$ and $F(x_n-(b-a)/n)<0$. Apply Bolzano-Weierstrass.
+
+\begin{thm}[Brouwer's fixed point theorem in one dimension]
+    If $f:[a,b]\to[a,b]$ cts, then $f$ has a fixed point.
+\end{thm}
+This is a trivial consequence of IVT.
+
+\begin{rem}
+    In fact, Brouwer's fixed point theorem in one dimension is equivalent to IVT.
+\end{rem}
+
+We will generalize this result.
+
+\begin{thm}[2D Brouwer's fixed point theorem]
+    Any continuous self maps of $D^2$ has a fixed point.
+\end{thm}
+\begin{thm}[No retraction theorem]
+    There is no retraction $D^2\to \partial D^2$
+\end{thm}
+\begin{thm}
+    Let $T$ be a (closed solid) triangle with sides $I_1,I_2,I_3$. Let $A,B,C$ be closed subsets of $T$ s.t. $I_1\subseteq A$, $I_2\subseteq B$, and $I_3\subseteq C$ and $A\cup B\cup C=T$. Then $A\cap B\cap C\neq\varnothing$.
+\end{thm}
+\begin{thm}[No quasi-retraction theorem]
+    There is no continuous function $f:T\to\partial T$ s.t. $\forall x\in I_j$, $f(x)\in I_j$.
+\end{thm}
+
+We will prove that these four theorems are all equivalent.
+
 \end{document}
