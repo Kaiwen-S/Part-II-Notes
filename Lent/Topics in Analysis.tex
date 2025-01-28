@@ -139,19 +139,31 @@ This is a trivial consequence of IVT.
 
 We will generalize this result.
 
-\begin{thm}[2D Brouwer's fixed point theorem]
-    Any continuous self maps of $D^2$ has a fixed point.
-\end{thm}
-\begin{thm}[No retraction theorem]
-    There is no retraction $D^2\to \partial D^2$
-\end{thm}
 \begin{thm}
-    Let $T$ be a (closed solid) triangle with sides $I_1,I_2,I_3$. Let $A,B,C$ be closed subsets of $T$ s.t. $I_1\subseteq A$, $I_2\subseteq B$, and $I_3\subseteq C$ and $A\cup B\cup C=T$. Then $A\cap B\cap C\neq\varnothing$.
+    TFAE,
+    \begin{enumerate}
+        \item[(a)] Any continuous self maps of $D^2$ has a fixed point. (2D Brouwer's fixed point theorem)
+        \item[(b)] There is no retraction $D^2\to \partial D^2$. (No retraction theorem)
+        \item[(c)] Let $T$ be a (closed solid) triangle with sides $I_1,I_2,I_3$. Let $A_1,A_2,A_3$ be closed subsets of $T$ s.t. $I_j\subseteq A_j$ and $A_1\cup A_2\cup A_3=T$. Then $A_1\cap A_2\cap A_3\neq\varnothing$.
+        \item[(d)] There is no continuous function $f:T\to\partial T$ s.t. $\forall x\in I_j$, $f(x)\in I_j$. (No quasi-retraction theorem)
+    \end{enumerate}
 \end{thm}
-\begin{thm}[No quasi-retraction theorem]
-    There is no continuous function $f:T\to\partial T$ s.t. $\forall x\in I_j$, $f(x)\in I_j$.
-\end{thm}
+\begin{proof}
+    (a)$\Rightarrow$(b): Suppose (b) fails and $f:D\to\partial D$ is a retraction. Let $\sigma\neq\id$ be a non-trivial rotation about $(0,0)$. Then $\sigma\circ f:D\to D$ is continuous and has no fixed points. Contradiction.
 
-We will prove that these four theorems are all equivalent.
+    (b)$\Rightarrow$(a): standard proof of Brouwer's fixed point theorem from no retraction theorem. Construct a retraction by mapping $x\in D$ to the intersection of the ray from $f(x)$ to $x$ with $\partial D$. 
+
+    (a)$\Rightarrow$(d): Suppose (d) fails. Take $T$ to be an equilateral triangle with vertices $1,\omega,\omega^2\in\CC$ (cube roots of unity). For each polar angle $\theta$, define $\rho(\theta)=d(0,x)$, where $x$ is the point on $\partial T$ with argument $\theta$. $\rho$ is cts in $\theta$ and $1/2\le\rho(\theta)\le 1$ for all $\theta$. Define $\varphi:D\to T$, $\varphi(z)=\rho(\theta)z$ if $z\in\rho(\theta) e^{i\theta}$ This is a homeomorphism. $\varphi(\partial D)=\partial T$. Now let $g:D\to D$, $g=\varphi^{-1}\circ f\circ\varphi$. Then $\varphi^{-1}(I_j)$ is a $2\pi/3$ radian arc of $\partial D$. If $x\in\varphi^{-1}(I_j)$ and $\varphi(x)\in I$, then $f(\varphi(x))\in I_j$, so $g(x)=\in\varphi^{-1}(I_j)$. Also $x\in D$, have $\varphi(x)\in T\Rightarrow f(\varphi(x))\in\partial T\Rightarrow g(x)\in\partial D$. Let $\pi$ be the antipodal map, then $\pi\circ g$ has no fixed points.
+
+    (c)$\Rightarrow$(d): Suppose $f:T\to\partial T$ is a quasi-retraction. Let $A_j=f^{-1}(I_j)$ for $j=1,2,3$. These are closed subsets of $T$ and $A_1\cup A_2\cup A_3=T$. Since $I_1\cap I_2\cap I_3=\varnothing$, we deduce that $A_1\cap A_2\cap A_3=\varnothing$, which contradicts (c).
+
+    (d)$\Rightarrow$(c): Choose a convenient triangle. Let $T=\{(x,y,z)\in\RR^3: x,y,z\ge 0,\ x+y+z=1\}$. This is the standard 2-simplex spanned by $e_1,e_2,e_3$. Let $I_j=\langle e_k:k\neq j\rangle$. If (c) fails, then we can find $A_j$, $j=1,2,3$ with $I_j\subseteq A_j$, $\bigcup_j A_j=T$, and $\bigcap_jA_j=\varnothing$. Define
+    \[f(x)=\dfrac{(d(x,A_1),d(x,A_2),d(x,A_3)}{\sum_jd(x,A_j)}\]
+    Note that $A_j$ is closed and bounded for all $j$, so each $d(x,A_j)$ is finite, and $\bigcap_jA_j=\varnothing$ ensures that the denominator is never $0$. $f$ is also cts. If $x\in I_j\subseteq A_j$, then $d(x,A_j)=0$, then $f(x)\in I_j$, so $f(I_j)\subseteq I_j$. Contradiction.
+
+    (d)$\Rightarrow$(b): Suppose (b) fails, i.e., we can find a retraction $f:D\to\partial D$. Recall the homeomorphism $\varphi:D\to T$ from an earlier part of the proof. Let $g=\varphi\circ f\circ\varphi^{-1}$, then $g:T\to \partial T$ is continuous. If $x\in T$, then $f(\varphi^{-1}(x))\in\partial D$, then $g(x)\in\partial T$. If $x\in\partial T$, then $\varphi^{-1}(x)\in\partial D$, then $f(\varphi^{-1}(x))=\varphi^{-1}(x)$, so $g(x)=x$. In particular, $g$ is a quasi-retraction.
+\end{proof}
+
+
 
 \end{document}

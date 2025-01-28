@@ -175,4 +175,44 @@ So $z$ being regular means that $f$ can be extended holomorphically to $\bar f$ 
         \item[(ii)] For $w\in\Delta$, let $\rho(w)$ be radius of convergence of the Taylor series at $w$. For $z\in T$, have $z$ regular if and only if $\rho(z/2)>1/2$.
     \end{enumerate}
 \end{rem}
+\begin{thm}
+    If $f(z)=\sum_{n\ge 0} a_nz^n$ has r.o.c. $1$, then there is a singular point on $T$.
+\end{thm}
+\begin{proof}
+    If not, then for all $w\in T$, $\exists r_w>0$ s.t. $f$ can be extended holomorphically to $f_w$ on $\Delta\cup D(w,r_w)$. Note that $D(w,r_w)\cap D(w',r_{w'})$ is convex (if non-empty). Let $F:\Delta\cup\bigcup_{w\in T}D(w,r_w)\to\CC$ be the extension of $f$. $F$ is well-defined. If $z\in D(w,r_w)\cap D(w',r_{w'})$ then $f_w,f_{w'}$ both holo'c on $D(w,r_w)\cap D(w',r_{w'})\cup\Delta$. By identity theorem, they agree. Now, we note that the domain of $F$ includes $D(o,R)$ for some $R>1$. (If not, take $z_n$ with $1|z_n|<1+1/n$) and $z_n\not\in\operatorname{dom}(F)$, then by sequential compactness, get a contradiction.) Contradiction with r.o.c being $1$.
+\end{proof}
+\begin{crly}
+    If $a_n\ge0$ for all $n$, then $1$ is singular.
+\end{crly}
+\begin{proof}
+    For $z\in T$ and each $k$, we have $f^{(k)}(z/2)=\sum_{n=k}^\infty n(n-1)...(n-k+1)a_n(z/2)^{n-k}$. So $|f^{(k)}(z/2)|\le |f^{(k)}(1/2)|$, so $\rho(z/2)\ge \rho(1/2)$. If $\rho(1/2)>1/2$, then all $z\in T$ is regular. Contradiction.
+\end{proof}
+
+\subsection{Complex Logarithm}
+Notation: $L_\theta=\{re^{i\theta}:r\ge 0\}$.
+\begin{defn}
+    For any $\alpha\in\RR$, define $\log_\alpha:\CC\setminus L_{\alpha+\pi}\to\CC$ as $\log_\alpha(re^{i\theta})=\ln r+i\theta$, where $\theta\in(\alpha-\pi,\alpha+\pi)$.
+\end{defn}
+
+\subsection{Analytic Continuation (Plane)}
+Let $D$ be a fixed domain of $\CC$.
+\begin{defn}
+    A function element of $D$ is a pair $(f,U)$, where $U$ is a subdomain $(\subseteq D)$ and $f$ is a holo'c function defined on $U$.
+\end{defn}
+\begin{defn}
+    Let $(f,U)$ and $(g,V)$ be function elements of $D$. Say $(g,V)$ is a direct analytic continuation of $(f,U)$ if $U\cap V\neq\varnothing$ and $f\equiv g$ on $U\cap V$.
+\end{defn}
+\begin{rem}
+    The relation of being direct analytic continuation is relfexive and symmetric but not transitive. For instance, $f=\log_{\pi/2}$ on its domain, $g=\log_0$ on the right half plane, $h=\log_{-\pi/2}$ on its domain.
+\end{rem}
+\begin{defn}
+    $(g,V)$ is an analytic continuation of $(f,U)$ along some path $\gamma$ if there exists function elements $(f, U)=(f_1,U_1), (f_2,U_2),...,(f_n,U_n)=(g,V)$ and a dissection $\{t_0=0\le t_1\le...\le t_n=1\}$ s.t. $(f_{i+1},U_{i+1})$ is a direct analytic continuation of $(f_i, U_i)$ and $\gamma([t_{i-1},t_i])\subseteq U_i$. Write $(f,U)\approx (g,V)$.
+
+    An equivalence class $\mathfrak F$ is called a complete analytic function of $D$.
+\end{defn}
+Note that if $(g,V)$ and $(h,V)$ are both analytic continuations of $(f,U)$ along the \textbf{same} path $\gamma$, then $g\equiv h$ on $V$. (See ES1 or later).
+
+\begin{rem}
+    Can do the same for meromorphic continuation.
+\end{rem}
 \end{document}

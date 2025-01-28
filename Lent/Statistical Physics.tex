@@ -148,7 +148,25 @@ e.g., gas of $10^{23}$ molecules, then $S/k_B\sim 10^{23}$, then $\Omega=e^{S/k_
 $S$ is additive: consider two (independent and isolated) systems, then $\Omega(E_1,E_2)=\Omega(E_1)\Omega(E_2)$ so $S(E_1,E_2)=S(E_1)+S(E_2)$.
 
 Now assume that these two systems exchange energy, $E^{\text{old}}_1\mapsto E_1$, $E_2^{\text{old}}\mapsto E_2$, $E_{\text{tot}}=E_1^{\text{old}}+E_2^{\text{old}}=E_1+E_2$. Then,
-\[\Omega(E_{\text{tot}})=\sum_{E_i}\Omega_1(E_i)\Omega_2(E_{\text{tot}}-E_i)=\sum_{E_i}\exp\left[\dfrac{S_1(E)}{k}+\dfrac{S_1(E_{\text{tot}}-E_i)}{k}\right]\]
-The system is dominated by $\max S$, so $\Delta S\ge 0$. (2nd Law)
+\[\Omega(E_{\text{tot}})=\sum_{E_i}\Omega_1(E_i)\Omega_2(E_{\text{tot}}-E_i)=\sum_{E_i}\exp\left[\dfrac{S_1(E_i)}{k}+\dfrac{S_1(E_{\text{tot}}-E_i)}{k}\right]\]
+The system is dominated by $\max S$, so $\Delta S\ge 0$. (2nd Law: in an isolated system, $dS/dt\ge 0$, i.e., the entropy is non-decreasing w.r.t. time) Note that in a non-isolated system, e.g. earth, the total entropy is increasing.
+
+\textbf{Why?} (not because there are more high $S$ states than low $S$ states since can't get time-asymmetric conclusion without time-asymmetric assumption.) 
+Micro-laws of physics are reversible (can play backward in time).
+To justify the 2nd law, need to assume that the universe began in low $S$ state. Observation suggests that this is true in big bang cosmology. This time asymmetry + micro-reversibility + memoryless property $\Rightarrow$ 2nd law.
+
+``Coarse-graining'': some procedure to replace state (e.g. $p_2$ in $M_2$) with a higher entropy random state.
+
+
+Return to the 2nd law and maximize. Set $E_1=E$, $E_2=E_{\text{tot}}-E$. Maximized for $E_1=E_\ast$ if
+\[\dfrac{d}{dE_1}(S_1(E_1)+S_2(E_2))=\left[\dfrac{dS_1}{dE}-\dfrac{dS_2}{dE}\right]_{E=E_\ast}=0\]
+(in equilibrium)
+
+\begin{defn}
+    Temperature $T=\dfrac{\partial S}{\partial E}$
+\end{defn}
+So $T_1=T_2$ in equilibrium. If small energy transfer happens $\delta E_1=-\delta E_2$, then
+\[\delta S\approx \dfrac{dS_1}{dE}\Bigg|_{E_1}\delta E_1+\dfrac{dS_2}{dE}\Bigg|_{E_2}\delta E_2=\left(\dfrac{1}{T_1}-\dfrac{1}{T_2}\right)\delta E_1\]
+By 2nd law, $\delta S\ge0$. If $T_1>T_2$, then $\delta E_1<0$, which implies that energy flows from hot to cold. Will evaluate $T$ for ideal gas later.
 
 \end{document}

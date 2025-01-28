@@ -114,7 +114,7 @@
 \maketitle
 \section{Section 1}
 (: (\textit{Owen's signature})
-\subsection{What?}
+\subsection*{What?}
 Field Extension: \(L\vert K\)
 
 
@@ -132,7 +132,54 @@ $[\QQ(\alpha):\QQ]=\deg f_\alpha$. These are all the examples by primitive eleme
 \begin{example}
     Quadratic fields, cyclotomic fields. 
 \end{example}
-\subsection{Why?}
+\subsection*{Why?}
 We don't care... (so why are we here?) idk
+
+\[);\models\tag{Owen's Signature}\]
+
+\begin{defn}
+    An algebraic number $\alpha$ is an algebraic integer if $f_\alpha\in\ZZ[X]$ (i.e., its monic minimal polynomial has integer coefficient)
+\end{defn}
+\begin{rem}
+    If $\alpha$ is a root of a monic poly $f\in\ZZ[X]$, then $\alpha$ is an algebraic integer.
+\end{rem}
+\begin{example}
+    Let $K=\QQ(\sqrt m)$
+    If $m\not\equiv 3\pmod 4$, then $\mathcal O_K=\ZZ[\sqrt m]$. If $m\equiv 1\pmod 4$, then $\mathcal O_K=\ZZ[(1+\sqrt m)/2]$.
+
+    For cyclotomic field $K=\QQ(\theta_n)$, $n\ge 3$, $\mathcal O_K=\ZZ[\theta_m]$. (We will prove this for $n$ prime later.)
+\end{example}
+\begin{thm}
+    The set of algebraic integers $\mathcal{O}$ is a ring.
+\end{thm}
+Notation: We write $\mathcal{O}_K=K\cap\mathcal O$ for $K$ number field, and we call $\mathcal O_K$ the ring of integers in $K$.
+\begin{proof}
+    GRM ES4.s
+\end{proof}
+\begin{table}[H]
+    \centering
+    \begin{tabular}{c|c|c}
+         0&$\longleftarrow^\bullet$ & $\overline\longrightarrow$ \\
+         \hline
+         $\leftrightarrow$&O &\\
+         \hline
+        \(\tilde{\mathcal{O}}\) & &\(\overset{\circ}{\chi}\)
+    \end{tabular}
+    \caption{Noughts and Arrows}
+    \label{tab:my_label}
+\end{table}
+
+\begin{prop}
+    Let $\alpha\in\CC$ be an algebraic number. TFAE,
+    \begin{enumerate}[(1)]
+        \item[(1)] $\alpha$ is an algebraic integer;
+        \item $\ZZ[\alpha]$ is f.g. as a $\ZZ$-module
+        \item $\exists$ a f.g. $\ZZ$-module $M$ that is invariant under multiplication by $\alpha$.
+        \item
+    \end{enumerate}
+\end{prop}
+\begin{proof}
+    (1)$\Rightarrow$(2)$\Rightarrow$(3) is clear. Need to prove (3)$\Rightarrow$(1). Let $M=\ZZ\beta_1\oplus...\oplus \ZZ\beta_k$ be a module satisfying (3). Left multiplication by $\alpha$ is $\ZZ$-linear. Let $A$ be the matrix, then take the char poly of $A$.
+\end{proof}
 
 \end{document}

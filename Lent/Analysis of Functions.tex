@@ -144,4 +144,47 @@ Recall Riesz-Fischer Theorem. Also recall the spaces $C^k(\RR^n)$, the set of al
     $C^\infty_c(\RR^n)$ is dense in $L^p(\RR^n,dx)$ for $1\le p<\infty$.
 \end{thm}
 
+\[\langle\text{-}:\tag{Owen's signature}\]
+
+We admit the following lemma from PM.
+\begin{lem}
+    $C_c(\RR^n)$ is dense in $L^p$, $1\le p<\infty$.
+\end{lem}
+Recall convolution and basic properties including commutativity, associativity, and $\int_{\RR^n}f\ast gdx=\int_{\RR^n}f\int_{\RR^n}g$ (translation invariance and Fubini).
+
+Recall multi-index notation $\alpha\in\ZZ_+^n$ is written as $\alpha=(\alpha_1,...,\alpha_n)$ with order $|\alpha|=\alpha_1+...+\alpha_n$ and we set $\alpha!=\alpha_1!\cdots\alpha_n!$, and for $x\in\RR^n$, we write $x^\alpha=x_1^{\alpha_1}\cdots x_n^{\alpha_n}$, so the partial differential operator becomes
+\[D^\alpha=\dfrac{\partial^{|\alpha|}}{\partial x^\alpha}=\dfrac{\partial^{|\alpha|}}{\partial x_1^{\alpha_1}...\partial x_n^{\alpha_n}}\]
+In particular $D_i=D^{(0,...,1,0,...,0)}$
+\begin{thm}
+    Let $f\in L^1_{\text{loc}}$ (i.e., $f1_K\in L^1$ for any $K\subseteq\RR^n$ compact), and $g\in C^k_c(\RR^n)$. Then $f\ast g\in C^k(\RR^n)$ and for all $0\le|\alpha|\le k$, we have
+    \[D^\alpha(f\ast g)=f\ast(D^\alpha g)\]
+\end{thm}
+\begin{proof}
+    Recall the translation operator $\tau_zh=h(\bullet-z)$, $z\in\RR^n$. Then for all $u\in\RR^n$,
+    \[\tau_z(f\ast g)(x)=\int_{\RR^n}g(x-u-y)f(y)dy\]
+    Since $g\in C_c(\RR^n)$ we have $|g(x-u-y)|\le\|g\|_\infty1_K$ for all $|u|\le 1$, where $K=K_{x,g}$ is a compact set, so tht $\|g\|_\infty1_K|f|$ gives an integrable upper bounde for the integrand. Since $g(x-u-y)\to g(x-y)$ as $u\to 0$, we have pointwise convergence. Apply DCT, we see that $f\ast g$ is cts.
+
+    Now for $k=1$, we define difference operators $\forall e_i$ (standard basis vector) by $\Delta^i_hg(z)=\frac{g(z+he_i)-g(z)}{h}$ which converges to $D_ig(z)$. We can write
+    \begin{align*}
+        \Delta_h^i(f\ast g)(x)=\int_{\RR^n}\Delta_h^ig(x-y)f(y)dy
+    \end{align*}
+    Apply mean value inequality, get $|\Delta_h^ig(x-y)|\le\|D_ig\|_\infty1_K$. Apply DCT, $\Delta_h^i(f\ast g)\to f\ast(D_ig)$, which is continuous, so $f\ast g\in C^1$. Induction...
+\end{proof}
+\begin{prop}[Continuity of translation in $L^p$]
+    Let $1\le p<\infty$. Then $\|\tau_zf-f\|_{L^p}\to 0$ as $z\to 0$ for all $f\in L^p$.
+\end{prop}
+\begin{proof}
+    Hold for cts functions with compact support. Then apply $\epsilon/3$-argument.
+\end{proof}
+\begin{thm}[Minkowski's inequality for integrals]
+    Let $F:\RR^n\times\RR^n\to\RR$ be a measurable non-negative or $dx\otimes dx$-integrable function. Then
+    \[\left\|\int_{\RR^n}F(x,\cdot)dx\right\|_{L^p}\le\int_{\RR^n}\|F(x,\cdot)\|_{L^p}dx\]
+\end{thm}
+\begin{proof}
+    Example sheet.
+\end{proof}
+\begin{thm}[Mollification/Approximate identity]
+    Let $\varphi\in C_c^\infty(\RR^n)$ be non-negative s.t. $\int_{\RR^n}\varphi(x)dx=1$. Define $\varphi_\epsilon^{-n}\varphi(\cdot/\epsilon)$, $\epsilon>0$. Then for $1\le p<\infty$ and any $f\in L^p$,
+    \[\|f-\varphi_\epsilon\ast f\|_{L^p}\overset{\epsilon\to0}{\longrightarrow} 0\]
+\end{thm}
 \end{document}

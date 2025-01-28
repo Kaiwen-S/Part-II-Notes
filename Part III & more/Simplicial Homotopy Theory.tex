@@ -239,11 +239,94 @@ Now consider the functor $I\to\bdel$, $(\Delta^n\to X_\bullet)\mapsto [n]$. Comp
     Geometric realization is a functor $|\cdot |:s\bset\to\btop$.
 \end{defn}
 \begin{rem}
-    It is the unique colimit preserving functor taking $\Delta^n$ to $|\Delta^n|$. (The previous discussion shows that if such functor exists then it's unique) We will construct this functor later.
+    It is the unique colimit preserving functor taking $\Delta^n$ to $|\Delta^n|$. (The previous discussion shows that if such functor exists then it's unique) We will construct this functor later :).
 \end{rem}
 This functor will allow us to visualize simplicial sets constructed by combinatorial means.
+\begin{rem}
+    If $X$ is a nice top. space, then $\sing(X)$ is a combinatorial model for the htpy type of $X$.
+    Similarly, if $Y$ is a ``nice'' simplicial set, then $|Y|$ is a top. model for the htpy type of $Y$. In particular, if $X$ is a nice space then $|\sing(X)|$ is htpy equivalent to $X$.
+\end{rem}
+\begin{example}
+    For every $n\ge0$, $\partial\Delta^n$ is a simplicial set with $(\partial \Delta^n)_m=\Hom_{s\bset}(\Delta^n,\partial\Delta^n)=\{\alpha:[m]\to[n]:\text{not surjective}\}$. There is a canonical map $\partial\Delta^n\to\Delta^n$
+\end{example}
+\begin{prop}
+    The geometric realization $|\partial\Delta^n\to\Delta^n|$ is the inclusion of the boundary of the standard $n$-simplex.
+\end{prop}
+\begin{proof}
+    If $n=1$, then any non-surjective order preserving function is constantly $0$ or $1$.
+
+    If $n\ge 2$, then we have
+    \[\partial \Delta^n=\operatorname{colim}\left(\coprod_{0\le i<j\le n}\Delta^{n-2}\overset{\rightarrow}{\rightarrow}\coprod_{0\le i\le n}\Delta^{n-1}\right)\]
+\end{proof}
+\begin{example}
+    For $n\ge1$ and $-\le i\le n$, we define $\Lambda_i^n$, the $i$th horn in $\Delta^n$ to send $[m]$ to the set of order-preserving functions $\{0\le1\le...\le m\}\to\{0\le 1\le...\le n\}$ such that $\im(\alpha)\supsetneq\{0\le...\le i-1\}\cup\{i+1\le...\le n\}$.
+    
+    There is a natural map $\Lambda_i^n\to\partial\Delta^n$. The geometric realization is hte inclusion of the $i$th horn.
+\end{example}
+
+\begin{prop}
+    Suppose $X$ is a topological space. For every $n\ge 1$, $0\le i\le n$ and cts map $|\Lambda_i^n\to X|$, there exists a commuting diagram in $\btop$.
+    \begin{center}
+        % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRAB8AdTgGToFsARlDoB9LAD0w7EAF9S6TLnyEUARnJVajFmwAachSAzY8BImTVb6zVog7cAIjAY46UmbK0woAc3hEoABmAE4Q-EhkIDgQSBratkhgTAwM1Ax0gi4ACkpmqiAMMEE4hsFhEYhRMUgATNQ2uojJqemZOXkqbEUlZSCh4XXUNYjxjXYtaYXtDLmmXfY9pelYYHYgInAAFj5yFLJAA
+\begin{tikzcd}
+\vert\Lambda_i^n\vert \arrow[r] \arrow[d] & X \\
+\vert\Delta^n\vert \arrow[ru, dashed]     &  
+\end{tikzcd}
+    \end{center}
+    i.e., any continuous map from the topological horn can be extended to a map from the simplex.
+\end{prop}
+\begin{proof}
+    Note that there is a retraction $|\Delta^n|\to|\Lambda_i^n|$.
+\end{proof}
 \begin{defn}
-    For every $n\ge0$, $\partial\Delta^n$ is a simplicial set with $(\partial \Delta^n)_m=\Hom_{s\bset}(\Delta^n,\partial\Delta^n)=\{\alpha:[m]\to[n]:\text{not surjective}\}$.
+    A simplicial set $X$ is said to be a Kan complex if for all integers $n\ge 1$ and $0\le i\le n$ and maps $\Lambda_i^n\to X$ there exiss a commuting diagam
+    \begin{center}
+        \begin{tikzcd}
+\Lambda_i^n \arrow[r] \arrow[d] & X \\
+\Delta^n \arrow[ru, dashed]     &  
+\end{tikzcd}
+    \end{center}
 \end{defn}
 
+\begin{prop}
+    If $X\in\btop$, then $\sing(X)$ is a Kan complex
+\end{prop}
+\begin{rem}
+    Kan complexes will be our combinatorial models for homotopy types
+\end{rem}
+\begin{prop}
+    The functor $|-|$ is a left adjoint to the functor $\sing$.
+\end{prop}
+\begin{proof}
+    Recall that $X=\operatorname{colim}_{\Delta^n\to X}\Delta^n$ for all simplicial set $X$. Let $Y$ be a top. space
+    \begin{align*}
+        \Hom_{s\bset}(X,\sing(Y))&\cong\Hom_{s\bset}(\operatorname{colim}\Delta^n,\sing(Y))\\
+        &\cong\operatorname{colim}_{\Delta^n\to X}\Hom_{s\bset}(\Delta^n,\sing(Y))\\
+        &\cong\operatorname{colim}\Hom_\btop(|\Delta^n|,Y)\\
+        &\cong\Hom_\btop(\operatorname{colim}|\Delta^n|,Y)\\
+        &\cong\Hom_\btop(|X|,Y)
+    \end{align*}
+\end{proof}
+
+Another source of simplicial sets: for each $[m]\in\bdel$, there is a category (also denoted by $[m]$) with
+\begin{itemize}
+    \item $\operatorname{Ob}([m])=\{0,1,...,n\}$
+    \item $\Hom_{[m]}(i,j)=\begin{cases}
+        \varnothing & i>j\\ \{\ast\} & i\le j
+    \end{cases}$
+\end{itemize}
+The set $\Hom_\bdel([m],[n])$ is in bijection with the set of functors from $[m]$ to $[n]$.
+
+\begin{defn}
+    If $\mathscr C$ is a category, then $N(\mathscr C)$, the nerve of $\mathscr C$ is a simplicial set with $N(\mathscr C)_m=\operatorname{Fun}([m],\mathscr C)$.
+\end{defn}
+Note that $N([n])=\Delta^n$.
+\begin{prop}
+    A category $\mathscr C$ is a groupoid if and only if $N(\mathscr C)$ is a Kan complex.
+\end{prop}
+\begin{proof}
+    Note that $N(\mathscr C)_0=\operatorname{Ob}(\mathscr C)$, $N(\mathscr C)_1=\{\text{morphism}\}$, $N(\mathscr C)_2=\{\text{commuting triangles}\}$.
+
+    A map $\Lambda)i^n\to N(\mathscr C)$ is a diagram.
+\end{proof}
 \end{document}

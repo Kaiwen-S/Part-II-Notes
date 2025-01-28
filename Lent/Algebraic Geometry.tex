@@ -112,5 +112,54 @@
 
 \begin{document}
 \maketitle
-\section{}
+\section{Motivating Examples and Introduction}
+\[\backslash:\tag{Owen's signature}\]
+Consider $f(x,y)=x^2+y^2-1$ over $\RR$. Roots of $f$: unit circle.
+\begin{itemize}
+    \item $1$-dim manifold
+    \item smooth
+    \item irreducible
+\end{itemize}
+Algebraically, consider the quotient ring $R[x,y]/I$, where $I=(x^2+y^2-1)$.
+\begin{itemize}
+    \item transcendence degree $1$ over $\RR$.
+    \item localizations are independent of choices
+    \item $I$ is a prime ideal
+\end{itemize}
+\begin{example}
+    $x^n+y^n=z^n$ over $\ZZ$. (no non-trivial solutions when $n\ge 3$) Assume $n=2$. Can identify (not a bijective correspondence) the solution sets with $\{(x,y)\in\QQ^2:x^2+y^2=1\}$. Consider the line $L_t:y=tx+1$. $L_t$ meets the circle at $(-2t/(1+t^2),(1-t^2)/(1+t^2))$. In $\QQ^2$, if $t\in \QQ$, then 
+    \[t\leftrightarrow\left(\dfrac{-2t}{1+t^2},\dfrac{1-t^2}{1+t^2}\right)\]
+    is a fully algebraic identification of the solution set with the base field.
+\end{example}
+\begin{rem}
+    Care about intersections.
+\end{rem}
+\begin{example}
+    FTA. The set of zeros of a polynomial over $\CC$ is $\{(z,y)=(z,p(z)):z\in\CC\}\cap\{(z,y):y=0\}\subseteq\CC^2$.
+\end{example}
+\begin{defn}
+    Let $L/k$ be a field extension. We say $x\in L$ is algebraic over $k$ if there exists a non-zero $p_x\in k[z]$ s.. $p_x(x)=0$. Otherwise, $x$ is transcendental over $k$. Say $L/k$ is algebraic if all elemnts of $L$ are algebraic over $k$
+\end{defn}
+Recall that every field $k$ has a (unique up to iso) maximal algebraic extension $\bar k$, its algebraic closure.
+
+\textbf{In this course, we work over an algebraically closed field of characteristic $0$.}
+
+\subsection{The Projective Plane}
+FTA predicts that every two lines in a plane intersect at a point, unless they are parallel.
+\begin{defn}
+    The projective plane: $\PP^2_k=\PP^2=\{(x,y,z)\in k^3\setminus\{(0,0,0)\}\}/\{(x,y,z)\sim\lambda(x,y,z),\lambda\neq 0\}$.
+\end{defn}
+Denote $[(x,y,z)]=(x:y:z)$. We have an inclusion $k^2\hookrightarrow\PP_k^2, (x,y)\mapsto (x:y:1)$. The points at infinity are $\{(x:y:0)\}\subseteq\PP_k^2$.
+
+A line $ax+by-c=0$ in $k^2$ dosn't have well-defined solution set in $\PP^2$, but its homogenization $ax+by+cz=0$ does.
+
+\begin{defn}
+    A projective plane curve is
+    \[\{(x:y:z)\in\PP^2\colon F(x,y,z)=0\}\]
+    for some non-zero homogeneous poly $F$.
+\end{defn}
+If $f\in k[x,y]$, then $z^{\deg f}f(x/z,y/z)=F(x,y,z)$ is homogeneous of the same degree.
+\begin{defn}
+    If $C=\{f(x,y)=0\}\subseteq k^2$ and $F$ is the homogenization of $f$, we say that $\{(x:y:z)\in\PP^2:F(x,y,z)=0\}$ is the projective closure of $C$ in $\PP^2$.
+\end{defn}
 \end{document}

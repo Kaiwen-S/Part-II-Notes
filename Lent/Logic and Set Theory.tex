@@ -159,6 +159,14 @@
 \begin{defn}
     Let $t\in L$. We say that $t$ is a tautology if $v(t)=1$ for all valuations $v$ on $L$.
 \end{defn}
+\begin{example}
+    The following are all tautologies
+    \begin{enumerate}
+        \item[(i)] $(p\Rightarrow (q\Rightarrow p))$, $p,q\in L$. A true statement is implied by anything.
+        \item[(ii)] $(\neg\neg p\Rightarrow p)$, i.e., $(((p\Rightarrow\bot)\Rightarrow\bot)\Rightarrow p)$ for any $p\in L$. `The law of excluded middle', can be written as $(\neg p\vee q)$
+        \item[(iii)] $(p\Rightarrow(q\Rightarrow r)\Rightarrow ((p\Rightarrow q)\Rightarrow(p\Rightarrow r)))$. If not a tautology then there is a valuation s.t. the whole thing evaluates to $0$, then $v((p\Rightarrow(q\Rightarrow r)))=1$ and $v((p\Rightarrow q)\Rightarrow(p\Rightarrow r))=0$. Then $v(p\Rightarrow q)=1$ and $v(p\Rightarrow r)=0$, so $v(p)=1, v(r)=0, v(q)=1$, then $v(p\Rightarrow (q\Rightarrow r))=0$, contradiction.
+    \end{enumerate}
+\end{example}
 \textbf{Notations:}
 \begin{itemize}
     \item (true/top) $\top=(\bot\Rightarrow\bot)$
@@ -166,6 +174,61 @@
     \item (or) $p\vee q=(\neg p\Rightarrow q)=((p\Rightarrow\bot)\Rightarrow q)$
     \item (and) $p\wedge q=\neg (p\Rightarrow\neg q)$
 \end{itemize}
+\begin{defn}
+    Let $S\subseteq L$, $t\in L$. Say $S$ (semantically) entails $t$ if for any valuation $v$, $(\forall s\in S, v(s)=1)\implies v(t)=1$. We denote this by $S\models t$.
+\end{defn}
+Note that $t$ is a tautology iff $\varnothing\vDash t$, or simply written $\models t$.
+\begin{example}\
+    $\{p,p\Rightarrow q\}\models q$.
+\end{example}
+\begin{defn}
+    For $t\in L$, valuation $v$, say $t$ is true in $v$ (or $v$ is a model of $t$) if $v(t)=1$. For $S\subseteq L$, valuation $v$, say $v$ is a model of $S$ if $v(s)=1$ for all $s\in S$.
+\end{defn}
+Note that $S\models t$ iff $t$ is true in every model of $S$.
+
+\subsection{Syntactic Entailment}
+A notion of proof consists of axioms and rules of deduction. In propositional logic we adopt the following propositions as axioms
+\begin{enumerate}
+    \item[(A1)] $p\Rightarrow(q\Rightarrow p)$, $p,q\in L$
+    \item[(A2)] $(p\Rightarrow(q\Rightarrow r))\Rightarrow((p\Rightarrow q)\Rightarrow(p\Rightarrow r))$, $p,q,r\in L$
+    \item[(A3)] $\neg\neg p\Rightarrow p$, $p\in L$
+\end{enumerate}
+Note that all axioms are tautologies. These are called `axiom schemes'. We have one rule of deduction called modus ponens (MP): from $p$ and $p\Rightarrow q$, we can deduce $q$.
+
+Given $S\subseteq L$, $t\in L$, a proof of $t$ from $S$ is a finite sequence $t_1,...,t_n$ in $L$ s.t. $t_n=t$ and for each $i$, 
+\begin{enumerate}
+    \item[(i)] either $t_i$ is an axiom 
+    \item[(ii)] or $t_i\in S$ (premise or hypothesis)
+    \item[(iii)] $t_i$ is obtained by modus ponens from earlier lines: $\exists j,k<i$ s.t. $t_k\Rightarrow (t_j\Rightarrow t_i)$
+\end{enumerate}
+Say $S$ proves $t$ ot $S$ syntactically entails $t$ if there is a proof of $t$ from $S$. Write $S\vdash t$.
+If $\varnothing\vdash t$ (or write $\vdash t$), then say $t$ is a theorem.
+\begin{example}
+    
+\end{example}
+\begin{prop}[Deduction theorem]
+    Let $S\subseteq L$, $p,q\in L$. Then $S\vdash (p\Rightarrow q)$ iff $S\cup \{p\}\vdash q$.
+\end{prop}
+\begin{rem}
+    So $\Rightarrow$ does behave like implications in formal proofs.
+\end{rem}
+\begin{proof}
+    If $S\vdash (p\Rightarrow q)$, then we can write down a proof of $p\Rightarrow q$ from $S$ and add the following lines to obtain a proof of $q$ from $S\cup\{p\}$: Add $p$ (premise), then $q$ (MP).
+
+    Now assume $S\cup\{p\}\vdash q$. Let $t_1,...,t_n$ be a proof of $q$ from $S\cup\{p\}$. We prove that $S\vdash (p\Rightarrow t_i)$ by induction on $i$.
+    \begin{enumerate}
+        \item[Case 1.] $t_i$ is an axiom or $t_i\in S$. Then $t_i\Rightarrow(p\Rightarrow t_i)$ by (A1) and $t_i$ (premise or axiom), so $p\Rightarrow t_i$ (MP)
+        \item[Case 2.] $t_i=p$. Then $S\vdash (p\Rightarrow p)$ since $\vdash (p\Rightarrow p)$.
+        \item[Case 3.] $\exists j,k<i$ s.t. $t_k=(t_j\Rightarrow t_i)$. By induction we can write down proofs of $(p\Rightarrow t_j)$ and $p\Rightarrow (t_j\Rightarrow t_i)$ from $S$ and add the following: $(p\Rightarrow (t_j\Rightarrow t_i))\Rightarrow((p\Rightarrow t_j)\Rightarrow(p\Rightarrow t_i))$ by (A2) and $(p\Rightarrow t_j)\Rightarrow(p\Rightarrow t_i)$ by (MP), and $(p\Rightarrow t_i)$ by (MP). This is a proof of $p\Rightarrow t_i$ from $S$.
+    \end{enumerate}
+\end{proof}
+\textbf{Aim:} to prove the completeness theorem: $S\vDash t$ iff $S\vdash t$. This consists of \textit{soundness} ($S\vdash$ implies $S\vDash t$) and \textit{adequacy} ($S\vDash t$ implies $S\vdash t$).
+\begin{prop}[Soundness theorem]
+    Let $S\subseteq L$, $t\in L$. Then $S\vdash t$ implies $S\vDash t$.
+\end{prop}
+\begin{proof}
+    Let $t_1,...,t_n=t$ be a proof of $t$ from $S$. Let $v$ be a model of $S$. We prove $v(t_i)=1$ by induction on $i$. If $t_i$ is a premise, then $v(t_i)=1$. If $t_i$ is an axiom, then $v(t_i)=1$ since all axioms are tautologies. If $\exists j,k<i$ s.t. $t_k=(t_j\Rightarrow t_i)$, then by induction, $v(t_j)=v(t_j\Rightarrow t_i)=1$, so $v(t_i)=1$.
+\end{proof}
 
 
 \end{document}
