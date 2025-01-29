@@ -169,4 +169,41 @@ So $T_1=T_2$ in equilibrium. If small energy transfer happens $\delta E_1=-\delt
 \[\delta S\approx \dfrac{dS_1}{dE}\Bigg|_{E_1}\delta E_1+\dfrac{dS_2}{dE}\Bigg|_{E_2}\delta E_2=\left(\dfrac{1}{T_1}-\dfrac{1}{T_2}\right)\delta E_1\]
 By 2nd law, $\delta S\ge0$. If $T_1>T_2$, then $\delta E_1<0$, which implies that energy flows from hot to cold. Will evaluate $T$ for ideal gas later.
 
+\subsection{Heat Capacity}
+Define
+\begin{defn}
+    Define the heat capacity $C=\frac{\partial E}{\partial T}$.
+\end{defn}
+$C$ can be easily measured. If we think of $E$ as a function of $T$ then 
+\[\dfrac{\partial S}{\partial E}\dfrac{\partial E}{\partial T}=\dfrac{C}{T}\]
+Can measure entropy differences
+\[\Delta S=\int_{T_1}^{T_2}\dfrac{C(T)}{T}dT\]
+\begin{defn}
+    The specific heat capacity is 
+    \[c=\dfrac{C}{N}\]
+    where $N$ is the number of molecules.
+\end{defn}
+
+\subsection{Two-State Systems}
+2 stable spins: non-interacting, distinguishable, 2 states $\uparrow,\downarrow$. Let $E_\uparrow=\epsilon$, $E_\downarrow=0$. Have $N_\uparrow$ particles spin up, $N_\downarrow=N-N_\uparrow$. $E=N_\uparrow\epsilon$. Get $\Omega(R)=\binom{N}{N_\uparrow}$. So $S=k\ln \binom{N}{N_\uparrow}$. Expand and use Stirling's formula
+\[S\sim -kN\left[\left(1-\dfrac{E}{N\epsilon}\right)\ln\left(1-\dfrac{E}{N\epsilon}\right)+\dfrac{E}{N\epsilon}\ln\dfrac{E}{N\epsilon}\right]\]
+Special cases: $S(0)=0$, $S(N\epsilon/2)=kN\ln 2$ (maximal by symmetry), $S(N\epsilon)=0$.
+
+Special case of ``Gibbs entropy'': Assume each state equally probable, for an $n$-state system with prob $(p_1,...,p_n)$,
+\[S=\sum_{i=1}^n-p_i\ln p_i\]
+
+Temperature 
+\[\dfrac{1}{T}=\dfrac{\partial S}{\partial E}\approx \dfrac{k}{\epsilon}\ln\left(\dfrac{N\epsilon}{E}-1\right)\]
+so
+\[\dfrac{N_\uparrow}{N}\approx\dfrac{E}{N\epsilon}=\dfrac{1}{e^{\epsilon/(kT)}+1}\]
+As $T\to\infty$, $\frac{N_\uparrow}{N}\to 1/2$. If $E>\frac{N\epsilon}{2}$, then as $E$ increases, $\Omega$ decreases, $T<0$.
+
+Now calculate the heat capacity of this 2-state system.
+\[C=\dfrac{\partial E}{\partial T}=\dfrac{N\epsilon^2}{kT^2}\dfrac{e^{\epsilon/(kT)}}{(e^{\epsilon/(kT)}+1)^2}\]
+So
+\begin{itemize}
+    \item $C$ is maximal near $kT\sim\epsilon$;
+    \item As $T\to 0$, $C\sim e^{-\epsilon/(kT)}\to 0$ (gap to the 1st excited state)
+    \item As $T\to \infty$, $C\sim \frac{1}{T^2}$ (half of the states are already $\uparrow$)
+\end{itemize}
 \end{document}

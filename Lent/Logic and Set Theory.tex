@@ -229,6 +229,48 @@ If $\varnothing\vdash t$ (or write $\vdash t$), then say $t$ is a theorem.
 \begin{proof}
     Let $t_1,...,t_n=t$ be a proof of $t$ from $S$. Let $v$ be a model of $S$. We prove $v(t_i)=1$ by induction on $i$. If $t_i$ is a premise, then $v(t_i)=1$. If $t_i$ is an axiom, then $v(t_i)=1$ since all axioms are tautologies. If $\exists j,k<i$ s.t. $t_k=(t_j\Rightarrow t_i)$, then by induction, $v(t_j)=v(t_j\Rightarrow t_i)=1$, so $v(t_i)=1$.
 \end{proof}
+\[(\circ\tag{Owen's cyclop signature}\]\[\leftindex^\circ\smile^\circ\]
+\begin{defn}
+    Let $S\subseteq L$, say $S$ is inconsistent if $S\vdash\bot$. Otherwise, $S$ is consistent.
+\end{defn}
+\begin{thm}[Model existence lemma]
+    Let $S\subseteq L$. Then if $S$ is consistent, then $S$ has a model.
+\end{thm}
+\begin{proof}
+    Assume $P$ (primitive props) is countable (general case in chap 3), so $L=\bigcup L_n$ is countable. Enumerate $t_1,t_2,...$. If $T\subseteq L$ is consistent and $t\in L$, then $T\cup\{t\}$ or $T\cup\{\neg t\}$ is consistent. If not then $T\cup\{t\}$ and $T\cup\{\neg t\}$ entails $\bot$. By deduction theorem $T\vdash\neg t$, $T\vdash(\neg t\Rightarrow\bot)$ and hence $T\vdash \bot$ by MP. Contradiction. 
 
+    So enlarge $S$ by including $t$ or $\neg t$ to obtain $S_1$ (consistent). Inductively get $S_1, S_2,...$. Let $\bar S=\bigcup S_n$. Note that $S\subseteq\bar S$  and $\forall t\in T$, either $t\in\bar S$ or $\neg t\in \bar S$. Note that $\bar S$ is consistent.
+
+    Note that $\bar S$ is deductively closed, i.e., $if t\in L$ and $\bar S\vdash t$, then $t\in\bar S$.
+
+    Define a valuation $v:L\to\{0,1\}$ by $v(t)=1$ if $\bar S\vdash t$ and $0$ o/w. Need to check that this is a valuation and then we are done.
+\end{proof}
+\begin{crly}[Adequacy Theorem]
+    Let $S\subseteq L$, $t\in L$. If $S\vDash t$, then $S\vdash t$.
+\end{crly}    
+\begin{proof}
+    $S\vDash t\implies S\cup\{\neg t\}\vDash \bot\overset{\text{Thm}}{\implies} S\cup\{\neg t\}\vdash\bot\implies S\vdash\neg\neg t$. By deduction theorem, add $\neg\neg t\Rightarrow t$ and $t$ (MP), get $S\vdash t$.
+\end{proof}
+\begin{thm}[Completeness theorem]
+    $S\subseteq L$, $t\in L$. Then $S\vDash t$ iff $S\vdash t$.
+\end{thm}
+
+\begin{crly}[Compactness Theorem]
+    $S\subseteq L$, $t\in L$. If $S\vDash t$, then $\exists$ finite subset $S'\subseteq S$ s.t. $S'\vDash t$.
+\end{crly}
+\begin{crly}
+    $S\subseteq L$. If every finite subset of $S$ has a model, then $S$ ha s a model
+\end{crly}
+\begin{crly}[Decidability Theorem]
+    $S\subseteq L$ finite, $t\in L$. There is an algorithm that can determine whether $S\vdash t$ in finite time.
+\end{crly}
+
+\section{Well-Orderings and Ordinals}
+A linare roder (i.e.g. total order) on a set $X$ is a relation $<$ s.t.
+\begin{enumerate}
+    \item[(i)] irreflexive $\forall x\in X, \neg(x<x)$;
+    \item[(ii)] transitive
+    \item[(iii)] trichotomous
+\end{enumerate}
 
 \end{document}
