@@ -117,6 +117,7 @@ Notation: open ball of radius $\delta$ will be denoted $B_\delta(x)$.
 
 Revised some results about metric spaces.
 
+\section{Brouwer's Fixed Point Theorem}
 A proof of IVT using a compactness argument:
 \begin{lem}[Discrete IVT]
     Let $f:\{0,1,...,n\}\to\RR$ with $f(0)<0$ and $f(n)\ge 0$, then $\exists m$ s.t. $f(m-1)<0$, $f(m)\ge 0$.
@@ -164,6 +165,25 @@ We will generalize this result.
     (d)$\Rightarrow$(b): Suppose (b) fails, i.e., we can find a retraction $f:D\to\partial D$. Recall the homeomorphism $\varphi:D\to T$ from an earlier part of the proof. Let $g=\varphi\circ f\circ\varphi^{-1}$, then $g:T\to \partial T$ is continuous. If $x\in T$, then $f(\varphi^{-1}(x))\in\partial D$, then $g(x)\in\partial T$. If $x\in\partial T$, then $\varphi^{-1}(x)\in\partial D$, then $f(\varphi^{-1}(x))=\varphi^{-1}(x)$, so $g(x)=x$. In particular, $g$ is a quasi-retraction.
 \end{proof}
 
+We prove (c). First, some technical results.
+\begin{defn}
+    For $n\ge 2$, we define the $n$th subdivision of a triangle $T$ (or the $n$th triangular grid) by dissecting each edge into $n$ equal subintervals and join them by lines parallel to the sides.
+\end{defn}
+\begin{thm}[Discrete version of (c)]
+    Let $T$ be a triangle with edges $I_j$, $j=1,2,3$, subdivided into a triangular grid. Suppose each vertex of the grid has one of $3$ colors $R_1,R_2,R_3$ s.t. $\forall$ vertex in $I_j$ is either $R_j$ or $R_{j-1}$ (index mod $3$). Then there exists a triangle in the grid s.t. all vertices have distinct colors (multicolored).
+\end{thm}
+\begin{proof}
+    Given an edge between two adjacent vertices of the grid and a direction, we assign a value to that edge: if the two vertices have the same color then $0$, if $R_j\to R_{j-1}$ then $1$, if $R_j\to R_{j+1}$, then $-1$. (Observation: if we have a small triangle in the grid, then summing over its edges counterclockwise gives a non-zero value if and only if all three vertices have distinct colors. In this situation, the value is $\pm 3$.)
+    Now consider the the sum over all small triangles in the grid (each counterclockwise), then each internal edge appears exactly twice with opposite orientation, so we only pick up values from the boundary of the large triangle $T$. (The contribution is $1$ from each $I_j$ since we can only have two colors.) The total is $3$, so as we sum over each small triangle,  there must exist at least one small triangle with non-zero contribution, and this happens precisely when it is multicolored.
+\end{proof}
+We now prove (c).
+\begin{proof}
+    For each $n\ge 2$, consider the $n$th triangular grid in $T$. For all vertices $x$ of the grid, if $x$ has color $R_j$ then $x\in A_j$. Can do this in a way so that all vertices in $I_j$ are $R_j$ or $R_{j-1}$. Apply the preceding theorem for each $n$. We see that for each $n$, there exists a triangle with vertices $x_n,y_n,z_n$ which multi-colored. Find a subsequence $x_{n_k}\to x\in T$ by sequential compactness. Then $y_{n_k},z_{n_k}\to x$. By closedness of $A_j$, we see that $x\in\bigcap_{j=1}^3A_j$. 
+\end{proof}
+\begin{rem}
+    Brouwer's fixed point theorem holds for any compact convex set in $D\subseteq\RR^n$.
+\end{rem}
 
+\section{}
 
 \end{document}

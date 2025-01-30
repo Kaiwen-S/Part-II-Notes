@@ -329,4 +329,54 @@ Note that $N([n])=\Delta^n$.
 
     A map $\Lambda)i^n\to N(\mathscr C)$ is a diagram.
 \end{proof}
+
+We will define a collection of morhpisms of simplicial sets $A\to B$ (including the horn inclusion). If $K$ is a Kan complex and $A\to K$ a map, then there will be a lift to $B$.
+\begin{defn}
+    The collection of anodyne morphisms is the smallest collection of morphisms in $s\bset$ s.t.
+    \begin{enumerate}
+        \item[(i)] $\Lambda_i^n\to\Delta^n$ is anodyne for $n\ge 1, 0\le i\le n$,
+        \item[(ii)] If $X\to Y$ is anodyne, then every pushout along a map $X\to X'$ (consider the pushout square) $X\to P$ is also anodyne.
+        \item[(iii)] A retract of an anodyne map is anodyne.
+        \item[(iv)] A composition of anodyne morphisms is anodyne. (Also, transfinite composition of anodyne maps is anodyne. In particular, given an $\NN$-system of anodyne morphisms, then $X_0\to\operatorname{colim} X_i$ is anodyne)
+    \end{enumerate}
+\end{defn}
+\begin{prop}
+    If $K$ is a Kan complex $A\to B$ is anodyne, then any map $A\to K$ can be lifted to $B$.
+\end{prop}
+\begin{proof}
+    Check (ii)-(iv). (Definition chasing)
+\end{proof}
+\begin{rem}
+    A somewhat deep theorem (which we won't use or prove), says that an inclusion $A\hookrightarrow B$ of simplicial sets is anodyne iff the induced maps on geometric realization is a homotopy equivalence.
+\end{rem}
+Given simplicial sets $A, B$, the product simplicial set $A\times B$ is the functor taking $[m]$ to $A_m\times B_m$. Our next goal is to prove that if $X\to Y$ is anodyne and $A$ is a simplicial set, then the induced $X\times A\to Y\times A$ is anodyne.
+
+\begin{defn}
+    Given two maps $i:A\to B$, $j:X\to Y$ in $s\bset$, the pushout product is the morphism
+    \[(A\times Y)\coprod_{A\times X} (B\times X)\to B\times Y\]
+    arising from the commuting square.
+\end{defn}
+\begin{prop}
+    Suppose $i:A\to B$ is a monomorphism and $j:X\to Y$ is anodyne, then the pushout product is anodyne.
+\end{prop}
+\begin{example}
+    When $A=\varnothing$, then the proposition gives what we want.
+\end{example}
+\begin{lem}
+    The class of anodyne morphisms is the smallest class closed under pushouts, retracts and ( possibly transfinite) compositions that contains all pushout products. $k?l$ where $k$ is a monomorphism and $l:\Delta^0\to\Delta^1$.
+\end{lem}
+We assume the lemma to prove the proposition
+\begin{proof}
+    Fix a mono $i$ and consider the collection of all $j$ s.t. $i?j $ is anodyne. We wish to show that the collection contains all morphisms that are anodyne. It is straightforward to check that the collection is closed under pushouts, retracts, and compositions, so we are reduced to the case (i?k?l) is anodyne. Pushout products are associative, so we may rewrite (i k del0 del 1). Pushout products of mono are mono. lemma again
+\end{proof}
+
+\begin{defn}
+    If $A,B$ are simplicial sets, then $\underline{\Hom}_{s\bset}(A,B)$ is a simplicial set sending $[m]$ to $\Hom_{s\bset}(A\times\Delta^n,B)$.
+\end{defn}
+\begin{prop}
+    If $A$ and $B$ are Kan complexes, so is $\underline{\Hom}_{s\bset}(A,B)$.
+\end{prop}
+\begin{rem}
+    A cate $\mathscr C$
+\end{rem}
 \end{document}

@@ -101,6 +101,8 @@
 \newcommand{\id}{\operatorname{id}}
 \newcommand{\Ind}{\operatorname{Ind}}
 \newcommand{\Res}{\operatorname{Res}}
+\newcommand{\tr}{\operatorname{Tr}}
+\newcommand{\disc}{\operatorname{disc}}
 
 \newcommand{\calD}{\mathcal{D}}
 
@@ -114,8 +116,8 @@
 \maketitle
 \section{Section 1}
 (: (\textit{Owen's signature})
-\subsection*{What?}
-Field Extension: \(L\vert K\)
+%\subsection*{What?}
+%Field Extension: \(L\vert K\)
 
 
 
@@ -132,8 +134,8 @@ $[\QQ(\alpha):\QQ]=\deg f_\alpha$. These are all the examples by primitive eleme
 \begin{example}
     Quadratic fields, cyclotomic fields. 
 \end{example}
-\subsection*{Why?}
-We don't care... (so why are we here?) idk
+%\subsection*{Why?}
+%We don't care... (so why are we here?) idk
 
 \[);\models\tag{Owen's Signature}\]
 
@@ -171,15 +173,52 @@ Notation: We write $\mathcal{O}_K=K\cap\mathcal O$ for $K$ number field, and we 
 
 \begin{prop}
     Let $\alpha\in\CC$ be an algebraic number. TFAE,
-    \begin{enumerate}[(1)]
-        \item[(1)] $\alpha$ is an algebraic integer;
-        \item $\ZZ[\alpha]$ is f.g. as a $\ZZ$-module
-        \item $\exists$ a f.g. $\ZZ$-module $M$ that is invariant under multiplication by $\alpha$.
-        \item
+    \begin{enumerate}
+        \item[(i)] $\alpha$ is an algebraic integer;
+        \item[(ii)] $\ZZ[\alpha]$ is f.g. as a $\ZZ$-module
+        \item[(iii)] $\exists$ a f.g. $\ZZ$-module $M$ that is invariant under multiplication by $\alpha$.
     \end{enumerate}
 \end{prop}
 \begin{proof}
     (1)$\Rightarrow$(2)$\Rightarrow$(3) is clear. Need to prove (3)$\Rightarrow$(1). Let $M=\ZZ\beta_1\oplus...\oplus \ZZ\beta_k$ be a module satisfying (3). Left multiplication by $\alpha$ is $\ZZ$-linear. Let $A$ be the matrix, then take the char poly of $A$.
 \end{proof}
+\[\{-:\tag{Owen's Signature}\]
+\subsection{Additive Structure of $\mathcal{O}_K$}
+Let $K$ be a number field of deg $d$. If $\mathcal O_K=\ZZ\alpha_1\oplus...\oplus\ZZ\alpha_d$ for some $\alpha_i\in \mathcal O_K$, then we say that $\{\alpha_i\}$ is an integral basis. Always have an integral basis (assume $\mathcal O_K$ is f.g.): structure theorem and linear independence $\Rightarrow$ $\mathcal O_K$ is has rank $r\le d$; $\mathcal O_K$ contains $d$ linearly independent elements in $K$ ($1,\alpha,\alpha^2,...,\alpha^{d-1}$, where $K=\QQ(\alpha)$).
 
+Find $\mathcal O_K$:
+\begin{enumerate}
+    \item Find $d$ L.I. elements $\alpha_i^{(1)}$ of $\mathcal O_K$ and let $M_1=\bigoplus\ZZ\alpha_i^{(1)}$
+    \item If $M_1=\mathcal O_K$, then done. Otherwise, can find $\beta\in\mathcal O_K\setminus M_1$. and consider $M_2=M_1+\ZZ\beta$ and express in normal form $M_2=\bigoplus\ZZ\alpha_i^{(2)}$.
+    \item Iterate this process.
+\end{enumerate}
+Need to prove that this process terminates. 
+
+Recall trace and norm from Galois theory. (I have recalled. Pls hurry up.) Recall basic properties of trace and norm. (I have recalled. Pls hurry up.) Abbreviate $N_{K/\QQ}=N_K,\tr_{K/\QQ}=\tr_K$. Recall more properties of trace and norm. (I have recalled. Pls hurry up.)
+
+%Would you rather a faster lectured course on number fields? (Groj) Y/N? *************************************************
+
+\begin{defn}
+    Let $\alpha_1,...,\alpha_d\in K$, where $K$ is a number field of deg $d$. The discriminant is defined as $\disc(\alpha_1,...,\alpha_d)=\det(\sigma_i(\alpha_j))^2$, where $\sigma_i\in\Hom(K,\CC)$.
+\end{defn}
+\begin{example}
+    $\disc(1,\alpha,\alpha^2,...,\alpha^{d-1})=(-1)^{\frac{n(n-1)}{2}}N(f'(\alpha))$.
+\end{example}
+\begin{lem}
+    For $\alpha_1,...,\alpha_d\in K$, then
+    $\disc(\alpha_1,...,\alpha_d)=\det(\tr_K(\alpha_i\alpha_j))$. If $\alpha_1,...,\alpha_d\in\mathcal O_K$, then $\disc(\alpha_1,...,\alpha_d)\in\ZZ$.
+\end{lem}
+\begin{proof}
+    Compute,
+    \begin{align*}
+        [\tr(\alpha_i\alpha_k)]_{ik}=[\sigma_i(\alpha_j)]_{ij}[\sigma_{j}(\alpha_k)]_{jk}
+    \end{align*}
+    Take det.
+\end{proof}
+\begin{lem}
+    $\disc(\alpha_1,...,\alpha_d)=0$ iff $\alpha_1,...,\alpha_d$ are linearly dependent over $\QQ$.
+\end{lem}
+\begin{proof}
+    If linearly dependent, then $[\tr(\alpha_i\alpha_j)]$ is singular.
+\end{proof}
 \end{document}
