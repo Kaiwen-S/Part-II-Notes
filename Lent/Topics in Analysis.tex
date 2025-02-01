@@ -184,6 +184,36 @@ We now prove (c).
     Brouwer's fixed point theorem holds for any compact convex set in $D\subseteq\RR^n$.
 \end{rem}
 
-\section{}
+\section{The Degree of a Closed Curve and Winding Number}
+Recall from CA that we can define $\operatorname{arg}_a$ for $z$ in the cut plane.
+\begin{lem}
+    $\arg_a$ is cts on its domain.
+\end{lem}
+So if $f:[0,1]\to \CC$ is a cts function to a cut plane, then we have a continuous choice of argument defined on $f$.
+\begin{thm}
+    Let $f:[0,1]\to\CC^\ast$ be cts. Then there is a cts choice of argument on $f$, i.e., $\exists\theta:[0,1]\to\RR$ cts s.t.$f(t)=|f(t)|e^{i\theta(t)}$. This choice is unique up to adding $2n\pi,\ n\in\ZZ$.
+\end{thm}
+\begin{proof}
+    By uniform continuity, partition $[0,1]$ into a number of segments $[t_i,t_{i+1}]$ s.t. $|f(t_k)-f(t_{k-1})|<\epsilon$, where $\epsilon$ is s.t. $B_\epsilon(0)\subseteq \CC\setminus\im(f)$. 
 
+    Induction: suppose there is a cts choice $\theta$ on $[0,t_k]$. Note that $\im(f|_{[t_k,t_{k+1}]})\subseteq B_\epsilon(f(t_k))$. This lies in a cut plane, so we choose a cts $\operatorname{arg}_a$ s.t. $\theta(t_k)=\arg_a(t_k)$, so the argument function is extendable.
+
+    For uniqueness, if $\phi(t)$ is another choice, then $\theta(t)-\phi(t)$ is a cts function to $2n\ZZ$.
+\end{proof}
+\begin{defn}
+    $f:[0,1]\to\CC^\ast$ be a closed path. The winding number (degree) of $f$ about $0$ is $\frac{1}{2\pi}(\theta(1)-\theta(0))$ where $\theta$ is a choice of argument on $f$.
+\end{defn}
+
+\begin{lem}
+    $f,h:[0,1]\to\CC^\ast$. two cts closed paths, $w(fh,0)=w(f,0)+w(h,0)$.
+\end{lem}
+\begin{proof}
+    If $\theta,\phi$ are cts arg for $f,h$ respectively, then $\theta+\phi$ is a cts arg of $fh$.
+\end{proof}
+\begin{crly}[`Dog-walking' lemma]
+    Let $f:[0,1]\to\CC^\ast$ be a closed path. $g:[0,1]\to\CC$ another closed path s.t. $|g(t)|<|f(t)|$ for all $t$. Then $w(f,0)=w(f+g,0)$. 
+\end{crly}
+\begin{proof}
+    Write $f+g=f(1+g/f)$. Let $h=1+g/f$, then $\im h$ lies in the right half plane, so $h$ has a cts arg and $w(h,0)=0$. Done by the lemma.
+\end{proof}
 \end{document}

@@ -114,7 +114,7 @@
 \maketitle
 \section{Propositional Logic}
 \((\; :\langle\) (by Owen)
-\begin{defn}
+\begin{defn}[Propositional logic]
     The language of propositional logic consists of a set $P$ of primitive propositions and the set $L=L(P)$ of propositions (or compound propositions) built as follows
     \begin{enumerate}
         \item[(i)] $P\subseteq L$
@@ -134,7 +134,7 @@
     \end{itemize}
 \end{rem}
 \subsection{Semantic Entailment}
-\begin{defn}
+\begin{defn}[Valuation]
     A valuation on $L$ is a function $v:L\to\{0,1\}$ s.t. 
     \begin{enumerate}
         \item[(i)] $v(\bot)=0$
@@ -156,7 +156,7 @@
         \item[(ii)] Define $v(p)=w(p)$ for all $p\in P$. Extend $v$ to $L$ inductively.
     \end{enumerate}
 \end{proof}
-\begin{defn}
+\begin{defn}[Tautology]
     Let $t\in L$. We say that $t$ is a tautology if $v(t)=1$ for all valuations $v$ on $L$.
 \end{defn}
 \begin{example}
@@ -174,14 +174,14 @@
     \item (or) $p\vee q=(\neg p\Rightarrow q)=((p\Rightarrow\bot)\Rightarrow q)$
     \item (and) $p\wedge q=\neg (p\Rightarrow\neg q)$
 \end{itemize}
-\begin{defn}
+\begin{defn}[Semantic entailment]
     Let $S\subseteq L$, $t\in L$. Say $S$ (semantically) entails $t$ if for any valuation $v$, $(\forall s\in S, v(s)=1)\implies v(t)=1$. We denote this by $S\models t$.
 \end{defn}
 Note that $t$ is a tautology iff $\varnothing\vDash t$, or simply written $\models t$.
 \begin{example}\
     $\{p,p\Rightarrow q\}\models q$.
 \end{example}
-\begin{defn}
+\begin{defn}[Model?]
     For $t\in L$, valuation $v$, say $t$ is true in $v$ (or $v$ is a model of $t$) if $v(t)=1$. For $S\subseteq L$, valuation $v$, say $v$ is a model of $S$ if $v(s)=1$ for all $s\in S$.
 \end{defn}
 Note that $S\models t$ iff $t$ is true in every model of $S$.
@@ -230,7 +230,7 @@ If $\varnothing\vdash t$ (or write $\vdash t$), then say $t$ is a theorem.
     Let $t_1,...,t_n=t$ be a proof of $t$ from $S$. Let $v$ be a model of $S$. We prove $v(t_i)=1$ by induction on $i$. If $t_i$ is a premise, then $v(t_i)=1$. If $t_i$ is an axiom, then $v(t_i)=1$ since all axioms are tautologies. If $\exists j,k<i$ s.t. $t_k=(t_j\Rightarrow t_i)$, then by induction, $v(t_j)=v(t_j\Rightarrow t_i)=1$, so $v(t_i)=1$.
 \end{proof}
 \[(\circ\tag{Owen's cyclop signature}\]\[\leftindex^\circ\smile^\circ\]
-\begin{defn}
+\begin{defn}[Inconsistency]
     Let $S\subseteq L$, say $S$ is inconsistent if $S\vdash\bot$. Otherwise, $S$ is consistent.
 \end{defn}
 \begin{thm}[Model existence lemma]
@@ -259,7 +259,7 @@ If $\varnothing\vdash t$ (or write $\vdash t$), then say $t$ is a theorem.
     $S\subseteq L$, $t\in L$. If $S\vDash t$, then $\exists$ finite subset $S'\subseteq S$ s.t. $S'\vDash t$.
 \end{crly}
 \begin{crly}
-    $S\subseteq L$. If every finite subset of $S$ has a model, then $S$ ha s a model
+    $S\subseteq L$. If every finite subset of $S$ has a model, then $S$ has a model
 \end{crly}
 \begin{crly}[Decidability Theorem]
     $S\subseteq L$ finite, $t\in L$. There is an algorithm that can determine whether $S\vdash t$ in finite time.
@@ -272,5 +272,38 @@ A linare roder (i.e.g. total order) on a set $X$ is a relation $<$ s.t.
     \item[(ii)] transitive
     \item[(iii)] trichotomous
 \end{enumerate}
+\[\ell:\tag{Owen's signature}\]
+\begin{defn}[Well ordering]
+    A well-ordering of a set $X$ is a linear order $<$ on $X$ s.t. every non-empty subset of $X$ has a least element:
+    \[(\forall S\subseteq X)(S\neq\varnothing\Rightarrow(\exists x\in S)(\forall y\in S)(x\le y))\]
+\end{defn}
+\begin{defn}[Order isomorphism]
+     Let $X, Y$ be linearly ordered sets. Say $X, Y$ are order-isomorphic (o.i.) if there exists an order-preserving bijection $f:X\to Y$. Such an $f$ is called an order-isomorphism.
+\end{defn}
+\begin{defn}[Initial segment]
+    A subset $I$ of a l.o. set $X$ is an initial segment (i.s.) of $X$ if $\forall x, y\in X$, $(x\in I\wedge y<x)\Rightarrow y\in I$.
+\end{defn}
+\begin{rem}
+    If $I$ is a proper i.s.  of a w.o. set $X$, then $I=I_x=\{y\in X:y<x\}$ for $x$ the least element of $X\setminus I$.
+\end{rem}
+\begin{lem}
+    Let $X, Y$ be w.o. sets, $I$ an i.s. of $Y$ and $f:X\to I$ an o.i. Then for every $x\in X$, we have $f(x)=\min(Y\setminus\{f(y):y<x\})$.
+\end{lem}
+\begin{proof}
+    Fix $x\in X$ and let $A=Y\setminus\{f(y):y<x\}$. Note that $A\neq\varnothing$. Let $a=\min A$. Then $a\le f(x)$, so $a\in I$, so $a=f(z)$ some $z\in X$. Since $f(z)\le f(x)$, so $z\le x$ If $z<x$, then $x\not\in A$. Contradiction. 
+\end{proof}
+\begin{prop}[Induction]
+    Let $X$ be a w.o. set and $S\subseteq X$ s.t. for every $x\in X$ if $y\in S$ for all $y<x$, then $x\in S$. Then $S=X$.
+\end{prop}
+\begin{proof}
+    If not, then pick $x=\min X\setminus S$. If $y<x$, then $y\in S$. Assumption says $x\in S$. Contradiction.
+\end{proof}
+\begin{prop}
+    Let $X, Y$ be o.i. w.o. sets. Then there is a unique o.i. $X\to Y$
+\end{prop}
+\begin{proof}
+    Assume $f,g:X\to Y$ are o.i. Fix $x\in X$ assume $\forall y<x$, $f(y)=g(y)$. By lemma $f(x)=\min \{Y\setminus f(y):y<x\}=g(x)$. Done by the last proposition.
+\end{proof}
+
 
 \end{document}

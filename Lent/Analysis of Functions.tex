@@ -125,7 +125,7 @@ q: (Owen's signature)\\
 For $f:(E,\mathcal E,\mu)\to \RR$ (or $\CC$), define
 \begin{align*}
     &\|f\|_{L^p}=\left(\int_E |f|^pd\mu\right)^{1/p},\ 1\le p<\infty\\
-    &\|f\|_{L^\infty}=\operatorname{ess}\sup|f|=\int\{\lambda>0:|f|\le \lambda\ \text{a.e.}\}
+    &\|f\|_{L^\infty}=\operatorname{ess}\sup|f|=\inf\{\lambda\ge0:|f|\le \lambda\ \text{a.e.}\}
 \end{align*}
 We use $\|\cdot\|_\infty$ to denote the usual sup-norm. Define $L^p(E,\mu)=\{f:E\to\RR:\text{meas. }\|f\|_{L^p}<\infty\}$
 
@@ -227,6 +227,44 @@ $\{\varphi_\epsilon\ast f:f\in C_c(\RR^n)\}\subseteq C_c^\infty(\RR^n)$, we have
 \begin{rem}
     The set of points $A=\{x\in\RR^n:(\dagger)\}$ are called Lebesgue points of $f$.
 \end{rem}
-
+\[\langle(\rangle-:\tag{Owen's Signature}\]
+\begin{proof}
+    Consider
+    \[\bar A_\lambda=\left\{x:\lim_{r\to 0}|B_r(x)^{-1}|\int_{B_r(x)}|f(y)-f(x)|dy>2\lambda\right\}\]
+    Let $\epsilon>0$. Pick $g\in C_c(\RR^n)$ s.t. $\|f-g\|_{L^1}<\epsilon$. Then
+    \[\dfrac{1}{|B_r(x)|}\int_{B_r(x)}|f(y)-f(x)|dy\le \dfrac{1}{|B_r(x)|}\int_{B_r(x)}|f(y)-g(y)|dy+\dfrac{1}{|B_r(x)|}\int_{B_r(x)}|g(y)-g(x)|dy+|f(x)-g(x)|\]
+    $g$ is unif. cts, so the second term is small. If $x\in\bar A_\lambda$, either the first term or the third term is $>\lambda$. The third term is bounded using Markov's inequality
+    \[\{x:|f(x)-g(x)|>\lambda\}\le\dfrac{\|f-g\|_{L^1}}{\lambda}<\epsilon/\lambda\]
+    For the first term, use HL-maximal inequality,
+    \[|\{x:\text{first term}>\lambda\}|\le|\{x:M(f-g)(x)>\lambda\}|\le\dfrac{3^n}{\lambda}\|f-g\|_{L^1}\le 3^n\epsilon/\lambda\]
+    Therefore $|\bar A_\lambda|\le C\epsilon$.
+    So $|A^c|\le|\bigcup_n\bar A_{1/n}|\le\sum_n|\bar A_{1/n}|=0$.
+\end{proof}
+\begin{rem}
+    In particular, for $f\in L^1(\RR), \lim_{h\to 0}\int_x^{x+h}f(y)dy=f(x)$ a.e.
+\end{rem}
+\begin{thm}[Egorov]
+    Let $E\in B(\RR^n)$, $|E|<\infty$. Suppose $f_j:E\to\RR$ measurable s.t. $f_j\to f$ a.e. on $E$. Then
+    \[\forall\epsilon>0,\ \exists A_\epsilon\ \text{s.t.}\ |E\setminus A_\epsilon|<\epsilon \text{ and } f_j\overset{\text{unif}}{\to} f\text{ on }A_\epsilon\]
+\end{thm}
+\begin{proof}
+    By discarding a null set, we may assume that $f_j\to f$ pointwise on $E$. Define
+    \[E_k^m=\{x:\forall j>k,\ |f_j(x)-f(x)|<1/m\}\]
+    $E_k^m$ is increasing as $k\to\infty$, and $\bigcup_k E_k^m=E$ by pointwise convergence.
+    Pick a subsequence $k_m$ s.t. $|E\setminus E_{k_m}^m|\le\epsilon 2^{-m}$. Define $A_\epsilon=\bigcap_m E_{k_m}^m$. For all $x\in A_\epsilon$, $|f_j(x)-f(x)|<1/m$ whenever $j>k_m$, so the convergence is uniform on $A_\epsilon$, and
+    \[|E\setminus A_\epsilon|\le\sum_m|E\setminus E_{k_m}^m|\le\epsilon\]
+\end{proof}
+\begin{thm}[Lusin]
+    Let $|E|<\infty$, $f:E\to\RR$ (or $\CC$) Borel-measurable. Then
+    \[\forall\epsilon>0,\ \exists F_\epsilon\text{ s.t. }|E\setminus F_\epsilon|<\epsilon\text{ and } f:F_\epsilon\to\RR \text{ cts}\]
+\end{thm}
+\begin{rem}
+    Note that $f$ is not necessarily continuous $F_\epsilon$ when regarded as a map defined on $E$.
+\end{rem}
+\begin{proof}
+    First prove it for simple functions $f=\sum_{i=1}^ma_i1_{A_i}$ (wlog assume $A_i$ disjoint), where $\bigcup A_i=E$. Use inner regularity to find compact sets $K_k\subseteq A_k$ s.t. $|A_k\setminus K_k|<\epsilon/m$. $f$ is cts on $\bigcup_k K_k$ and $|E\setminus\bigcup K_k|\le\epsilon$. For general $f$, approximate $f$ ptwise by simple functions on $E$. Pick $A_\epsilon$ s.t. $|E\setminus A_\epsilon|<\epsilon/2$ s.t. $f_m\to f$ unif. by Egorov. Take $C_m$ compact s.t. $|E\setminus C_m|<\epsilon 2^{-m-1}$. Then Take $F_\epsilon=A_\epsilon\cap\bigcap_mC_m$. Can check that $|E\setminus F_\epsilon|\le\epsilon$.
+\end{proof}
+Recall...(I have recalled) Hilbert space.
+His mus are criminal
 
 \end{document}

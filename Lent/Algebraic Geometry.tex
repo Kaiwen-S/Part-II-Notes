@@ -205,5 +205,79 @@ If $f\in k[x,y]$, then $z^{\deg f}f(x/z,y/z)=F(x,y,z)$ is homogeneous of the sam
 \end{defn}
 Note that Zariski topology is very coarse. The intersection of two non-empty open sets is non-empty and dense. Will prove in ES1 that distinguished open sets form a basis of Zariski topology. (Also on ES1) The Zariski topology on a product is the the product of Zariski topology. If $X\in \bA^n$ is affine algebraic, then the subspace topology agrees with the Zariski topology on $X$.
 
+\begin{defn}
+    A topological space $X$ is irreducible if $X$ is cannot be written as $X=X_1\cup X_2$ with $X_1, X_2$ closed and proper. Otherwise, $X$ is reducible.
+\end{defn}
+e.g. $Z(xy)$ is reducible.
+\begin{defn}
+    An affine variety is an irreducible (w.r.t. Zariski topology) affine algebraic set.
+\end{defn}
+If $f\in k[x_1,...,x_n]$ is irreducible then $Z(f)$ is irreducible.
+
+\section{Ideals and the Nullstellensatz}
+\begin{defn}
+    $X\subseteq \bA^n$. The ideal of $X$ is $I(X)=\{f\in k[x_1,...,x_n]:\forall P\in X,\ f(P)=0\}$
+\end{defn}
+\begin{prop}[Properties of $I(X)$ for $X$ algebraic]
+    Let $X, Y$ be affine algebraic sets in $\bA^n$.
+    \begin{enumerate}[(1)]
+        \item If $S\subseteq k[x_1,...,x_n]$, then $S\subseteq I(Z(S))$;
+        \item $X=Z(I(X))$
+        \item $X=Y$ iff $I(X)=I(Y)$.
+        \item $X\subseteq Y$ iff $I(Y)\subseteq I(X)$
+    \end{enumerate}
+\end{prop}
+\begin{proof}
+    (1) clear from defn. 
+
+    (2) Clearly $X\subseteq Z(I(X))$. Conversely, write $X=Z(S)$, so $S\subseteq I(X)$, so $Z(I(X))\subseteq Z(S)=X$.
+
+    (3) follows from (2).
+
+    (4). If $X\subseteq Y$, then $I(Y)\subseteq I(X)$ by defn. Conversely, if $P\in X\setminus Y$, then (2) implies that $P\not\in Z(I(Y))$, so there exists $f\in I(Y)$ with $f(P)\neq 0$.
+\end{proof}
+\begin{prop}
+    Any affine algebraic set is a finite union (unique up to ordering, ES1) of irred. affine algebraic sets (varieties).
+\end{prop}
+\begin{proof}
+    Let $X$ be affine algebraic. Suppose $X$ is reducible (otherwise done), i.e., $X=X_1\cup X_1'$. If $X$ is not a finite union of varieties, then wlog $X_1$ is not a finite union of varieties. We can write $X_1=X_2\cup X_2'$ s.t. $X_2$ fails to be a finite union of varieties. Continue, get a descending chain of affine alg sets. By the preceding prop, get an ACC in $k[x_1,...,x_n]$, which eventually stabilizes, i.e., eventually $X_n$ is a finite union of varieties.
+\end{proof}
+Get maps $Z(\cdot ),\ I(\cdot )$
+\[\left\{\text{affine alg subsets of }\bA^n\right\}\overset{X\leftrightarrow I(X)}{\longleftrightarrow}\left\{I\trianglelefteq k[x_1,...,x_n]\right\}\]
+$I(\cdot)$ does not have full image, e.g., $(x^2)$.
+\begin{prop}
+    $X\subseteq\bA^n$ affine alg set. Then $X$ is irreducible iff $I(X)$ is a prime ideal.
+\end{prop}
+\begin{proof}
+    Suppose $X$ is reducible, write $X=X_1\cup X_2$ proper closed. Then $I(X)=I(X_1)\cap I(X_2)$. By (3) of the previous proposition, there exists $f\in I(X_1)\setminus I(X_2)$ and $g\in I(X_2)\setminus I(X_1)$. Then $fg\in I(X)$ but $f,g\not\in I(X)$, so $I(X)$ is not prime.
+
+    Conversely, if $I(X)$ is not prime, then can find $f,g\not\in I(X)$ but $fg\in I(X)$. Define $X_1=X\cap Z(f)$ and $X_2=X\cap Z(g)$. These are proper closed subsets and $X_1\cup X_2=X$, so $X$ is reducible. 
+\end{proof}
+
+\begin{thm}[Weak Nullstellensatz]
+    The maximal ideals of $k[x_1,...,x_n]$ are those of the form $(x_1-a_1,x_2-a_2,...,x_n-a_n)$ for some $(a_1,...,a_n)\in k^n$.
+\end{thm}
+Proof postponed.
+\begin{crly}[Weak Nullstellensatz]
+    If $I\subsetneq k[x_1,...,x_n]$ is a proper ideal, then $Z(I)\neq\varnothing$.
+\end{crly}
+\begin{proof}
+    Any proper ideal is contained in a maximal ideal which has the form $(x_1-a_1,...,x_n-a_n)=\mathfrak m$, so $(a_1,...,a_n)\in Z(\mathfrak m)$.
+\end{proof}
+\begin{defn}
+    Let $I\trianglelefteq k[x_1,...,x_n]$. The radical ideal of $I$ is $\sqrt I=\{f\in k[x_1,...,x_n]:\exists m>0,\ f^m\in I\}$.
+\end{defn}
+Note that $I\subseteq\sqrt I$ and $Z(I)=Z(\sqrt I)$.
+\begin{thm}[Hilbert's Nullstellensatz]
+    Let $J\trianglelefteq k[x_1,...,x_n]$. Then $\sqrt J=I(Z(J))$.
+\end{thm}
+\begin{proof}
+    By defn, $\sqrt J\subseteq I(Z(J))$.
+
+    Write $J=(f_1,...,f_r)$ and let $g\in I(Z(J))$. Define another ideal $\tilde J=(f_1,...,f_r,x_{n+1}g(x_1,...,x_n)-1)\trianglelefteq k[x_1,...,x_{n+1}]$. If $\tilde P\in Z(\tilde J)$, then the projection $P$ to the first $n$ coords is in $Z(f_i)$ for all $1\le i\le r$, so $g(P)=0$. Contradicting $x_{n+1}g-1=0$, so $Z(\tilde J)=\varnothing$, so $1\in \tilde J$ by weak Nullstellensatz, so $\exists h_1,...,h_{n+1}\in k[x_1,...,x_{r+1}]$ with $\sum_{i=1}^r h_if_i+h_{r+1}(x_{n+1}g-1)=1$. On the set where $x_{n+1}g=1$, we have $\sum_{i=1}^r h(x_1,...,x_n,1/g(x_1,...,x_n))g(x_1,...,x_n)=1$. Clear denominators by a sufficiently high power of $g$. Get
+    \[\sum_{i=1}^rh_i'(x_1,...,x_n)f_i(x_1,...,x_n)=g(x_1,...,x_n)^N\]
+    so $g\in\sqrt J$.
+\end{proof}
+
 
 \end{document}
