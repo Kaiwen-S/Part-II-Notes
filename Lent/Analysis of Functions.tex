@@ -264,7 +264,87 @@ $\{\varphi_\epsilon\ast f:f\in C_c(\RR^n)\}\subseteq C_c^\infty(\RR^n)$, we have
 \begin{proof}
     First prove it for simple functions $f=\sum_{i=1}^ma_i1_{A_i}$ (wlog assume $A_i$ disjoint), where $\bigcup A_i=E$. Use inner regularity to find compact sets $K_k\subseteq A_k$ s.t. $|A_k\setminus K_k|<\epsilon/m$. $f$ is cts on $\bigcup_k K_k$ and $|E\setminus\bigcup K_k|\le\epsilon$. For general $f$, approximate $f$ ptwise by simple functions on $E$. Pick $A_\epsilon$ s.t. $|E\setminus A_\epsilon|<\epsilon/2$ s.t. $f_m\to f$ unif. by Egorov. Take $C_m$ compact s.t. $|E\setminus C_m|<\epsilon 2^{-m-1}$. Then Take $F_\epsilon=A_\epsilon\cap\bigcap_mC_m$. Can check that $|E\setminus F_\epsilon|\le\epsilon$.
 \end{proof}
-Recall...(I have recalled) Hilbert space.
-His mus are criminal
+Recall Riesz representation theorem in Hilbert spaces (bounded linear functionals can be written as taking inner product with a certain element).
+
+Consider two measures $\mu,\nu$ on a measurable space $(E,\mathcal E)$. 
+\begin{defn}
+    We say that $\nu$ is absolutely continuous w.r.t $\mu$ if $\mu(A)=0\implies\nu(A)=0$ for any $A\in\mathcal E$. We write $\nu\ll\mu$. If $\nu\ll\mu$ and $\mu\ll\nu$ both hold, then we say that $\mu,\nu$ are mutually absolutely continuous.
+
+    If there exists $B\in\mathcal E$ s.t. $0=\mu(B)=\nu(B^c)$, then we say that $\mu,\nu$ are mutually singular, and we write $\mu\perp\nu$.
+\end{defn}
+
+\begin{thm}[Radon-Nikodym]
+    Let $\mu,\nu$ be finite measures on $(E,\mathcal E)$ s.t. $\nu\ll\mu$. Then $\exists w\in L^1(\mu)$, $w\ge 0$, s.t. for all $A\in\mathcal E$, $\nu(A)=\int_A d\nu=\int_Awd\mu$.
+\end{thm}
+\begin{rem}\
+    \begin{enumerate}
+        \item[1)] $w$ is unique.
+        \item[2)] Will show that $\int_E hd\nu=\int_E hwd\mu$ for all $h\ge 0$ measurable. In particular, $w=d\nu/d\mu$ (Leibniz notation) is called the Radon-Nikodym derivative (or density) of $\nu$ w.r.t. $\mu$.
+        \item[3)] The result extends to $\mu,\nu$ $\sigma$-finite.
+    \end{enumerate}
+\end{rem}
+\begin{proof}[Proof (von Neumann)]
+    Define $\alpha=\mu+2\nu$ and $\beta=2\mu+\nu$. On $L^2(\alpha)$, consider the map $\Lambda(f)=\int_Efd\beta$. This is bounded since \[|\Lambda(f)|\le\int_E|f|d\beta\le2\int_E|f|d\alpha\le 2\sqrt{\alpha(E)}\|f\|_{L^2(\alpha)}\]
+    By Riesz, there exists $g\in L^2(\alpha)$ s.t. $\Lambda(f)=\int_Egfd\alpha$, i.e., $\int f(2d\mu+d\nu)=\int gf(d\mu+2d\nu)$ for all $f\in L^2(\alpha)$. Rearrange,
+    \[\int_Ef(2-g)d\mu=\int_Ef(2g-1)d\nu\]
+    Consider $A_j=\{x:g(x)\le\frac{1}{2}-\frac{1}{j}\}$, $j\in\NN$. Thus, by taking $f=1_{A_j}$,
+    \[\dfrac32\mu(A_j)\le\int_E f(2g-1)d\mu\le-\dfrac2j\nu(A_j) \]
+    So, $g\ge 1/2$ a.e. (w.r.t. both $\mu,\nu$). Similarly, by considering $\{x:g(x)\ge 2+1/j\}$, can prove that $g\le 2$ $\mu$-, $\nu$- a.e. We extend to simple functions and then to non-negative measurable functions by MCT.
+
+    Consider $f=1_{\{x:g(x)=1/2\}}$, then get $\frac{3}{2}\mu(\{x:g(x)=1/2\})=0$, so $\nu(\{x:g(x)=1/2\})=0$.
+
+    Let $h\ge 0$ measurable and define $f=\frac{h}{2g-1}$ and $w=\frac{2-g}{2g-1}$ (define it to be $0$ if $2g-1=0$). Now
+    \[\int_E hd\nu=\int_Ef(2g-1)d\nu=\int_Ef(2-g)d\mu=\int_E hwd\mu\]
+    Done by taking $h=1_A$. Note that $w\in L^1(\mu)$ since $\int_E wd\mu=\int_E 1_E wd\mu=\nu(E)<\infty$.
+\end{proof}
+
+\begin{rem}\
+    \begin{enumerate}[1)]
+        \item If $\PP$ is a prob measure on $B$ s.t. $\PP\ll dx$, where $dx$ is the Lebesgue measure, then $\frac{d\PP}{dx}=p(x)$ is the Lebesuge prob density of $\PP$. Moreover, there exists a unique decomposition $\PP=\PP_{\ll}+\PP_\perp$. (ESheet)
+    \end{enumerate}
+\end{rem}
+
+\section{Dual Spaces}
+
+\begin{defn}
+    Let $X$ be a topological vector space. The top dual space is \[X'=\{\Lambda:X\to\RR \text{ linear and cts}\}\]
+    If $(X,\|\cdot \|)$ is a normed space, then cts$\Leftrightarrow$bounded, and $X'$ has the operator norm. $X''=(X')'$ is called the bidual space.
+\end{defn}
+We have a point evaluation map $\Lambda\mapsto \Lambda(x)$ for each $x\in X$. [Note that $|\Lambda(x)|\le \|\Lambda\|_{X'}\|x\|_X\le C\|\lambda\|_{X'}$.] Can identify $x\mapsto (\Lambda\mapsto \Lambda(x))$ and regard $X$ as a subspace of $X''$.
+\begin{defn}
+    If $X''=X$, then say $X$ is reflexive.
+\end{defn}
+For $1<p<\infty$, consider the H\"older conjugate $q$ of $p$. Each $g\in L^q$ defines a linear functional on $L^p$ by
+$\Lambda_g(f)=\int fgdx$. This is bounded since $|\Lambda_g(f)|\le\|g\|_{L^q}\|f\|_{L^p}$. In fact $\|\Lambda_g\|=\|g\|_{L^q}$. Get an embedding $L^q\subseteq (L^p)'$.
+\begin{thm}
+    For $1\le p<\infty$, $(L^p)'=L^q$. For $1<p<\infty$, $L^p$ is reflexive.
+\end{thm}
+\begin{rem}
+    The result is false for $p=\infty$, so $L^1$ is not reflexive.
+\end{rem}
+\begin{lem}
+    Under the hypothesis of the theorem, let $U\in (L^p)'$ positive, then $\exists g\in L^q$ s.t. $U(f)=\Lambda_g$ and $\|U\|=\|g\|_{L^q}$.
+\end{lem}
+\begin{proof}[Proof of lemma]
+    On $\RR^n$ consider the finite measure $\mu$ with density $e^{-|x|^2}$. Further define, for each $A\in\mathcal B$, the set function
+    \[\nu(A)= U(e^{-|x|^2/p}1_A)\ge 0\]
+    To show that $\nu$ is countably additive, consider $A_m\in\mathcal B$ s.t. $A_m\downarrow\bigcap _mA_m=\varnothing$ and note $\nu(A_m)= U(e^{-|x|^2/p}1_{A_m})\le\|U\|\|\|e^{-|x|^2/p}1_{A_m}\|_{L^p}\to 0$ by DCT. Hence $\nu$ is a finite measure. Note that $\nu\ll \mu$. [If $\mu(A)=0$, then $\nu(A)\le\|U\|\|\|e^{-|x|^2/p}\|_{L^p}=\|U\|\mu(A)^{1/p}=0$.] By Radon-Nikodym, $\exists\mathcal G\in L^1(\mu)$ non-negative s.t. $\nu(A)=\int_A\mathcal G d\mu$. Consider a simple function $F=\sum_k a_k1_{A_k}$. Compute $$U(e^{-|x|^2/p}F)=\int\sum_k a_k1_{A_k}\mathcal G e^{-|x|^2}dx=\int e^{-|x|^2/p}\sum_{k}a_k1_{A_k}\mathcal G e^{-|x|^2/q}dx$$
+    Set $g=\mathcal G e^{-|x|^2/q}$. Note that $\{e^{-|x|^2/p}F:F\text{ simple}\}$ is dense in $L^p\cap \{\ge 0\}$. Since $fg\in L^1$ [Note $\int |fg|=\int|f|g=U(|f|)\le \|U\|\|f\|_{L^p}<\infty$]. Decomposing $fg$ into $f_+g-f_-g$ and taking limits, we see that $U(f)=\int fg$ for all $f\in L^p$.
+
+    (cf. ES1), have $\|g\|_{L^q}=\sup\{\int |fg|:\|f\|_{L^p}\le 1\}= U(|f|)\le\|U\|<\infty$ and $\|U\|=\sup_{\|f\|_{L^p}\le 1}|\int fg|\le\|g\|_{L^q}$ by H\"older, so $\|U\|=\|g\|_{L^q}$.
+\end{proof}
+\begin{proof}[Proof of thm]
+    Note (ES) that $\Lambda\in (L^p)'$ can be uniquely decomposed as $\Lambda_+-\Lambda_-$, where $\Lambda_\pm$ are positive linear functionals ($\Lambda_\pm(h)\ge 0$ for all $h\ge 0$ a.e.). Apply the preceding lemma.
+\end{proof}
+
+We can characterize duals of subspace of $L^\infty$, e.g., any finite measure defines a linear functional in $C_c(\RR^n)'$ by $f\mapsto \mu(f)$.
+
+\begin{defn}
+    A measure is regular on $\RR^n$ if $\forall\epsilon>0,\forall A\in\mathcal B,\exists C$ closed, $D$ open s.t. $C\subseteq A\subseteq D$ s.t. $\mu(D\setminus C)<\epsilon$
+\end{defn}
+\begin{thm}[Riesz]
+    Let $\Lambda\in (C_c(\RR^n))'$ be positive. Then $\exists$ a $\sigma$-algebra $M\supseteq\mathcal B$ and a regular measure $\mu$ on $M$ s.t. $\Lambda(f)=\int_{\RR^n}fd\mu$.
+\end{thm}
+Proof omitted.
 
 \end{document}

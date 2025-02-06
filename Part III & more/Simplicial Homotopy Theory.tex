@@ -451,4 +451,159 @@ Recall the adjunction in $\bset$ between cartesian product and $\Hom$. Analogous
 \begin{defn}
     A map $f:A\to B$ of simplicial sets is an equivalence if there exists a map $g:B\to A$ s.t. $g\circ f\in\underline{\Hom}(A,A)$ is isomorphic to $1_A$ and $f\circ g$ is isomorphic to $1_B$.
 \end{defn}
+
+Let $K$ be a Kan complx. A point in $K$ is a map $\Delta^0\to K$. A path in $K$ is a map $\Delta^1\to K$. We define $\pi_0(K)$ to be the set of iso classes of objects in $K$. 
+
+Goal: Classify Kan complexes up to equivalence.
+
+Suppose $A\to B$ is an inclusion of simplicial sets. Given $f:A\to K$ to a Kan complex, we can study the lifting problem.
+\begin{center}
+    % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBoBGAXVJADcBDAGwFcYkQBBEAX1PU1z5CKchWp0mrdgGkefEBmx4CRMsXEMWbRCABCPcTCgBzeEVAAzAE4QAtkjIgcEJACZelm-cSuazpKIgjFhg2iBQ9HAAFkZynnYOfi6IgZpSOhYG3EA
+\begin{tikzcd}
+B \arrow[rd, dashed]       &   \\
+A \arrow[u] \arrow[r, "f"] & K
+\end{tikzcd}
+\end{center}
+(If $A\to B$ is anodyne then the lift exists.) A lift is an object in the pullback.
+\begin{center}
+    % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRAAUQBfU9TXfIRQBGclVqMWbADrSmYWACcGWMDGCyAEhAC2XABQAhUgGkAlGe68QGbHgJFRw8fWatEIWfKUq1G6dp6+gCCphZWfHaCRGTO1K5SHrIAIjAMOHQAesTc4jBQAObwRKAAZoq6SADM1DgQSABM8ZLuIKURbRU6SGQgddU8ZV09tfWIwoOdleOjjVwUXEA
+\begin{tikzcd}
+P \arrow[d] \arrow[r]   & {\underline{\Hom}(B,K))} \arrow[d] \\
+\Delta^0 \arrow[r, "f"] & {\underline{\Hom}(A,K))}          
+\end{tikzcd}
+\end{center}
+\begin{prop}
+    $P$ is a Kan complex.
+\end{prop}
+\begin{defn}
+    A map $X\to Y$ of simplicial sets is a Kan fibration if for all horns $\Lambda_i^n\to\Delta^n$, the following problem has a solution.
+    \begin{center}
+        % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRAB12AZOgWwCModAPpYAeoQC+pdJlz5CKAIzkqtRizYANENNnY8BIiqVr6zVohABNXTJAYDComVPVzmq5wAiMBjjoJXTUYKABzeCJQADMAJwheJABmahwIJAAmPRA4hKQyEDTk7NzExAKixCUS+LKVQvTELPtS5NTG+oYsMEsQITgAC1DgySA
+\begin{tikzcd}
+\Lambda_i^n \arrow[d] \arrow[r]       & X \arrow[d] \\
+\Delta^n \arrow[r] \arrow[ru, dashed] & Y          
+\end{tikzcd}
+    \end{center}
+\end{defn}
+Note that A simplicial set $X$ is a Kan complex iff the unique map $X\to\Delta^0$ is a Kan fibration.
+
+Note that Kan fibrations are preserved under pullback, i.e., the pullback of a Kan fibration is a Kan fibration.
+
+To prove the proposition, it suffices to prove that whenever $A\hookrightarrow B$ is an inclusion and $K$ Kan complex, then $\underline{\Hom}(B,K)\to\underline{\Hom}(A,K)$ is a Kan fibration.
+\begin{proof}
+    Translate the data of the commuting square into a lifting problem. Note that $\Delta^n\times A\coprod_{\Lambda_i^n\times A}\Lambda_i^n\times B\to \Delta^n\times B$ is the pushout product which is anodyne.
+\end{proof}
+
+\begin{defn}
+    A map $X\to Y$ is of simplicial sets is a trivial Kan fibration if whenever $A\to B$ is monomorphism, the following problem has a solution.
+    \begin{center}
+        % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRAB12AZOgWwCModAPpYAeoQC+pdJlz5CKAIzkqtRizYANENNnY8BIiqVr6zVohABNXTJAYDComVPVzmq5wAiMBjjoJXTUYKABzeCJQADMAJwheJABmahwIJAAmPRA4hKQyEDTk7NzExAKixCUS+LKVQvTELPtS5NTG+oYsMEsQITgAC1DgySA
+\begin{tikzcd}
+A \arrow[d] \arrow[r]       & X \arrow[d] \\
+B \arrow[r] \arrow[ru, dashed] & Y          
+\end{tikzcd}
+    \end{center}
+\end{defn}
+\begin{thm}
+    If $X\to Y$ is a trivial Kan fibration between Kan complexes, then $X\to Y$ is an equivalence of Kan complexes.
+\end{thm}
+\begin{defn}
+    Suppose $K$ is a Kan complex with a base point $x:\Delta^0\to K$. Then $\pi_1(X,x)$ is the isomoprphism classes of lifts.
+    \begin{center}
+        % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRAB1206AnPRzgBEYDHHQB6ARhABfUuky58hFJPJVajFmyEix44rPkgM2PASIAmddXrNWiEAGkjCs8qJlJGu9se7RCWkZDRgoAHN4IlAAMx4IAFskMhAcCCQAZjlY+KTEFLSkSWyQOMSi6kLEa017NgAPV1LczMr06uoGLDAHECg6OAALMNkKGSA
+\begin{tikzcd}
+\partial\Delta^1 \arrow[d] \arrow[r] & \Delta^0 \arrow[r, "x"] & K \\
+\Delta^1 \arrow[rru, dashed]         &                         &  
+\end{tikzcd}
+    \end{center}
+\end{defn}
+\begin{rem}
+    If $X$ is a based top. space $x:|\Delta^0|\to X$, then that's the same as $x:\Delta^0\to \sing(X)$. (Defn of fundamental group)
+\end{rem}
+\begin{rem}
+    $\pi_1(K,x)$ is naturally a group. The composition is given by horn filling.
+\end{rem}
+For $n\ge 2$, we defien the $n$th homotopy group $\pi_n(K,x)$, where $K$ is a Kan complex with a base point $x$.
+
+\begin{example}
+    $\pi_2(K,x)$ will measure $2$-automoprhisms of $1_x$ up to $3$-isomorphisms.
+\end{example}
+\begin{defn}
+    Let $\Box^n=\Delta^1\times\cdots\times\Delta^1$ ($n$ times) and $\partial\Box^n$ is the sub-simplicial subsets of $\Box^n$.
+\end{defn}
+\begin{defn}
+    If $(K,x:\Delta^0\to K)$ is a pointed Kan complex, then $\pi_n(K,x)$ is the set of isomorphism classes of lifts
+    \begin{center}
+        % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRAB1206AnPRzgBEYDHHQB6ARhABfUuky58hFJPJVajFmyEix44rPkgM2PASIAmddXrNWiEAGkjCs8qJlJGu9se7RCWkZDRgoAHN4IlAAMx4IAFskMhAcCCQAZjlY+KTEFLSkSWyQOMSi6kLEa017NgAPV1LczMr06uoGLDAHECg6OAALMNkKGSA
+\begin{tikzcd}
+\partial\Box^n \arrow[d] \arrow[r] & \Delta^0 \arrow[r, "x"] & K \\
+\Box^n \arrow[rru, dashed]         &                         &  
+\end{tikzcd}
+    \end{center}
+\end{defn}
+Two maps $f,g:\Box\to X$ are equivalent if there eixsts $h:\Box\times\Delta^1\to X$ s.t. $h|_{\Box\times\{0\}}=f$, $h|_{\Box\times\{1\}}=g$ and $h|_{\partial\Box\times\Delta^1}:\partial\Delta^1\to\Delta^0\overset{x}{\to}K$.
+\begin{rem}
+    There is a quotient simplicial set $\Box^n/\partial\Box^n$. and $\pi_n(K,x)$ is the pointed htpy classes of maps $[\Box^n/\partial\Box^n,K]$
+\end{rem}
+\begin{rem}
+    There are $n$ different ways to write $\Box^n=\Delta^1\times\Box^{n-1}$. The boundary inclusion $\partial \Box^n\to\Box^n$ is essentially $(\partial \Delta^1\to\Delta^1)\boxtimes(\partial \Box^{n-1}\to\Box^{n-1})$. We can rephrase the diagram in the defn as
+    \begin{center}
+        % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRAB1206AnPRzgBEYDHHQB6ARhABfUuky58hFJPJVajFmyEix44rPkgM2PASIAmddXrNWiDuyZhYPBljAxgnABIQAWxkACk4AIQgAD3FgMABaSTkAaQBKIwUzZSIySQ07bUddUQlpOQylCxRrXNstBycXNw8vH3Z-INCuXn4GcKiY+MTSVLSyk0VzFWQ1Gs17HXZhYoNZDRgoAHN4IlAAMx5ApDIQHAgkAGYx-cPEY9OkIb2DgIfqe8RLK+eLt7PEAFYvjd-r8kAAWIEvD6gxAQ4zXKHnGHWEDNepQOhwAAW61WMiAA
+\begin{tikzcd}
+\partial\Delta^1 \arrow[d] \arrow[r]   & \Delta^0 \arrow[r] & {\underline{\Hom}(\Box^{n-1},K)} \arrow[d] \\
+\Delta^1 \arrow[r] \arrow[rru, dashed] & \Delta^0 \arrow[r] & {\underline{\Hom}(\partial\Box^{n-1},K))} 
+\end{tikzcd}
+    \end{center}
+    Now it can be seen that this is $\pi_1$ of some other Kan complex. Note that this gives $n$ potentially different group structures $\cdot_1,...,\cdot_n$ on $\pi_n(K,x)$. These operations agree by an Eckmann-Hilton argument. Moreover, $\pi_n$ is abelian for $n\ge 2$.
+\end{rem}
+
+If $X$ is a top. space with a base point $x$, then one might try to compute $\pi_n(X,x)=\pi_n(\sing(X),x)$.
+
+\begin{thm}
+    For any $S^n$, $\pi_i(S^n,x)\cong 0$ if $i<n$.
+\end{thm}
+\begin{prop}
+    Suppose $A$ is a simplicial set. Then there exists an anodyne map $A\to K$ where $K$ is a Kan complex.
+\end{prop}
+\begin{proof}[Proof. (Quillen's small object argument)]
+    Consider the pushout diagram.
+    \begin{center}
+        % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRAB12BjCNAJ2gB9YJwAydALYAjKHUFYAemE44IAAgCCAXzGSZcxYS2l0mXPkIoyARiq1GLNpx78hI9uOmz5Sleu2cACIwDDh0SiDGpth4BETW5Hb0zKyIIBqRJiAYMRbxpLbUyY5pGgDkkXYwUADm8ESgAGYCEkhkIKpI1lEgzRCtiO2diABMPX0DI9TDAMzjLV3TEEhzFFpAA
+\begin{tikzcd}
+\coprod_{\Lambda_i^n\to A}\Lambda_i^n \arrow[d] \arrow[r] & A \arrow[d] \\
+\coprod_{\Lambda_i^n\to A}\Delta^n \arrow[r]              & A'         
+\end{tikzcd}
+    \end{center}
+    We can iterate this construction to obtain a sequence $A\to A'\to A''\to A'''\to\ldots$. Let $K$ be the colimit of this sequence.
+\end{proof}
+\begin{lem}
+    Suppose $A$ is a simplicial set which admits horn fillers along $\Lambda_i^n\to\Delta^n$ when $n\le d$ for some fixed $d$. Then there exists an anodyne map $A\to K$ which is a bijection on $n$-simplices for $n\le d$.
+\end{lem}
+\begin{proof}
+    A variation of small object argument. Use the construction for $n>d$.
+\end{proof}
+\begin{crly}
+    There exists an anodyne map $\Box^n/\partial\Box^n\to K$ where $K$ is a Kan complex with $K_m=\{\ast\}$ for $m<n$.
+\end{crly}
+\begin{proof}
+    Note that $(\Box^n/\partial\Box^n)_m=\{\ast\}$ for every $m<n$. Then apply the lemma.
+\end{proof}
+Note that $|\Box^n/\partial\Box^n|\simeq S^n$, so $K$ is a Kan complex whose geometric realization is homotopy equivalence to $S^n$. To compute $\pi_k(S^n)=\pi_k K$, we consider the pointed homotopy classes of maps $\Box^k/\partial\Box^k\to K$. Note that a map $\Box^k\to K$ is determined by $K_i=\{\ast\}$ for $i\le k<n$.
+
+\begin{lem}
+    As a set, $\pi_n(K,x)$ is the collection of lifts
+    \begin{center}
+        \begin{tikzcd}
+\partial\Delta^n \arrow[d] \arrow[r] & \Delta^0 \arrow[r, "x"] & K \\
+\Delta^n \arrow[rru, dashed]         &                         &  
+\end{tikzcd}
+    \end{center}
+    up to equivalence.
+\end{lem}
+\begin{proof}
+    Consider $r:\Delta^n\to\Box^n$ given by map of posets $[n]\to[1]^n,\ i\mapsto (1,...,1,0,...,0)$, where $1$ is repeated $i$ times. Let $C$ denote the smallest subsimplicial set of $\Box^n$ containing all $m$-simplices, where $m<n$. and all $n$-simplices except $r$. Then $C\subseteq\partial\Box^n\subseteq\Box^n$. Note that $\Delta^n/\partial\Delta^n\cong\Box^n/\partial\Box^n$ as simplicial sets.
+
+    We are reduced to showing that if $K$ is a pointed Kan complex, then pointed homotopy classes of maps from $\Box^n/C\to K$ is the same as homotopy classes of maps $\Box^n/\partial\Box^n\to K$
+\end{proof}
+
 \end{document}

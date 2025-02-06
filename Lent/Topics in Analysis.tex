@@ -216,4 +216,66 @@ So if $f:[0,1]\to \CC$ is a cts function to a cut plane, then we have a continuo
 \begin{proof}
     Write $f+g=f(1+g/f)$. Let $h=1+g/f$, then $\im h$ lies in the right half plane, so $h$ has a cts arg and $w(h,0)=0$. Done by the lemma.
 \end{proof}
+Define homotopy between two paths.
+\begin{lem}
+    Let $f_1,f_2:[0,1]\to\CC^\ast$ be closed paths. If $f_1\simeq_F f_2$, where $F:[0,1]^2\to\CC^\ast$, then $w(f_1,0)=w(f_2,0)$.
+\end{lem}
+\begin{proof}
+    Note that $\im F$ is closed in $\CC$, so can find $\epsilon>0$ s.t. $|F(s,t)|>\epsilon$ for all $s,t$. By unif continuity, find $\delta>0$ s.t. $d((s,t),(s',t'))<\delta\Rightarrow|F(s,t)-F(s',t')|<\epsilon$. Choose a dissection $\{0=s_0<s_1<\ldots<s_n=1\}$ s.t. $s_{k+1}-s_k<\delta$. Then for all $k$ and $t$, we have
+    \[F(s_k,t)=F(s_{k+1},t)+h_k(t)\]
+    where $|h(t)|<\epsilon$. Since $|F(s_{k+1},t)|>\epsilon$, we are in the situation of the previous lemma. Done.
+\end{proof}
+\begin{crly}[Topological argument principle]
+    Let $D$ be the closed unit disk in $\CC$ and $f:D\to \CC$ cts s.t. $f(z)\neq 0$ whenever $|z|=1$. Let $g:[0,1]\to\CC$ with $g(t)=f(e^{i2\pi t})$. If $w(g,0)\neq 0$, then $f$ has a root in $D$.
+\end{crly}
+\begin{proof}
+    Suppose $f$ is never zero in $D$. We define $F(s,t)=f(se^{i2\pi t})$ for $s,t\in [0,1]^2$, i.e., $g$ is null-homotopic, so has winding number zero.
+\end{proof}
+\begin{crly}
+    No retraction $D\to\partial D$.
+\end{crly}
+\begin{proof}
+    If such a retraction exists, then define $g(t)$ as in the previous corollary. Then $w(g,0)=1$, so there exists $z$ s.t. $f(z)=0$. Contradiction.
+\end{proof}
+\begin{crly}[FTA]
+    Every non-constant complex poly has a root in $\CC$.
+\end{crly}
+\begin{proof}
+    Let $p(z)=a_nz^n+\ldots+a_0$, $a_n\neq 0$. Choose $r>1$ s.t. $|a_nr|>|a_{n-1}|+\ldots+|a_0|$. Then for $|z|=r$, have
+    \begin{align*}
+        |a_nz^n|&> (|a_{n-1}|+\ldots+|a_0|)r^{n-1}\\
+        &\ge |a_{n-1}z^{n-1}|+\ldots+|a_0|\\
+        &\ge |a_{n-1}z^{n-1}+\ldots+a_0|
+    \end{align*}
+    Let $f:D\to\CC,\ z\mapsto p(rz)$, so $f(z)=g(z)+h(z)$ where $g(z)=a_n(rz)^n$. We have $|g(z)|>|h(z)|$ when $|z|=1$. Consider the paths $u=f(e^{i2\pi t}), v=g(e^{i2\pi t}), a=h(e^{i2\pi t})$. Have $|a(t)|<|v(t)|$. Apply dog-walking lemma, get $w(u,0)=w(v,0)=n$. [Write $a_n=qe^{i\alpha}$, define $\theta(t)=2\pi nt+\alpha$ is a cts choice of argument]. So there exists $z_0$ s.t. $f(z_0)=0$, so $p(rz_0)=0$.
+\end{proof}
+
+\section{Polynomial Approximation}
+\begin{prop}[Chebyshev Inequality]
+    Let $X$ be a square integrable r.v. with $\mathbb EX=\mu$ and $\operatorname{var}(X)=\sigma^2$, then
+    \[\PP(|X-\mu|\ge c\sigma)\le\dfrac{1}{c^2}\]
+\end{prop}
+\begin{proof}
+    $\sigma^2=\mathbb E[(X-\mu)^2]\ge (c\sigma^2)\mathbb E[1_{|X-\mu|\ge c\sigma}]$
+\end{proof}
+\begin{crly}
+    Let $X_1,...,X_n$ be i.i.d Bernoulli variables with parameter $t\in[0,1]$. Let $Y_n(t)=\frac{1}{n}\sum_{i=1}^n X_i$. Then
+    \[\forall \delta>0,\ \PP(|Y_n(t)-t|\ge\delta)\le\dfrac{1}{\delta^2n}\]
+\end{crly}
+\begin{proof}
+    Observe that $\sigma^2=\operatorname{var}(Y_n)\le 1/n$. Apply Chebyshev with $c=\delta\sqrt n$.
+    \[\PP(|Y_n-t|\ge \delta)\le \PP(|Y_n-t|\ge (\sigma\sqrt n)\delta)\le\dfrac{1}{\delta^2n}\]
+    Note that $\sigma<1/\sqrt{n}$, so the first inequality makes sense.
+\end{proof}
+\begin{thm}[Weierstrass approximation theorem]
+    Let $f:[0,1]\to\RR$ be cts. For all $\epsilon>0$, there exists a poly $p$ s.t. $\|p-f\|_\infty<\epsilon$.
+\end{thm}
+\begin{proof}
+    For each $n=1,2,3,...$, let $Y=Y_n(t)$ be the r.v. defined in the previous corollary.
+
+    \textbf{Step 1:} We show that $\mathbb E[f(Y_n(t))]$ is a polynomial in $t$. Compute
+    \[\mathbb E[f(Y_n(t))]=\sum_{k=0}^n f(k/n)\PP(Y_n(t)=k/n)=\sum_{k=0}^nf(k/n)\binom{n}{k}t^k(1-t)^{n-k}\]
+
+    \textbf{Step 2:} We show that for all $\epsilon>0$, there exists a sufficiently large $n$ s.t. $|\mathbb E[f(Y_n(t))]-f(t)|<\epsilon$ for all $t\in [0,1]$. We know that $\exists M>0$ s.t. $|f(t)|<M$ for all $t$. Let $\epsilon>0$. Uniform continuity implies that $|f(s)-f(t)|<\epsilon/2$ whenever $|s-t|<\delta$. Now $\PP(|Y_n-t|\ge\delta)$
+\end{proof}
 \end{document}

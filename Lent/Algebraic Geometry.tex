@@ -279,5 +279,111 @@ Note that $I\subseteq\sqrt I$ and $Z(I)=Z(\sqrt I)$.
     so $g\in\sqrt J$.
 \end{proof}
 
+\section{Coordinate Rings and Morphisms}
+\begin{crly}
+    There is a bijective correspondence
+    \begin{align*}\{\text{affine alg subsets of $\bA^n$}\}&\longleftrightarrow\{\text{radical ideals in }k[x_1,...,x_n]\}\\
+    & X\rightarrow I(X)\\
+    &Z(J)\leftarrow J
+    \end{align*}
+\end{crly}
+\begin{proof}
+    $Z(I(X))=X$ and $I(Z(J))=\sqrt J$.
+\end{proof}
+This specializes to 
+\[\{\text{affine varieties in }\bA^n \}\leftrightarrow\{\text{prime ideals of }k[x_1,...,x_n]\}\]
+
+\begin{defn}
+    $X\subseteq\bA^n$ affine algebraic set. The coordinate ring on $X$ (the ring of regular functions on $X$) is $A(X)=k[x_1,...,x_n]/I(X)$. [Alternative notations include $\mathcal O_X,\mathcal O(X), k[X]$,...]
+\end{defn}
+\begin{rem}
+    Have an algebraic description of evaluation of $P\in X$. Write $P=(p_1,...,p_n)$, then
+    \[ev_P=k[x_1,...,x_n]\to k[x_1,...,x_n]/(x_1-p_1,...,x_n-p_n)\overset\cong\to k\]
+    Call $\mathfrak m_P=(x_1-p_1,...,x_n-p_n)$, then $\mathfrak m_P=I(\{P\})$. For $P\in X\in\bA^n$, $I(X)\subseteq\mathfrak m_P$, and the image of $\mathfrak m_P$ in $A(X)$ is the ideal of regular functions on $X$ which vanish at $P$.
+\end{rem}
+\begin{defn}
+    $X\subseteq \bA^n$, $Y\subseteq\bA^m$ affine alg. sets. A morphism (regular map) from $X$ to $Y$ is $f:X\to Y$ s.t. $\exists p_1,...,p_m\in A(X)$ with $f(P)=(p_1(P),...,p_m(P))$ for all $P\in X$. Denote the set of morphisms $X\to Y$ by $\operatorname{Mor}(X,Y)$. In particular, if $Y=\bA^1$, then $\operatorname{Mor}(X,\bA^1)=A(X)$.
+\end{defn}
+\begin{defn}
+    Let $f:X\to Y$ be a morphism. The pullback of $f$ is $f^\ast:A(Y)\to A(X)$, $g\mapsto g\circ f$. 
+\end{defn}
+\begin{enumerate}[1)]
+    \item Morphisms are cts w.r.t. Zariski topology. If $Z=Z(g_1,...,g_r)\subseteq Y$, then
+    \[f^{-1}(Z)=\bigcap_i f^{-1}(Z(g_i))=\bigcap_i Z(f^\ast g)=Z(f^\ast g_1,...,f^\ast g_r)\]
+    \item Morphisms need not be closed, e.g., $\pi_x:\bA^2\to\bA^1$ sends $Z(xy-1)$ to $\bA^1\setminus\{0\}$.
+    \item Functorial.
+    \item Pullback $f^\ast:A(Y)\to A(X)$ is a ring hom, which restricts to the identity on $k$, i.e., $f^\ast$ is a $k$-algebra hom.
+\end{enumerate}
+\begin{example}
+\begin{enumerate}[1)]
+    \item Let $n\ge m$, $\pi:\bA^n\to\bA^m$ projection on to the first $m$ coords. Then $\pi$ is a morphism and $\pi^\ast:k[y_1,...,y_m]\to k[x_1,...,x_n]$ is given by $y_i\to y_i\circ \pi=x_i$, i.e., this map is the natural inclusion.
+    \item $f:\bA^1\to Z(y-x^2)\subseteq\bA^2$, $t\mapsto (t,t^2)$. Then $f^\ast:k[x,y]/(y-x^2)\to k[t]$, $x\mapsto t,\ y\mapsto t^2$, is an iso. More gnerally, the affine $d$-Veronese embedding of $\bA^1$ is the image of $t\mapsto (t,t^2,...,t^d)\subseteq\bA^d$ (degree $d$ Veronese curve).
+\end{enumerate}
+\end{example}
+\begin{thm}
+    Let $X\subseteq\bA^n$, $Y\subseteq\bA^m$ be affine alg. sets. Then $f\mapsto f^\ast$ defines a bijection $\operatorname{Mor}(X, Y)\to \Hom_k(A(Y),A(X))$
+\end{thm}
+\begin{proof}
+    Let $x_1,...,x_n$, $y_1,...,y_n$ be coords on $\bA^n$, $\bA^m$ respectively. A morphism $f:X\to Y$ described by $P\mapsto (f_1(P),...,f_m(P))$, $f_i\in A(X)$. Then $f^\ast y_i=f_i$ by defn, so $f$ can be recovered from $f^\ast$, i.e., the map is inj. 
+    
+    If $\lambda:A(Y)\to A(X)$ is a $k$-algebra hom. Define $f_i=\lambda(y_i)$ and $f:X\to \bA^m$ by $f=(f_1,...,f_m)$.\\
+    \textbf{Claim: $f(X)\subseteq Y=Z(I(Y))$, i.e., $g\circ f$ vanishes for all $P\in X$ and all $g\in I(Y)$} We have $g\circ f=g(f_1,...,f_m)=g(\lambda(g_1),...,\lambda(g_m))=\lambda(g)$, so this is $0$ if $g\in I(Y)$. Note that $\lambda=f^\ast$, since $\lambda(y_i)=f^\ast(y_i)$.
+\end{proof}
+\begin{defn}
+    A morphism $f:X\to Y$ is an isomorphism if $f$ is bijective and $f^{-1}$ is a morphism.
+\end{defn}
+Note that being bijective does not imply being an iso, e.g., $X=\bA^1$, $Y=Z(y^2-x^3)\subseteq\bA^2$. $f:X\to Y,\ t\mapsto (t^2,t^3)$ is a bijective morphism. If $f^{-1}$ is a morphism, then $\exists fg\in k[x,y]$ s.t. $g(t^2,t^3)=t$. Contradiction.
+\begin{crly}
+    $f:X\to Y$ is an iso iff $f^\ast$ is an iso.
+\end{crly}
+This is affine.  Will see that $\hat\CC$ (Riemann sphere) is a proj. variety. If $f$ is a fn on $\hat\CC$ which looks like a finite-valued poly everywhere, then it's constant by Liouville.
+
+\section{Proof of Nullstellensatz}
+\begin{defn}
+    $S$ is a finitely generated $R$-algebra if $\exists s_1,...,s_n\in S$ s.t. $S=R[s_1,...,s_n]$. Say $S$ is integral over $R$ if $\exists$ monic poly $f\in R[x]$ with $f(s)=0$.
+\end{defn}
+\begin{prop}
+    Let $s\in S$, TFAE,
+    \begin{enumerate}[1)]
+        \item $s$ is integral over $R$,
+        \item $R[s]$ is a f.g. $R$-mod
+        \item $\exists$ f.g. $R$-mod $R'$ which is a subring of $S$ s.t. $R[s]\subseteq R'$.
+    \end{enumerate}
+\end{prop}
+\begin{proof}
+    1)$\Rightarrow$2): Take a monic poly $f$ which annihilates $s$, then $R[s]$ is generated by $1,s,...,s^{\deg (f)-1}$ as $R$-mod.
+
+    2)$\Rightarrow$3): Take $R'=R[s]$.
+
+    3)$\Rightarrow$1): Write $R'=Rv_1+\cdots+Rv_n$. Consider the multiplication by $s$. Let $A$ be the matrix of this $R$-lienar map. Then $Av=sv$, so $(A-s\id)v=0$, so $\det (A-s\id)=0$ and $\det (A-s\id)$ is monic over $R$, so $s$ is integral over $R$.
+\end{proof}
+\begin{crly}
+    If $R\subseteq S$ are rings and $S$ is f.g. as an $R$-alg and $R$-mod, then all elements of $S$ are integral over $R$.
+\end{crly}
+\begin{lem}[Zariski's lemma]
+    Let $K/k$ be a field extension. If $K$ is a f.g. $k$-algebra, then $K$ is a f.g. $k$-module.
+\end{lem}
+Now prove Weak Nullstellensatz assuming Zariski's lemma.
+\begin{proof}[Proof of Weak Nullstellensatz]
+    Note that $(x_1-a_i,...,x_n-a_n)$ is maximal in $k[x_1,...,x_n]$.
+
+    Suppose $\mathfrak m\trianglelefteq k[x_1,...,x_n]$ is maximal. so $k\hookrightarrow k[x_1,...,x_n]\to k[x_1,...,x_n]/\mathfrak m=K$, so $K/k$ is a field extension. $K$ is f.g. as $k$-algebra, so f.g. as $k$-mod (Zariski), so the extension is finite. But $k$ is alg-closed, so the extension is trivial. $\phi$ is surj. Define $a_i=\phi^{-1}(x_i\mod \mathfrak m)$, so $x_i-a_i\in\mathfrak m$. Then $\mathfrak m=(x_1-a_1,...,x_n-a_n)$ by maximality of the other.
+\end{proof}
+\begin{prop}
+    Suppose $k\subseteq k(s)$ is a field extension and $s$ is transcendental over $k$. Then
+    \begin{enumerate}[1)]
+        \item $k[s]$ is a UFD, and contains an infinite set of pairwise coprime elements.
+        \item If $t\in k(s)$ is integral over $k[s]$, then $t\in k[s]$.
+    \end{enumerate}
+\end{prop}
+\begin{proof}
+    1) The map $k[x]\to k[s]$ is an iso. If we can only find a finite set of monic irreducible pairwise coprimes $p_1,...,p_k$, then $p_1\cdots p_k+1$ is pairwise coprime to everything on the list.
+
+    2) Write $t=p(s)/q(s)$ and suppose $\exists f_0,...,f_{n-1}\in k[s]$ s.t. $(p/q)^n+f_{n-1}(p/q)^{n-1}+\cdots+f_0=0$. If $p,q$ are coprime, then $q$ is const, i.e., $t\in k[s]$.
+\end{proof}
+\begin{proof}[Proof of Zariski's lemma]
+    Induction on the number of generators of $K$ as a $k$-alg.
+    Base case: $K$ is generated by $s$. $s^{-1}\in k[s]$, so $s$ is alg over $k$ so integral over $k$, so $K$ is f.g. as a $k$-mod. Suppose the lemma holds for $<n$ generators. Let $K=k[s_1,...,s_n]$. Apply inductive hypothesis to $k(s_1)$, so $K$ is a f.g. $K(s_1)$-mod. If $s_1$ is alg, then done. Suppose $s_1$ is transcendental over $k$. Note that each $s_i$, $2\le i\le n$ is alg over $k(s_1)$, so $\exists f_{ij}\in k(s_1)$ s.t. $s_i^{n_i}+\cdots+f_{i,n-1}s_i^{n_{i}-1}+\cdots+f_{i,0}=0$. There exists $f\in k[s_1]$ s.t. $(fs_i)^{n_i}+ff_{i,n-1}(fs_i)^{n-1}+\cdots+f^{n_i}f_0=0$, so $fs_i$ is integral over $k[s_1]$. If $h\in k(s_1)\subseteq K=k[x_1,...,x_n]$, then $\exists N$ s.t. $f^Nh\in k[s_1][fs_2,...,fs_n]$, so $f^Nh$ is integral over $k[s_1]$. Since $k[s_1]$ is integrally closed, $f^Nh\in k[s_1]$. This holds for all $h$, so choose $h=1/t$, $t$ is coprime to $f$ by the previous prop, so contradiction. So $s_1$ is algebraic.
+\end{proof}
 
 \end{document}

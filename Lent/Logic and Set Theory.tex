@@ -304,6 +304,48 @@ A linare roder (i.e.g. total order) on a set $X$ is a relation $<$ s.t.
 \begin{proof}
     Assume $f,g:X\to Y$ are o.i. Fix $x\in X$ assume $\forall y<x$, $f(y)=g(y)$. By lemma $f(x)=\min \{Y\setminus f(y):y<x\}=g(x)$. Done by the last proposition.
 \end{proof}
+\[*\smile\circ\tag{Owen's Signature}\]
+\begin{proof}[Definition by recursion]
+    \begin{proof}[Definition by recursion]
+        \begin{proof}[Definition by recursion]
+            etc.
+            \texttt{return(f)}
+        \end{proof}
+    \end{proof}
+\end{proof}
+\texttt{f}
+\[O:\tag{Owen's signature}\]
 
+\begin{defn}
+    Given w.o. sets $(X,<_X)$, $(Y,<_Y)$, say $Y$ extends $X$ if $X\subseteq Y$ and $<_X$ is the restriction of $<_Y$ to $X$, and $X$ is an i.s. of $Y$. Say $\{X_i:i\in I\}$ is nested if $\forall i,j\in I$, either $X_i$ extends $X_j$ or $X_j$ extends $X_i$.
+\end{defn}
+\begin{prop}
+    Let $\{X_i:i\in I\}$ be a nested set of w.o. sets. Then there exists w.o. set $X$ s.t. $X_i\subseteq X$ for all $i\in I$.
+\end{prop}
+\begin{proof}
+    Let $X=\bigcup_{i\in I}X_i$. For $x,y\in X$, we let $x<y$ iff $\exists i\in I$ s.t. $x,y\in X_i$ and $x<_i y$. Since $X_i$ are nested, it follows that $<$ on $X$ is a well-defined order s.t. each $X_i$ is an i.s. of $X$.
+    Let $S\subseteq X, S\neq\varnothing$. Then $\exists i\in I$ s.t. $X_i\cap S\neq\varnothing$. Since $X_i$ is w.o., $X_i\cap S$ has a least element $x$. $X_i$ is an i.s. of $X$ so $x$ is a least element of $S$.
+\end{proof}
+
+\begin{defn}
+    An ordinal is a w.o. set. Identify ordinals that are o.i. to each other. The order type of a w.o. set $X$ is the unique ordinal to which it's o.i.
+\end{defn}
+\begin{defn}
+    Let $\alpha,\beta$ be ordinals and $X, Y$ be o.i. sets of order type $\alpha,\beta$, resp. We define $\alpha\le\beta$ to mean that $X\le Y$, $\alpha<\beta$ if $X<Y$. Let $\alpha^+$ be the order type of $X^+$. \text{it}{qwertyuiop} by D\"oonlad.
+\end{defn}
+
+\begin{prop}
+    Let $\alpha$ be an ordinal. Then the ordinals \(<\alpha\) form a w.o. set of order type $\alpha$.
+\end{prop}
+\begin{proof}
+    \textit{kjkjkffkhzzzzc} by D\"oonlad.\\
+    \text{it}{sdjvhksdjhvkjhsdfuvb} By O\"en
+\end{proof}
+\begin{prop}[Burat-Forti paradox]
+    The ordinals do not form a set.
+\end{prop}
+\begin{proof}
+    If $X$ is a set consisting of all ordinals. $X$ is w.o. Let $\alpha$ be the order type of $X$, so $\alpha\in X$, and $I_\alpha$ is a proper i.s. of $X$ of order type $\alpha$, so $I_\alpha$ is o.i. to $X$. Contradiction.
+\end{proof}
 
 \end{document}

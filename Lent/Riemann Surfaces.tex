@@ -227,9 +227,66 @@ Note that if $(g,V)$ and $(h,V)$ are both analytic continuations of $(f,U)$ alon
 \begin{defn}
     A Riemann Surface $R$ is a (non-empty) connected Hausdorff top. space with a collection of charts (homeo to open subsets of $\CC$) such that the transition functions are holo'c.
 \end{defn}
-Note the transition function $\tau_{ij}=\varphi_i\varphi_j^{-1}$ is biholo'c. In particular, any Riemann surface is orientable. Second countability is automatic from the defiintion. (Rado 1925)
+Note the transition function $\tau_{ij}=\varphi_i\varphi_j^{-1}$ is biholo'c. In particular, any Riemann surface is orientable. Second countability is automatic from the definition. (Rado 1925)
 
 Two atlases are said to be compatible (Same Riemann surface) if their union is an atlas.
+
+\[\overset{..}{\tilde{}}\tag{Owen's Signature}\]
+
+\begin{prop}
+    The Riemann sphere $\CC_\infty$ is the top. space $\CC\cup\{\infty\}$ (open sets are open subsets of $\CC$ if $\infty\not\in U$ or $U^c$ is compact in $\CC$ if $\infty\in U$.) Charts $\varphi_0:\CC\to\CC$ and $\varphi_1(\CC_\infty\setminus\{0\})$
+\end{prop}
+
+Given $P(z,w)\in\CC[z,w]$ Consider $S=\{(z,w)\in\CC^2:P(z,w)=0,(\partial P/\partial z,\partial P/\partial w)\neq (0,0)\}$. Then each conn. component is a Riemann surface. Suppose $(z_0,w_0)\in S$ and $\partial P/\partial z\neq 0$ at $z_0$. Get $f_{w_0}=P(-,w_0)$. By shrinking domain, assume $f_{w_0}D(z_0,r)\to\im(f_{w_0})$ Let $\gamma=\partial D(z_0,r)$ oriented counterclockwise.
+
+
+
+\[\supset;\tag{Owen's Signature}\]
+\section{Maps on Riemann Surfaces}
+\subsection{Analytic Maps}
+\begin{defn}
+    For Riemann Surfaces $R,S$, a cts function $f:R\to S$ is analytic if for all charts $(\varphi, U)$ on $R$ and $(\psi, W)$ on $S$, have (if $U\cap f^{-1}(W)\neq\varnothing$) $\psi f\varphi^{-1}:\varphi(U\cap f^{-1}(W))\to \CC$ is holomorphic.
+\end{defn}
+Note that if $R=S$ as top. spaces and $f=\id$, then two atlases are compatible iff $\id$ is analytic.
+
+Consider $\bar\CC$ ($\CC$ with chart given by conjugation), then any biholomorphic map $f:\CC\to\CC$ is not analytic as a map $f:\bar\CC\to\CC$, but the map $f(z)=\bar z$ is analytic.
+
+Let $U$ be a domain in $\CC$. A cts function $f:U\to\CC_\infty$ is analytic iff $f$ is holo'c on $U\setminus f^{-1}(\{\infty\})$ and $g=1/f(z)$ is holo'c on $U\setminus f^{-1}(\{0\})$. If $g$ is never $0$, then $f$ is holo'c. Otherwise $|f(z)|\to \infty$ near the zeros of $g$, i.e., $f$ has poles, i.e., $f$ is meromophic on $U$.
+
+A map $f:\CC_\infty\to\CC$ is analytic iff $f:\CC\to\CC$ and $f(1/z)$ are both holomorphic. By compactness, $f$ is bounded, so $f$ is constant by Liouville.
+\begin{defn}
+    Let $R$ be a Riemann surface. An analytic function $f$ on $R$ is $f:R\to\CC$ (analytic), and a meromorphic function $g$ on $R$ is $g:R\to\CC_\infty$ (analytic)
+\end{defn}
+\begin{prop}
+    $f:\CC_\infty\to\CC_\infty$ is analytic and nonconstant iff
+    \[f(z)=\dfrac{c(z-\alpha_1)\cdots(z-\alpha_m)}{(z-\beta_1)\cdots(z-\beta_n)}\]
+    where $c\neq 0$ and $\alpha_i\neq\beta_j$ with $\infty\mapsto\begin{cases}
+        \infty & m>n\\
+        c & m=n\\
+        0 & m<n
+    \end{cases}$
+\end{prop}
+\begin{proof}
+    Analytic iff $f(z)$ and $f(1/z)$ are both meromorphic on $\CC$.
+    
+    ($\Leftarrow$): Clear
+    ($\Rightarrow$): If $f(\infty)\neq\infty$. Replace by $1/f$. By continuity, there exists $K>0$ s.t. no poles in $|z|>K$, so we have a finite number of poles $\{\zeta_1,...,\zeta_i\}$. Have Laurent series around each pole. Let $Q_j(z)$ be the principal part of the Laurent series around $\zeta_j$. Let $\bar f=f-Q_1-\cdots-Q_i$, then $f$ has removable singularities at each $\zeta_j$ and holo'c elsewhere (including $\infty$). So $\bar f:\CC_\infty\to\CC$ is analytic, so constant.
+
+    
+\end{proof}
+
+\begin{thm}[Identity theorem for Riemann surfaces]
+    If $f,g:R\to S$ are analytic maps between Riemann surfaces, then $f\equiv g$ on $R$ or $\forall w\in R$, $\exists \mathcal N$ open nbd of $w$ s.t. $f\neq g$ on $\mathcal N\setminus\{w\}$.
+\end{thm}
+\begin{proof}
+    Let $E=\{w\in R:\exists\mathcal N\ni w,\ f\equiv g\text{ on }\mathcal N\}$, $F=\{w\in R:\exists\mathcal N\ni w,\ f\neq g\text{ on }\mathcal N\setminus\{w\}\}$. Need to show $E\cup F= R$.
+
+    If $f(w)\neq g(w)$. Find $U,V$ open and separating $f(w),g(w)$, then $\mathcal N=f^{-1}(U)\cap f^{-1}(V)$ shows $w\in F$.
+
+    If $f(w)=g(w)$. Take charts $(\varphi, U)$ in $R$ around $w$ and $(\psi, W)$ in $S$ around $f(w)$. $\psi f\varphi^{-1}$ and $\psi g\varphi^{-1}$ are holo'c on $\varphi(U\cap f^{-1}(U)\cap g^{-1}(V))$ and agree at $\varphi(w)$. By identity theorem in CA, there is a disk $D(\varphi(w),r)$ s.t. $\psi f\varphi^{-1},\psi g\varphi^{-1}\varphi^{-1}$ either agree or disagree except at $\varphi(w)$. Let $\mathcal N=\varphi^{-1}(D(\varphi(w),r))$, so $w\in E\cup F$.
+
+    We are done by connectedness.
+\end{proof}
 
 
 \end{document}
