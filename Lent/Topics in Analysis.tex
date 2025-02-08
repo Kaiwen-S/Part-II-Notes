@@ -276,6 +276,43 @@ Define homotopy between two paths.
     \textbf{Step 1:} We show that $\mathbb E[f(Y_n(t))]$ is a polynomial in $t$. Compute
     \[\mathbb E[f(Y_n(t))]=\sum_{k=0}^n f(k/n)\PP(Y_n(t)=k/n)=\sum_{k=0}^nf(k/n)\binom{n}{k}t^k(1-t)^{n-k}\]
 
-    \textbf{Step 2:} We show that for all $\epsilon>0$, there exists a sufficiently large $n$ s.t. $|\mathbb E[f(Y_n(t))]-f(t)|<\epsilon$ for all $t\in [0,1]$. We know that $\exists M>0$ s.t. $|f(t)|<M$ for all $t$. Let $\epsilon>0$. Uniform continuity implies that $|f(s)-f(t)|<\epsilon/2$ whenever $|s-t|<\delta$. Now $\PP(|Y_n-t|\ge\delta)$
+    \textbf{Step 2:} We show that for all $\epsilon>0$, there exists a sufficiently large $n$ s.t. $|\mathbb E[f(Y_n(t))]-f(t)|<\epsilon$ for all $t\in [0,1]$. We know that $\exists M>0$ s.t. $|f(t)|<M$ for all $t$. Let $\epsilon>0$. Uniform continuity implies that $|f(s)-f(t)|\le \epsilon/2$ whenever $|s-t|\le\delta$. Now $$\PP(|f(Y_n(t))-f(t)|\ge\epsilon)\le \PP(|Y_n-t|\ge\delta)\le\dfrac{1}{\delta^2n}$$
+    Choose $n$ s.t. $\frac{1}{\delta^2n}<\frac{\epsilon}{4M}$ so that
+    \begin{align*}|\mathbb E(f(Y_n(t))-f(t))|&\le\mathbb E|f(Y_n(t))-f(t)|\\
+    &=\mathbb E(|f(Y_n(t))-f(t)|1_{|f(Y_n(t))-f(t)|<\epsilon/2})+\mathbb E(|f(Y_n(t))-f(t)|1_{|f(Y_n(t))-f(t)|\ge\epsilon/2})\\
+    &\le\frac{\epsilon}{2}+2M\frac{\epsilon}{4M}=\epsilon
+    \end{align*}
+    and we are done.
 \end{proof}
+\begin{crly}
+    Let $f:[0,1]\to\RR$ cts. Then there exists a seuquence of polys $(p_k)_{k\in\NN}$ s.t. $p_k\to f$ unif. on $[0,1]$ as $k\to\infty$.
+\end{crly}
+\begin{thm}[Chebyshev equal ripple criterion]
+    Let $f:[0,1]\to\RR$ be cts and $p$ a polynomial of degree $p<n$. Suppose there exists $a\le a_0<a_1<\cdots<a_n\le b$ s.t. $\|f-p\|_\infty$ such that \textbf{exactly one of the following holds}\begin{enumerate}[(1)]
+        \item $f(a_k)-p(a_k)=(-1)^k\|f-p\|_\infty$ for all $k=0,...,n$
+        \item $f(a_k)-p(a_k)=(-1)^{k+1}\|f-p\|_\infty$ for all $k=0,...,n$.
+    \end{enumerate}
+    Then, we have $\|f-p\|_\infty\le\|q-f\|_\infty$ for all polynomials $q$ with $\deg q<n$. (i.e. $p$ is hte best poly approximation of $f$ of degree less than $n$)
+\end{thm}
+\begin{proof}
+    Suppose $p$ has property $(1)$ and $q$ is a poly of deg $<n$ with $\|q-f\|_\infty<\|p-f\|_\infty$. Then
+    \begin{itemize}
+        \item for $k$ even, we have $f(a_k)-p(a_k)=\|f-p\|_\infty$ and $f(a_k)-q(a_k)<r$ and $f(a_k)-q(a_k)<r$, so $q(a_k)>p(a_k)$
+        \item for $k$ odd, similar argument shows that $q(a_k)<p(a_k)$.
+    \end{itemize}
+    By IVT, we can find a root of $p(t)-q(t)$ between $(a_k,a_{k+1})$, so $p(t)-q(t)$ has $n$ roots. But this has degree $<n$, so $p\equiv q$.    
+\end{proof}
+In fact the equal ripple condition is also necessary.
+
+We try to find a poly of deg $<n$ which best approximates $t^n$.
+\begin{lem}
+    $\cos(n\theta)$ is a poly of deg $n$ in $\cos\theta$ with leading coeff $2^{n-1}$.
+\end{lem}
+\begin{proof}
+    Expand $(\cos\theta+i\sin\theta)^n$.
+\end{proof}
+\begin{defn}
+    The $n$th Chebyshev polynomial $T_n(x)$ is defined by $T_n(\cos\theta)=\cos(n\theta)$.
+\end{defn}
+Observe that $|T_n(t)|\le 1$ for $t\in[-1,1]$ with roots $t=\cos\frac{(2l-1)\pi}{2n}$ for $l=1,...,n$. It reaches extremum at $\cos(k\pi/n)$.
 \end{document}

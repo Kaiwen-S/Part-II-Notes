@@ -396,7 +396,15 @@ Given simplicial sets $A, B$, the product simplicial set $A\times B$ is the func
     \end{center}
     where the vertical map in the middle is the pushout product map.
 
-    To define the maps in the retract diagram, it suffices to define the bottom row as all vertical maps are monomorphisms. The first horizontal map is given by $\Delta^n\times\{1\}\hookrightarrow\Delta^n\times\Delta^1$. The second map is given by a grid(need to insert diagrams). One can check that this produces a retract diagram.
+    To define the maps in the retract diagram, it suffices to define the bottom row as all vertical maps are monomorphisms. The first horizontal map is given by $\Delta^n\times\{1\}\hookrightarrow\Delta^n\times\Delta^1$. The second map is given by a grid.
+    \begin{center}
+        % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBoBGAXVJADcBDAGwFcYkRiQBfU9TXfIRTkK1Ok1bty3XiAzY8BIgCZRNBizaIQymXwWCiZYmI2TtnHvoFLhpE+olaQ0q3P6KhyVQ-Gb2um7yNl4AzPamTuwAOtEAxlAQOAhBHoYoACwRjv7aWAC0rrLBnkQArNl+5iBYeu4GtsgAbJVmzrWpDV4A7K1R2rEJSSnFaY0AHH25NXUl6ciTVDnVhJ0hRL1LVc6DicmzY15ZW23sBUXWpSgVJ-0za1fNattnANQX9eso4bfTu8PcMQwKAAc3gRFAADMAE4QAC2SHCIBwECQGTcMPhaJoKKQZQxsIRiAqyNRiCaBKx5JxZO6lKJvVJSHG9OZNKQAE5WYgOezEORiNyBXzyOQhSImfzlNzeZLyBTZJiiZM5fjFYSkIzcfz0eqqeQsqqhSTtfKhS05aEhUjTdK9UTyFqyQbuao5XT7UgJdq7VCNcS+b6QErsXLuTayYLPYgyGHKFwgA
+\begin{tikzcd}
+0 \arrow[r] \arrow[d] & 1 \arrow[r] \arrow[d] & 2 \arrow[r] \arrow[d] & \cdots \arrow[r] & i-1 \arrow[r] \arrow[d] & i \arrow[r] \arrow[d] & i \arrow[r] \arrow[d] & \cdots \arrow[r] & i \arrow[d] \\
+0 \arrow[r]           & 1 \arrow[r]           & 2 \arrow[r]           & \cdots \arrow[r] & i-1 \arrow[r]           & i \arrow[r]           & i+1 \arrow[r]         & \cdots \arrow[r] & n          
+\end{tikzcd}
+    \end{center} The grid represents $\Delta^n\times\Delta^1$. Each point in the grid is labelled by its image in $\Delta^n$. The arrows then determine the image of higher simplices.
+    One can check that this produces a retract diagram.
 
     Need to prove (i). First, focus on $(\partial \Delta^n\to\Delta^n)\boxtimes(\{0\}\to\Delta^1)$. We can factor the inclusion $(\partial\Delta^n\times\Delta^1)\coprod_{\partial \Delta^n\times \{0\}}(\Delta^n\times\{0\})\hookrightarrow\Delta^n\times\Delta^1$ into a sequence $X_0\to X_1\to\cdots\to X_n$ of maps such that each one in the sequence is given by a pushout square.
 
@@ -417,7 +425,7 @@ We assume the lemma to prove the proposition
 Recall the adjunction in $\bset$ between cartesian product and $\Hom$. Analogously, we define the following.
 
 \begin{defn}
-    If $A,B$ are simplicial sets, then define $\underline{\Hom}(A,B):=\underline{\Hom}_{s\bset}(A,B)$. It is a simplicial set sending $[m]$ to $\Hom_{s\bset}(A\times\Delta^n,B)$.
+    If $A,B$ are simplicial sets, then define $\underline{\Hom}(A,B):=\underline{\Hom}_{s\bset}(A,B)$. It is a simplicial set sending $[m]$ to $\Hom_{s\bset}(A\times\Delta^m,B)$.
 \end{defn}
 %\begin{prop}
 %    If $A$ and $B$ are Kan complexes, so is %$\underline{\Hom}_{s\bset}(A,B)$.
@@ -430,8 +438,9 @@ Recall the adjunction in $\bset$ between cartesian product and $\Hom$. Analogous
 
 \begin{defn}
     For simplicial sets $B,C$, define $\underline{\Hom}(B,C)=\underline{\Hom}_{s\bset}(B,C)$ to be the simplicial set such that for any other simplicial set $A$, there is a natural bijection.
-    \[\Hom_{s\bset}(A\times B,C)\cong\Hom_{s\bset}A,\underline{\Hom}(B,C)\]
+    \[\Hom_{s\bset}(A\times B,C)\cong\Hom_{s\bset}(A,\underline{\Hom}(B,C))\]
 \end{defn}
+Explicitly, this agrees with defn 1.24.
 
 \begin{prop}
     Suppose $A$ is a simplicial set and $B$ is a Kan complex. Then $\underline{\Hom}(A,B)$ is a Kan complex.
@@ -491,7 +500,15 @@ Note that Kan fibrations are preserved under pullback, i.e., the pullback of a K
 
 To prove the proposition, it suffices to prove that whenever $A\hookrightarrow B$ is an inclusion and $K$ Kan complex, then $\underline{\Hom}(B,K)\to\underline{\Hom}(A,K)$ is a Kan fibration.
 \begin{proof}
-    Translate the data of the commuting square into a lifting problem. Note that $\Delta^n\times A\coprod_{\Lambda_i^n\times A}\Lambda_i^n\times B\to \Delta^n\times B$ is the pushout product which is anodyne.
+    Translate the data of the commuting square into a lifting problem.
+    \begin{center}
+        % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRAB12AZOgWwCModAPpYAeoQC+pdJlz5CKAIzkqtRizacmYWACcGWMDGCcAEhF6SAFACFSAaQCUTkNNnY8BImSVr6zKyIHOwAIjAMOHQSbjIgGJ4KRCp+1AGawdq6MAZGJuaWNgCCji6xHvLeKADMqmkaQSDWnOGR0WCceLzwAARFTpwAxhBoetDCptx8giLiHexdvUU2nDwCQqISnVjdcD22ru7xcl6KyLWp6oFaYRFRWws7vbblx4lVyAAsdVcZIA5uNQwKAAc3gRFAADMxrwkGQQDgIEgAEz1a6IMBMBgMagMOj8CIABROSWCDBgkJwr2hljh1ERSBUvyCmOxuPxRJJVRA5Mp1JhjPpSMQtWZSFZOJ5HIYxPeih5FKpRxpsMQqIRwtF6UakJA7IJMq58t5SriKpRQsFPLybCEcAAFsD+bTEN8NUgAKzKgWuy2IABs3pdHr9-txNuCdsdUEBkiAA
+\begin{tikzcd}
+\Lambda_i^n \arrow[d] \arrow[r]            & {\underline{\Hom}(B,K))} \arrow[d] &  & (\Delta^n\times A)\coprod_{\Lambda_i^n\times A}(\Lambda_i^n\times B) \arrow[d] \arrow[r] & K \\
+\Delta^n \arrow[r, "f"] \arrow[ru, dashed] & {\underline{\Hom}(A,K))}           &  & \Delta^n\times B \arrow[ru, dashed]                                                      &  
+\end{tikzcd}
+    \end{center}
+    Note that $\Delta^n\times A\coprod_{\Lambda_i^n\times A}\Lambda_i^n\times B\to \Delta^n\times B$ is the pushout product $(\partial\Delta^n\to\Delta^n)\boxtimes(A\hookrightarrow B)$ which is anodyne, so the lifting on the right exists.
 \end{proof}
 
 \begin{defn}
@@ -521,7 +538,7 @@ B \arrow[r] \arrow[ru, dashed] & Y
     If $X$ is a based top. space $x:|\Delta^0|\to X$, then that's the same as $x:\Delta^0\to \sing(X)$. (Defn of fundamental group)
 \end{rem}
 \begin{rem}
-    $\pi_1(K,x)$ is naturally a group. The composition is given by horn filling.
+    $\pi_1(K,x)$ is naturally a group. The composition is given by horn filling and take the map restricted to the third edge. This is well-defined since $K$ is a Kan complex.
 \end{rem}
 For $n\ge 2$, we defien the $n$th homotopy group $\pi_n(K,x)$, where $K$ is a Kan complex with a base point $x$.
 
@@ -605,5 +622,58 @@ Note that $|\Box^n/\partial\Box^n|\simeq S^n$, so $K$ is a Kan complex whose geo
 
     We are reduced to showing that if $K$ is a pointed Kan complex, then pointed homotopy classes of maps from $\Box^n/C\to K$ is the same as homotopy classes of maps $\Box^n/\partial\Box^n\to K$
 \end{proof}
+\begin{lem}
+    If $A\hookrightarrow B\hookrightarrow K$ are monomorphisms of simplicial sets and $A\hookrightarrow B$ is anodyne. Then $[X/B,K]_\ast\to [X/A,K]_\ast$ is a bijection, where $K$ is a pointed Kan complex.
+\end{lem}
+\begin{proof}
+    Surjectivity: if $f:X\to K$ which restricts to the constant map on $A$, then need to prove that it is homotopic rel $A$ to a map which is constant on $B$. Note that we have
+    \begin{center}
+        % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRAEEQBfU9TXfIRQBGclVqMWbANLdeIDNjwEiZYePrNWiEACFu4mFADm8IqABmAJwgBbJGRA4ISAEw9LN+4lfVnSUQktNgsAHwB9fQ8QazsHPxdEYS4KLiA
+\begin{tikzcd}
+A \arrow[d] \arrow[r] & K \\
+B \arrow[ru, "f|_B"]  &  
+\end{tikzcd}
+    \end{center}
+    Since $A\hookrightarrow$ is anodyne, the lift is unique up to homotopy. We can find $h:\Delta^1\times B\to K$ which is a homotopy $f|_B\simeq \ast$ rel $A$.
+    Then, consider the map $X\times\{0\}\coprod_{B\times\{0\}}B\times\Delta^1\to X\times\Delta^1$. This is the pushout prod $(B\hookrightarrow X)\boxtimes(\{0\}\to\Delta^1)$ which is anodyne, so we lift to a homotopy $X\times\Delta^1\to K$.
+
+    Injectivity: Suppose $f,g:X\to K$ const. on $B$ (and are maps between Kan complex). Suppose $f,g$ are homotopic rel $A$, i.e., $\exists h:X\times\Delta^1\to K$ between $f,g$ rel $A$. Then $h|_{B\times\Delta^1}$ is constant on $B\times\partial\Delta^1\coprod_{A\times\partial\Delta^1}A\times\Delta^1$. This lifts to $B\times\Delta^1$, i.e., we have a homotopy rel $B\times\partial\Delta^1\coprod_{A\times\partial \Delta^1}A\times\Delta^1$ between $h_{B\times\Delta^1}$ and the const map.
+    Gluing this together with the const homotopy of $h|_{X\times\partial\Delta^1}$, we get a homotopy rel $X\times\partial\Delta^1\coprod_{A\times\partial\Delta^1}A\times\Delta^1$ between $h|_{X\times\partial\Delta^1\cup_{B\times\partial \Delta^1}B\times\Delta^1}$ and a map const on $B\times \Delta^1$. Extend along
+    \[(X\times\partial\Delta^1\coprod_{B\times\partial\Delta^1}B\times\Delta^1\to X\times\Delta^1)\boxtimes(\{0\}\to\Delta^1)\]
+    to get a homotopy between $h:X\times\Delta^1\to K$ and $h':X\times\Delta^1\to K$ constant on $B\times\Delta^1$.
+\end{proof}
+\textbf{!}
+
+\begin{lem}
+    Let $A\to K$ be an inclusion of pointed connected Kan complexes inducing an isomorphism on all homotopy groups. Then every map $\Delta^n\to K$ s.t. its boundary lands entirely in $A$ is homotopic rel $\partial\Delta^n$ to a map $\Delta^n\to K$ with image entirely in $A$.
+\end{lem}
+\begin{proof}
+    
+\end{proof}
+\begin{lem}
+    Let $A\to K$ be a mono of connected pointed Kan complexes that induces isomorphisms on all homotopy groups. Then for every pair $Z\hookrightarrow X$ of simplicial sets, a map $X\to K$ sending $Z$ to $A$ is homotopic rel $A$ to a map sending $X$ to $A$.
+\end{lem}
+\begin{proof}
+    Factor $Z\hookrightarrow X$ as $Z=Z_{(-1)}\to Z_{(0)}\to\cdots\to X$ (c.f. proof of lemma 1.23). Know the lemma for each pair $Z\hookrightarrow Z_{(0)}$ (trivial), then repeat step by step.
+\end{proof}
+\begin{lem}
+    Let $A\hookrightarrow K$ be an inclusion of pointed connected Kan complexes inducing isomorphisms on all homotopy groups. Then for any simplicial set $X$, the induced map $[X,A]\to[X,K]$ is a bijection. (Note: $\pi_0\underline{\Hom}(X,A)=[X,A]$)
+\end{lem}
+\begin{proof}
+    Surjectivity follows from the previous lemma with $Z=\varnothing$. Injectivity is the previous lemma $Z=X\times\partial\Delta^1\hookrightarrow X\times\Delta^1$.
+\end{proof}
+\begin{thm}
+    Suppose $f:A\to B$ is a map of Kan complexes such that \begin{enumerate}[(i)]
+        \item $\pi_0(f):\pi_0(A)\to\pi_0(B)$ is bijective
+        \item For every point $x:\Delta^0\to A$, the induced map $\pi_n(f):\pi_n(A,x)\to\pi_n(B,f(x))$ is an isomorphism
+    \end{enumerate}
+    Then $f:A\to B$ is a homotopy equivalence.
+\end{thm}
+\begin{proof}
+    Suppose $A,B$ are connected and $A\to B$ is a mono. The previous lemma says $[X,A]\to[X,B]$ is a bijection for every Kan complex $X$. By Yoneda, $A\cong B$ in $\text{Ho}(\textbf{KanCpx})$. In general, we can look at each path component.
+
+    For an arbitrary map we need to use the following statement: \textit{If $A\to B$ is a map of Kan complex then it factors as a composite $A\to A'\to B$, where $A\to A'$ is a mono and $A'\to B$ is a htpy equivalence.} The space $A'$ is given by $A\times\operatorname{Kan}(\Delta^1)\coprod_{A\times{1}}B$, where $\operatorname{Kan}(\Delta^1)$ is the Kan replacement, i.e., applying the small object argument to $\Delta^1$. In fact $\operatorname{Kan}(\Delta^1)$ is the nerve of a 2-object category.
+\end{proof}
+
 
 \end{document}
