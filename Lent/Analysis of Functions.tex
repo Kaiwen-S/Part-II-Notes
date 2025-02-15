@@ -174,7 +174,7 @@ In particular $D_i=D^{(0,...,1,0,...,0)}$
     Let $1\le p<\infty$. Then $\|\tau_zf-f\|_{L^p}\to 0$ as $z\to 0$ for all $f\in L^p$.
 \end{prop}
 \begin{proof}
-    Hold for cts functions with compact support. Then apply $\epsilon/3$-argument.
+    Hold for cts functions with compact support. Then apply $\varepsilon/3$-argument.
 \end{proof}
 \begin{thm}[Minkowski's inequality for integrals]
     Let $F:\RR^n\times\RR^n\to\RR$ be a measurable non-negative or $dx\otimes dx$-integrable function. Then
@@ -184,23 +184,23 @@ In particular $D_i=D^{(0,...,1,0,...,0)}$
     Example sheet.
 \end{proof}
 \begin{thm}[Mollification/Approximate identity]
-    Let $\varphi\in C_c^\infty(\RR^n)$ be non-negative s.t. $\int_{\RR^n}\varphi(x)dx=1$. Define $\varphi_\epsilon^{-n}\varphi(\cdot/\epsilon)$, $\epsilon>0$. Then for $1\le p<\infty$ and any $f\in L^p$,
-    \[\|f-\varphi_\epsilon\ast f\|_{L^p}\overset{\epsilon\to0}{\longrightarrow} 0\]
+    Let $\varphi\in C_c^\infty(\RR^n)$ be non-negative s.t. $\int_{\RR^n}\varphi(x)dx=1$. Define $\varphi_\varepsilon^{-n}\varphi(\cdot/\varepsilon)$, $\varepsilon>0$. Then for $1\le p<\infty$ and any $f\in L^p$,
+    \[\|f-\varphi_\varepsilon\ast f\|_{L^p}\overset{\varepsilon\to0}{\longrightarrow} 0\]
 \end{thm}
 \[\circ-;\tag{Owen's signature}\]
 \begin{proof}
     For $f\in L^p$, $x\in\RR^n$,
     \begin{align*}
-        |\varphi_\epsilon\ast f(x)-f(x)|&=\left|\int_{\RR^n}f(x-y)\epsilon^{-n}\varphi(y/\epsilon)dy-f(x)\right|\\
-        &=\left|\int_{\RR^n}(f(x-\epsilon u)\varphi(u)-f(x))du\right|\\
-        &\le \int_{\RR^n}|f(x-\epsilon)-f(x)|\varphi(u)du
+        |\varphi_\varepsilon\ast f(x)-f(x)|&=\left|\int_{\RR^n}f(x-y)\varepsilon^{-n}\varphi(y/\varepsilon)dy-f(x)\right|\\
+        &=\left|\int_{\RR^n}(f(x-\varepsilon u)\varphi(u)-f(x))du\right|\\
+        &\le \int_{\RR^n}|f(x-\varepsilon)-f(x)|\varphi(u)du
     \end{align*}
     Apply Minkowski's inequality for integrals,
-    \[\|\varphi_\epsilon\ast f-f\|_{L^p}\le\int_{\RR^n}\|\tau_{\epsilon u}f=f\|_{L^p}\varphi(u)du\]
-    This converges to $0$ as $\epsilon\to 0$ by DCT.
+    \[\|\varphi_\varepsilon\ast f-f\|_{L^p}\le\int_{\RR^n}\|\tau_{\varepsilon u}f=f\|_{L^p}\varphi(u)du\]
+    This converges to $0$ as $\varepsilon\to 0$ by DCT.
 \end{proof}
 In particular, since $C_c(\RR^n)$ is dense in $L^p$ and
-$\{\varphi_\epsilon\ast f:f\in C_c(\RR^n)\}\subseteq C_c^\infty(\RR^n)$, we have also proved that $C_c^\infty(\RR^n)$ is dense in $L^p$.
+$\{\varphi_\varepsilon\ast f:f\in C_c(\RR^n)\}\subseteq C_c^\infty(\RR^n)$, we have also proved that $C_c^\infty(\RR^n)$ is dense in $L^p$.
 
 \subsection{Lebesgue's Differentiation Theorem}
 \begin{defn}[Hardy-Littlewood maximal function]
@@ -231,13 +231,13 @@ $\{\varphi_\epsilon\ast f:f\in C_c(\RR^n)\}\subseteq C_c^\infty(\RR^n)$, we have
 \begin{proof}
     Consider
     \[\bar A_\lambda=\left\{x:\lim_{r\to 0}|B_r(x)^{-1}|\int_{B_r(x)}|f(y)-f(x)|dy>2\lambda\right\}\]
-    Let $\epsilon>0$. Pick $g\in C_c(\RR^n)$ s.t. $\|f-g\|_{L^1}<\epsilon$. Then
+    Let $\varepsilon>0$. Pick $g\in C_c(\RR^n)$ s.t. $\|f-g\|_{L^1}<\varepsilon$. Then
     \[\dfrac{1}{|B_r(x)|}\int_{B_r(x)}|f(y)-f(x)|dy\le \dfrac{1}{|B_r(x)|}\int_{B_r(x)}|f(y)-g(y)|dy+\dfrac{1}{|B_r(x)|}\int_{B_r(x)}|g(y)-g(x)|dy+|f(x)-g(x)|\]
     $g$ is unif. cts, so the second term is small. If $x\in\bar A_\lambda$, either the first term or the third term is $>\lambda$. The third term is bounded using Markov's inequality
-    \[\{x:|f(x)-g(x)|>\lambda\}\le\dfrac{\|f-g\|_{L^1}}{\lambda}<\epsilon/\lambda\]
+    \[\{x:|f(x)-g(x)|>\lambda\}\le\dfrac{\|f-g\|_{L^1}}{\lambda}<\varepsilon/\lambda\]
     For the first term, use HL-maximal inequality,
-    \[|\{x:\text{first term}>\lambda\}|\le|\{x:M(f-g)(x)>\lambda\}|\le\dfrac{3^n}{\lambda}\|f-g\|_{L^1}\le 3^n\epsilon/\lambda\]
-    Therefore $|\bar A_\lambda|\le C\epsilon$.
+    \[|\{x:\text{first term}>\lambda\}|\le|\{x:M(f-g)(x)>\lambda\}|\le\dfrac{3^n}{\lambda}\|f-g\|_{L^1}\le 3^n\varepsilon/\lambda\]
+    Therefore $|\bar A_\lambda|\le C\varepsilon$.
     So $|A^c|\le|\bigcup_n\bar A_{1/n}|\le\sum_n|\bar A_{1/n}|=0$.
 \end{proof}
 \begin{rem}
@@ -245,24 +245,24 @@ $\{\varphi_\epsilon\ast f:f\in C_c(\RR^n)\}\subseteq C_c^\infty(\RR^n)$, we have
 \end{rem}
 \begin{thm}[Egorov]
     Let $E\in B(\RR^n)$, $|E|<\infty$. Suppose $f_j:E\to\RR$ measurable s.t. $f_j\to f$ a.e. on $E$. Then
-    \[\forall\epsilon>0,\ \exists A_\epsilon\ \text{s.t.}\ |E\setminus A_\epsilon|<\epsilon \text{ and } f_j\overset{\text{unif}}{\to} f\text{ on }A_\epsilon\]
+    \[\forall\varepsilon>0,\ \exists A_\varepsilon\ \text{s.t.}\ |E\setminus A_\varepsilon|<\varepsilon \text{ and } f_j\overset{\text{unif}}{\to} f\text{ on }A_\varepsilon\]
 \end{thm}
 \begin{proof}
     By discarding a null set, we may assume that $f_j\to f$ pointwise on $E$. Define
     \[E_k^m=\{x:\forall j>k,\ |f_j(x)-f(x)|<1/m\}\]
     $E_k^m$ is increasing as $k\to\infty$, and $\bigcup_k E_k^m=E$ by pointwise convergence.
-    Pick a subsequence $k_m$ s.t. $|E\setminus E_{k_m}^m|\le\epsilon 2^{-m}$. Define $A_\epsilon=\bigcap_m E_{k_m}^m$. For all $x\in A_\epsilon$, $|f_j(x)-f(x)|<1/m$ whenever $j>k_m$, so the convergence is uniform on $A_\epsilon$, and
-    \[|E\setminus A_\epsilon|\le\sum_m|E\setminus E_{k_m}^m|\le\epsilon\]
+    Pick a subsequence $k_m$ s.t. $|E\setminus E_{k_m}^m|\le\varepsilon 2^{-m}$. Define $A_\varepsilon=\bigcap_m E_{k_m}^m$. For all $x\in A_\varepsilon$, $|f_j(x)-f(x)|<1/m$ whenever $j>k_m$, so the convergence is uniform on $A_\varepsilon$, and
+    \[|E\setminus A_\varepsilon|\le\sum_m|E\setminus E_{k_m}^m|\le\varepsilon\]
 \end{proof}
 \begin{thm}[Lusin]
     Let $|E|<\infty$, $f:E\to\RR$ (or $\CC$) Borel-measurable. Then
-    \[\forall\epsilon>0,\ \exists F_\epsilon\text{ s.t. }|E\setminus F_\epsilon|<\epsilon\text{ and } f:F_\epsilon\to\RR \text{ cts}\]
+    \[\forall\varepsilon>0,\ \exists F_\varepsilon\text{ s.t. }|E\setminus F_\varepsilon|<\varepsilon\text{ and } f:F_\varepsilon\to\RR \text{ cts}\]
 \end{thm}
 \begin{rem}
-    Note that $f$ is not necessarily continuous $F_\epsilon$ when regarded as a map defined on $E$.
+    Note that $f$ is not necessarily continuous $F_\varepsilon$ when regarded as a map defined on $E$.
 \end{rem}
 \begin{proof}
-    First prove it for simple functions $f=\sum_{i=1}^ma_i1_{A_i}$ (wlog assume $A_i$ disjoint), where $\bigcup A_i=E$. Use inner regularity to find compact sets $K_k\subseteq A_k$ s.t. $|A_k\setminus K_k|<\epsilon/m$. $f$ is cts on $\bigcup_k K_k$ and $|E\setminus\bigcup K_k|\le\epsilon$. For general $f$, approximate $f$ ptwise by simple functions on $E$. Pick $A_\epsilon$ s.t. $|E\setminus A_\epsilon|<\epsilon/2$ s.t. $f_m\to f$ unif. by Egorov. Take $C_m$ compact s.t. $|E\setminus C_m|<\epsilon 2^{-m-1}$. Then Take $F_\epsilon=A_\epsilon\cap\bigcap_mC_m$. Can check that $|E\setminus F_\epsilon|\le\epsilon$.
+    First prove it for simple functions $f=\sum_{i=1}^ma_i1_{A_i}$ (wlog assume $A_i$ disjoint), where $\bigcup A_i=E$. Use inner regularity to find compact sets $K_k\subseteq A_k$ s.t. $|A_k\setminus K_k|<\varepsilon/m$. $f$ is cts on $\bigcup_k K_k$ and $|E\setminus\bigcup K_k|\le\varepsilon$. For general $f$, approximate $f$ ptwise by simple functions on $E$. Pick $A_\varepsilon$ s.t. $|E\setminus A_\varepsilon|<\varepsilon/2$ s.t. $f_m\to f$ unif. by Egorov. Take $C_m$ compact s.t. $|E\setminus C_m|<\varepsilon 2^{-m-1}$. Then Take $F_\varepsilon=A_\varepsilon\cap\bigcap_mC_m$. Can check that $|E\setminus F_\varepsilon|\le\varepsilon$.
 \end{proof}
 Recall Riesz representation theorem in Hilbert spaces (bounded linear functionals can be written as taking inner product with a certain element).
 
@@ -340,7 +340,7 @@ $\Lambda_g(f)=\int fgdx$. This is bounded since $|\Lambda_g(f)|\le\|g\|_{L^q}\|f
 We can characterize duals of subspace of $L^\infty$, e.g., any finite measure defines a linear functional in $C_c(\RR^n)'$ by $f\mapsto \mu(f)$.
 
 \begin{defn}
-    A measure is regular on $\RR^n$ if $\forall\epsilon>0,\forall A\in\mathcal B,\exists C$ closed, $D$ open s.t. $C\subseteq A\subseteq D$ s.t. $\mu(D\setminus C)<\epsilon$
+    A measure is regular on $\RR^n$ if $\forall\varepsilon>0,\forall A\in\mathcal B,\exists C$ closed, $D$ open s.t. $C\subseteq A\subseteq D$ s.t. $\mu(D\setminus C)<\varepsilon$
 \end{defn}
 \begin{thm}[Riesz]
     Let $\Lambda\in (C_c(\RR^n))'$ be positive. Then $\exists$ a $\sigma$-algebra $M\supseteq\mathcal B$ and a regular measure $\mu$ on $M$ s.t. $\Lambda(f)=\int_{\RR^n}fd\mu$.
@@ -393,5 +393,100 @@ So $\{f:\|f\|_{C^{0,\gamma}}\le 1\}$ is compact in $C([0,1])$ by Arzela-Ascoli.
 \begin{rem}
     In $(C_b(D))'$ any sequence of probmeas has a weak-$\ast$ convergent subsequence.
 \end{rem}
+We will prove Banach Alaoglu for $X$ separable.
+\[\ddot{T}\tag{Owen's Signature}\]
+\begin{lem}
+    For a countable dense subset $D=\{x_1,...,x_n\}$ of $X$, consider seminorms $\tilde{\mathcal{P}}=\{p_{x_k}(\Lambda)=|\Lambda(x_k)|:k\in\NN\}$ with induced topology $\tau_{\tilde{\mathcal P}}$. Then $\tau_{w^*}=\tau_{\tilde{\mathcal P}}$ coincide as topologies on $B_1'=\{\Lambda\in X':\|\Lambda\|_{X'}\le 1\}$ and are metrized by
+    \[d_{\tilde{\mathcal P}(\Lambda,\Lambda')}=\sum_{k=1}^\infty \dfrac{|\Lambda(x_k)-\Lambda'(x_k)|}{2^k(1+|\Lambda(x_k)+\Lambda'(x_k)|)}\]
+\end{lem}
+\begin{proof}
+    The open sets for $\tau_{\tilde{\mathcal P}}$ are generated by $V(x_k,m)=\{\Lambda:|\Lambda(x_k)|<1/m\}$. To prove that the two topologies are equivalent, it suffices to show that $V(x,n)$ contain some $V(x_k,m)$ for all $x\in X,n\in\NN$. Suppose $x\in X\setminus D$ and pick $x_k\in D$ s.t. $\|x-x_k\|<\varepsilon$. For $\Lambda\in V(x_k,m)$ we have $|\Lambda(x)|\le|\Lambda(x_k-x)|+|\Lambda(x_k)|\le\|\Lambda\|_{X'}\varepsilon+1/m<n$ when $\varepsilon$ is sufficiently small and $m$ sufficiently large, so $V(x_k,m)\subseteq V(x,n)$.
 
+    If $\Lambda_j(x_k)\overset{j\to\infty}{\longrightarrow}\Lambda(x_k)$ for all $k$ then $d_{\tilde{\mathcal P}}(\Lambda_j,\Lambda)\to 0$ by DCT applied to counting measure on $\NN$.
+\end{proof}
+\begin{thm}
+    Let $\Lambda_j\in B_1'$. Then $\exists\Lambda\in B_1'$ s.t. $\Lambda_{j_k}\to\Lambda$ weak-$\ast$.
+\end{thm}
+\begin{proof}
+    Let $D$ be a countable dense subset of $X$. Since $|\Lambda_j(x_k)|\le\|x_k\|<\infty$. Diagonalization argument. Find convergent subsequences $\Lambda_{i,j}$ Find a $\Lambda$ as the limit of $\Lambda_{j,j}$. Need to show linearity and continuity. Note that $\Lambda$ is unif cts on $D$. [If $x,y\in D$ with $\|x-y\|<\varepsilon/2$, then for all $j$ sufficiently large, $|\Lambda_{j,j}(x)-\Lambda(x)|,|\Lambda(y)-\Lambda_{j,j}(y)|<\varepsilon/4$] Apply triangle inequality to $|\Lambda(x)-\Lambda(y)|$. Note that $\Lambda_{j,j}$ is uniformly Lipschitz.
+    By uniform continuity, we can extend $\Lambda$ to a unif cts function on $X$.
+
+    To show linearity, let $x,y\in X$, $z=x+ay$ for $a\in\RR$ (or $\CC$) and pick $x',y',z'\in D$ s.t. $\|x-x'\|+|a|\|y-y;\|+\|z-z'\|<\delta$.
+
+    Apply a big triangle inequality.
+    \begin{align*}
+        |\Lambda(z)-\Lambda(x)-a\Lambda(y)|&\le|\Lambda(z)-\Lambda(z')|+|\Lambda(x)-\Lambda(x')|+|a||\Lambda(y)-\Lambda(y')|\\
+        &\le +|\Lambda(z')-\Lambda_{j,j}(z')|+\ ..................................|
+    \end{align*}
+    each term is small either by unif continuity or unif convergence or linearity of $\Lambda$ on $D$.
+
+    Need to show that $\|\Lambda\|\le 1$ ($|\Lambda(x)|\le|\Lambda(x-x')|+|\Lambda(x')|$) and that the convergence holds on $X$.
+\end{proof}
+\section{The Hahn-Banach theorem and its consequences}
+\begin{defn}
+    A functional $p:X\to\RR$ on a real vector space is called sub-linear if \begin{enumerate}[(i)]
+        \item $p(x+y)\le p(x)+p(y)$ for all $x,y\in X$
+        \item $p(tx)=tp(x)$ for all $t\ge 0$, $x\in X$.
+    \end{enumerate}
+\end{defn}
+
+\begin{lem}[Bounded extension]
+    Let $X$ be a real vector space and $p:X\to\RR$ sub-linear Let $M\subsetneq X$ be a vector subspace, and for $x\in X\setminus M$ define $\tilde{M}=\operatorname{span}(M,x)=\{M+cx:c\in\RR\}$. If $l:M\to \RR$ is a linear form s.t. $l(x)\le p(x)$ for all $x\in M$, then there exists $\tilde l:\tilde M\to\RR$ linear s.t. $\tilde l_{M}=l$ and $\tilde l(x)\le p(x)$ for all $x\in\tilde M$.
+\end{lem}
+\begin{proof}
+    Let $y_1,y_2\in M$. $l(y_1)+l(y_2)=l(y_1+y_2)\leq p(y_1+y_2)\le p(y_1-x)+p(y_2+x)$ for all $x\in X\setminus M$. Rearrange, $l(y_1)-p(y_1-x)\le l(y_2)-p(y_2+x)$. Take sup/inf, 
+    \[\sup\{l(y)-p(y-x):y\in M\}\le a\le \inf\{p(y+x)-l(y):y\in M\}\tag{$\ast$}\] for some $a\in\RR$.
+    If $z\in\tilde M$, then it has a unique decomposition $z=y+\lambda x$ for some $\lambda\in\RR$. Define $\tilde l(z)=\tilde l(y+\lambda x)=l(y)+\lambda a$. To see $\tilde l\le p$ on $\tilde M$, for $\lambda>0$, write $\tilde l (y+\lambda x)=\lambda (l(y/\lambda)+a)\overset{(\ast)}{\le}\lambda(l(\frac y\lambda)+p(\frac{y}{\lambda}+x)-l(\frac y\lambda))=p(y+\lambda x)$. For $\lambda<0$, let $\mu=-\lambda$ and $\tilde l(y+\lambda x)=\mu(l(\frac y\mu-a))\le \mu(l(\frac y\mu)-l(\frac y\mu)+p(\frac y\mu-x))$.
+\end{proof}
+To extend $l$ to all of $X$ (for $X$ separable), we can apply the extension lemma inductively to $M_n=\operatorname{span}(M;x_1,...,x_n)$, where $(x_n)_{n\in\NN}$ is a countable dense subset of $X$.
+
+In general, consider $S=\{(N,\tilde l):M\subseteq N\subseteq X\text{ vec.sp. },\  \tilde l|_M=l,\ \tilde l\le p\text{ on }N\}$. Apply Zorn's lemma.
+
+\begin{thm}[Hahn-Banach]
+    Let $X$ be a real vector space and $p:X\to\RR$ a sublinear functional. For $M\subseteq X$ vec. subspace, let $l:M\to\RR$ be a linear functional s.t. $l(x)\le p(x)$ for all $x\in M$. Then there exists an extension $\tilde l:X\to\RR$ (linear) s.t. $\tilde l(x)\le p(x)$ for all $x\in X$.
+\end{thm}
+\begin{rem}
+    Extensions need not be unique. If $X$ is non-separable, the result depends on Axiom of Choice.
+\end{rem}
+
+\begin{crly}[Norming Functional]
+    Let $X$ be a normed linear space. For all $x\in X$, there exists a linear functional $\Lambda=\Lambda_x\in X'$ s.t. $\|\Lambda\|=1$ and $|\Lambda(x)|=\|x\|_X$. In particular, if $\Lambda(x-y)=0$ for all $\Lambda\in X'$, then $x=y$.
+\end{crly}
+\[\subset]-:\langle\tag{Owen's (infinitely handsome) signature}\]
+\begin{proof}
+    For $x\in X$ define the vector subspace $M=\{cx:c\in\RR\}$ and consider the linear functional $l(cx)=c\|x\|_X$, so $|l(y)|\le p(y)=\|y\|_X$. By Hahn-Banach, there exists $\Lambda=\Lambda_x:X\to\RR$ s.t. $|\Lambda_x(y)|\le\|y\|_X$, so $\Lambda\in X'$ and $\|\Lambda\|\le 1$. Note that $\|\Lambda\|_{X'}\ge \sup_{y\in M\cap B_X}|l(y)|\ge \|x\|_X$
+\end{proof}
+\begin{crly}
+    The canonical injection of $i:X\hookrightarrow X''$ given by $x\mapsto(\Lambda\to\Lambda(x))$ is an isometric embedding.
+\end{crly}
+\begin{proof}
+    Consider $\|i(x)\|_{X''}=\sup_{\|\Lambda\|\le 1}|\Lambda(x)|\le\|x\|_X$. By taking a norming functional, $\|i(x)\|_{X''}\ge\|\Lambda_x(x)\|=\|x\|$.
+\end{proof}
+If $X$ is reflexive, then $X$ is isometrically isomorphic to $(X')'$ which is complete. (i.e., reflexive normed lienar space is Banach.)
+If $X$ is not reflexive, then $X''$ provides (up to iso) the completion of $X$ for $\|\cdot\|_X$.
+
+In particular, if $X$ is reflexive ,then the weak topology coincides with the weak-$\ast$ topology on $(X')'$, so Banach-Alaoglu the unit ball $B_X$ is compact in $\tau_w$.
+\begin{thm}[Hyperplane Separation]
+    Let $A,B$ be non-empty disjoint convex sets in a Banach space $X$ over $\RR$.
+    \begin{enumerate}[(i)]
+        \item If $A$ is open, then $\exists\Lambda\in X'$ and $\gamma\in\RR$ s.t. $\Lambda(a)<\gamma\le \Lambda(b)$ for all $a\in A$ and $b\in B$.
+        \item If $A$ is compact and $B$ is closed, then $\exists\Lambda\in X'$ and $\gamma_1,\gamma_2\in\RR$ s.t. $\Lambda(a)<\gamma_1<\gamma_2<\Lambda(b)$ for all $a\in A$, $b\in B$.
+    \end{enumerate}
+\end{thm}
+\begin{proof}
+    (i): Pick $a_0\in A$, $b_0\in B$ and let $x_0=b_0-a_0$. Define $C=A-B+x_0$. $C$ is convex, $0\in C$, $x_0\notin C$. $C$ is open. Consider the Minkowski functional defined as 
+    \[p_C(x)=\inf\{t>0:x/t\in C\}\]
+    Can show (ES) that $p_C$ is 
+    \begin{itemize}
+        \item sublinear on $X$
+        \item there exists $k>0$ s.t. $p_C(x)\le k\|x\|$
+        \item $p_C(x)<1$ for $x\in C$ and $p_C(x)\ge 1$ for $x\notin C$.
+    \end{itemize}
+     Take $$M=\{tx_0:t\in\RR\}$$ and consider the linear functional $l:M\to\RR,\ tx_0=t$. Then $l$ is dominated by $p_C$ since 
+     \[l(tx_0)=t\le tp_C(x_0)=p(tx_0)=p_C(tx_0)\]
+     for $t>0$ and $l(tx_0)=t\le 0\le p_C(tx_0)$. By Hahn-Banach, there exists $\Lambda:X\to\RR$ s.t. $-k\|x\|\le -p_C(x)\le \Lambda(x)\le p_C(x)\le k\|x\|$ for all $x\in X$, so $\Lambda\in X'$. Pick $a\in A$, $b\in B$. Note that \[\Lambda(a)-\Lambda(b)+\Lambda(x_0)=\Lambda(a-b+x_0)\le p_C(a-b+x_0)<1\]
+     So $\Lambda(a)<\sup\Lambda(A)\le \Lambda(b)$.
+
+     (2): $\Lambda(A)$ is compact in $\RR$ and $d=\|A-B\|_X$. Then consider $\tilde A_d=A+B_{d/2}$, where $B_{d/2}=\{y:\|y\|<d/2$ still disjoint from $B$. Apply (1).
+\end{proof}
 \end{document}

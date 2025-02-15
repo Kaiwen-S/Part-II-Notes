@@ -112,7 +112,7 @@
 
 \begin{document}
 \maketitle
-\section{Review of Metric Spaces}
+\section*{Review of Metric Spaces}
 Notation: open ball of radius $\delta$ will be denoted $B_\delta(x)$.
 
 Revised some results about metric spaces.
@@ -314,5 +314,104 @@ We try to find a poly of deg $<n$ which best approximates $t^n$.
 \begin{defn}
     The $n$th Chebyshev polynomial $T_n(x)$ is defined by $T_n(\cos\theta)=\cos(n\theta)$.
 \end{defn}
-Observe that $|T_n(t)|\le 1$ for $t\in[-1,1]$ with roots $t=\cos\frac{(2l-1)\pi}{2n}$ for $l=1,...,n$. It reaches extremum at $\cos(k\pi/n)$.
+Observe that $|T_n(t)|\le 1$ for $t\in[-1,1]$ with roots $t=\cos\frac{(2l-1)\pi}{2n}$ for $l=1,...,n$. It reaches extremum at $\cos(k\pi/n)$. If $a_k=\cos(k\pi/n)$, then $1=a_0>\cdots>a_n=-1$ and $T_n(a_k)=(-1)^k$.
+
+We can write $T_n(t)=2^{n-1}(t^n-S_n(t))$ for some poly $S_n$, so $S_n(t)=t^n-2^{1-n}T_n(t)$. Since $|t^n-S_n(t)|\le 2^{1-n}$ and $a_k^n-S_n(a_k)=2^{1-n}T_n(a_k)=(-1)^k2^{1-n}$. Therefore by Chebyshev criterion, we get
+\begin{prop}
+    $S_n(t)$ is the best poly approximation (deg $<n$) of $t^n$ on $[-1,1]$. For any polynomial $Q(t)$ of degree $<n$, we have $\|t^n-Q(t)\|_\infty\ge 2^{1-n}$.
+\end{prop}
+\begin{crly}\
+    \begin{enumerate}[(i)]
+        \item If $p:[-1,1]\to\RR$ defined by $\sum_{j=0}^na_jt^j$ with $|a_n|\ge 1$, then $\|p\|_\infty\ge 2^{-n+1}$.
+        \item $\forall n\in\NN$, $\exists\epsilon=\epsilon(n)>0$ s.t. if $p(t)=\sum_{j=1}^na_kt^j$ (so deg $\le n$) and $|a_k|\ge 1$ for some $n\ge k\ge 0$, then $\|p\|_\infty\ge\epsilon$.
+    \end{enumerate}
+\end{crly}
+\begin{proof}
+    (i): Consider
+    \[\|p\|_\infty=|a_n|\sup_{t\in[-1,1]}\left|t^n+\sum_{j=0}^{n-1}\frac{a_n}{|a_n|}t^n\right|\ge 2^{1-n}\]
+    (ii) Proceed by induction. If $n=0$, then pick $\epsilon=1$. Suppose the result holds for all poly of deg $\le n$. Consider $p(t)=a_{n+1}t^{n+1}+\sum_{j=0}^na_jt^j=a_{n+1}t^{n+1}+Q(t)$.
+    \begin{itemize}
+        \item If $|a_{n+1}|<\epsilon(n)/2$, then $\|p\|_\infty\ge\|Q\|_\infty-|a_{n+1}|\ge\epsilon(n)/2$.
+        \item If $|a_{n+1}|\ge\epsilon(n)/2$, then $\|p\|\ge \|t^n+\frac{1}{a_{n+1}}Q(t)\|_\infty\ge |a_{n+1}|2^{-n}\ge\epsilon(n)2^{-1-n}$, so we set $\epsilon(n+1)=\epsilon(n)2^{-1-n}$.
+    \end{itemize} 
+\end{proof}
+\begin{thm}
+    Let $f:[-1,1]\to\RR$ be a cts function. For all $n\in\NN$, there exists a poly $p$ of deg $\le n$ s.t. $\|p-f\|_\infty\le\|q-f\|_\infty$ for all polys $q$ of deg $\le n$.
+\end{thm}
+\begin{proof}
+    Let $q(t)=\sum_{j=0}^nb_jt^j$.
+    \begin{itemize}
+        \item Suppose $\exists j$ s.t. $b_j\ge\frac{2\|f\|_\infty+1}{\epsilon(n)}$. Then $\|q\|_\infty\ge\epsilon(n)\frac{2\|f\|_\infty+1}{\epsilon(n)}=2\|f\|_\infty+1$ by (ii) of the previous corollary. In this case, $\|q-f\|_\infty\ge2\|f\|_\infty+1-\|f\|_\infty>\|f\|_\infty$. Certainly not the best poly approx.
+        \item Otherwise, let $$E=\{q(t)=\sum_{j=0}^nb_jt^n:\forall j,\ |b_j|<\frac{2\|f\|_\infty+1}{\epsilon(n)}\}$$
+        Define $\kappa=\inf_{q\in E}\|q-f\|_\infty$. Then there exists $q_m\in E$ s.t. $\|q_m-f\|_\infty\to\kappa$ as $m\to\infty$. Write $q_m(t)=\sum_{j=0}^nb_j(m)t^j$. Note that the coefficients (regarded as a vector) is a bounded sequence in $\RR^{n+1}$, so admits a convergent subsequence by B-W. Let $p^\ast$ denote the limit. Have $\|q_{m_k}-p^\ast\|\to 0$.
+    \end{itemize}
+    Can check that $p^\ast$ is the best approximation.
+\end{proof}
+
+\section{Gaussian Integration}
+Recall inner products and $L^2$ norm on $C[-1,1]$.
+\begin{lem}
+    There exists a sequence of polynomials $(p_n)_{n\in\NN}\in C[-1,1]$ with $\deg p_n=n$ and $\langle p_m,p_n\rangle=\delta_{nm}$. Moreover, $p_n$ is unique up to scalar multiple.
+\end{lem}
+Can fix $\|p_n\|_2=1$ and require the leading coefficient is $>0$.
+\begin{proof}
+    Start with $\{t^i:i\in\NN\}$. Apply Gram-Schmidt.
+\end{proof}
+\begin{crly}
+    If $f$ is a poly of degree $<n$, then $\int_{-1}^1fp_n=0$.
+\end{crly}
+\begin{lem}
+    $p_n$ has distinct roots, all in $[-1,1]$.
+\end{lem}
+\begin{proof}
+    Suppose $x_1,...,x_k$ are all the distinct root of $p_n$ having odd multiplicity. Consider $q(t)=(t-x_1)(t-x_k)$, $k\le n$. Then $q$ changes sign precisely when $p_n$ changes sign, so $qp_n$ doesn't change sign. Since $qp_n$ is non-zero, we have $\langle q,p_n\rangle\neq 0$, so $k=n$ (forced by the preceding corollary).
+\end{proof}
+\begin{defn}
+    $p_n$ discussed above is called the $n$th Legendre polynomial.
+\end{defn}
+\begin{thm}\
+    \begin{enumerate}[(i)]
+        \item Let $\alpha_1,...,\alpha_n$ be the roots of $n$th Legendre polynomial $p_n$ and $A_1,...,A_n$ chosen so that $\int_{-1}^1P(t)dt=\sum_{j=1}^nA_jP(\alpha_j)$ whenever $\deg p<n$. Then, $\int_{-1}^1Q(t)dt=\sum_{j=1}^nA_jQ(\alpha_j)$ whenever $Q$ is a poly of degree $<2n$.
+        \item If $\beta_j,B_j$ are alternative choices s.t. (i) holds, then $\{\beta_j\}=\{\alpha_j\}$ are the roots of Legendre polynomial.
+    \end{enumerate}
+\end{thm}
+\begin{proof}
+    (i): If $\deg Q<2n$, then $Q=qp_n+r$ for some poly $r$ s.t. $\deg r<n$. Note that $\deg q<n$ so that 
+    $\int_{-1}^1Q(t)dt=\int_{-1}^1 r(t)dt=\sum_jA_jr(\alpha_j)=\sum_j A_j(q(\alpha_j)p_n(\alpha_j)+r(\alpha_j))=\sum_jA_jQ(\alpha_j)$.
+
+    (ii): Suppose we have another set of choices. So $\int_{-1}^1Q(t)dt=\sum_jB_jQ(\beta_j)$ whenever $\deg Q<2n$. Consider $p(t)=\prod_j(t-\beta_j)$. Consider $\langle p,q\rangle$ for $\deg q<n$. Note that $\deg pq<2n$, so $\int_{-1}^1pq=\sum_jB_jp(\beta_j)q(\beta_j)=0$. By the uniqueness of the construction of $p_n$, $\beta_j$ are roots of $p_n$.
+\end{proof}
+\begin{lem}
+    Let $\alpha_1,...,\alpha_n$ be the roots of the $n$th Legendre poly and $A_1,...,A_n$ numbers defined as in the previous theorem. Then \begin{enumerate}[(i)]
+        \item $\sum_iA_i=2$
+        \item $A_i\ge 0$ for all $i=1,...,n$
+    \end{enumerate}
+\end{lem}
+\begin{proof}
+    (i): Apply the first part of the preceding theorem to $Q(t)=1$.
+
+    (ii): Define $Q_i(t)=\prod_{j\neq i}(t-\alpha_j)^2$
+\end{proof}
+\begin{thm}
+    For $n\ge 1$, let $\alpha_1,...,\alpha_n$ be the roots of the $n$th Legendre poly and $A_1,...,A_n$ as in the preceding theorem.
+    Let $f:[-1,1]\to\RR$ be a continuous function and $\epsilon>0$.
+    Then for all sufficiently large $n$
+    \[\left|\int_{-1}^1f(t)dt-\sum_{i=1}^nA_if(\alpha_i)\right|<\epsilon\]
+\end{thm}
+\begin{proof}
+    By Weierstrass approximation theorem, there exists a polynomial $p$ s.t. $\sup_{t\in[-1,1]}|f(t)-p(t)|<\epsilon/4$. For all $n>\frac12\deg p$, have
+    \begin{align*}
+        \left|\int_{-1}^1f(t)dt-\sum_{i=1}^nA_if(\alpha_i)\right|&\le\left|\int_{-1}^1(f(t)-p(t))dt\right|+\left|\sum_iA_i(p(\alpha_i)-f(\alpha_i))\right|\\
+    \end{align*}
+    The first term is $\le \epsilon/2$. The second term is $\le\epsilon/2$ by the preceding lemma.
+\end{proof}
+\begin{rem}
+    Can further show that \begin{enumerate}[(i)]
+        \item Legendre poly $p_n=c\frac{d^n}{dt^n}(1-t^2)^n$ (cf. ES2 Q11)
+        \item Chebyshev polys can be presented as an orthogonal seuqnece by integrating w.r.t. a weight function. (cf. ES2 Q13)
+    \end{enumerate}
+\end{rem}
+
+\section{Approximation by Complex Polynomials}
+When $S\subseteq\CC$ is any set, a function being holo'c on $S$ means that it is holo'c on some open set containing $S$.
 \end{document}

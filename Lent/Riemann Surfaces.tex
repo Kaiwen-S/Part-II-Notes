@@ -287,6 +287,91 @@ A map $f:\CC_\infty\to\CC$ is analytic iff $f:\CC\to\CC$ and $f(1/z)$ are both h
 
     We are done by connectedness.
 \end{proof}
+\[(\}-:\tag{Owen's Signature with moustache}\]
+\begin{thm}[Open Mapping Thm for Riemann surfaces]
+    If $f:R\to S$ is a non-constant analytic map, then $W$ open in $R$ $\implies$ $f(W)$ is open in $S$.
+\end{thm}
+\begin{proof}
+    Take $w\in W$ and charts $(\varphi, U)$, $(\psi, V)$ around $w, f(w)$ resp. Let $N=\varphi(U\cap f^{-1}\cap W)$, which is open in $\CC$, and consider $\psi f\varphi^{-1}$. WLOG, assume $N$ is connected, so by identity thm on $\CC$, either const (contradiction) or $\psi f\varphi^{-1}(N)$ is open in $\psi(V)$, so $f\varphi^{-1}(N)$ is open in $V$. Let $M_w=\varphi^{-1}(N)$ which is a nbd of $w$ in $R$ with $M_w\subseteq W$ and $f(w)\in f(M_w)$ is open in $S$, so $f(w)$ is an interior point of $f(W)$.
+\end{proof}
+\begin{crly}
+    Let $f:R\to S$ be analytic with $R$ compact. Then either $f$ is surjective (so $S$ is compact) or $f$ is constant. 
+\end{crly}
 
+\subsection{Local Representation of Analytic Maps}
+Let $U\subseteq\CC$ be a domain and let $f:U\to\CC$ be a non-const holo'c function with $z_0\in U$. Locally, $f(z)=f(z_0)+\sum_{k\ge 1}a_k(z-z_0)^k$. Let $m\ge 1$ be the smallest s.t. $a_m\neq 0$. Then $f(z)=f(z_0)+(z-z_0)^mg(z)$ where $g(z_0)\neq 0$.
+\begin{defn}
+    The multiplicity of $f$ at $z_0$ is $m_f(z_0)=m$ as above.
+\end{defn}
+Note that the set of points with multiplicity $>1$ form a discrete set. Also, the multiplicity is multiplicative (w.r.t. composition).
+\begin{thm}[Local mapping thm for domains]
+    For non-const $f:U\to\CC$ holo'c, $z_0\in U$, $m=m_f(z_0)$. Then $\exists$ nbd $N$ of $z_0\in U$ and a  biholomorphic $\beta:N\to D(0,\delta)$ (for arbitrarily small $\delta>0$) s.t. $f(z)=f(z_0)+\beta(z)^m$ on $N$.
+\end{thm}
+\begin{proof}
+    Write $f(z)=f(z_0)+(z-z_0)^mg(z)$ on some $D(z_0,r)\subseteq U$ w/ $g$ holo'c and non-zero at $z_0$. Write $g(z_0)=re^{i\alpha}\neq 0$. Have a holo'c branch $\log_\alpha$. Define $g^{-1}(\CC\setminus L_{\pi+\alpha}\cap D(z_0,r))$ is a nbd of $z_0$ on which $g$ is holo'c. Define $\beta(z)=(z-z_0)e^{1/m}\log_\alpha g(z)$. Can see that $\beta'(z_0)\neq 0$. By IFT, have nbd $N''\subseteq N'$ w/ $\beta:N''\to\beta(N'')$ biholo'c. Take $\beta^{-1}(D(0,\delta))$ and restrict.
+\end{proof}
+Let $f:R\to S$ be analytic and $z_0\in R$ with charts $(\varphi_0,U_0)$, $(\psi_0,V_0)$ around $z_0$ and $f(z_0) $ resp.
+\begin{defn}
+    The multiplicity $m_f(z_0)$ is $m_{\psi_0f\varphi^{-1}}(\varphi_0(z_0))$.
+\end{defn}
+\begin{lem}
+    This is independent of charts.
+\end{lem}
+\begin{proof}
+    For another pair of charts $(\varphi_1,U_1)$ and $(\psi_1,V_1)$. Write $\psi_1f\varphi_1^{-1}=(\psi_1\psi_0^{-1})(\psi_0f\varphi_0^{-1})(\varphi_0\varphi_1^{-1})$. Done (multiplicative).
+\end{proof}
 
+\subsection{Degree}
+\begin{thm}[Valency Thm]
+    Let $f:R\to S$ be a non-const and analytic. Suppose $R$ is compact. Then $\exists n\ge 1$ (degree/valency) s.t. $\forall w\in S$, $\# f^{-1}(w)=n$ (with multiplicity).
+\end{thm}
+\[D:\tag{Owen's Signature}\]
+\begin{proof}
+    For all $w_0\in S$, $f^{-1}(w_0)$ is compact and discrete so finite, say $\{z_1,...,z_q\}\neq\varnothing$. For $A\subseteq R$, and $w\in S$, let $n_A(w)=\sum_{z\in f^{-1}(w)\cap A}m_f(z)$. 
+
+    $R$ Hausdorff, so have $q$ disjoint nbds $M_i$ of $z_i$. Choose charts $(\varphi_i,U_i)$ around $z_i$ and $(\psi,V)$ around $w_0$. Wlog, $\psi(w_0)=0$. Then $\psi f\varphi_i^{-1}$ is holo'c around $\varphi_i(z_i)$, so there exists a nbd $H_i$ in  $\CC$ around $\varphi_i(z_i)$ s.t. $\psi f\varphi_i^{-1}(\zeta)=\psi f(z_i)+\beta_i(\zeta)^{m_f(z_i)}$ for some $\beta_i:H_i\to D(0,r_i)$ is biholo'c. Take $s=\min r_i$ and define $N_i=\varphi_i^{-1}(H_i)$. $f$ is $m_i$-to-1 $N_i\to\psi^{-1}(D(0,s))$ and $N_i$ are disjoint nbd of $z_i$ in $R$.
+
+    Consider $R\setminus\bigcup_{i=1}^q N_i$. It's compact, so $M=S\setminus f(R\setminus \bigcup N_i)$ is open, so a nbd of $w_0$. Take any $w\in\bigcap f(N_i)\cap M$ (nbd of $w_0$) with $R=\bigsqcup N_i\bigsqcup (R\setminus\bigcup N_i)$. Have $n_R(w)=n_{N_1}(w)+\cdots+n_{N_q}(w)+n_{R\setminus \bigcup U_i}(w)=m_f(z_1)+\cdots+m_f(z_q)+0$, so $n_R$ is loc.const.
+\end{proof}
+\begin{crly}
+    $f:\CC_\infty\to\CC_\infty$ is biholo'c (bianalytic) iff $f$ is a M\"obius transformation.
+\end{crly}
+
+\subsection{Harmonic Functions}
+\begin{defn}
+    A func $u:U\to\RR$, $U$ domain, is harmonic if $u\in C^2(U)$ and $\nabla^2u=0$.
+\end{defn}
+\begin{thm}
+    $u$ is harmonic on disk $D$ $\implies$ $\exists f:D\to\CC$ holo'c with $u=\Re f$.
+\end{thm}
+\begin{crly}
+    If $u$ is harmonic on a domain $U$, then $u$ is smooth.
+\end{crly}
+\begin{crly}
+    If $U\to V$ holo'c on a domain and $u:V\to\RR$ harmonic, then $u\circ g$ harmonic.
+\end{crly}
+\begin{defn}
+    $R$ is a Riemann surface. $u:R\to\RR$ is harmonic if $u\varphi_\alpha^{-1}$ is harmonic for all charts $\varphi_\alpha$.
+\end{defn}
+\begin{thm}[Identity Thm for harmonic functions]
+    Let $R$ be a Riemann surface with $u,v:R\to\RR$ both harmonic, then either $u\equiv v$ or $\{z\in R:u(z)=v(z)\}$ has empty interior.
+\end{thm}
+\begin{proof}
+    ES1
+\end{proof}
+\begin{crly}[Open Mapping for harmonic functions]
+    Let $R$ be a Riemann surface with a non-const harmonic function $R\to \RR$, then $u$ is an open map.
+\end{crly}
+\begin{proof}
+    Pick $w\in W$ open and chart $(\varphi, U)$ at $w$. Wlog, assume $U\subseteq W$ and $\varphi(U)$ is a disk, so there exists a holo'c function $f:\varphi(U)\to\CC$ s.t. $\Re f=u\varphi^{-1}$. Note that $f$ is non-constant, so open mapping theorem for holo'c functions, $f(\varphi(U))$ is open. Project to the real part, deduce that $u(U)$ is open in $\RR$, so $u(w)$ is an interior point of $W$ for all $w\in W$.
+\end{proof}
+\begin{crly}
+    If $u:R\to\RR$ is a harmonic function and $R$ is compact, then $u$ is const.
+\end{crly}
+\section{Covering Maps}
+In this section, assume all topological spaces are Hausdorff, connected, and locally path-connected, unless stated otherwise.
+\subsection{Local Homeomorphisms}
+\begin{defn}
+    A map $f:X\to Y$ is a local-homeo if $\forall x\in X$, $\exists N_x$ open nbd of $x$ s.t. $f(N_x)$ is open in $Y$ and $f|_{N_x}:N_x\to f(N_x)$ is a homeo.
+\end{defn}
 \end{document}

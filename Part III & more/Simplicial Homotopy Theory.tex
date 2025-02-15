@@ -260,7 +260,7 @@ This functor will allow us to visualize simplicial sets constructed by combinato
     \[\partial \Delta^n=\operatorname{colim}\left(\coprod_{0\le i<j\le n}\Delta^{n-2}\overset{\rightarrow}{\rightarrow}\coprod_{0\le i\le n}\Delta^{n-1}\right)\]
 \end{proof}
 \begin{example}
-    For $n\ge1$ and $-\le i\le n$, we define $\Lambda_i^n$, the $i$th horn in $\Delta^n$ to send $[m]$ to the set of order-preserving functions $\{0\le1\le...\le m\}\to\{0\le 1\le...\le n\}$ such that $\im(\alpha)\supsetneq\{0\le...\le i-1\}\cup\{i+1\le...\le n\}$.
+    For $n\ge1$ and $0\le i\le n$, we define $\Lambda_i^n$, the $i$th horn in $\Delta^n$ to send $[m]$ to the set of order-preserving functions $\{0\le1\le...\le m\}\to\{0\le 1\le...\le n\}$ such that $\im(\alpha)\supsetneq\{0\le...\le i-1\}\cup\{i+1\le...\le n\}$.
     
     There is a natural map $\Lambda_i^n\to\partial\Delta^n$. The geometric realization is hte inclusion of the $i$th horn.
 \end{example}
@@ -675,5 +675,207 @@ B \arrow[ru, "f|_B"]  &
     For an arbitrary map we need to use the following statement: \textit{If $A\to B$ is a map of Kan complex then it factors as a composite $A\to A'\to B$, where $A\to A'$ is a mono and $A'\to B$ is a htpy equivalence.} The space $A'$ is given by $A\times\operatorname{Kan}(\Delta^1)\coprod_{A\times{1}}B$, where $\operatorname{Kan}(\Delta^1)$ is the Kan replacement, i.e., applying the small object argument to $\Delta^1$. In fact $\operatorname{Kan}(\Delta^1)$ is the nerve of a 2-object category.
 \end{proof}
 
+\begin{proof}[Proof of Thm 1.31]
+    Let $f:A\to B$ be a trivial Kan fibration between Kan complexes, then every map $\Delta^0\to B$ lifts to $A$. If two points are in the same path component, then there lifts are also in the same component, as illustrated by the diagrams below. 
+    \begin{center}
+        % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRAB136AnSHACyxgA5iAC+pdJlz5CKMgEYqtRizacAIjAY46APWLjJIDNjwEiC8svrNWiEAEEjUs7Mukl1W2ocAhFxNpczlkAGZrb1V7DnY0Om48Rk1tXT0FQNMZCxQIrxU7dXYtHX0MiVds0IAWSILfJ0zg9xRa-J8YgLFlGChheCJQADNuCABbJDIQHAgkACYKkBHx+eoZpDDF5YnEKfXEBS3Rnatp2cRN422kU-256gYhGKg6OH5ewOvEWrOkADYjitEH81ucAOyAnY-fYAVkhSBhoKQEKuxwRSOBDyebBebw+3TEQA
+\begin{tikzcd}
+\varnothing \arrow[r] \arrow[d]       & A \arrow[d] &  & \partial\Delta^1 \arrow[r] \arrow[d]  & A \arrow[d] \\
+\Delta^0 \arrow[r] \arrow[ru, dashed] & B           &  & \Delta^1 \arrow[r] \arrow[ru, dashed] & B          
+\end{tikzcd}
+    \end{center}
+    Similar diagrams can be used to show that $f$ induces iso on higher homotopy groups.
+\end{proof}
 
+\subsection{Tools to compute homotopy groups}
+Suppose $(X,x:\Delta^0\to X)$ is a pointed Kan complex. Then there is another pointed Kan complex $\Omega X$ defined using the following pullback
+\begin{center}
+    % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZARgBoAGAXVJADcBDAGwFcYkQANAPWAB1eAIjEY56XYgF8QE0uky58hFGWLU6TVu259eaegCc8TfkJFjJ02SAzY8BIuVKqaDFm0QgTw0V3KW5tooOFGqumh78APIAtjAA5vQABBzSajBQcfBEoABm+hDRSADMNDgQSOQyufmFiI4gZUiSVnkFxaXliABMVSCttV0dTRKUEkA
+\begin{tikzcd}
+\Omega X \arrow[r] \arrow[d] & X^{\Delta^1} \arrow[d] \\
+\Delta^0 \arrow[r]           & X^{\partial\Delta^1}  
+\end{tikzcd}
+\end{center}
+where $X^{\Delta^1}=\underline{\Hom}(\Delta^1,X)$.
+
+Note that $\pi_0(\Omega X)=\pi_1(X,x)$.
+
+In general, we can define $\Omega^n X$ by iterating this construction $n$ times, so $\pi_n(X,x)\cong \pi_1(\Omega^{n-1}X)\cong\pi_0(\Omega^n X)$.
+
+Taking loop space is a special case of a more general construction called homotopy pullback.
+\begin{defn}
+    Given a diagram
+    \begin{center}
+        % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZARgBoAGAXVJADcBDAGwFcYkQBNEAX1PU1z5CKMsWp0mrdgC0efEBmx4CRcqTE0GLNohAANHuJhQA5vCKgAZgCcIAWyRqQOCEjITt7AI5yrth4gATDQubpqSOgqG3EA
+\begin{tikzcd}
+                 & Y \arrow[d, "q"] \\
+X \arrow[r, "p"] & Z               
+\end{tikzcd}
+    \end{center}
+    of Kan complexes, the homotopy pullback of the diagram is the pullback in $s\bset$ of
+    \begin{center}
+        % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZARgBoAGAXVJADcBDAGwFcYkQAtAPWAB1eAIjEY56XYgF8QE0uky58hFGWLU6TVuw788AW3gACDgF5+zMLABOjLGBh9eACQi6JACn5p6lvE35CRMTIOAEppWRAMbDwCInJSVRoGFjZEEAANHSx9OAMATWk1GCgAc3giUAAzSxckeJAcCCRJCOraxAAmGkbmpI1UyKycgwBHQokgA
+\begin{tikzcd}
+                                 & Z^{\Delta^1} \arrow[d]                           \\
+X\times Y \arrow[r, "p\times q"] & {Z\times Z=\underline{\Hom}(\partial\Delta^1,Z)}
+\end{tikzcd}
+    \end{center}
+\end{defn}
+Note that an object in the homotopy pullback is specified by an object in $X$, an object in $Y$, and a \textbf{specified} path between their images in $Z$.
+\begin{rem}
+    The projection $Z^{\Delta^1}\to Z^2$ is a Kan fibration. Also, $X\times Y\to\Delta^0$ is a Kan fibration, so the homotopy pullback is a Kan complex.
+\end{rem}
+\begin{rem}
+    A map from $W$ to the htpy pullback is essentially a map from $W\to X,$ a map $W\to Y$ and a map $\Delta^1\to\underline{\Hom}(W,Z)$ connecting the two composites.
+\end{rem}
+\begin{example}
+    If $(X,x)$ is a pointed Kan complex, then $\Omega X$ is the homotopy pullback when $X=Y=\Delta^0$ and $p=q=x$.
+\end{example}
+\begin{defn}
+    Suppose $E\to B$ is a map of pointed Kan complexes. The homotopy fiber $F$ of this map is homotopy pullback of
+    \begin{center}
+        % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBoBGAXVJADcBDAGwFcYkQBREAX1PU1z5CKchWp0mrdgCEefEBmx4CRUcXEMWbRCAA6ugCIxGOegD1iPcTCgBzeEVAAzAE4QAtkjIgcEJOV5nN09EACYaX39uSm4gA
+\begin{tikzcd}
+            & \Delta^0 \arrow[d] \\
+E \arrow[r] & B                 
+\end{tikzcd}
+    \end{center}
+    where the vertical map is the inclusion of base point.
+\end{defn}
+Note that the homotopy fiber is canonically pointed.
+\begin{prop}
+    The sequence $\pi_0(F)\to\pi_0(E)\to\pi_0(B)$ of pointed sets is exact.
+\end{prop}
+\begin{prop}
+    Suppose $F$ is a homotopy fiber of a map $E\to B$, then the homotopy fiber of the map $F\to E$ is $\Omega B$.
+\end{prop}
+\begin{proof}
+    Consider the diagram of homotopy pullbacks
+    \begin{center}
+        % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZAJgBoAGAXVJADcBDAGwFcYkQAdDgERkZ3oA9ciAC+pdJlz5CKMgEZqdJq3YAhMRJAZseAkXmlFNBizaIQAUU2TdMgxSWnVFgGI3tUvbOTkjTlXNOHj4BYQ8daX0UPyoTQPZXAHIxJRgoAHN4IlAAMwAnCABbJABWGhwIJABmcTzCksRqiqrEYjqQAuKalqRyDq7GvxBKpHkBhqQyEdbxrUGkABZetonuxHKZpdFKUSA
+\begin{tikzcd}
+F' \arrow[r] \arrow[d] & F \arrow[d] \arrow[r] & \Delta^0 \arrow[d] \\
+\Delta^0 \arrow[r]     & E \arrow[r]           & B                 
+\end{tikzcd}
+    \end{center}
+    By universal property, can see that an element in $F'$ is the same as specifying two objects in $\Delta^0$ and a path between them in $B$. This is exactly $\Omega B$. 
+\end{proof}
+\begin{prop}
+    Suppose $E\to B$ is a map of pointed Kan complexes with homotopy fiber $F$. Then there is a long exact sequence 
+    \[\cdots\to\pi_nF\to\pi_nE\to\pi_nB\to\cdots\to\pi_0F\to\pi_0E\to\pi_0B\]
+\end{prop}
+\begin{proof}
+    Apply the previous proposition, noting that $\pi_n$ can be expressed as $\pi_0$ of some iterated loop space.
+\end{proof}
+
+Category theory aside.
+
+\begin{defn}
+    An inner horn inclusion is a map $\Lambda_i^n\hookrightarrow\Delta^n$ with $0<i<n$.
+\end{defn}
+\begin{defn}
+    A quasicategory ($\infty$-category) is a $s\bset$ $X$ which admits lifts for all inner horn inclusions.
+\end{defn}
+Note that every Kan complex is a quasi category. Note that if $\mathscr C$ is a category, then $N(\mathscr C)$ is a quasicategory. (It's a a Kan complex iff $\mathscr C$ is a groupoid.)
+\begin{rem}
+    Somtimes $\infty$-categories are called $(\infty,1)$-categories since they have objects forming a set $X_0$, Morphisms forming a set $X_1$, 2-isomorphisms, 3-isomorphisms, etc.
+\end{rem}
+\begin{rem}
+    Categories sits fully faithfully inside quasicategories in the sense that given $\mathscr C,\mathscr D$ categories, functors $\mathscr C\to\mathscr D$ are in bijection with maps $N(\mathscr C)\to N(\mathscr D)$.
+\end{rem}
+There is an $\infty$-category $\mathcal S$ of Kan complexes.
+\begin{itemize}
+    \item $0$-simplices $\leftrightarrow$ Kan complexes.
+    \item $1$-simplices $\leftrightarrow$ morphisms $f:K_1\to K_2$ of Kan complexes.
+    \item $2$-simplices $\leftrightarrow$ pairs (diagram $K_0\to K_1\to K_2$ and $K_0\to K_2$, a map $\Delta^1\to\underline{\Hom}(K_1,K_2)$)
+\end{itemize}
+\begin{defn}
+    The simplicial category $\mathscr C$ is\begin{itemize}
+        \item  A collection of objects
+        \item For every pair of obj $c_1,c_2$, a simplicial set $\underline{\Hom}_{\mathscr C}(c_1,c_2)$
+        \item Composition of morphisms of simplicial sets $\underline{\Hom}_{\mathscr C}(c_1,c_2)\times\underline{\Hom}_{\mathscr C}(c_2,c_3)\to\underline{\Hom}_{\mathscr C}(c_1,c_3)$
+        \item Identity $1_c:\Delta^0\to\underline{\Hom}_{\mathscr C} (c,c)$ satisfying the axioms of a category
+    \end{itemize}
+\end{defn}
+Examples include $s\bset$, and $\textbf{Kan}$ (of Kan complexes)
+\begin{defn}
+    For every integer $n\ge 0$, there is a simplicial category $\operatorname{Path}(\Delta^n)$ \begin{itemize}
+        \item Objects are non-neg integers
+        \item Morphisms $i\to j$ is the simplicial set that is the nerve of the poset of linearly ordered sets $i=x_0<x_1<\cdots<x_n=j$.
+    \end{itemize}
+\end{defn}
+\begin{defn}
+    $\mathcal S$ has $n$-simplices the set of functors of simplicial categories $\operatorname{Path}(\Delta^n)\to\mathbf{Kan}$
+\end{defn}
+\begin{defn}
+    Any quasicategory $\mathscr C$ has a homotopy category $\operatorname{Ho}(\mathscr C)$
+    \begin{itemize}
+        \item Objects $\mathscr C_0$
+        \item Morphisms, elements of $\mathscr C$ up to homotopy (2-isomorphisms)
+    \end{itemize}
+\end{defn}
+We have functors
+\[\btop\overset{\sing}{\longrightarrow}\mathbf{Kan}\overset{}{\longrightarrow}\mathcal S\overset{}{\longrightarrow}\operatorname{Ho}(\mathcal S)\]
+
+\section{Homotopy colimit and limit}
+Let $\mathscr C$ be a quasicategory. Then $\underline{\Hom}(\Lambda_2^2,\mathscr C)$ is a quasicategory The right-adjoint to the constant diagram functor $\operatorname{Ho}\mathscr C\to\operatorname{Ho}\underline{\Hom}(\Lambda_2^2,\mathscr C)$ is the homotopy pullback functor. 
+\begin{rem}
+    This defines the homotopy pullback as a functor
+    \[\operatorname{Ho}\underline{\Hom}(\Lambda_2^2,\mathscr C)\to\operatorname{Ho}\mathscr C\] Can go futher into objects and define it as a functor $\underline{\Hom}(\Lambda_2^2,\mathscr C)\to\mathscr C$. This allows us to define a Kan complex of homotopy pullbacks that is contractible (equivalent to $\Delta^0$)
+\end{rem}
+\section{Quasicategories}
+A simplicial category is a category where morphisms are simplicial sets.
+\begin{defn}
+    Given a simplicial category $\mathscr C$, its homotopy coherent nerve is the simplicial set with $[n]$ simplices, functors of simplicial categories from $\operatorname{Path}(\Delta^m)$ to $\mathscr C$.
+\end{defn}
+\begin{example}
+    We can extract a simplicial set $S$ from the simplicial category of Kan complexes. $S_0=\{\text{Kan complexes}\}$, $S_1=\{f:K_1\to K_2\}$, etc.
+\end{example}
+\begin{thm}[Cordier-Porter]
+    Suppose the mapping objects in a simplicial category $\mathscr C$ are Kan complexes. Then the homotopy coherent nerve of $\mathscr C$ is a quasicategory.
+\end{thm}
+\begin{proof}[Proof Sketch]
+    \textbf{[later]}
+\end{proof}
+\subsection{Diagrams in a Quasicategory}
+If $K$ is a simplicial set and $\mathscr C$ is a quasicategory, then $\underline{\Hom}(K,\mathscr C)$ is a quasicategory. This is the quasicategory of $K$-shaped diagram in $\mathscr C$.
+\begin{example}
+     A map $\Delta^1\times\Delta^1\to N(\mathbf{Kan})$ is a commuting square. A map $\Delta^1\times\Delta^1\to \mathcal{S}=N^{\text{hc}}(\mathscr C)$ is a commuting square and a specified homotopy $\Delta^1\to\underline{\Hom}(A,D)$ witnessing the homotopy commutativity.
+\end{example}
+We say that a quasicategory $\mathscr C$ has pullbacks if the constant diagram fucntor $\mathscr C\to\underline{\Hom}(\Lambda_2^2,\mathscr C)$ admits a right adjoint on homotopy categories.
+\begin{example}
+    If $\mathscr C$ is a category, then $N(\mathscr C)$ has pullbacks iff $\mathscr C$ does. However, pullbacks in $N(\mathbf{Kan})$ and $N^{\text{hc}}(\mathbf{Kan})$ are different in general, and we call the pullback in $N^{\text{hc}}(\mathbf{Kan})$ homotopy pullbacks.
+\end{example}
+The homotopy pullback of a diagram $A\overset p\rightarrow C\overset q\leftarrow B$ is a Kan complex $P$. The defining feature/universal property of $P$ is that maps $X\to P$ from any other Kan complex to $P$ up to homotopy are in bijection with maps from the constant diagram $X\overset\id\rightarrow X\overset\id\leftarrow X$. Such a diagram has the data of \begin{enumerate}[(1)]
+    \item An object of $\underline{\Hom}(X,A)$, $\underline{\Hom}(X,B)$, and $\underline{\Hom}(X,C)$.
+    \item A map $\Delta^1\to\underline{\Hom}(X,C)$
+\end{enumerate}
+\begin{center}
+    % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZARgBoAGAXVJADcBDAGwFcYkQAdDgGXoFsARlHoB9AEwA9MSAC+pdJlz5CKcqWLU6TVuy4ARGIxz0JxWfJAZseAkTIaaDFm0ScOBoyelyF15UTEKTScdVy5mMFgAJ0YsMBhgLgAJCD4ZAAoADVIAYQBKWU0YKABzeCJQADMo1KQyEBwIJDEfEGraxDUGpsQWi3a+ZppGpABmGlj49mE4AAti8yqawc7hntGZShkgA
+\begin{tikzcd}
+                   & \Lambda_2^2 \arrow[d] \arrow[r] & {\underline{\Hom}(X,C)} \\
+\Delta^1 \arrow[r] & \Delta^2 \arrow[ru, dashed]     &                        
+\end{tikzcd}
+\end{center}
+
+We have proved that in $\mathcal S$, the pullback of $A\rightarrow C\leftarrow B$ is the pullback in $\mathbf{Kan}$ of $\underline{\Hom}(\Delta^1,C)\rightarrow C\times C\leftarrow A\times B$.
+
+Eventually, want to prove that 
+\begin{thm}
+    If $A\to C$ is a Kan fibration and $B\to C$ is any map, then the pullback in $\mathbf{Kan}$ of $A\rightarrow C\leftarrow B$ is the pullback in $\mathcal S$. This is homotopy equivalent to the pullback of $\underline{\Hom}(\Delta^1,C)\rightarrow C\times C\leftarrow A\times B$.
+\end{thm}
+\begin{proof}
+    Note that $\underline{\Hom}(\Delta^1,C)\to\underline{\Hom}(\{1\},C)$ is a trivial Kan fibration. Consider $\underline{\Hom}(\Delta^1,C)\times_{\underline{\Hom}(\{1\},C)}A\to A$ is a trivial Kan fibration (pullback). Note: the map $A\to\underline{\Hom}(\Delta^1,C)\times_{\underline{\Hom}(\{1\},C)}A$ defined by $A\to C\to\underline{\Hom}(\Delta^1,C)$ is a section. Note that any section of a trivial Kan fibration between Kan complexes is a homotopy equivalence since a section induces a section of isomorphism of homotopy groups. 
+
+    Form the following diagram
+    \begin{center}
+        % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRACEQBfU9TXfIRQBGclVqMWbAMLdeIDNjwEiAJjHV6zVohABBOXyWCiZYeK1TdnHkYEqRpc5sk6Qs2wv7Khydc4ltNgAdYKYwWAAnBiwwGGBQgAkIAFsuAApQgBEYBhw6AD1RaQBKULwU+AB9aQACAy5xGCgAc3giUAAzSNSkdRAcCCQAVhcg3VDsSoBHQxBu3sRRAaHEABYxqxBhGrmFlKQyFaQAZk23HZt5fcPqQaRhTxvEfvulp56DxFHj9Y-Fs6-NaNLhAA
+\begin{tikzcd}
+B \arrow[d, "1_B"] \arrow[r] & C \arrow[d, "1_C"] & A \arrow[d, "\simeq"] \arrow[l]                    \\
+B \arrow[r]                  & C                  & {\underline{\Hom}(\Delta^1,C)\times_C A} \arrow[l]
+\end{tikzcd}
+    \end{center}
+    This is an iso in $\operatorname{Ho}(\underline{\Hom}(\Lambda_2^2,\mathcal S))$.
+    unfinished.
+\end{proof}
 \end{document}
