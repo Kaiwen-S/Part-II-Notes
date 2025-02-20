@@ -19,7 +19,7 @@
 \usepackage{subcaption}
 \usepackage[export]{adjustbox}
 \usepackage{lipsum}
-
+\newcommand{\e}{\varepsilon}
 %hyperref setup
 \hypersetup{
     colorlinks=true,
@@ -194,9 +194,9 @@ So if $f:[0,1]\to \CC$ is a cts function to a cut plane, then we have a continuo
     Let $f:[0,1]\to\CC^\ast$ be cts. Then there is a cts choice of argument on $f$, i.e., $\exists\theta:[0,1]\to\RR$ cts s.t.$f(t)=|f(t)|e^{i\theta(t)}$. This choice is unique up to adding $2n\pi,\ n\in\ZZ$.
 \end{thm}
 \begin{proof}
-    By uniform continuity, partition $[0,1]$ into a number of segments $[t_i,t_{i+1}]$ s.t. $|f(t_k)-f(t_{k-1})|<\epsilon$, where $\epsilon$ is s.t. $B_\epsilon(0)\subseteq \CC\setminus\im(f)$. 
+    By uniform continuity, partition $[0,1]$ into a number of segments $[t_i,t_{i+1}]$ s.t. $|f(t_k)-f(t_{k-1})|<\varepsilon$, where $\varepsilon$ is s.t. $B_\varepsilon(0)\subseteq \CC\setminus\im(f)$. 
 
-    Induction: suppose there is a cts choice $\theta$ on $[0,t_k]$. Note that $\im(f|_{[t_k,t_{k+1}]})\subseteq B_\epsilon(f(t_k))$. This lies in a cut plane, so we choose a cts $\operatorname{arg}_a$ s.t. $\theta(t_k)=\arg_a(t_k)$, so the argument function is extendable.
+    Induction: suppose there is a cts choice $\theta$ on $[0,t_k]$. Note that $\im(f|_{[t_k,t_{k+1}]})\subseteq B_\varepsilon(f(t_k))$. This lies in a cut plane, so we choose a cts $\operatorname{arg}_a$ s.t. $\theta(t_k)=\arg_a(t_k)$, so the argument function is extendable.
 
     For uniqueness, if $\phi(t)$ is another choice, then $\theta(t)-\phi(t)$ is a cts function to $2n\ZZ$.
 \end{proof}
@@ -221,9 +221,9 @@ Define homotopy between two paths.
     Let $f_1,f_2:[0,1]\to\CC^\ast$ be closed paths. If $f_1\simeq_F f_2$, where $F:[0,1]^2\to\CC^\ast$, then $w(f_1,0)=w(f_2,0)$.
 \end{lem}
 \begin{proof}
-    Note that $\im F$ is closed in $\CC$, so can find $\epsilon>0$ s.t. $|F(s,t)|>\epsilon$ for all $s,t$. By unif continuity, find $\delta>0$ s.t. $d((s,t),(s',t'))<\delta\Rightarrow|F(s,t)-F(s',t')|<\epsilon$. Choose a dissection $\{0=s_0<s_1<\ldots<s_n=1\}$ s.t. $s_{k+1}-s_k<\delta$. Then for all $k$ and $t$, we have
+    Note that $\im F$ is closed in $\CC$, so can find $\varepsilon>0$ s.t. $|F(s,t)|>\varepsilon$ for all $s,t$. By unif continuity, find $\delta>0$ s.t. $d((s,t),(s',t'))<\delta\Rightarrow|F(s,t)-F(s',t')|<\varepsilon$. Choose a dissection $\{0=s_0<s_1<\ldots<s_n=1\}$ s.t. $s_{k+1}-s_k<\delta$. Then for all $k$ and $t$, we have
     \[F(s_k,t)=F(s_{k+1},t)+h_k(t)\]
-    where $|h(t)|<\epsilon$. Since $|F(s_{k+1},t)|>\epsilon$, we are in the situation of the previous lemma. Done.
+    where $|h(t)|<\varepsilon$. Since $|F(s_{k+1},t)|>\varepsilon$, we are in the situation of the previous lemma. Done.
 \end{proof}
 \begin{crly}[Topological argument principle]
     Let $D$ be the closed unit disk in $\CC$ and $f:D\to \CC$ cts s.t. $f(z)\neq 0$ whenever $|z|=1$. Let $g:[0,1]\to\CC$ with $g(t)=f(e^{i2\pi t})$. If $w(g,0)\neq 0$, then $f$ has a root in $D$.
@@ -268,7 +268,7 @@ Define homotopy between two paths.
     Note that $\sigma<1/\sqrt{n}$, so the first inequality makes sense.
 \end{proof}
 \begin{thm}[Weierstrass approximation theorem]
-    Let $f:[0,1]\to\RR$ be cts. For all $\epsilon>0$, there exists a poly $p$ s.t. $\|p-f\|_\infty<\epsilon$.
+    Let $f:[0,1]\to\RR$ be cts. For all $\varepsilon>0$, there exists a poly $p$ s.t. $\|p-f\|_\infty<\varepsilon$.
 \end{thm}
 \begin{proof}
     For each $n=1,2,3,...$, let $Y=Y_n(t)$ be the r.v. defined in the previous corollary.
@@ -276,11 +276,11 @@ Define homotopy between two paths.
     \textbf{Step 1:} We show that $\mathbb E[f(Y_n(t))]$ is a polynomial in $t$. Compute
     \[\mathbb E[f(Y_n(t))]=\sum_{k=0}^n f(k/n)\PP(Y_n(t)=k/n)=\sum_{k=0}^nf(k/n)\binom{n}{k}t^k(1-t)^{n-k}\]
 
-    \textbf{Step 2:} We show that for all $\epsilon>0$, there exists a sufficiently large $n$ s.t. $|\mathbb E[f(Y_n(t))]-f(t)|<\epsilon$ for all $t\in [0,1]$. We know that $\exists M>0$ s.t. $|f(t)|<M$ for all $t$. Let $\epsilon>0$. Uniform continuity implies that $|f(s)-f(t)|\le \epsilon/2$ whenever $|s-t|\le\delta$. Now $$\PP(|f(Y_n(t))-f(t)|\ge\epsilon)\le \PP(|Y_n-t|\ge\delta)\le\dfrac{1}{\delta^2n}$$
-    Choose $n$ s.t. $\frac{1}{\delta^2n}<\frac{\epsilon}{4M}$ so that
+    \textbf{Step 2:} We show that for all $\varepsilon>0$, there exists a sufficiently large $n$ s.t. $|\mathbb E[f(Y_n(t))]-f(t)|<\varepsilon$ for all $t\in [0,1]$. We know that $\exists M>0$ s.t. $|f(t)|<M$ for all $t$. Let $\varepsilon>0$. Uniform continuity implies that $|f(s)-f(t)|\le \varepsilon/2$ whenever $|s-t|\le\delta$. Now $$\PP(|f(Y_n(t))-f(t)|\ge\varepsilon)\le \PP(|Y_n-t|\ge\delta)\le\dfrac{1}{\delta^2n}$$
+    Choose $n$ s.t. $\frac{1}{\delta^2n}<\frac{\varepsilon}{4M}$ so that
     \begin{align*}|\mathbb E(f(Y_n(t))-f(t))|&\le\mathbb E|f(Y_n(t))-f(t)|\\
-    &=\mathbb E(|f(Y_n(t))-f(t)|1_{|f(Y_n(t))-f(t)|<\epsilon/2})+\mathbb E(|f(Y_n(t))-f(t)|1_{|f(Y_n(t))-f(t)|\ge\epsilon/2})\\
-    &\le\frac{\epsilon}{2}+2M\frac{\epsilon}{4M}=\epsilon
+    &=\mathbb E(|f(Y_n(t))-f(t)|1_{|f(Y_n(t))-f(t)|<\varepsilon/2})+\mathbb E(|f(Y_n(t))-f(t)|1_{|f(Y_n(t))-f(t)|\ge\varepsilon/2})\\
+    &\le\frac{\varepsilon}{2}+2M\frac{\varepsilon}{4M}=\varepsilon
     \end{align*}
     and we are done.
 \end{proof}
@@ -323,16 +323,16 @@ We can write $T_n(t)=2^{n-1}(t^n-S_n(t))$ for some poly $S_n$, so $S_n(t)=t^n-2^
 \begin{crly}\
     \begin{enumerate}[(i)]
         \item If $p:[-1,1]\to\RR$ defined by $\sum_{j=0}^na_jt^j$ with $|a_n|\ge 1$, then $\|p\|_\infty\ge 2^{-n+1}$.
-        \item $\forall n\in\NN$, $\exists\epsilon=\epsilon(n)>0$ s.t. if $p(t)=\sum_{j=1}^na_kt^j$ (so deg $\le n$) and $|a_k|\ge 1$ for some $n\ge k\ge 0$, then $\|p\|_\infty\ge\epsilon$.
+        \item $\forall n\in\NN$, $\exists\varepsilon=\varepsilon(n)>0$ s.t. if $p(t)=\sum_{j=1}^na_kt^j$ (so deg $\le n$) and $|a_k|\ge 1$ for some $n\ge k\ge 0$, then $\|p\|_\infty\ge\varepsilon$.
     \end{enumerate}
 \end{crly}
 \begin{proof}
     (i): Consider
     \[\|p\|_\infty=|a_n|\sup_{t\in[-1,1]}\left|t^n+\sum_{j=0}^{n-1}\frac{a_n}{|a_n|}t^n\right|\ge 2^{1-n}\]
-    (ii) Proceed by induction. If $n=0$, then pick $\epsilon=1$. Suppose the result holds for all poly of deg $\le n$. Consider $p(t)=a_{n+1}t^{n+1}+\sum_{j=0}^na_jt^j=a_{n+1}t^{n+1}+Q(t)$.
+    (ii) Proceed by induction. If $n=0$, then pick $\varepsilon=1$. Suppose the result holds for all poly of deg $\le n$. Consider $p(t)=a_{n+1}t^{n+1}+\sum_{j=0}^na_jt^j=a_{n+1}t^{n+1}+Q(t)$.
     \begin{itemize}
-        \item If $|a_{n+1}|<\epsilon(n)/2$, then $\|p\|_\infty\ge\|Q\|_\infty-|a_{n+1}|\ge\epsilon(n)/2$.
-        \item If $|a_{n+1}|\ge\epsilon(n)/2$, then $\|p\|\ge \|t^n+\frac{1}{a_{n+1}}Q(t)\|_\infty\ge |a_{n+1}|2^{-n}\ge\epsilon(n)2^{-1-n}$, so we set $\epsilon(n+1)=\epsilon(n)2^{-1-n}$.
+        \item If $|a_{n+1}|<\varepsilon(n)/2$, then $\|p\|_\infty\ge\|Q\|_\infty-|a_{n+1}|\ge\varepsilon(n)/2$.
+        \item If $|a_{n+1}|\ge\varepsilon(n)/2$, then $\|p\|\ge \|t^n+\frac{1}{a_{n+1}}Q(t)\|_\infty\ge |a_{n+1}|2^{-n}\ge\varepsilon(n)2^{-1-n}$, so we set $\varepsilon(n+1)=\varepsilon(n)2^{-1-n}$.
     \end{itemize} 
 \end{proof}
 \begin{thm}
@@ -341,8 +341,8 @@ We can write $T_n(t)=2^{n-1}(t^n-S_n(t))$ for some poly $S_n$, so $S_n(t)=t^n-2^
 \begin{proof}
     Let $q(t)=\sum_{j=0}^nb_jt^j$.
     \begin{itemize}
-        \item Suppose $\exists j$ s.t. $b_j\ge\frac{2\|f\|_\infty+1}{\epsilon(n)}$. Then $\|q\|_\infty\ge\epsilon(n)\frac{2\|f\|_\infty+1}{\epsilon(n)}=2\|f\|_\infty+1$ by (ii) of the previous corollary. In this case, $\|q-f\|_\infty\ge2\|f\|_\infty+1-\|f\|_\infty>\|f\|_\infty$. Certainly not the best poly approx.
-        \item Otherwise, let $$E=\{q(t)=\sum_{j=0}^nb_jt^n:\forall j,\ |b_j|<\frac{2\|f\|_\infty+1}{\epsilon(n)}\}$$
+        \item Suppose $\exists j$ s.t. $b_j\ge\frac{2\|f\|_\infty+1}{\varepsilon(n)}$. Then $\|q\|_\infty\ge\varepsilon(n)\frac{2\|f\|_\infty+1}{\varepsilon(n)}=2\|f\|_\infty+1$ by (ii) of the previous corollary. In this case, $\|q-f\|_\infty\ge2\|f\|_\infty+1-\|f\|_\infty>\|f\|_\infty$. Certainly not the best poly approx.
+        \item Otherwise, let $$E=\{q(t)=\sum_{j=0}^nb_jt^n:\forall j,\ |b_j|<\frac{2\|f\|_\infty+1}{\varepsilon(n)}\}$$
         Define $\kappa=\inf_{q\in E}\|q-f\|_\infty$. Then there exists $q_m\in E$ s.t. $\|q_m-f\|_\infty\to\kappa$ as $m\to\infty$. Write $q_m(t)=\sum_{j=0}^nb_j(m)t^j$. Note that the coefficients (regarded as a vector) is a bounded sequence in $\RR^{n+1}$, so admits a convergent subsequence by B-W. Let $p^\ast$ denote the limit. Have $\|q_{m_k}-p^\ast\|\to 0$.
     \end{itemize}
     Can check that $p^\ast$ is the best approximation.
@@ -394,16 +394,16 @@ Can fix $\|p_n\|_2=1$ and require the leading coefficient is $>0$.
 \end{proof}
 \begin{thm}
     For $n\ge 1$, let $\alpha_1,...,\alpha_n$ be the roots of the $n$th Legendre poly and $A_1,...,A_n$ as in the preceding theorem.
-    Let $f:[-1,1]\to\RR$ be a continuous function and $\epsilon>0$.
+    Let $f:[-1,1]\to\RR$ be a continuous function and $\varepsilon>0$.
     Then for all sufficiently large $n$
-    \[\left|\int_{-1}^1f(t)dt-\sum_{i=1}^nA_if(\alpha_i)\right|<\epsilon\]
+    \[\left|\int_{-1}^1f(t)dt-\sum_{i=1}^nA_if(\alpha_i)\right|<\varepsilon\]
 \end{thm}
 \begin{proof}
-    By Weierstrass approximation theorem, there exists a polynomial $p$ s.t. $\sup_{t\in[-1,1]}|f(t)-p(t)|<\epsilon/4$. For all $n>\frac12\deg p$, have
+    By Weierstrass approximation theorem, there exists a polynomial $p$ s.t. $\sup_{t\in[-1,1]}|f(t)-p(t)|<\varepsilon/4$. For all $n>\frac12\deg p$, have
     \begin{align*}
         \left|\int_{-1}^1f(t)dt-\sum_{i=1}^nA_if(\alpha_i)\right|&\le\left|\int_{-1}^1(f(t)-p(t))dt\right|+\left|\sum_iA_i(p(\alpha_i)-f(\alpha_i))\right|\\
     \end{align*}
-    The first term is $\le \epsilon/2$. The second term is $\le\epsilon/2$ by the preceding lemma.
+    The first term is $\le \varepsilon/2$. The second term is $\le\varepsilon/2$ by the preceding lemma.
 \end{proof}
 \begin{rem}
     Can further show that \begin{enumerate}[(i)]
@@ -414,4 +414,31 @@ Can fix $\|p_n\|_2=1$ and require the leading coefficient is $>0$.
 
 \section{Approximation by Complex Polynomials}
 When $S\subseteq\CC$ is any set, a function being holo'c on $S$ means that it is holo'c on some open set containing $S$.
+\begin{thm}[Runge]
+    Let $K\subseteq\CC$ be compact and $f$ a holo'c function on $K$. Suppose $\CC\setminus K$ is path-connected. Then $\forall\e>0$ $\exists$ a poly $p(z)$ s.t. $\sup_{z\in K}|f(z)-p(z)|\le\e$
+\end{thm}
+We write u.a.p. for "unif. approximable by polys".
+\begin{lem}
+    If $f,g$ are u.a.p. on $K$, then $f+g,fg,\lambda f$, $\lambda\in\CC$ are also u.a.p. Furthermore, if $f_n$ is a sequence of functions u.a.p. in $K$ and $f_n\to f$ unif. then $f$ is u.a.p. in $K$.
+\end{lem}
+\begin{proof}
+    Note that $\|(\lambda f+\mu g)-(\lambda p+\mu q)\|_\infty\le \lambda\|f-p\|_\infty+\mu\|g-q\|_\infty$ and $\|fg-pq\|_\infty=\|fg-pg+pg-pq\|_\infty\le\|g\|_\infty\|f-p\|_\infty+\|p\|_\infty\|g-q\|_\infty$.
+
+    For the second part, note
+    $\|f-p\|_\infty=\|f-f_n+f_n-p\|_\infty\le\|f-f_n\|_\infty+\|f_n-p\|_\infty$.
+\end{proof}
+\begin{lem}
+    Let $U\subseteq\CC$ open, $K\subseteq U$ compact, $f:U\to \CC$ holo'c. Then there exists a `finite set of' piecewise linear contours $C_m$, $m=1,...,M$, lying in $U\setminus K$ s.t. \[f(z)=\frac{1}{2\pi i}\sum_{i=1}^M\int_{C_m}\frac{f(w)}{w-z}dw\]
+    for all $z\in K$.
+\end{lem}
+\begin{proof}
+    $\CC\setminus U$ is closed and $(\CC\setminus U)\cap K=\varnothing$, then there exists $\delta>0$ s.t. $|z-w|\ge \delta$ for all $z\in K$ and all $w\not\in U$. Cover $\CC$ with grid of closed solid squares with length $\delta/10$. The number of such squares is finite, so we have a finite list $s_1,...,s_J$ (all squares that meet $K$). Let $\partial s_j$ denote the boundary of $s_j$ oriented counterclockwise. If $z\in K$ and $z\not\in \partial s_j$ for all $j$, then there exists a unique $s_j$ s.t. $f(z)=\frac{1}{2\pi i}\int_{\partial s_j}f(w)/(w-z)dw$ by CIF. Note that the integrals over other squares are $0$. The integral over all internal edges cancel due to consistent orientation. Let $E_l$ be an edge of $s_j$ then $\bigcup E_l$ is a finite set of closed contours we want.
+\end{proof}
+\begin{proof}[Proof of Runge's theorem]
+    Step 1: Prove that $f$ is u.a. by rational functions $p(z)/q(z)$ s.t. poles are outside of $K$. First suppose $K$ is connected. We expect a nice contour $\gamma:[0,1]\to U\setminus K$ s.t. $w(\gamma,z)=1$ for all $z\in K$ (preceding lemma). Then can write $I_z=f(z)=(2\pi i)^{-1}\int_\gamma\frac{f(w)}{w-z}dw$ for all $z\in K$. Note that
+    \[f(z)=\dfrac{1}{2\pi i}\int_0^1\dfrac{f(\gamma(t))\gamma'(t)}{\gamma(t)-z}dt\]
+    The function $F(z,t)=\frac{f(\gamma(t))\gamma'(t)}{\gamma(t)-z}$ is unif. cts on $K\times[0,1]$.
+
+    Step 2: Prove that rational functions of the form $c/(z-\alpha)$ is u.a.p. in $K$.
+\end{proof}
 \end{document}

@@ -260,7 +260,7 @@ This functor will allow us to visualize simplicial sets constructed by combinato
     \[\partial \Delta^n=\operatorname{colim}\left(\coprod_{0\le i<j\le n}\Delta^{n-2}\overset{\rightarrow}{\rightarrow}\coprod_{0\le i\le n}\Delta^{n-1}\right)\]
 \end{proof}
 \begin{example}
-    For $n\ge1$ and $0\le i\le n$, we define $\Lambda_i^n$, the $i$th horn in $\Delta^n$ to send $[m]$ to the set of order-preserving functions $\{0\le1\le...\le m\}\to\{0\le 1\le...\le n\}$ such that $\im(\alpha)\supsetneq\{0\le...\le i-1\}\cup\{i+1\le...\le n\}$.
+    For $n\ge1$ and $0\le i\le n$, we define $\Lambda_i^n$, the $i$th horn in $\Delta^n$ to send $[m]$ to the set of order-preserving functions $\{0\le1\le...\le m\}\to\{0\le 1\le...\le n\}$ such that $\im(\alpha)\not\supseteq\{0\le...\le i-1\}\cup\{i+1\le...\le n\}$.
     
     There is a natural map $\Lambda_i^n\to\partial\Delta^n$. The geometric realization is hte inclusion of the $i$th horn.
 \end{example}
@@ -864,6 +864,16 @@ Eventually, want to prove that
 \begin{thm}
     If $A\to C$ is a Kan fibration and $B\to C$ is any map, then the pullback in $\mathbf{Kan}$ of $A\rightarrow C\leftarrow B$ is the pullback in $\mathcal S$. This is homotopy equivalent to the pullback of $\underline{\Hom}(\Delta^1,C)\rightarrow C\times C\leftarrow A\times B$.
 \end{thm}
+\begin{lem}
+    Suppose
+    \begin{center}
+        \begin{tikzcd}
+A_0 \arrow[d] \arrow[r] & C_0 \arrow[d] & B_0 \arrow[d] \arrow[l]                    \\
+A_1 \arrow[r]                  & C_1                  & {B_1} \arrow[l]
+\end{tikzcd}
+    \end{center}
+    is a diagram of Kan complexes, where the vertical maps are equivalences. Then if $A_0\to C_0$ and $A_1\to C_1$ are Kan fibrations, the map of pullback is an equivalence.
+\end{lem}
 \begin{proof}
     Note that $\underline{\Hom}(\Delta^1,C)\to\underline{\Hom}(\{1\},C)$ is a trivial Kan fibration. Consider $\underline{\Hom}(\Delta^1,C)\times_{\underline{\Hom}(\{1\},C)}A\to A$ is a trivial Kan fibration (pullback). Note: the map $A\to\underline{\Hom}(\Delta^1,C)\times_{\underline{\Hom}(\{1\},C)}A$ defined by $A\to C\to\underline{\Hom}(\Delta^1,C)$ is a section. Note that any section of a trivial Kan fibration between Kan complexes is a homotopy equivalence since a section induces a section of isomorphism of homotopy groups. 
 
@@ -876,6 +886,68 @@ B \arrow[r]                  & C                  & {\underline{\Hom}(\Delta^1,C
 \end{tikzcd}
     \end{center}
     This is an iso in $\operatorname{Ho}(\underline{\Hom}(\Lambda_2^2,\mathcal S))$.
-    unfinished.
+    We are done by the lemma.
 \end{proof}
+\begin{lem}
+    Suppose \begin{center}
+        % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRAA0QBfU9TXfIRQBGclVqMWbdgHJuvEBmx4CRUcPH1mrRCADKcnn2WCiZDdS1Tde7uJhQA5vCKgAZgCcIAWyRkQOBBIohLabI7y7l6+iCGBSABMlpI6IG6GCp4+SADM1PGISaHWIAAWkWnRfvlBiHnFqW52XEA
+\begin{tikzcd}
+X \arrow[r, "g"] \arrow[d, "f"] & X' \arrow[d, "f'"] \\
+S \arrow[r, "h"]                & S'                
+\end{tikzcd}
+    \end{center} is a diagram where $f,f'$ are Kan fibrations and $h$ is an equivalence, then $g$ is an equivalence iff  for every point $s:\Delta^0\to S$, the induced map $X_s\to X'_{h(s)}$ is aneqivalence,shere $X_s$ is the pullback of $\Delta^0\rightarrow S\leftarrow X$.
+\end{lem}
+
+\section{Homotopy and Homology}
+If $R$ is a ring, then a simplicial $R$-mod is a functor $\bdel^{op}\to\Rmod$. There is a functor $C_\ast:s\mathbf{Ab}\to\mathbf{Ch}_\ZZ$ from simplicial abelian groups to chain complexes taking a simplicial abelian group $X$ to the chain complex $C_\ast(X)$ s.t. $C_n(X)=X_n=X([n])$. The boundary operators are defined in the usual way using face maps. There is a functor $\ZZ\{\bullet\}:s\bset\to s\mathbf{Ab}$ taking a simplicial set to a simplicial abelian group by allowing formal $\ZZ$-linear combinations of simplices, so we can define homology for simplicial sets. This definition specializes to the definition of homology of topological spaces.
+
+Eventual goal: define an $\infty$-category of $s\mathbf{Ab}$.
+It will tun out that simplicial abelian groups are classified up to equivalence by homology.
+
+-----------------
+
+\begin{defn}
+    $A$ is a simplicial abelian group. Define $D_n(A)\subseteq C_n(A)=A_n$ to be the subgrp of degenerate $n$-simplices. 
+\end{defn}
+\begin{prop}
+    If $\sigma\in A_n$ is degenerate, i.e., $\sigma=s_j\tau$ then $\partial\sigma$ is a formal $\ZZ$-linear combination of degenerate simplices.
+\end{prop}
+So $D_\ast(A)$ defines a subcomplex of $C_\ast(A)$.
+\begin{proof}
+    Use simplicial identities.
+\end{proof}
+\begin{defn}
+    If $A$ is a simplicial abelian group, then the normalized chain complex $N_\ast(A)=C_\ast(A)/D_\ast(A)$.
+\end{defn}
+This can be described as a chain complex which in deg $n$ contains all non-degenerate elements in $A_n$.
+\begin{defn}
+    If $A$ is a simplicial abelian group, there is a chain complex $\tilde N(A)\subseteq C_\ast(A)$ where $\tilde N_n(A)$ is the subgroup of $A_n$ containing elements $\sigma\in A_n$ with $d_i\sigma=0$ for $1\le i\le n$.
+\end{defn}
+Note that this is indeed a chain complex due to simplicial identities applied to $\partial x=d_0x$.
+\begin{prop}
+    The composition $\tilde N_\ast(A)\hookrightarrow C_\ast(A)\to N_\ast(A)$ is an iso of chain complexes.
+\end{prop}
+Therefore we have splitting $C_\ast(A)\cong D_\ast(A)\oplus N_\ast(A)$. (Split short exact sequence of chain complexes).
+
+\begin{prop}
+    If $A$ is a simplicial abelian group, then the inclusion $\tilde N_\ast(A)\subseteq C_\ast(A)$ induces a homology isomorphism.
+\end{prop}
+In particular, $D_\ast(A)$ has trivial homology and the projection $C_\ast(A)\to N_\ast(A)$ is a homology isomorphism.
+\begin{proof}
+    The induced map is clearly injective using the splitting.
+
+    Given a cycle $x$, let $i$ denote the smallest nonneg integer such that $d_j(x)=0$ for $i<j\le n$. If $i=0$ then we are done as this means $x\in \tilde N_\ast(A)$. Proceed by induction. Consider $y=\partial s_ix$. Can use simplicial identity (split the sum) and inductive hypothesis to get $\partial y= s_{i-1}\sum_{j=0}^{i-1}(-1)^jd_jx=s_{i-1}(x-(-1)^id_ix)=(-1)^{i+1}s_{i-1}d_ix$. If we set $x'=x+(-1)^iy$, then $x'$ is homologous to $x$ and for $j\ge i$ $d_jx'=0$, so we have improved the value of $i$. Eventually, can reduce to $i=0$.
+\end{proof}
+\begin{rem}
+    For any ring $R$, $C_\ast(A;R)\cong D_\ast(A;R)\oplus N_\ast(A;R)$
+\end{rem}
+\begin{thm}
+    The functor \[N_\ast:\operatorname{Fun}(\bdel^{op},\Rmod)\to\mathbf{Ch}(\Rmod)_{\ge0}\] is an equivalence of categories.
+\end{thm}
+\begin{defn}
+    If $M_\ast$ is a chain complex of $\ZZ$-modules, then $K(M_\ast)$ is the simplicial abelian group sneding $[n]$ to the set of chain maps $N_\ast(\ZZ\{\Delta^n\})\to M_\ast$.
+\end{defn}
+\begin{rem}
+    $K(M_\ast)$ is called the Eilenberg-MacLane space associated to $M_\ast$.
+\end{rem}
 \end{document}

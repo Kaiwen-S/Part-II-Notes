@@ -101,6 +101,7 @@
 \newcommand{\id}{\operatorname{id}}
 \newcommand{\Ind}{\operatorname{Ind}}
 \newcommand{\Res}{\operatorname{Res}}
+\newcommand{\e}{\varepsilon}
 
 \newcommand{\calD}{\mathcal{D}}
 
@@ -374,4 +375,85 @@ In this section, assume all topological spaces are Hausdorff, connected, and loc
 \begin{defn}
     A map $f:X\to Y$ is a local-homeo if $\forall x\in X$, $\exists N_x$ open nbd of $x$ s.t. $f(N_x)$ is open in $Y$ and $f|_{N_x}:N_x\to f(N_x)$ is a homeo.
 \end{defn}
+\begin{lem}
+    Let $f:R\to S$ be non-const and analytic.
+    \begin{enumerate}[(i)]
+        \item If $m_f(z)\equiv 1$ then $f$ is a local homeo.
+        \item If $Z=\{z\in R: m_f(z)>1\}$, have $R\setminus Z$ RS so $f|_{R\setminus Z}$ is a local homeo
+    \end{enumerate}
+\end{lem}
+\begin{proof}
+    (i): For $z\in R$, pick charts $(\varphi, U), (\psi,W)$. Do stuff over $\CC$ and shrink the domain.
+
+    (ii): $Z$ is discrete. $\phi(z)$ has an accumulation point, then identity theorem on $\CC$ and on riemann surfaces imply that $f$ is const.
+\end{proof}
+\subsection{Paths and  Lifts}
+\begin{defn}
+    Lift of paths 
+\end{defn}
+\begin{thm}
+    For $f:\tilde X\to X$ local homeo and $\tilde\gamma,\tilde{\tilde\gamma}$ two lifts of $\gamma$ s.t. $\tilde\gamma(0)=\tilde{\tilde\gamma}(0)$, then $\tilde\gamma\equiv\tilde{\tilde\gamma}$.
+\end{thm}
+\begin{proof}
+    Define $E=\{t:\in[0,1]:\tilde\gamma(t)=\tilde{\tilde\gamma}(t)\}$. $E$ is closed since $\tilde X$ is Hausdorff and paths are cts. $E$ is also open. Let $\tau\in E$. Pick nbd $\tilde N$ around $\tilde\gamma(\tau)$ s.t. $f|_{\hat N}$ is inj. For $t\in(\tau-\delta,\tau+\delta)\cap I$, $\tilde\gamma(t),\tilde{\tilde\gamma}(t)\in\hat N$. $f$ is inj on $\hat N$, so $\tilde\gamma(t)=\tilde{\tilde\gamma}(t)$
+\end{proof}
+\begin{defn}
+    Covering maps
+\end{defn}
+\begin{lem}
+    The cardinality of the fiber is constant.
+\end{lem}
+\begin{proof}
+    Equiv rel: $x\sim x'$ iff $|\pi^{-1}(x)|=|\pi^{-1}(x')|$. $|\pi^{-1}(x)|$ is locally constant. Done by connectedness.
+\end{proof}
+\begin{thm}
+    For non-const $f:R\to S$ analytic and $R$ cpt, the map $f:R\setminus f^{-1}f(Z)\to S\setminus f(Z)$ is a covering map of Riemann surfaces.
+\end{thm}
+\begin{proof}
+    $Z$ is discrete and closed in a cpt set, so $Z$ is finite, so $f(Z)$ is finite. For all $w\in S$, $f^{-1}(w)$ is finite (cpt discrete), so $f^{-1}f(Z)$ is finite.
+\end{proof}
+\[(\&\tag{Owen's Soognature}\]
+\subsection{Branched Covering Maps}
+\begin{defn}
+    If $\tilde S, S$ are Riemann surfaces, a branched covering map $p:\tilde S\to S$ is where $\forall s\in S$ there exists a nbd  $N$ of $s$ in $S$ and a homeo $\Phi:N\to\Delta$ (unit disk) with $\Phi(s)=0$ s.t. $p^{-1}(N)=\bigsqcup_{i\in I} U_i$ a disjoint union of (connected) open subsets of $\tilde S$, each with a homeo $\Psi_i:U_i\to \Delta$ s.t. $\forall z\in \Delta$, $\Phi p\Psi_i^{-1}=z^{m_i}$ for some $m_i\in\NN$.
+
+    A branch point $s$ of $p$ is a point $s=\Psi_i^{-1}(0)\in\tilde S$ where $m_i>1$. (The unique point $x\in U_i$ with $p(x)=s$) A critical value of $p$ is $p(x)\in S$ for any branch point $x$.
+\end{defn}
+e.g., any non-const analytic map $f:R\to S$ for $R$ compact Riemann surface. (follows from thm 3.7 and valency theorem thm 2.11)
+
+\begin{thm}
+    Any compact orientable connected topological surface (without boundary) $S$ is homeo to a genus $g$ surface.
+\end{thm}
+\begin{thm}[Riemann-Hurwitz formula]
+    Let $f:R\to S$ non-const analytic map between compact Riemann surfaces. Suppose $f$ has deg $n$. Then \[\sum_{p\in R}(m_f(p)-1)=2(g_R-1)-2n(g_S-1)\]
+    where $g_R,g_S$ are genera of $R,S$ resp.
+\end{thm}
+\begin{proof}[Proof Sketch [Non-examinable]]
+    Finite number of branch points $\{r_1,...,r_k\}$ on $R$ (where $m_f(r_i)>1$). For any $w\in S$ not critical value, have $|f^{-1}(w)|=n$ by 2.11. Take a polygonal decomposition $\calD$ of $S$ (existence by Rado) including all critical values in the vertices. Then the preimage $f^{-1}(D)$ is a polygonal decomposition of $R$ with $nF$ faces, $nE$ edges and $nV-\sum_{j=1}^k(m_f(r_j)-1)$. Compute.
+\end{proof}
+In particular, $g_R\ge g_S$ (cf. ES2).
+
+\subsection{The (Topological) Monodromy Theorem}
+\begin{thm}
+    Let $\pi:\tilde X\to X$ be a covering map, $\gamma$ path in $X$ and $p\in\tilde X$ any pt with $\pi(p)=\gamma(0)$. Then there exists a lift $\tilde\gamma$ of $\gamma$ with $\tilde\gamma(0)=p$ (unique by thm 3.4)
+\end{thm}
+\begin{proof}
+    (cf. Htpy lifting)
+\end{proof}
+\begin{defn}
+    Homotopy rel $\partial[0,1]$. (cf. algtop)
+\end{defn}
+\begin{defn}
+    Simply connected (cf. algtop)
+\end{defn}
+\begin{thm}[Topological Monodromy thm]
+    Let $f:Y\to X$ be a local homeo. Suppose $\alpha,\beta$ are paths in $X$ which are homotopic rel $\{0,1\}$. Take $y_0\in Y$ with $f(y)=\alpha(0)=\beta(0)=x_0$. Suppose that any path $\gamma$ in $X$ with $\gamma(0)=x_0$ has a lift $\tilde\gamma(0)=y_0$. Then $\tilde\alpha,\tilde\beta$ are homotopic in $Y$ rel $\{0,1\}$. In particular, $\tilde\alpha(1)=\tilde\beta(1)$.
+\end{thm}
+Proof omitted.
+\begin{crly}
+    If $\pi:\tilde X\to X$ is a covering map and if $X$ is simply connected, then $\pi$ is a homeo. 
+\end{crly}
+\begin{proof}
+    ES2.
+\end{proof}.
 \end{document}

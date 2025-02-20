@@ -7,7 +7,7 @@
 \usepackage{tikz,tikz-cd,graphicx,color,mathrsfs,color,hyperref,boldline}
 \usepackage{caption,float}
 \usepackage[a4paper,margin=1in,footskip=0.25in]{geometry}
-
+\newcommand{\e}{\varepsilon}
 \usepackage{listings}
 \usepackage{xcolor}
 
@@ -489,4 +489,89 @@ In particular, if $X$ is reflexive ,then the weak topology coincides with the we
 
      (2): $\Lambda(A)$ is compact in $\RR$ and $d=\|A-B\|_X$. Then consider $\tilde A_d=A+B_{d/2}$, where $B_{d/2}=\{y:\|y\|<d/2$ still disjoint from $B$. Apply (1).
 \end{proof}
+\[???\tag{Owen's missing Signature}\]
+\section{Generalized Functions and Distributions}
+Consider a topological vec. space $X\subseteq\bigcap_{q\ge 1}L^q(\Omega,dx)$, where $\Omega$ is an open subset of $\RR^n$. Suppose $X$ contains $C_c^\infty(\Omega)$. Let $f\in L^q$, then obtain a linear functional on $X$ given by $\Lambda_f(g)=\int_\Omega fgdx$, $g\in X$. If the embedding $X\hookrightarrow L^q$ is cts, then $\Lambda_f\in X'$. Note that $g=\phi_\epsilon$ is contained in $X$, mollification implies $\Lambda_f=0\implies f=0$ a.e.. So we can identify $\Lambda_f$ with $f$  and study the weak-$\ast$ topology of $X'$ on $L^p$.
+
+
+Define seminorms on $C^\infty(\Omega)$, $p_N(\phi)=\max_{0\le |\alpha|\le n}\sup_{x\in K_N}|D^\alpha\phi(x)|$, where $K_i\subseteq K_{i+1}$ and $\bigcup _iK_i=\Omega$. We define the Frechet space $\mathcal E(\Omega)=(C^\infty(\Omega),\tau_{\mathcal P})$, where $\mathcal P=\{p_N:N\in\NN\}$. [Note that $\mathcal E(\Omega)$ may contain non-integrable functions.] 
+
+\begin{thm}
+    There exists a topology $\tau$ on $C^\infty_c(\Omega)$ s.t.
+    \begin{enumerate}[(1)]
+        \item vector space operations are cts
+        \item a sequence $\phi_j\overset{j\to\infty}{\to} 0$ iff $\exists K\subseteq\Omega$ compact s.t. $\operatorname{supp}(\phi_j)\subseteq K$ for all $j$ and $D^\alpha\phi_j\to 0$ unif. on $K$ for all $0\le |\alpha|<\infty$.
+        \item If $T:C^\infty_c(\Omega)\to\RR$ (or $\CC$) is linear, then it's cts iff $T(\phi_j)\to 0$ for all $\phi_j\to 0$ in $\tau$.
+    \end{enumerate}
+\end{thm}
+proof omitted.
+
+\begin{defn}
+    We define $\calD=\calD(\Omega)=(C^\infty_c(\Omega),\tau)$, the space of test functions.
+\end{defn}
+For each $\phi\in C^\infty_c(\Omega)$, define $e^{-j}\phi(\cdot/j)$, then $e^{-j}\phi(\cdot/j)\to 0$ in $D$, but $j^{-2025}\phi(\cdot/j)$ does not converge to $0$ in $D$.
+
+\begin{defn}
+    Call $\phi\in C^\infty(\RR^n)$ rapidly decreasing if $\sup_{x\in\RR^n}(1+|x|)^N|D^\alpha\phi(x)|<\infty$ for all $0\le|\alpha|<\infty$ and all $N\in\NN$.
+\end{defn}
+[Note that $e^{-|x|^2}$ is rapidly decreasing but $(1+|x|)^{-2025}$ is not.]
+
+Define seminorms $\tilde{\mathcal P}=\{\tilde p_N:N\in\NN\}$ with 
+\[\tilde p_N=\max_{0\le|\alpha|\le N}\sup_{x\in \RR^n}(1+|x|)^N|D^{\alpha}\phi(x)|\]
+Define Frechet space $\mathcal{S}(\RR^n)=(\{\phi\text{ rapidly decreasing}\},\tau_{\tilde{\mathcal P}})$.
+This is metrizable since $\tilde{\mathcal P}$ is countable. This is called the Schwartz class.
+
+Clearly $\calD(\Omega)\subsetneq \mathcal E(\Omega)$, $D(\RR^n)\subsetneq\mathcal S(\RR^n)\subsetneq\mathcal E(\RR^n)$ with continuous embedding (ES). We can now define $\calD'(\Omega)=\{T:\calD(\Omega)\to\RR\text{ (or $\CC$) linear and cts}\}$, the space of Schwartz distributions.
+We also define $\mathcal E(\Omega)=\{T:\mathcal E(\Omega)\to \RR\text{ (or $\CC$) linear and cts}\}$ the space of compactly supported Schwartz distributions. Finally for $\Omega=\RR^n$ we define
+$\mathcal S(\RR^n)=\{T:\mathcal S(\RR^n)\to\RR\text{ (or $\CC$) linear and cts}\}$ the space of tempered distributions. These spaces are equipped with their weak-$\ast$ topologies of pointwise convergence on $\cal D,\mathcal E,\mathcal S$ resp. Have cts embeddings
+$\mathcal E'\subset\mathcal D'$, and $\mathcal E(\RR^n)\subset \mathcal S(\RR^n)\subset \calD'(\RR^n)$.
+
+\begin{example}
+    Consider $\delta_x(\phi)=\phi(x)$, then if $\phi_j\to0$ in $\cal D,\mathcal E,\mathcal S$ , then $\delta_x(\phi_j)=\phi_j(x)\to 0$ as $j\to\infty$, so $\delta_x\in\mathcal E',\mathcal D',\mathcal S'$.
+\end{example}
+\[O\frown O\tag{Owen's Signature}\]
+
+Let $f\in L^1_{\text{loc}}(\Omega)$. Then $T_f(\phi)=\int_\Omega f\phi dx$, $\phi\in\calD(\Omega)$. Have $T_f\in\calD'(\Omega)$ since for $\phi_j\to 0$ in $\calD(\Omega)$ we have $T_f\phi_j\to0$ by DCT with dominating function $\sup_{j\in\NN}\|\phi_j\|_\infty1_K|f|\in L^1$ ($K$ compact). Also, $T_f=0$ in $\calD'(\Omega)$ still implies $f=0$ a.e. by applying the mollification theorem (ES) to $f1_{B(x)}$ where $B(x)$ is a ball in $\Omega$ containing $x\in\Omega$, so $L^1_{\text{loc}}\subseteq\calD'$
+
+If $\varphi_\e=\e^{-n}\varphi(\cdot/\e)$, $\varphi\ge 0$, smooth, compactly supported, normalized, then for $g\in\calD(\RR^n)$, $T_{\varphi_\e}(g)=g\ast\varphi_\e(0)\to g(0)=\delta_0(g)$ as $\e\to0$. So $T_{\varphi_\e}\overset{\e\to0}{\to}\delta_0$ in $\calD'(\RR^n)$.
+\subsection{Generalized (Distributional) Derivatives in $\calD'(\Omega)$)}
+Let $f\in C^1(\Omega)$, then $D_if\in L^1_{\text{loc}}$. Consider $T_{D_if}$. Let $\varphi\in\calD(\Omega)$
+\[\int (D_if)\varphi dx\overset{ibp}{=}-\int fD_i\varphi dx=-T_f(D_i\varphi)\]
+So we define (for all multi-index $\alpha$) the generalized derivative of any $T\in\calD'(\Omega)$ as
+\[(D^\alpha T)(\varphi)=(-1)^{|\alpha|}T(D^\alpha\varphi)\]
+so $D^\alpha T\in\calD'(\Omega)$. If $T=T_f$ and $D^\alpha T=T_g$ for some $f,g\in L^1_{\text{loc}}$, then say $g=D^\alpha_wf$ the weak partial derivative of $f$.
+
+\begin{example}
+    Let $f(x)=x1_{\{x>0\}}$. Consider $T_f$.
+    \[DT_f(\varphi)=-T_f(\varphi')=-\int_0^\infty x\varphi'(x)dx\overset{ibp}{=}\int_0^\infty\varphi(x)dx=\int_\RR H\varphi dx\]
+    where $H$ is the Heaviside function, so $H$ is the weak derivative of $f$.
+
+    Consider the second derivative.
+    \[D^2T_f(\varphi)=DT_H(\varphi)=-T_H(\varphi')=-\int_0^\infty\varphi'=\varphi(0)=\delta_0(\varphi)\]
+    $\delta_0$ cannot be represented by locally integrable functions.
+
+    Have $D^3T_f(\varphi)=-\delta_0(\varphi')=-\varphi'(0)$ which is a Schwartz distribution but not a measure.
+\end{example}
+\subsection{Multiplication of Distributions with Smooth Functions}
+If $f\in L^1_{\text{loc}}$ and $a\in C^\infty(\Omega)$, the $T_{af}(\varphi)=\int_\Omega af\varphi=T_f(a\varphi)$. Note that $a\varphi\in\calD$ if $\varphi\in\calD$, so we define
+\[(aT)(\varphi)=T(a\varphi)\]
+for $T\in\calD'(\Omega)$ and $a\in C^\infty(\Omega)$.
+
+\subsection{Compactly Supported Distributions}
+\begin{prop}
+    A linear map $T:\mathcal E(\Omega)\to\RR$ (or $\CC$) is cts iff there exists $K\subseteq\Omega$ compact, $N\in\NN$, and $C>0$ s.t. for all $\varphi\in\mathcal E(\Omega)$
+    \[|T(\varphi)|\le C\max_{0\le|\alpha|\le N}\sup_{x\in K}|D^\alpha\varphi(x)|\tag{$\dagger$}\]
+\end{prop}\
+\begin{proof}
+    Suppose $(\dagger)$ holds and $\phi_j\to 0$ in $\mathcal E(\Omega)$. By defn of $\tau_{\mathcal P}$, for $j$ large enough, $K\subseteq K_j$ and RHS of $(\dagger)$ with $\phi=\phi_j$ converges to $0$, so $T(\phi_j)\to 0$, so $T\in\mathcal E'(\Omega)$.
+
+    Conversely, assume $T$ is cts but $(\dagger)$ fails. If $K_j\subseteq K_{j+1}$ is any exhaustion of compact sets of $\Omega$, we obtain a sequence $\varphi_j\in\mathcal E'(\Omega)$ s.t. \[|T(\varphi_j)|\ge j\max_{0\le |\alpha|\le j}\sup_{x\in K_j}|D^\alpha(\varphi_j)|\]
+    Define $\psi_j=\frac{\varphi_j}{|T(\varphi_j)|}$. Have
+    \[|D^\beta\psi_j(x)|\le\frac1j\frac{|D^\beta\varphi_j(x)|}{\max_{0\le|\alpha|\le j}\sup_{x\in K_j}|D^\alpha\varphi_j(x)|}\overset{e.v.}{\le}\frac1j\to 0\]
+    So $\psi_j\to 0$ in $\mathcal E(\Omega)$ but $T(\psi_j)=1$ for all $j$. Contradiction.
+\end{proof}
+\begin{defn}
+    Say $T\in \calD'(\Omega)$ has support in a closed set $K\subseteq \Omega$ if $T(\varphi)=0$ whenever $\varphi\in C^\infty_c(\Omega\setminus K)\subseteq C^\infty_c(\Omega)$.
+\end{defn}
+The last proposition implies that $T\in\mathcal E'(\Omega)$ is supported in some compact subset of $\Omega$.
 \end{document}

@@ -103,7 +103,7 @@
 \newcommand{\Res}{\operatorname{Res}}
 \newcommand{\tr}{\operatorname{Tr}}
 \newcommand{\disc}{\operatorname{disc}}
-
+\newcommand{\e}{\varepsilon}
 \newcommand{\calD}{\mathcal{D}}
 
 \newcommand{\sol}{\textit{Solution: }}
@@ -358,12 +358,76 @@ Multiplication can be extended to fractional ideals.
     Let $\mathfrak p\trianglelefteq\mathcal O_K$ be a prime idea. Then there exists a fractional ideal $\mathfrak p'$ s.t. $\mathfrak p\mathfrak p'=(1)$.
 \end{lem}
 \begin{proof}
-    Let $\mathfrak p'=\{\alpha\in K:\alpha\mathfrak p\subseteq \mathcal O_K\}$. This is a $\mathcal O_K$-module. $\beta \mathfrak p'\subseteq\mathcal O_K$ for all $\beta\in\mathfrak p$. $\mathfrak p'$ is a f.g. $\mathcal O_K$-mod, i.e., a fractional ideal. Since $\mathfrak p\mathfrak p'\subseteq\mathcal O_K$, so it's an ideal. On the other hand ,$\mathfrak p'\mathfrak p\supseteq \mathfrak p$ and $\mathfrak p$ is prime, hence maximal. Either $\mathfrak p\mathfrak p'=(1)$ or $\mathfrak p\mathfrak p'=\mathfrak p$. If the latter holds, then $\alpha\mathfrak p\subseteq \mathfrak p$ and $\alpha\in\mathcal O_K$. Contradiction (integral closedness)
+    Let $\mathfrak p'=\{\alpha\in K:\alpha\mathfrak p\subseteq \mathcal O_K\}$. This is a $\mathcal O_K$-module. $\beta \mathfrak p'\subseteq\mathcal O_K$ for all $\beta\in\mathfrak p$. $\mathfrak p'$ is a f.g. $\mathcal O_K$-mod, i.e., a fractional ideal. Since $\mathfrak p\mathfrak p'\subseteq\mathcal O_K$, so it's an ideal. On the other hand ,$\mathfrak p'\mathfrak p\supseteq \mathfrak p$ and $\mathfrak p$ is prime, hence maximal. Either $\mathfrak p\mathfrak p'=(1)$ or $\mathfrak p\mathfrak p'=\mathfrak p$. If the latter holds, then $\alpha\mathfrak p\subseteq \mathfrak p$ and $\alpha\in\mathcal O_K$. Contradiction (integral closurenessiety)
+\end{proof}
+\begin{lem}
+    Let $I\trianglelefteq \mathcal O_K$ be a non-zero ideal. Then there exists $\mathfrak p_1,...,\mathfrak p_k$ non-zero prime ideals s.t. $\mathfrak p_1\cdots\mathfrak p_k\subseteq I$. 
+\end{lem}
+\begin{proof}(Noetherian Induction) Suppose not true. Let $I$ be maximal among ideals for which it fails. In particular, $I$ cannot be a prime ideal. Find $\alpha,\beta\in\mathcal O_K$ s.t. $\alpha\beta\in I$ but $\alpha,\beta\notin I$. Consider $\langle\alpha\rangle+I$ and $\langle\beta\rangle+I$. Both contain $I$. Find $\mathfrak p_1,...,p_k$, $\mathfrak q_1,...,\mathfrak q_l$ s.t. $\mathfrak p_1\cdots\mathfrak p_k\subseteq\langle\alpha\rangle +I$ and $\mathfrak q_1\cdots\mathfrak q_l\subseteq\langle\beta\rangle+I$. Then $\mathfrak p_1\cdots\mathfrak p_k\mathfrak q_1\cdots\mathfrak q_l\subseteq I$. Contradiction.
+\end{proof}
+\begin{prop}
+    If $\mathfrak p\subseteq\mathcal O_K$ is a prime, then there exists a fractional ideal $\mathfrak p'$ s.t. $\mathfrak p\mathfrak p'=(1)$.
+\end{prop}
+\begin{proof}
+    //////////////////////////////////////////////
 \end{proof}
 \begin{thm}
     In a Dedekind domain, have unique factorization domain of ideals.
 \end{thm}
 \begin{proof}
+Existence: suppose fail. Find a maximal $I$ for which there is no factorization into prime ideals. There exists a maximal (prime) ideal $\mathfrak p\supseteq I$. Consider $J=\mathfrak p^{-1}I$. For any $\alpha\in\mathfrak p^{-1}$, $\alpha\mathfrak p\subseteq\mathcal O_K$, so $\alpha I\subseteq\alpha\mathfrak p\subseteq\mathcal O_K$, so $J\subseteq\mathcal O_K$ is an (integral) ideal. Note that $J\neq I$ since there exists $\alpha\in\mathfrak p^{-1}\setminus\mathcal O_K$, so $\alpha I\not\subseteq I$. [Otherwise $\alpha I\subseteq I$ for all $\alpha\in\mathfrak p^{-1}$, which would imply $\mathfrak p^{-1}\subseteq\mathcal O_K$]. So $J$ is strictly larger. There exists $\mathfrak p_1,...,\mathfrak p_{k-1}$ s.t. $\mathfrak p_1\cdots\mathfrak p_{k-1}=J$ and $I=\mathfrak p J$. Contradiction.
 
+Uniqueness: suppose $\mathfrak p_1\cdots\mathfrak p_k=\mathfrak q_1\cdots\mathfrak q_l$. induction
 \end{proof}
+\begin{crly}
+    Every fractional ideal has an inverse.
+\end{crly}
+\begin{crly}
+    If $I, J$ are two ideals in $\mathcal O_K$, then $I\supset J$ iff $\exists I_2\trianglelefteq\mathcal O_K$ s.t. $II_2=J$
+\end{crly}
+Notation: $I\mid J$.
+\[\e:\tag{Owen's Signature}\]
+\begin{crly}
+    $\mathcal O_K$ is a UFD iff $\mathcal O_K$ is a PID.
+\end{crly}
+\begin{proof}
+    $\Leftarrow:$ clear.\\
+    $\Rightarrow:$ Every principal ideal is a product of principal prime ideals. Enough to show that every prime ideal is principal. Enough to show that every prime ideal divides a principal ideal. Let $\mathfrak p$ be a prime ideal and $\alpha\in\mathfrak p$. Then $\langle\alpha\rangle\subseteq \mathfrak p\implies \mathfrak p\mid \langle\alpha\rangle$.    
+\end{proof}
+\begin{defn}
+    $I,J\trianglelefteq\mathcal O_K$ ideals. Define $\gcd(I,J)$ to be the smallest ideal dividing both.
+\end{defn}
+Have $\gcd(I,J)=I+J$ and $\operatorname{lcm}(I,J)=I\cap J$ (cf. ES2).
+
+\section{Norm of Ideals}
+Let $I\trianglelefteq\mathcal O_K$ be an ideal. 
+\begin{defn}
+    The norm of $I$, $N(I)$, is $|\mathcal O_K/I|$.
+\end{defn}
+Recall\begin{itemize}
+    \item If $I$ is non-zero, then $N(I)<\infty$.
+    \item If $I$ is generated by $\alpha_1,...,\alpha_d$ as a $\ZZ$-mod then $N(I)^2=\frac{\disc(\alpha_1,...,\alpha_d)}{\disc(K)}$
+\end{itemize}
+\begin{prop}
+    Let $I,J\trianglelefteq \mathcal O_K$ be non-zero ideals. Then $N(IJ)=N(I)N(J)$.
+\end{prop}
+\begin{proof}
+    Enough to prove this for $J$ prime. By isomorphism thm (of groups) $|\mathcal O_K/IJ|=|\mathcal O_K/I||I/IJ|$, i.e., $N(IJ)=N(I)|I/IJ|$. Claim that $|I/IJ|=N(I)$. Let $\alpha_1,...,\alpha_{N(I)}$ be coset representatives of $\mathcal O_K/J$. Then $\beta\alpha_1,...,\beta\alpha_{N(J)}$ are coset representatives of $I/IJ$ for some $\beta\in I\setminus IJ$. [Write $\langle\beta\rangle + IJ=\gcd(\langle\beta\rangle,IJ)=I$, so for all $\gamma\in I$, $\gamma=\alpha\beta+x$, where $\alpha\in\mathcal O_K$, $x\in IJ$. Find $\alpha_j$ s.t. $\alpha\in\alpha_j+J$, then $\gamma\in\alpha_j\beta+IJ$.] If $\beta\alpha_i\equiv\beta\alpha_j\mod IJ$, then $IJ\mid \beta(\alpha_i-\alpha_j)$. Write $\beta=I\mathfrak p_1\cdots\mathfrak p_k$ (where $\mathfrak p_i$ are prime ideals not equal to $J$). Then $IJ\mid I\mathfrak p_1\cdots \mathfrak p_k\langle\alpha_i-\alpha_j\rangle$, so $J\mid \langle\alpha_i-\alpha_j\rangle$, so $i=j$, so the choice of $\alpha_j$ is unique.
+\end{proof}
+\begin{prop}
+    Let $\alpha\in\mathcal O_K$. Then $N(\langle\alpha\rangle)=|N_{K/\QQ}(\alpha)|$.
+\end{prop}
+\begin{proof}
+    Let $\alpha_1,...,\alpha_d$ be an integral basis. Then $\alpha\alpha_1,...,\alpha\alpha_d$ generates $I$ as $\ZZ$-mod.
+    \[\disc(\alpha\alpha_1,...,\alpha\alpha_d)=N(\alpha)^2\disc(\alpha_1,...,\alpha_d)\]
+\end{proof}
+
+Let $L/K$ be an extn of num field.
+Given $I\trianglelefteq\mathcal O_K$, can construct 
+\[I\mathcal O_L=\{\alpha_1\beta_1+\cdots+\alpha_k\beta_k:\alpha_i\in I, \beta_i\in\mathcal O_l, k\in\NN\}\]
+Given ideals $J$ in $\mathcal O_L$, $J\cap\mathcal O_K$ is in $\mathcal O_K$. 
+\((I\cap\mathcal{O}_K)(J\cap\mathcal{O}_K)\neq(IJ)\cap\mathcal{O}_K\frown\)
+\begin{prop}
+    
+\end{prop}
 \end{document}
