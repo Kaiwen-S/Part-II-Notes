@@ -574,4 +574,39 @@ for $T\in\calD'(\Omega)$ and $a\in C^\infty(\Omega)$.
     Say $T\in \calD'(\Omega)$ has support in a closed set $K\subseteq \Omega$ if $T(\varphi)=0$ whenever $\varphi\in C^\infty_c(\Omega\setminus K)\subseteq C^\infty_c(\Omega)$.
 \end{defn}
 The last proposition implies that $T\in\mathcal E'(\Omega)$ is supported in some compact subset of $\Omega$.
+If $f\in L^1_{loc}$ s.t. $f=0$ outside of a compact set, then $T_f$ is compactly supported. If $T\in\calD'(\Omega)$ is compactly supported, then so is $D^\alpha T$ for any $\alpha$.
+\begin{prop}
+    Any $T\in\mathcal E'(\Omega)$ restricts to $T\in\calD'(\Omega)$ of compact support. Any $T\in\calD'(\Omega)$ that is compactly supported extends to $\tilde T\in\mathcal E'(\Omega)$.
+\end{prop}
+\begin{proof}
+    The first claim follows from $(\dagger)$ in the preceding proposition. Conversely, if $K$ is compact and supports $T_1$. Take $\xi\in C^\infty_c(\Omega)$ s.t. $\xi=1$ on $K$ and define $\tilde T(\varphi)=T(\xi\varphi)$, $\varphi\in\mathcal E(\Omega)$, which define an element of $\mathcal E'(\Omega)$.
+\end{proof}
+\subsection{Convolutions of Distributions}
+Notation: Recall the shift operator $\tau_xg=g(\cdot-x)$. Let $\overset{\vee}{g}=g(-\cdot)$, and $\overset{\vee}{\tau_xg}=g(x-\cdot)$.
+
+In this notation $f\ast g(x)=T_f(\overset{\vee}{\tau_xg})$. If $g\in C^\infty_c(\RR^n)$, $\overset{\vee}{\tau_xg}\in C_c^\infty(\RR^n)$, and we can define for $T\in\calD'(\RR^n)$, $\varphi\in \calD(\RR^n)$, the convolution
+\[x\mapsto T\ast\varphi(x)=T[\overset{\vee}{\tau_x\varphi}]\]
+\begin{thm}
+    Let $T\in\calD'(\RR^n)$, $\varphi\in\calD(\RR^n)$, $\alpha$ any multi-index. Then $T\ast\varphi\in C^\infty(\RR^n)$ and $D^\alpha(T\ast\varphi)=(D^\alpha T)\ast\varphi= T\ast(D^\alpha\varphi)$.
+\end{thm}
+\begin{proof}
+    Take $e_i\in\RR^n$ (basis vector), and let $h\to 0$. Write \begin{align*}\frac1h[T\ast\varphi(x+he_i)-T\ast\varphi(x)]&=T\left[\frac{\varphi(x+he_i-\cdot)-\varphi(x-\cdot)}{h}\right]\\
+    &\overset{ES2}{\longrightarrow} D_i(\varphi(x-\cdot))\end{align*}
+     in $\calD(\RR^n)$ and since $T$ is cts in this topology, $\text{RHS}\overset{h\to 0}{\to} T[D_i\varphi(x-\cdot)]=T(\overset{\vee}{\tau_xD_i\varphi})=T\ast D_i\varphi$. In particular $T\ast \varphi$ is cts for any $\varphi\in\calD(\RR^n)$ and is $T\ast D_i\varphi$, and by iterating we deduce that $T\ast\varphi\in C^\infty(\RR^n)$. In particular, $D^\alpha (T\ast\varphi)=T\ast(D^\alpha\varphi)$.
+
+     Need to prove the first equality. Note 
+     \[D^\alpha(\overset{\vee}{\tau_x\varphi})=D^\alpha\varphi(x-\cdot)=(-1)^{|\alpha|}(D^\alpha\varphi)(x-\cdot)=(-1)^{|\alpha|}\overset{\vee}{\tau_xD^\alpha\varphi}\]
+     Thus $(D^\alpha)\ast\varphi(x)\overset{}{=}D^\alpha T(\overset{\vee}{\tau_x\varphi})=(-1)^{|\alpha|}T(D^\alpha(\overset{\vee}{\tau_x\varphi}))=\tau(\overset{\vee}{\tau_xD^\alpha\varphi})=T\ast(D^\alpha\varphi)$.
+\end{proof}
+Notice if $T\in\mathcal E'(\Omega)$, supported in $K$ cpt and $K_x$ the shifted support of $\overset{\vee}{\tau_x\varphi}=\varphi(x-\cdot)$, $\varphi\in C_c^\infty(\RR^n)$. Thus for $|x|$ large enough, $K\cap K_x=\varnothing$ and $T_\ast\varphi\in\calD(\RR^n)$.
+\begin{defn}
+    Let $T)1\in\calD'(\RR^n)$, $T_2\in\mathcal E'(\RR^n)$. THen define their convolution by the action
+    \[(T_1\ast T_2)\ast\varphi(x)=T_1\ast(T_2\ast\varphi)(x)\] for $\varphi\in \calD(\RR^n)$.
+\end{defn}
+\begin{rem}
+    Note that $T_1\ast T_2$ is assigned on $\calD(\RR^n)$ as we can consider $x=0$, $\varphi=\phi(-\cdot)$ so that $T_1\ast T_2(\varphi)(0)=T_1\ast T_2(\phi)$ for $\phi\in\calD(\RR^n)$. 
+\end{rem}
+\begin{rem}
+    Note that $\delta_0$ has cpt support and $\delta_0\ast\varphi=\delta_0[\varphi(x-\cdot)]=\varphi(x)$. Therefore for any $T_1\in\calD'(\RR^n)$, $(T_1\ast\delta_0)\ast\varphi=T_1\ast(\delta_0\ast\varphi)=T_1\ast\varphi$, so $\delta_0\ast[\cdot]$ acts as a right identity on all of $\calD'(\RR^n)$.
+\end{rem}
 \end{document}
