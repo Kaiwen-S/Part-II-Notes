@@ -950,4 +950,114 @@ In particular, $D_\ast(A)$ has trivial homology and the projection $C_\ast(A)\to
 \begin{rem}
     $K(M_\ast)$ is called the Eilenberg-MacLane space associated to $M_\ast$.
 \end{rem}
+
+----------------------
+
+\begin{thm}[Dold-Kan]
+    The functor $N_\ast$ is an equivalence of categories. 
+\end{thm}
+There is a functor $K:\mathbf{Ch}(\mathbf{Ab})\to\operatorname{Fun}(\bdel^{op},\mathbf{Ab})$ s.t. its restriction to $\mathbf{Ch}(\mathbf{Ab})_{\ge0}$ is adjoint to $N_\ast$.
+This is defined so that $K(M_\ast)_n=\Hom_{\mathbf{Ch}(\mathbf{Ab})}(N_\ast(\ZZ\{\Delta^n\}),M_\ast)$.
+
+Notation: If $X$ is a simplicial set, write $N_\ast(X)$ for $N_\ast(\ZZ\{X\})$, so $K(M_\ast)=\Hom_{\mathbf{Ch}(\mathbf{Ab})}(N_\ast(\Delta^n),M_\ast)$. More generally, if $G$ is an abelian group, we write $G[n]$ to denote the chain complex which is $G$ in degree $n$ and $0$ in other degrees.
+
+\begin{example}
+    $K(M_\ast)_0=\Hom_{\mathbf{Ch}(\mathbf{Ab})}(N_\ast(\Delta^n),M_\ast)=\Hom_{\mathbf{Ch}(\mathbf{Ab})}(\ZZ[0],M_\ast)=\{\text{0-cycles}\}$.
+
+    $K(M_\ast)_1=\Hom(N_\ast(\Delta^1),M^\ast)$, where $N_\ast(\Delta^1)=(\cdots\to0\to\ZZ\to\ZZ\oplus\ZZ\to0\to\cdots)$, and the map $\ZZ\to\ZZ\oplus\ZZ$ is given by $\sigma\mapsto d_0\sigma-d_1\sigma$, so $\pi_0(K(M_\ast))=H_0(M_\ast)$.
+\end{example}
+\begin{example}
+    Let $G$ be an abelian group.$K(G[0])=\Hom_{\mathbf{Ch}(\mathbf{Ab})}(N_\ast(\Delta^n).G[0])$. These are sequences $(g_0,...,g_n)$ s.t. $g_i$ are all equal, so $K(G[0])_n=G$.
+    This is the const. functor $\bdel^{op}\to\ast\to\mathbf{Ab}$ sending everything to $G$.
+\end{example}
+\begin{example}
+    $K(G[1])$: Consider $\Hom(N_\ast(\Delta^n)\to G[1])$
+    These are elements $g_{ij}$ of the group subject to the relation that for $0\le i<j<k\le n$, $g_{ij}+g_{jk}=g_{ik}$. This is the nerve of the groupoid with one object that has automorphism group $G$.
+\end{example}
+\begin{defn}
+     If $G$ is an abelian group, then $K(G,n)$ is for $n\ge 0$ the Kan complex $K(G[n])$. (Eeilenber-Maclane space)
+\end{defn}
+\begin{defn}
+    If $X$ is a sset, we use $K(X,0)$ to denote $\coprod_{X}\Delta^0$. If $G$ is a group (not necessarily abelian), then use $K(G,1)$ to denote that nerve of the corresponding one-object category.
+\end{defn}
+Since $N_\ast$ and $K$ are adjoint, there is a counit $N_\ast(K(M_\ast))\to M_\ast$. Explicitly, any $n$-simplex $\sigma\in K(M)_n$ is a map $N_\ast(\Delta^n)\to M_\ast$ which carries the generator of $N_n(\Delta^n)$ to an $n$-chain $\tilde\nu(\sigma)\in M_n$. THe construction $\sigma\mapsto\tilde\nu(\sigma)$ defines a chain map $C_\ast(K(M_\ast))$ which factors through $N_n(K(M_\ast))\overset{\nu}{\to}M_\ast$. $\nu$ is the counit.
+\begin{prop}
+    Let $M_\ast$ be a chain complex of abelian groups. Then\begin{enumerate}[(i)]
+        \item The map $\nu_0:N_0(K(M_\ast))\to M_0$ is a mono, where the image is the set of $0$-cycles in $M_\ast$.
+        \item For $n>0$, $\nu_n:N_n(K(M_\ast))\to M_\ast$ is an iso of abelian groups.
+    \end{enumerate}
+\end{prop}
+\begin{proof}
+    (i) follows from example. $0$-simplices in $K(M_\ast)$ are $0$-cycles in $M_\ast$.
+
+    (ii): Consider the composite 
+    \begin{align*}
+        \tilde N_n(K(M_\ast))\to C_n(K(M_\ast))\to N_n(K(M_\ast))\overset\nu\to M_n
+    \end{align*}
+    $\sigma$ is in the image of $\tilde N_n(K(M_\ast))$ iff the composite $N_\ast(\Lambda_i^n)\to N_\ast(\Delta^n)\overset\sigma\to M_\ast$ is trivial. Thus, $\tilde N_n(K(M_\ast))=\Hom_{\mathbf{Ch}(\ZZ)}(X_\ast,M_\ast)$, where $X_\ast=N_\ast(\Delta^n)/N_\ast(\Lambda_i^n)$.
+\end{proof}
+\begin{thm}
+    When restricted to $\mathbf{Ch}(\ZZ)_{\ge0}$, the functor $K:\mathbf{Ch}(\ZZ)\to s\mathbf{Ab}$ is fully faithful and essentially surjective
+\end{thm}
+\begin{proof}
+    ff: Have $\Hom_{s\mathbf{Ab}}(K(M_\ast),K(M_\ast'))=\Hom_{\mathbf{Ch}(\ZZ)}(N(K(M_\ast)),M_\ast)$. The map $\Hom_{\mathbf{Ch}(\ZZ)}(M_\ast,M_\ast')\to\Hom_{s\mathbf{Ab}}(K(M_\ast),K(M_\ast'))$ is given by precomposing with the counit $\nu$.
+\end{proof}
+
+---------------------
+
+\begin{defn}
+    If $C_\ast,\ D_\ast$ are chain complexes, we define $[C,D]_d=\prod_{n\in\ZZ}\Hom_{\mathbf{Ab}}(C_n,D_{n+d})$.
+\end{defn}
+There is a chain complex $\to[C,D]_{d+1}\to[C,D]_d\to[C,D]_{d-1}\to$ with boundary operator
+$\partial \{f_n:C_n\to D_{n+d}\}=\{\partial_D\circ f_n=(-1)^df_{n-1}\partial_C\}$
+\begin{rem}
+    A $0$-cycle in this chain complex is exactly a chain map. Two $0$-cycles are homologous iff they are chain homotopic.
+\end{rem}
+\begin{defn}
+    The quasicategory of $HR$-modules is a simplicial set with \begin{itemize}
+        \item $0$-simplices chain complexes of $R$-modules
+        \item $1$-simplices are chain maps 
+        \item $2$-simplices diagrams consisting of chain maps $f_{10}:X_0\to X_1$, $f_{21}:X_1\to X_2$ and $f_{20}:X_0\to X_2$ and an element $f_{210}\in [X_0,X_1]_1$ s.t. $\partial f_{210}=f_{20}-(f_{21}\circ f_{10})$, i.e., a chain homotopy.
+        \item In general, $(\text{HR-mod})_n$ ($n$-simplices) is the set of pairs $(\{x_i\}_{0\le i\le n},\{f_I\})$ where $I$ ranges over subsets $\{i_k<\cdots< i_0\}\subseteq[n]$ containing at least two elements. Each element $f_I\in[X_{i_{|I|}},X_{i_0}]_{|I|-1}$ s.t.
+        $\partial f_I=\sum_{a=1}^{|I|-1}(-1)^a(f_{\{i_a<\cdots<i_0\}}\circ f_{\{i_k<\cdots<i_a\}}-f_{|I|\setminus\{i_a\}})$
+    \end{itemize}
+\end{defn}
+This admits inner horn filling property.
+
+One can construct a commuting diagram
+\begin{center}
+    % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRADkAKAHW5xgAeOAEYAzYAGk6YAL4BKEDNLpMufIRQBGclVqMWbLrwhoYAJzo4IZsHQC2MYADEmsnt2GwGAPWAmlvABKdtByCkoq2HgERNqauvTMrIggvPxCwAASgQC0IVAyisogGFHqRGTx1IkGKbx2lgAWAMaMAAQAykWRajEoZABMCfrJqXyCOFkQMu4NOC3tHeHFpb0ayNpD1SNsaRNTM3sZ2XnQ8oq6MFAA5vBEoKJmEHZIZCBWSADMESCPz6-UD6ITQ-P4vRCfQEQJADUFPcHad7QxCw4pgmFQpAAVjh-whmMQABZceDCQScRQZEA
+\begin{tikzcd}
+N(\textbf{Kan}) \arrow[d] \arrow[r] & {N(\operatorname{Fun}(\bdel^{op},\Rmod))} \arrow[d] \\
+\mathcal S \arrow[r] \arrow[d]      & \text{HR-mod} \arrow[d]                             \\
+\text{Ho}(\mathcal S) \arrow[r]     & \text{Ho}(\text{HR-mod})                           
+\end{tikzcd}
+\end{center}
+$\text{Ho}(\text{HR-mod})$ is sometimes written as $D(R)$.
+
+\begin{rem}
+    If $A_\ast$ is a simplicial abelian group, then $\pi_n(A)=H_n(N_\ast(A_\ast))$. Note that $\Delta^n/\partial\Delta^n\to A$ corresponds to $N_\ast(\Delta^n)/N_\ast(\Delta^n)\to N(A_\ast)$. This translates via Dold-Kan correspondence.
+\end{rem}
+\begin{rem}
+    If $A_\ast$ is a simplicial abelian group, then the homotopy classes of maps from $A_\ast\to K(R,n)=K(R[n])$ is isomorphic to $H^n(A_\ast;R)$. Using the adjunction, we see that $A_\ast\to K(R,n)$ corresponds to $N(A_\ast)\to R[n]$.
+\end{rem}
+\begin{crly}
+    If $X$ is a Kan complex, then the homotopy classes of maps $X\to K(R,n)$ is equivalent to elements of $H^n(X;R)$.
+\end{crly}
+By Yoneda,
+\begin{crly}
+    Natural transformations between $H^n(-;R),\ H^m(-;R):\text{Ho}(\mathcal S)\to \Rmod$ corresponds to maps $K(R,n)\to K(R,m)$, i.e., elements of $H^m(K(R,n);R)$
+\end{crly}
+
+Next goal: compute the homology/cohomology of Kan complexes and also Eilenberg-MacLane spaces. Understand the relation between (co)homology and homotopy gps.
+
+\section{Spectral Sequences}
+Suppose we are given a seuqence of inclusions of chain complexes, i.e., $\colim(C_\ast^0\hookrightarrow C_\ast^1\hookrightarrow\cdots)=C_\ast$. Can the homology of $C_\ast$ be reassembled from the homologies of $C^n_\ast/C_\ast^{n-1}$?
+
+\begin{defn}
+    A bigraded abelian group is $A_{\bullet,\bullet}=\bigoplus_{p,q}A_{p,q}$. A degree $(a,b)$ map $f:A_{\bullet,\bullet}\to B_{\bullet,\bullet}$ is s.t. $f(A_{p,q})\subseteq B_{q+a,q+b}$.
+\end{defn}
+\begin{defn}
+    A (Serre graded) spectral sequence is a sequence $E_{\bullet,\bullet}^1, E_{\bullet,\bullet}^2,...$ of bigraded abelian groups, together with maps $d^r:E^r\to E^r$ of degree $(-r,r-1)$ s.t. $d^r\circ d^r=0$. And each page is obtained from the preceding page by taking homology.
+\end{defn}
 \end{document}

@@ -437,8 +437,39 @@ We write u.a.p. for "unif. approximable by polys".
 \begin{proof}[Proof of Runge's theorem]
     Step 1: Prove that $f$ is u.a. by rational functions $p(z)/q(z)$ s.t. poles are outside of $K$. First suppose $K$ is connected. We expect a nice contour $\gamma:[0,1]\to U\setminus K$ s.t. $w(\gamma,z)=1$ for all $z\in K$ (preceding lemma). Then can write $I_z=f(z)=(2\pi i)^{-1}\int_\gamma\frac{f(w)}{w-z}dw$ for all $z\in K$. Note that
     \[f(z)=\dfrac{1}{2\pi i}\int_0^1\dfrac{f(\gamma(t))\gamma'(t)}{\gamma(t)-z}dt\]
-    The function $F(z,t)=\frac{f(\gamma(t))\gamma'(t)}{\gamma(t)-z}$ is unif. cts on $K\times[0,1]$.
+    For each $l$ choose a linear parametrization $\gamma_l:I\to E$ s.t. $\gamma'=$ const, e.g. $\delta/10$. Consider
+    the function $F_l(z,t)=\frac{f(\gamma_l(t))\gamma_l'(t)}{\gamma_l(t)-z}$ is unif. cts on $K\times[0,1]$ as $\gamma(t)\notin E_l$ and $E_l\cap K=\varnothing$. Hence,
+    \[\sup_{|x-y|<1/N}|F_l(z,x)-F_l(z,y)|\to 0\]
+    uniformly in $z\in K$.
 
-    Step 2: Prove that rational functions of the form $c/(z-\alpha)$ is u.a.p. in $K$.
+    Then \[\left|\int_0^1 F_l(z,t)dt-\frac1N\sum_{n=1}^nF_l(z,n/N)\right|\to 0\]
+    uniformly in $z\in K$. Summing over $E_l$, get 
+    \[\left|\int_{\bigcup E_l} F_l(z,t)dt-r_N\right|\to 0\] where $r_N$ is a rational function.
+
+    Step 2: Prove that rational functions of the form $1/(\alpha-z)$ is u.a.p. in $K$. Define $S=\{\alpha\in\CC\setminus K:\frac{1}{\alpha-z}\text{ u.a.p.}\}$
+    \begin{itemize}
+        \item $S\neq\varnothing$. To see this, note that $K$ is closed and bounded. Pick an $\alpha$ with sufficiently large modulus, then we have a Taylor expansion which is loc. unif. convergent on a large open disk containing $K$. Can take partial sums to get poly approximation.
+        \item $S$ is open. Let $\alpha\in S$. Have
+        \[\frac{1}{\beta-z}=\frac{1}{(\alpha-z)(1-\frac{\alpha-\beta}{\alpha-z})}=\frac{1}{\alpha-z}\sum_{j=0}^\infty\left(\frac{\alpha-\beta}{\alpha-z}\right)^j\] when $|\alpha-\beta|<|\alpha-z|$. By compactness, let $d=\inf_{z\in K}|\alpha-z|$. Then such an expansion works when $\beta\in B_d(\alpha)$, so $B_d(\alpha)\subseteq S$.
+        \item Now claim that $S=\CC\setminus K$. Suppose $\beta\not\in K$, choose $\alpha\in S\subseteq \CC\setminus K$. By path-connectedness, there exists $\varphi:[0,1]\to \CC\setminus K$ with $\varphi(0)=\alpha$, $\varphi(1)=\beta$ By compactness of various things, we can find $\delta>0$ s.t. $|z-\varphi(t)|\ge\delta$ for all $z\in K$ and $t\in[0,1]$. Choose a partition $0=t_0<t_1<\cdots< t_m=1$ s.t. $|\varphi(t_{i+1})-\varphi(t_i)|<\delta$ for all $i$ (possible by uniform continuity). Then by the argument in the second bullet point, $\beta\in S$. 
+    \end{itemize}
 \end{proof}
+\begin{rem}
+    A stronger approximation result is given by S.N. Mergelyan: if $K\subseteq\CC$ is compact and $\CC\setminus K$ connected and $f:K\to\CC$ cts s.t. $f|_{\operatorname{int(K)}}$ is holo'c, then $f$ is u.a.p. on $K$.
+    When $\CC\setminus K$ is not connected, u.a.p. in general is not possible but can approximate by rational functions.
+\end{rem}
+\begin{rem}
+    If we only require pointwise convergence, then can e.g. show that $f(re^{i\theta})=r^{3/2}e^{3i\theta/2}$ can be pointwise approximated by polys on the closed unit disk. Let $K_n=\{z=re^{i\theta}:1/n\le r\le 1, 2\pi/n\le\theta\le2\pi+\pi/n\}$. Runge's thm applies to each $K_n$ after a suitable branch of square root is chosen.
+\end{rem}
+
+\section{Irrationality, Transcendence, and Continued Fractions}
+\begin{prop}
+    $\pi$ is irrational.
+\end{prop}
+\begin{proof}
+    Consider $S_n(x)=\frac{1}{2^nn!}\int_0^x(x^2-t^2)^n\cos(t)dt$
+    IBP twice, obtain a recursive relation: $S_n(x)=(2n-1)S_{n-1}(x)-x^2S_{n-2}(x)$ for $n\ge 2$. Have $S_0(x)=\sin(x)$ and $S_1(x)=-x\cos x+\sin x$. By induction, can write $S_n(x)=q_n(x)\sin x+p_n(x)\cos x$ for some polys $p_n, q_n$, which satisfies the same recursive relation $p_n=(2n-1)p_{n-1}=x^2p_{n-2}$, $q_n=(2n-1)q_{n-1}+x^2q_{n-2}$, with initial condition $p_0=0,\ p_1=x$, $q_0=q_1=1$.
+    Induction also shows that $\deg p_n,\ \deg q_n\le n$ and with integer coeff. Evaluate at $\pi/2$, see that $q_n(\pi/2)=S_n(\pi/2)>0$. Suppose $\pi\in\QQ$, then write $\pi/2=r/s$ for $r,s\in\NN$ coprime. Then $q_n(\pi/2)=\sum_{j=0}^na_j(r/s)^d\ge 1/s^n$. On the other hand, $q_n(\pi/2)\le \frac{1}{2^nn!}\frac\pi2(\frac\pi2)^{2n}$, so $1\le \frac{1}{n!}(\frac{s\pi^2}{8})^n\to 0$ as $n\to \infty$. Contradiction.
+\end{proof}
+Recall the defn of algebraic number and the defn of transcendental numbers.
 \end{document}
