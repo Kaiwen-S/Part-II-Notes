@@ -10,6 +10,7 @@
 \newcommand{\e}{\varepsilon}
 \usepackage{listings}
 \usepackage{xcolor}
+\usepackage{stmaryrd}
 
 \usepackage{tabularx,capt-of}
 
@@ -646,6 +647,60 @@ Recall Riemann Lebesgue lemma from PM.
 \end{proof}
 \begin{rem}
     Note that Fourier transform does not map $L^1$ onto $C_0(\RR^n)$.
+\end{rem}
+\[\Lbag;\tag{Owen's signature}\]
+\begin{lem}
+    Let $f\in L^1(\RR^n)$.\begin{enumerate}[(i)]
+        \item If $f_\lambda=\lambda^{-n}f(\cdot/\lambda)$, $\lambda>0$, then $\hat f_\lambda=\hat{f}(\lambda u)$, $u\in\RR^n$
+        \item $\mathcal F[\tau_x f](u)=e^{-ix\cdot u}\hat f(u)$, $\mathcal F[e^{i\langle y,\cdot\rangle}f]=\tau_y \hat f$.
+        \item If $g\in L^1$, then $f\ast g\in L^1$ and $\mathcal F[f\ast g]=\hat f\cdot \hat g$
+    \end{enumerate}
+\end{lem}
+\begin{proof}
+    Fubini and substitution.
+\end{proof}
+\begin{thm}\
+    \begin{enumerate}[(i)]
+        \item Let $f\in C^1(\RR^n)$, $f,D_jf\in L^1$ for $j=1,...,n$. Then $\mathcal F[D_jf](u)=iu_j\hat f(u)$ for $u\in\RR^n$.
+        \item If $f\in L^1(\RR^n)$ and $\int_{\RR^n}(1+|x|)|f(x)|dx<\infty$, then for any $j=1,...,n$, $u\in\RR^n$, have $D_j\hat f(u)=-i\mathcal F[x_j\hat f(x)]$. In particular, $\hat f\in C^1(\RR^n)$
+    \end{enumerate}
+\end{thm}
+\begin{proof}
+    (i) For any $\e>0$, we can pick $f_\e\in C^\infty_c(\RR^n)$ s.t.  $\|f_\e-f\|_{L^1}+\|D_jf_\e-D_jf\|_{L^1}<\e$. [First approximate by $\bar f=f\xi$, with $\xi\in C_c^\infty(\RR^n)$ s.t. $\xi=1$ on $D(0,M)$. Approximate $\bar f$ by $\phi_\e\ast \bar f\to \bar f$ in $L^1$. Also have $D_j(\phi_\e\ast f)=\phi_\e\ast(D_j\bar f)\to D_j\bar f$ as $\e\to 0$.] For such $f_\e$ we see
+    \[\mathcal F[D_jf_\e](u)=\int_{\RR^n}e^{ix\cdot u}D_jf_\e(x)dx\overset{ibp}{=}-\int_{\RR^n}iu_jx^{-ix\cdot u}f_\e(x)dx\]
+    So \begin{align*}
+        |\mathcal F[D_jf](u)-iu_j\hat f(u)|&\le |\mathcal F[D_j\hat f](u)-\mathcal F[D_jf_\e](u)|+|iu_j(\hat f_\e(u)-f(u))|\\
+        &\le \|D_jf-D_jf_\e\|+|u_j|\|f_\e-f\|_{L^1}\\ &\le (1+|u_j|)\e
+    \end{align*}
+
+    (ii) \begin{align*}
+        \frac1h(\hat f(u+he_j)-\hat f(u))&=\int_{\RR^n}\frac1h(e^{-ix\cdot(u+he_j)}-e^{-ix\cdot u})f(x)dx\\
+        &=\int_{\RR^n}e^{-ix\cdot u}(\frac{e^{-ix\cdot(he_j)}-1}{h})f(x)dx\overset{\text{DCT}}{\rightarrow}-i\int_{\RR^n}e^{-ix\cdot u}x_jf(x)dx
+    \end{align*}
+    Dominating function $|x_j|$, which is $|f(x)|dx$-integrable by assumption.
+\end{proof}
+Recall from PM.
+\begin{thm}[Fourier Inversion]
+    Let $f\in L^1$ and $\hat f\in L^1$ Then $f(x)=\frac{1}{(2\pi)^n}\int_{\RR^n}e^{ix\cdot u}\hat f(u)dx=\mathcal F^{-1}[\hat f](x)$ a.e.
+\end{thm}
+Note that for the unique cts representative of $f$, the formula holds everywhere.
+
+Note that $\mathcal F^{-1}[\mathcal F\varphi]=\frac{1}{(2\pi)^n}\mathcal F[\mathcal F\varphi](-\cdot)$, so $\mathcal F^{-1}$ is a Fourier transform, and $\mathcal F^2\varphi=(2\pi)^n\overset{\vee}{\varphi}$.
+
+\begin{thm}
+    $\mathcal F$ is a linear automorphism of $\mathcal S(\RR^n)$.
+\end{thm}
+\begin{proof}
+    Can check $\mathcal S(\RR^n)\subseteq L^1(\RR^n)$. If $f\in L^1$, then $\int|f|\le (\sup_{x\in\RR^n}(1+|x|)^{n+1}|f(x))\int_{\RR^n}\frac{dx}{(1+|x|)^{n+1}}<\infty$.
+    For multi-indices $\alpha,\beta$,
+    \[|u^\alpha||D^\beta\hat f(u)|=|\mathcal F[D^\alpha(x^\beta f)]|(u)\overset{\text{RL}}{\le}\|D^\alpha(x^\beta f)\|_{L^1}\le p_N(f)\] where $p_N(f)$ is an expression of the form in the previous ineq. If $\phi_j\to 0$ in $\mathcal S$, have $p_N(\hat \phi_j)\to 0$ and $\mathcal F:\mathcal S\to \mathcal S$ is cts. Moreover, if $\mathcal F[\phi]=0$ for $\phi\in\mathcal S\subseteq L^1$, then by the Fourier inversion formula, $\phi=\mathcal F^{-1}(0)=0$, so $F$ is injective. For any $\phi\in \mathcal S(\RR^n)$, have $\mathcal F^{-1}\mathcal F\phi=\frac{1}{(2\pi)^n}\mathcal F^2\overset{\vee}{\phi}$, which is the fourier transform of some function, so also surjective.
+\end{proof}
+
+\begin{defn}
+    For $T\in \mathcal S'(\RR^n)$ we define its distributional Fourier transform $\hat T(\phi)=T(\hat\phi)$ for all $\phi\in\mathcal S(\RR^n)$
+\end{defn}
+\begin{rem}
+    Clearly by the previous theorem, $\hat T\in \mathcal S'(\RR^n)$. If $f\in L^1$, then $T_{\hat f}(\phi)=\int_{\RR^n}\hat f\phi dx\overset{\text{Fubini}}{=}\int_{\RR^n}f\hat\phi= T_f(\hat\phi)$.
 \end{rem}
 
 \end{document}
