@@ -702,5 +702,38 @@ Note that $\mathcal F^{-1}[\mathcal F\varphi]=\frac{1}{(2\pi)^n}\mathcal F[\math
 \begin{rem}
     Clearly by the previous theorem, $\hat T\in \mathcal S'(\RR^n)$. If $f\in L^1$, then $T_{\hat f}(\phi)=\int_{\RR^n}\hat f\phi dx\overset{\text{Fubini}}{=}\int_{\RR^n}f\hat\phi= T_f(\hat\phi)$.
 \end{rem}
+\[(:\Lbag\tag{Owen's Signature with Quiff}\]
+\begin{defn}
+    Call $\phi$ slowly increasing if $\sup_{x\in\RR^n}(1+|x|)^{-N}|\phi(x)|<\infty$ for some $N$.
+\end{defn}
+Then $T_\phi\in\mathcal S'(\RR^n)$. Even if $\hat T_\phi$ is given by $T_g$ for some $g\in L^1_{\text{loc}}$, can't conclude $\hat\phi$ is pointwise defined.
 
+If $T_j, T\in\mathcal S'(\RR^n)$ and $T_j\to T$ weak-* in $\mathcal S'(\RR^n)$, then $\hat T_j(\phi)=T_j(\hat\phi)\to T(\hat\phi)=\hat T(\phi)$, so $\mathcal F:\mathcal S'(\RR^n)\to \mathcal S'(\RR^n)$ is sequentially continuous.
+One shows further that $\hat T=0\implies T=0$, so $\mathcal F$ is inj. Define $\mathcal F^{-1}T$ via $\mathcal F^{-1}T(\phi)=T(\mathcal F^{-1}\phi)$ for all $\phi$ in $\mathcal S(\RR^n)$. $\mathcal F^{-1}=\frac{1}{(2\pi)^n}\overset{\vee}{\mathcal F}$. Can check $\mathcal F^{-1}[\mathcal FT](\phi)=T(\phi)$.
+\begin{thm}
+    $\mathcal F$ (Fourier transform) defines a linear automorphism of $\mathcal S'(\RR^n)$.
+\end{thm}
+\begin{rem}
+    Recall Plancherel from PM. $\mathcal F$ extends to the completion by unif continuity. Get an isometry $\frac{1}{(2\pi)^{n/2}}\bar{\mathcal F}$ of $L^2=\overline{L^1\cap L^2}^{L^2}$. If we define $\bar{\mathcal F}T(\phi)=T(\bar{\mathcal F}\phi)=T(\hat\phi)$ for all $\phi\in\mathcal S\subseteq L^1\cap L^2$, then see that $\bar{\mathcal F}=\mathcal F$ on $\mathcal S^1$.
+
+    For any finite measure $\mu$ on $\RR^n$, have $\hat\mu(u)=\int_{\RR^n}e^{-ix\cdot u}d\mu(x)$. Then
+    \[\hat T_\mu(\phi)=T_\mu(\hat\phi)=\int_{\RR^n}\int_{\RR^n}e^{-ix\cdot u}\phi(u)dud\mu(x)=T_{\hat\mu}(\phi)\] $\mathcal FT_\mu=T_{\hat\mu}$ in $\mathcal S'(\RR^n)$.
+
+    For $T\in\mathcal E'(\RR^n)$, can define $E(u)=T(e^{-i\langle\cdot,u\rangle})$. Can show that $\hat T= T_E$ in $\mathcal S'(\RR^n)$ with $E$ slowly increasing.
+\end{rem}
+
+Note that the product of a slowly increasing func with a rapidly decreasing func is again rapidly decreasing, i.e., in $\mathcal S$. For $T\in \mathcal S'$, define $aT$ for $a\in C^\infty$ slowly increasing by $(aT)(\phi)=T(a\phi)$ for $\phi\in\mathcal S$. For any $T\in\mathcal D'(\RR^n)$, define $(\tau_kT)(\varphi)=T(\tau_{-k}\phi)$ for $k\in\RR^n$.
+
+\begin{lem}
+    Let $T\in\mathcal S'(\RR^n)$ and $\alpha$ any multi-index \begin{enumerate}[(i)]
+        \item $\mathcal F(\tau_y T)=e^{-i\langle y,\cdot\rangle}\hat T$ and $\mathcal F[e^{-i\langle y,\cdot\rangle}T]=\tau_y T$
+        \item $\mathcal F[D^\alpha T]=i^{|\alpha|}u^\alpha\hat T$ and $D^\alpha\hat T=(-i)^{|\alpha|}\mathcal F[x^\alpha T]$
+    \end{enumerate}
+\end{lem}
+\begin{proof}
+    Compute.
+\end{proof}
+\begin{rem}
+    $\mathcal F[D^\alpha\delta_0]=i^{|\alpha|}u^\alpha$. So the FT of partial derivatives of Dirac measure span the space of polys.
+\end{rem}
 \end{document}

@@ -499,10 +499,55 @@ Can put a Riemann surface structure on (conn. components of) $\mathfrak G(D)$. C
 \end{defn}
 This is well-defined and analytic as it is $f\circ\pi$ on $[f]_U$.
 \begin{thm}
-    Let $(f,U)$ and $(g,V)$ are function elements on $D$. Let $\gamma$ be a path in $D$ with $\gamma(0)\in U$, $\gamma(1)\in V$. Then $(g,V)$ is an analytic continuation of $(f,U)$ along $\gamma$ iff there exists a path $\tilde\gamma$ in $\mathfrak G(D)$ with $\pi\circ\tilde\gamma=\gamma$ and $\tilde(0)=[f]_{\gamma(0)},\ \tilde\gamma(1)=[g]_{\gamma(1)}$.
+    Let $(f,U)$ and $(g,V)$ are function elements on $D$. Let $\gamma$ be a path in $D$ with $\gamma(0)\in U$, $\gamma(1)\in V$. Then $(g,V)$ is an analytic continuation of $(f,U)$ along $\gamma$ iff there exists a path $\tilde\gamma$ in $\mathfrak G(D)$ with $\pi\circ\tilde\gamma=\gamma$ and $\tilde\gamma(0)=[f]_{\gamma(0)},\ \tilde\gamma(1)=[g]_{\gamma(1)}$.
 \end{thm}
 \begin{proof}
     ($\Rightarrow$:)%\[:)\tag{Owen's signature}\]
-    Have a chain of direct analytic continuation $(f_1,U_1),...,(f_n,U_n)$ with $0= t_0\le \cdots \le t_n=1$ with $\gamma([t_{j-1},t_j])\subseteq U_j$. Define $\tilde\gamma$ on $[t_{j-1},t_j]$ by $\tilde\gamma(t)=[f_j]_{\gamma(t)}$. $f_{j-1}=f_j$ on a nbd of $\gamma(t_j)$. $\tilde \gamma $ is  cts on $[t_{j-1},t_j]$. [If $[h]_W$ is an open set, then $t\in \tilde\gamma^{-1}[h]_W$ iff $\gamma(t)\in W$ and $f_j=h$ on some nbd of $N$ of $\gamma(t)$. $\gamma$ is cts, so there is an open interval $I$ in $[t_{j-1},t_j]$ around $t$ with $\gamma(I)\subseteq W\cap N$, so $I\subseteq \tilde\gamma^{-1}[h]_W$]. Can check directly that this is a lift.　
+    Have a chain of direct analytic continuation $(f_1,U_1),...,(f_n,U_n)$ with $0= t_0\le \cdots \le t_n=1$ with $\gamma([t_{j-1},t_j])\subseteq U_j$. Define $\tilde\gamma$ on $[t_{j-1},t_j]$ by $\tilde\gamma(t)=[f_j]_{\gamma(t)}$. $f_{j-1}=f_j$ on a nbd of $\gamma(t_j)$. $\tilde \gamma $ is  cts on $[t_{j-1},t_j]$. [If $[h]_W$ is an open set, then $t\in \tilde\gamma^{-1}[h]_W$ iff $\gamma(t)\in W$ and $f_j=h$ on some nbd of $N$ of $\gamma(t)$. $\gamma$ is cts, so there is an open interval $I$ in $[t_{j-1},t_j]$ around $t$ with $\gamma(I)\subseteq W\cap N$, so $I\subseteq \tilde\gamma^{-1}[h]_W$]. Can check directly that this is a lift.
+\[):\gimel\tag{Owen's Signature}\]
+    ($\Leftarrow$:) $\tilde\gamma[0,1]$ is compact. Cover by finitely basic open sets $[f_1]_{U_1},...,[f_n]_{U_n}$ with $U_i$ disks. Get $0=t_0\le \cdots\le t_n=1$ with $\tilde \gamma[t_{j-1},t_j]\subseteq[f_j]_{U_j}$. Have $\tilde\gamma(0)=[f_1]_{\gamma(0)}$. $f=f_1$ on a nbd of $\gamma(0)$. Similarly, $g=f_n$ near $\gamma(1)$. $\tilde\gamma(t_j)\in[f_j]_{U_j}\cap[f_{j+1}]_{U_{j+1}}$ so same argument applies. So $(f_1,U_1), (f_2,U_2),...,(f_n,U_n)$ direct analytic continuations. and $\gamma[t_{j-1},t_j]=\pi\tilde\gamma[t_{j-1},t_j]\subseteq\pi[f_j]_{U_j}=U_j$ all $j$.
 \end{proof}
+\begin{crly}
+    If $(g,V),(h,V)$ are analytic continuations of $(f,U)$ along the same path $\gamma$, then $g\equiv h$ on $V$.
+\end{crly}
+\begin{proof}
+    Get two lifts with the same starting point. The projection $\mathfrak G(D)\to D$ is a local homeo, so must have $[g]_{\gamma(1)}=[h]_{\gamma(1)}$, i.e, $g=h$ on a nbd of $\gamma(1)$.
+\end{proof}
+\begin{crly}[Classical Monodromy thm]
+    Suppose $D$ is a simply connected domain and $(f,U)$ a function element on $D$ which can be analytically continued along every path in $D$ starting in $U$. Take $(g,V), (h,V)$ analytic continuation along paths $\alpha,\beta$ in $D$ with the same endpoints. Then $g\equiv h$ on $V$.
+\end{crly}
+\begin{proof}
+    Have lifts $\tilde\alpha,\tilde\beta$. Lift the path homotopy $\alpha\simeq\beta$ to a path homotopy of $\tilde\alpha\simeq\tilde\beta$. So $g=h$ on a nbd of $\alpha(1)=\beta(1)$.
+\end{proof}
+\begin{crly}
+    For any complete analytic function $\mathfrak F$, let $\mathfrak G_{\mathfrak F}=\bigcup_{(f,U)\in\mathfrak F}[f]_U\subseteq\mathfrak G(D)$. These are exactly the (path) components of $\mathfrak G(D)$.
+\end{crly}
+\begin{proof}
+    $\mathfrak G_{\mathfrak F}$ is path conn by thm. Each $\mathfrak G_{\mathfrak F}$ is open and they partition $\mathfrak G(D)$.
+\end{proof}
+So $\mathfrak G_{\mathfrak F}$ is a Riemann surface.
+
+An analytic continuation along a path is equiv to a path in $\mathfrak G_{\mathfrak F}$ lifting the path. The eval map $\e:\mathfrak G_{\mathfrak F}\to\CC$ is analytic. FOr fn elt $(f,U)$. $\e$ is a single-valued extension of $f\circ\pi$ to all of $\mathfrak G_{\mathfrak F}$.
+
+\section{Periodic Functions}
+\subsection{Periods}
+\begin{defn}
+    Let $f:\CC\to X$ be any fn to a set. A period $\omega\in\CC$ of $f$ s.t. $f(z+w)=f(z)$ for all $z\in\CC$. $\Omega_f$ the set of all periods of $f$.
+\end{defn}
+$\Omega_f$ is an additive subgroup of $\CC$. If $X$ is Hausdorff and $f$ is cts, then $\Omega_f$ is closed in $\CC$.
+\begin{lem}
+    For non-const analytic map $f:\CC\to S$ to a Riemann surface, the set $\Omega_f$ consists of isolated points.
+\end{lem}
+\begin{proof}
+    Let $g(z)=f(0)$. If $w=\alpha$ where $\alpha\in\Omega_f$ is an accumulation point, then have a sequence $w_i\to\alpha$, so $f(w_i)\to f(0)$, so $f$ is const by identity theorem.
+\end{proof}
+\begin{thm}
+    Let $P\subseteq\CC$ be an additive subgroup consisting of isolated pts. Then
+    \begin{enumerate}
+        \item[(0)] $P=\{0\}$
+        \item[(1)] $P=\ZZ\langle\omega\rangle$ for some $\omega\in\CC^\times$
+        \item[(2)] $P=\ZZ\omega_1+\ZZ\omega_2$ for $\omega_i\in\CC^\times$ and $\omega_i$ are $\RR$-linearly independent.
+    \end{enumerate}
+\end{thm}
+
 \end{document}

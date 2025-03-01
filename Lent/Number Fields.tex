@@ -477,4 +477,37 @@ $N(\mathfrak q)=N(\mathfrak p)^{f(\mathfrak q|\mathfrak p)}$.
 \begin{thm}[Dedekind]
     Let $K$ be a number field, and let $\mathfrak p\subseteq \mathcal O_K$ be a prime. Let $g\in\mathcal O_K[x]$ be a monic irred poly, and let $\alpha$ be a root of $g$. Let $L=K(\alpha)$. Let $p$ be the unique rational prime that lies under $\mathfrak p$. Assume $p\nmid [\mathcal O_L:\mathcal O_K[\alpha]]$. Let $\bar g$ be the image of $g$ in $(\mathcal O_K/\mathfrak p)[x]$. Write $\bar g=\bar g_1^{e_1}\cdots \bar g_r^{e_r}$ be the factorization of $\bar g$ in $(\mathcal O_K/\mathfrak p)[x]$ into monic polys. Let $g_i\in\mathcal O_K[x]$ be a monic polys that projects to $\bar g_i$. Then $\mathfrak q_j=\mathfrak p\mathcal O_L+ g_j(\alpha)\mathcal O_L$ is a prime lying over $\mathfrak p$ and $f(\mathfrak q_j|\mathfrak p)=\deg g_j$. $\mathfrak q_i$ are distinct and $\mathfrak p\mathcal O_L=\mathfrak q_1^{e_1}\cdots\mathfrak q_r^{e_r}$.
 \end{thm}
+\[(:\triangleright\tag{Owen's signature}\]
+\begin{defn}
+    A number field $K$ is monogenic if there exists $\alpha\in\mathcal O_K$ s.t. $\mathcal O_K=\ZZ[\alpha]$.
+\end{defn}
+\begin{prop}
+    $\mathfrak p\mathcal O_L\supseteq \mathfrak q_1^{e_1}\cdots \mathfrak q_r^{e_r}$
+\end{prop}
+\begin{proof}
+    Let $A\subseteq \mathcal O_L$ be the set of all elements that are products of $e_1$ elements from $\{\mathfrak p\cup g_1(\alpha)\}$ and $e_2 $ elements from $\{\mathfrak p\cup g_2(\alpha)\}$...... Have $\mathfrak q_1^{e_2}\cdots q_r^{e_r}=\langle A\rangle$. This is obvious for all elements except $g_1(\alpha)^{e_1}\cdots g_r(\alpha)^{e_r}\equiv g(\alpha)=0$ modulo $\mathfrak p\mathcal O_L$. 
+\end{proof}
+\begin{prop}
+    The ring $\mathcal O_L/\mathfrak q_j$ is a factor of $(\mathcal O_K/\mathfrak p)[x]/\langle \bar g_j\rangle$.
+\end{prop}
+\begin{lem}
+    Let $R_1,R_2,R_3$ be rings and $R_1\overset{\varphi_1}{\to}R_2\overset{\varphi_2}{\to}R_3$ a sequence of surjective ring homs. Suppose $A\subseteq R_2$ is s.t. $\ker\varphi_2=\langle A\rangle_{R_2}$ and $\tilde A\subseteq R_1$ s.t. $\varphi_1(\tilde A)=A$. Then $\ker(\varphi_2\circ\varphi_1)=\langle\tilde A\rangle_{R_1}+\ker\varphi_1$.
+\end{lem}
+\begin{proof}
+    First prove $\mathcal O_K[\alpha]/\langle\mathfrak p,\bar g_j(\alpha)\rangle\cong(\mathcal O_K/\mathfrak p)[x]/\langle\bar g_j\rangle$. Consider the map
+    \begin{center}
+        % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRAB12BbOnACwDGjAAQB5APoBpZAA8KIAL6l0mXPkIoAjOSq1GLNpx78hDMVOSdGaPnXlKV2PASIAmHdXrNWiDt16CIhLSVgw2dgD0nAx0YADmDDBGAQBmAE50ANbCaKRx4gBWABSh4QCUnBnxiYrKIBhO6kTamrpeBr4l-iZBUlHdfOlZOWWy9nUNai4o7q2e+j4gXcaBZsH9K0PZaKNy-THVSewARnRpwvkFlbEJrAq6MFBx8ESg6RBcSGQgOBBI2npvIZ2PQ0jYsOJNLU3mkPl9qL8kABmeZA3ycNDYSHQkDvT6IAGIxDuQEdPyg8HiVw4vHIhF-RAAFlRZIxWOp9wUQA
+        \begin{tikzcd}
+        {\mathcal O_K[x]} \arrow[r, "\varphi_1"] \arrow[rd, "\psi_1"] & {\mathcal O_K[\alpha]} \arrow[r, "\varphi_2"]       & {\mathcal O_K[\alpha]/\langle\mathfrak p,g_j(\alpha)\rangle} \\
+                                                              & {(\mathcal O_K/\mathfrak p)[x]} \arrow[r, "\psi_2"] & {(\mathcal O_K/\mathfrak p)[x]/\langle\bar g_j\rangle}      
+        \end{tikzcd}
+    \end{center}
+    Apply the lemma. $\ker\varphi_2=\langle\mathfrak p,g_j(\alpha)\rangle$, $\tilde A=\mathfrak p\cup g_j$, so $\ker\varphi_2\circ\varphi_1=g\mathcal O_K[x]+\mathfrak p\mathcal O_K[x]+g_j\mathcal O_K[x]$.
+    Similarly, $\ker\psi_2\circ\psi_1=g_j\mathcal O_K[x]+\mathfrak p\mathcal O_K[x]$. Note that $g\equiv \bar g_1^{e_1}\cdots \bar g_r^{e_r}\mod\mathfrak p\mathcal O_K[x]$, so $g\in\langle g_j,\mathfrak p\rangle$.
+
+    Note $\mathfrak q_j\cap \mathcal O_K[\alpha]\supseteq \langle\mathfrak p,g_j(\alpha)\rangle$. Enough to show that $\mathcal O_L/\mathfrak q_j\cong \mathcal O_K[\alpha]/(\mathfrak q_j\cap \mathcal O_K[\alpha])$ is a factor of $\mathcal O_K[\alpha]/\langle\mathfrak p,g_j(\alpha)\rangle$. Enough to show $\mathcal O_K[\alpha]+\mathfrak q_j=\mathcal O_L$. As abelian groups, $\mathcal O_L/(\mathcal O_K[\alpha]+\mathfrak q_j)$ is a factor of both $\mathcal O_L/(\mathcal O_K[\alpha])$ and $\mathcal O_L/\mathfrak q_j$.
+
+    ??????????????????????????????????????
+\end{proof}
+
 \end{document}
