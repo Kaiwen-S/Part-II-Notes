@@ -472,4 +472,130 @@ We write u.a.p. for "unif. approximable by polys".
     Induction also shows that $\deg p_n,\ \deg q_n\le n$ and with integer coeff. Evaluate at $\pi/2$, see that $q_n(\pi/2)=S_n(\pi/2)>0$. Suppose $\pi\in\QQ$, then write $\pi/2=r/s$ for $r,s\in\NN$ coprime. Then $q_n(\pi/2)=\sum_{j=0}^na_j(r/s)^d\ge 1/s^n$. On the other hand, $q_n(\pi/2)\le \frac{1}{2^nn!}\frac\pi2(\frac\pi2)^{2n}$, so $1\le \frac{1}{n!}(\frac{s\pi^2}{8})^n\to 0$ as $n\to \infty$. Contradiction.
 \end{proof}
 Recall the defn of algebraic number and the defn of transcendental numbers.
+
+
+
+\begin{crly}
+    For all irrational $\alpha>0$, we can find $u_n,v_n\in\NN$ s.t. $v_n\to \infty$ and $|\alpha-u_n/v_n|<1/v_n^2$.
+\end{crly}
+It is useful to observe if $a,b,\tilde a,\tilde b\in\NN$ are s.t. $\gcd(a,b)=1$, $\gcd(\tilde a,\tilde b)=1$, then $|a/b-\tilde a/\tilde b|\ge \frac{1}{b\tilde b}$.
+\begin{thm}
+    Let $\alpha>0$ be irrational and $\frac{p_n}{q_n}$ convergents of $\alpha$. Suppose $k$ is odd. Then for all $p/q\in\QQ$ with $p/q\in(p_{k-1}/q_{k-1},p_k/q_k)$ have $q>q_k$.
+\end{thm}
+A similar statement holds when $k$ is even.
+\begin{proof}
+    Suppose $p,q$ coprime. If $q\le q_k$, then (exactly) one of the following holds.
+    If $\alpha<p/q<p_k/q_k$, then $|p_k/q_k-p/q|\ge \frac{1}{q_kq}\ge\frac{1}{q_kq_{k+1}}\ge |\alpha-p_k/q_k|$. Contradiction.
+    If $p_{k-1}/q_{k-1}<p/q<\alpha$, then $|p_{k-1}/q_{k-1}-p/q|\ge\frac{1}{qq_{k-1}}\ge\frac{1}{q_{k-1}q_k}\ge |\alpha-p_k/q_k|$. Contradiction
+\end{proof}
+
+\begin{lem}
+    For all $n$, $|\alpha-p_{n-1}/q_{n-1}|>|\alpha-p_n/q_n|$.
+\end{lem}
+\begin{proof}
+    $\alpha$ is between $p_{k-1}/q_{k-1}$ and $p_n/q_n$, so suffices to prove $|p_{n-1}/q_{n-1}-p_n/q_n|>2|\alpha-p_n/q_n|$. Note that LHS$\ge\frac{1}{q_nq_{n-1}}$ and RHS$\le\frac{2}{q_nq_{n+1}}$. Note that $q_{n+1}=a_{n+1}q_n+q_{n-1}\ge q_n+q_{n+1}\ge 2q_{n-1}$, and we are done.
+\end{proof}
+\begin{thm}
+    Suppose $\alpha$ is irrational, $p_n/q_n$ a convergent. Then $|p_n/q_n-\alpha|\le |p/q-\alpha|$ for all $p,q\in\ZZ$ with $0<q<q_n$.
+\end{thm}
+\begin{proof}
+    Preceding lemma and thm
+\end{proof}
+\begin{thm}
+    Let $\alpha>0$ be irrational.
+    If $p,q$ coprime and $|\alpha-p/q|\le \frac{1}{2q^2}$, then $p/q=p_k/q_k$ for some $k$
+\end{thm}
+\begin{proof}
+    $q_k$ is strictly increasing with $k$, so there exists a unique $k$ with $q_k\le q<q_{k+1}$. Suppose $p_k/q_k<\alpha<p_{k+1}/q_{k+1}$ (wlog, since the other case is very similar).
+
+    If $p/q<p_k/q_k$, then $|\alpha-p/q|>|p_k-p/q|\ge \frac{1}{q_kq}\ge \frac{1}{q^2}$. Contradiction. If $p_k/q_k=p/q$, then we are done. If $p_k/q_k<p/q$, then $|p/q-p_k/q_k|\ge \frac{1}{qq_k}>\frac{1}{q_kq_{k+1}}>|\alpha-p_k/q_k|$, so $p_k/q_k<\alpha<p/q$. Further, can't have $p/q\le p_{k+1}/q_{k+1}$, so $p_k/q_k<\alpha<p_{k+1}/q_{k+1}<p/q$. Then either $q\ge q_{k+1}/2$ (in this case $|\alpha-p/q|>|p_{k+1}/q_{k+1}-p/q|\ge \frac{1}{qq_{k+1}}\ge \frac{1}{2q^2}$ contradiction) or $0<q<q_{k+1}/2$ (in this case $|\alpha-p/q|=|p/q-p_k/q_k|-|p_k/q_k-\alpha|\ge\frac{1}{qq_k}-\frac{1}{q_kq_{k+1}}=\frac{1}{q_k}(\frac{1}{q}-\frac{1}{q_{k+1}})>\frac{1}{2q^2}$ Contradiction). Hence, $p_k/q_k=p/q$. 
+\end{proof}
+Observe that ``larger $a_n$'' $\implies$ ``larger $q_n$'' $\implies$ better approximation of $\alpha$.
+
+Consider a slight generalization of continued fraction
+Let \[R_n(x)=\frac{x}{1-\frac{x^2}{3-\frac{x^2}{5-x^2/\cdots}}}\]
+\begin{prop}
+    $R_n(x)\to\tan(x)$ as $n\to\infty$ whenever $|x|\le 1$.
+\end{prop}
+More generally, can consider
+\[a_0+\frac{b_0}{a_1+\frac{b_1}{a_2+\frac{b_2}{\vdots}}}\]
+for sequences $(a_j),(b_j)$, $b_j\in\RR$, $a_j\in\ZZ$ and $a_0\ge 0$, $a_j>0$ for $j>0$.
+
+Have \[\frac{p_n}{q_n}=a_0+\frac{b_0}{a_1+\frac{b_1}{a_2+\frac{b_2}{\cdots\frac{b_{n-1}}{a_n}}}}\]
+and \[\frac{r_k}{s_k}=a_k+\frac{b_k}{a_{k+1}+\frac{b_{k+1}}{\cdots\frac{b_{n-1}}{a_n}}}\]
+Then have $r_k/s_k=a_k+\frac{b_k}{r_{k+1}/s_{k+1}}$
+In terms of matrices
+\[\begin{pmatrix}
+    r_k & s_k
+\end{pmatrix}=\begin{pmatrix}
+    r_{k+1}&s_{k+1}
+\end{pmatrix}\begin{pmatrix}
+    a_k&1\\ b_k&0
+\end{pmatrix}\]
+So
+\[\begin{pmatrix}
+    p_n&q_n
+\end{pmatrix}=\begin{pmatrix}
+    r_0&s_0
+\end{pmatrix}=\begin{pmatrix}
+    a_n&1
+\end{pmatrix}\begin{pmatrix}
+    a_{n-1}&1\\ b_{n-1}&0
+\end{pmatrix}\cdots\begin{pmatrix}
+    a_0&1\\b_0&0
+\end{pmatrix}\]
+and
+\[b_n\begin{pmatrix}
+    p_{n-1}&q_{n-1}
+\end{pmatrix}=\begin{pmatrix}
+    b_n&0
+\end{pmatrix}\begin{pmatrix}
+    a_{n-1}&1\\b_{n-1}&0
+\end{pmatrix}\cdots\begin{pmatrix}
+    a_0&1\\b_0&0
+\end{pmatrix}\]
+Hence
+\[\begin{pmatrix}
+    p_n&q_n\\b_np_{n-q}&b_nq_{n-1}
+\end{pmatrix}=\begin{pmatrix}
+    a_n&1\\b_n&0
+\end{pmatrix}\begin{pmatrix}
+    p_{n-1}&q_{n-1}\\b_{n-1}p_{n-1}&b_{n-1}q_{n-1}
+\end{pmatrix}\]
+so \[\begin{cases}
+    p_n=a_np_{n-1}+b_{n-1}p_{n-2}\\
+    q_n=a_nq_{n-1}+b_{n-1}q_{n-2}
+\end{cases}\tag{$\dagger$}\]
+\begin{proof}
+    Apply $(\dagger)$ to $R_n(x)$, we have $R_1(x)=x/2$, $R_2(x)=\frac{3x}{3-x^2}$ and recurrence relation
+    \[\begin{cases}
+        p_n(x)=(2n-1)p_{n-1}(x)-x^2p_{n-2}(x)\\
+        q_n(x)=(2n-1)q_{n-1}(x)-x^2q_{n-2}(x)
+    \end{cases}\]
+    Now 
+    \[\tan(x)-\frac{p_n(x)}{q_n(x)}=\frac{q_n(x)\sin(x)-p_n(x)\cos(x)}{q_n(x)\cos(x)}=\frac{s_n(x)}{q_n(x)\cos(x)}\]
+    Recall from the proof that $\pi$ is irrational the integral expression $s_n(x)=\frac{1}{2^nn!}\int_0^x(x^2-t^2)^n\cos(t)dt$.
+    So \[|s_n(x)|\le \frac{1}{2^nn!}|x|^{2n+1}\to 0\] since $|x|$ is bounded.
+    
+    Need to bound $q_n$ from below. Let $r_n(x)=\frac{q_n(x)}{q_{n-1}(x)}$, then $r_{n}(x)=(2n-1)-\frac{x^2}{r_{n-1}(x)}$. If $|x|\le 1$, $n\ge 2$ and $|r_{n-1(x)}|\ge 1$, then $r_n(x)\ge 2n-1-1=2n-2\ge 2$, so $q_n(x)\to \infty$ as $n\to\infty$. Since $|x|\le 1$, have $r_2(x)=q_2(x)=3-x^2\ge 2$ and $q_1(x)=1$. Therefore the above is true.
+\end{proof}
+
+\section{Properties of Hausdorff Topological Spaces}
+\begin{thm}
+    Let $(X,\tau)$ be cpt hausdorff. Then there is no strictly finer topology on $X$ making it compact and there is no strictly coarser topology on $X$ making it Hausdorff
+\end{thm}
+\begin{proof}
+    Topological inverse function theorem applied to the identity of $X$ changing topology.
+\end{proof}
+\begin{defn}
+    A top. space $X$ is regular if for given $x\in X$ and a closed subset $F\subseteq X$ not containing $x$, there exists disjoint open $U,V\subseteq X$ s.t. $x\in U$, $F\subseteq V$, $U\cap V=\varnothing$
+\end{defn}
+\begin{defn}
+    A top. space $X$ is normal if for all $F,G\subseteq X$ disjoint closed subsets, there exists $U,V$ disjoint open s.t. $F\subseteq U$, $G\subseteq V$.
+\end{defn}
+\begin{defn}
+    A top. space $X$ is $T_1$ if for all $x,y\in X$ distinct, there exists an open set $U\subseteq X$ s.t. $x\notin U$ and $y\in U$.
+\end{defn}
+If $X$ is $T_1$, then normal implies regular implies Hausdorff. Recall from IB Anatop that any compact Hausdorff space is normal and regular.
+
 \end{document}

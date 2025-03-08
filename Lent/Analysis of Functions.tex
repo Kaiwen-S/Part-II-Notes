@@ -11,7 +11,7 @@
 \usepackage{listings}
 \usepackage{xcolor}
 \usepackage{stmaryrd}
-
+%\usepackage{tipa}
 \usepackage{tabularx,capt-of}
 
 \usepackage{blindtext}
@@ -736,4 +736,121 @@ Note that the product of a slowly increasing func with a rapidly decreasing func
 \begin{rem}
     $\mathcal F[D^\alpha\delta_0]=i^{|\alpha|}u^\alpha$. So the FT of partial derivatives of Dirac measure span the space of polys.
 \end{rem}
+\[\text{Owen is ill today}\]
+%{\fontspec{Symbola}\symbol{"1F912"}}
+\subsection{Periodic Distribution}
+\begin{defn}
+    $T\in\calD'(\RR^n)$ is periodic if $\tau_k T=T$ for all $k\in\ZZ^n$
+\end{defn}\
+\begin{defn}
+    For $T\in\mathcal E'(\RR^n)$, define the periodization $T_{\text{per}}=\sum_{k\in\ZZ^n}\tau_k T$.
+\end{defn}
+The fundamental cell of the lattice is $\mathcal Q=[-1/2,1/2)^n$. The indicator $1_{\mathcal Q}$ is not smooth.
+\begin{lem}
+    There exists $\psi\in C_c^\infty(\RR^n)$ s.t. \begin{enumerate}[(i)]
+        \item $\psi\ge 0$
+        \item $\operatorname{supp}\psi\subseteq\operatorname{Int}(Q)$ where $Q=[-1,1]^n$.
+        \item $\sum_{k\in\ZZ^n}\psi(x-k)=1$ for all $x\in\RR^n$
+    \end{enumerate}
+    If $\psi'$ is another such function and $T$ is a periodic distribution, then $T(\psi)=T(\psi')$.
+\end{lem}
+Call this $\psi$ a periodic partition of unity (ppu).
+\begin{proof}
+    Find $\psi_0\in C_0^\infty$ supported in $\operatorname{Int}(Q)$ s.t. $\psi_0=1$ on $\mathcal Q$. Define $S(x)=\sum_{k\in\ZZ^n}\psi_0(x-k)$. Normalize $\psi(x)=\psi_0(x)/S(x)$.
+
+    If $T$ is a periodic distribution, then
+    \[T(\psi)=T(\sum_{g\in \ZZ^n}\tau_g\psi'\psi)=\sum_g\tau_g T(\psi\tau_g\psi')=\sum_gT(\psi'\tau_g\psi)=T(\psi')\]
+\end{proof}
+Can take $\psi_{0,j}\to 1_{\mathcal Q}$ ptwise and $\sup_j\|\psi_{0,j}\|_\infty<\infty$. Obtain a uniformly bounded sequence of ppu $\psi_j\to 1_{\mathcal Q}$.
+
+\begin{defn}
+    For $T\in\calD'(\RR^n)$ periodic, define the mean of $T$ as $M(T)= T(\psi)$ where $\psi$ is any ppu.
+\end{defn}
+\begin{thm}
+    Let $\mathcal E'(\RR^n)$. $T_{\text{per}}$ converges in $\mathcal S'(\RR^n)$. If $T\in\calD'(\RR^n)$ is periodic, then there exists $V\in\mathcal E'(\RR^n)$ s.t. $T=\sum_{g\in\ZZ^n}\tau_g V$ in $\calD'(\RR^n)$.
+\end{thm}
+\begin{proof}
+    For $T\in\mathcal E'$, have a cpt set $K\subseteq B_R$ (ball of radius $R$) and $N,C>0$ s.t. for all $\phi\in\mathcal E$
+    \[|T(\phi)|\le C\sup_{x\in K,|\alpha|\le N}|D^\alpha\phi(x)|\]
+    Have $1+|g|\le 1+|g+x|+|x|\le 1+|g+x|+R\le (1+R)(1+|g+x|)$, so 
+    \[1\le \frac{(1+R)^M(1+|g+x|)^M}{(1+|g|)^M}\] for any $M\in\NN$.
+    For all $\phi\in\mathcal S\subseteq\mathcal E$, 
+    \[|T\phi|\le C\frac{(1+R)^M}{(1+|g|)^M}\sup_{x\in K,|\alpha|\le N}(1+|g+x|)^M|D^\alpha\phi(x)|\]
+    Applies to $\tau_g\phi$, get a similar inequality.
+
+    Since $\sum_{g\in\ZZ^n}(1+|g|)^{-n-1}<\infty$ we deduce
+    \[|\sum_g\tau_g T\phi|\le C'\sup_{y\in\RR^n,|\alpha|\le N}(1+|y|)^{n+1}|D^\alpha\phi(y)|\]
+    so $\sum_g\tau_g T\in\mathcal S'$ by ES.
+
+    For the converse, let $T$ be periodic and $\phi\in\calD$. If $\psi$ is any ppu, have
+    \[T\phi=T(\phi\sum_g\tau_g\psi)=\sum_g T(\psi\tau_{-g}\phi)=\sum_g(\psi T)(\tau_{-g}\phi)=\sum_g\tau_g(\psi T)(\phi)\]
+\end{proof}
+\[\overset{\rightharpoonup}{\overset{\circ<\circ}{\smile}}\tag{Owen's Signature}\]
+\begin{thm}[Convergence of Fourier series in $\mathcal S'$]
+  Let $U\in\mathcal D'(\RR^n)$ be periodic. Then $U=\sum_{g\in\ZZ^n}u_g T_{e_{2\pi g}}$ in $\mathcal S'(\RR^n)$, where $e_{2\pi h}=e^{i\langle 2\pi h,\cdot\rangle}$ and with Fourier coefficients $u_g=M(e_{2\pi h})$  
+\end{thm}
+\begin{lem}
+    If $T\in\mathcal S'$ s.t. $(e_{-k}-1)T=0$ for all $k\in\ZZ^n$, then $T=\sum_{g\in\ZZ^n}c_g\delta_{2\pi g}$ in $\mathcal S'$. Have $|c_g|\le C(1+|g|)^N$ for some $N,C>0$
+\end{lem}
+\begin{proof}
+    Let $\Lambda^\ast=\{2\pi g:g\in\ZZ^n\}$. Take $\varphi\in\mathcal D(\RR^n)$ s.t. $\operatorname{supp}\varphi\cap\Lambda^\ast=\varnothing$, so $(e_{-k}-1)^{-1}\varphi\in \calD$ and $T(\varphi)=(e_{-k}-1)T((e_{-k}-1)^{-1}\varphi)=0$ for all $k$, so $T$ is also supported in $\Lambda^\ast$. Now take ppu $\psi$ and consider $\tilde\psi=\psi(\cdot/(2\pi))$. $\operatorname{supp}\tilde\psi\subset\{x\in\RR^n:\forall i,\ -2\pi<x_i<2\pi \}$ and $\sum_{g\in\ZZ^n}\tau_{2\pi g}\tilde\psi =1$ on $\RR^n$. Now define $T_g=(\tau_{2\pi g}\tilde\psi )T$ which is supported in $\{2\pi g\}$ and have $\sum_{g\in\ZZ^n}T_g=\sum_g(\tau_{2\pi g}\tilde\psi) T=T$ (in $\calD'$) and $(e_{-k}-1)T_g=(\tau_{2\pi g}\tilde\psi)(e_{-k}-1)T$ for all $k\in\ZZ^n$.
+
+    Choose $k=g_j$ ($j$-th standard basis vector), have $(e_{-k}-1)T_g=(e^{-ix_j}-1)T_g=(e^{-(x_j-2\pi g)}-1)T_g\overset{\text{Taylor}}{=}(x_j-2\pi g)K(x_j)T_g$, where $K$ is the Taylor poly which doesn't vanish near $2\pi g$, so $(x_j-2\pi  g)T_g=0$.
+
+    Take $\phi\in\mathcal S(\RR^n)$ and apply Taylor expansion to get $\phi(x)=\phi(2\pi g)+\sum_{j=1}^n(x_j-2\pi g)\phi_j(x)$ for some $\phi_j\in\mathcal S$, so $T_g\phi=T_g(\phi(2\pi g))+\sum_{j=1}^n(x_j-2\pi g)T\phi_j=\delta_{2\pi g}(\phi)T_g(1)$. Let $c_g=T_g(1)$.
+
+    $|c_g|=|T_g(\sum_{g'}\tau_{2\pi g'}\tilde\psi)|=|T_g(\tau_{2\pi g}\tilde\psi)|$. Since $T_g\in\mathcal E'\subseteq\mathcal S'$ and we have a characterization of $\mathcal S'$ in ES3, have
+    $|c_g|\le C_0\sup_{x\in\RR^n,|\alpha|\le N}(1+|x|)^N|D^\alpha\tilde\psi(x-2\pi g)|$ for some $N\in\NN$, $c>0$, and $\le C_1(1+|x|)^N\sup_{y\in\RR^n,|\alpha\le N|}(1+|y|)^N|D^\alpha\tilde\psi(y)|\le C(1+|g|)^N$. Therefore $T=\sum_{g}c_g\delta_{2\pi g}$ converges in $\mathcal S'$.
+\end{proof}
+\begin{proof}[Proof of Thm]
+    Apply the lemma to $U$. $\hat U=(2\pi)^n\sum_{g\in\ZZ^n}u_g\delta_{2\pi g}$, $u_g=c_g/(2\pi)^n$. Take inverse FT, see $U=\sum_{g\in\ZZ^n}u_g T_{e_{2\pi g}}$. Note that $T\mapsto M[T]$ is cts on $\mathcal S'$, so $M(e_{-2\pi k}U)=\sum_{g\in\ZZ^n}u_gM(e_{-2\pi k}T_{e_{2\pi g}})=\int_{\mathcal Q}e^{i2\pi\langle g-k,x\rangle}dx=1$ if $g=k$  and $0$ otherwise.
+\end{proof}
+Apply this to $U=\sum_k\delta_k=\sum_{k}\tau_k\delta_0$ with ppu $\psi$ s.t. $\psi(0)=1$. Compute Fourier coeffs.
+$M(e_{-2\pi g}U)=\sum_k\delta_k(e_{-2\pi g} \psi)=1$ for all $g$, so $\sum_{k\in\ZZ^n}\delta_k=\sum_{k\in\ZZ^n}T_{e_{2\pi k}}$ in $\mathcal S'$.
+Testing this identity on $\phi(x-\cdot)$ for $\phi\in\mathcal S$, $x\in\RR^n$. Get $\sum_k\phi(x-k)=\sum_{k}T_{e_{2\pi k}}\phi(x-\cdot)=\sum_{k}e^{i2\pi k\cdot x}\hat\phi(2\pi k)$ (Poisson summation formula when $x=0$).
+%\[\text{\textcorner\%}\]
+\[\text{[Owen Broke \LaTeX{} Today]}\]
+\section{Sobolev Spaces and Elliptic PDEs}
+Let $C^k(\Omega)$ denote th normed space $\{f:\Omega\to\RR:D^\alpha f\text{ exists for all }0\le |\alpha|\le k,\ \|f\|_{C^k}<\infty\}$, where $\|f\|_{C^k}=\sum_{0\le|\alpha|\le k}\|D^\alpha f\|_\infty$. Similarly define the H\"older spaces for $0<\eta<1$ as $C^{k,\eta}(\Omega)=\{f\in C^{k}(\Omega):\|f\|_{C^{k,\eta}}<\infty\}$, where $\|f\|_{C^{k,\eta}}=\|f\|_k+\sum_{|\alpha|=k}\sup_{x\neq y}\frac{|D^\alpha f(x)-D^\alpha f(y)|}{|x-y|^\eta}$.
+$C^k$ and $C^{k,\eta}$ are Banach spaces.
+
+We can replace $\|\cdot\|_\infty$ and $D^\alpha$ by $L^p$-norm and the weak derivative $D^\alpha_w$.
+
+\begin{defn}[Sobolev space]
+    Let $k\in\ZZ_{\ge0}$, $1\le p\le\infty$. Then $f\in W^{k,p}(\Omega)$ ($\Omega$ open) if $D_w^\alpha f\in L^p$ for all $0\le |\alpha|\le k$. Then norm on $W^{k,p}(\Omega)$ is given by
+    \[\|f\|_{W^{k,p}}=\left(\sum_{0\le|\alpha|\le k}\|D_w^\alpha f\|_{L^p}^p\right)^{1/p}\] if $p<\infty$
+    and \[\|f\|_{W^{k,\infty}}=\max_{0\le|\alpha|\le k}\|D_w^\alpha f\|_{L^\infty}\]
+\end{defn}
+When $\Omega=\RR^n,\ p=2$, have
+\begin{defn}
+    Let $s\in\RR$. Then $H^s(\RR^n)$ consists of $f\in\mathcal S'(\RR^n)$, ($f=T_f$), s.t. $\hat f\in L^2_{\text{loc}}(\RR^n)$ and $\|f\|_{H^s}^2=\int_{\RR^n}|\hat f(u)|^2(1+|u|^2)^sdu$
+\end{defn}
+Note that $H^s(\RR^n)$ is a Hilbert space for the inner product $(f,g)_{H^s}=\int_{\RR^n}\hat f(u)\overline{\hat g(u)}(1+|u|^2)^sdu$, so $H^s=L^2(\mu_s)$ for some measure $\mu_s$ on $\RR^n$.
+
+By Plancherel, for $s\ge 0$, $H^s(\RR^n)$ consists of elements of $L^2(\RR^n,dx)$
+\begin{prop}
+    For $s\ge 0$, $H^s(\RR^n)= W^{s,2}(\RR^n)$ with equivalent norms
+\end{prop}
+\begin{proof}
+    
+\end{proof}
+\begin{thm}[Sobolev embedding]
+    Let $s>n/2+k$ for $k\in\NN$ and $f\in H^s$. Then $\exists f^\ast\in C^k(\RR^n)$ s.t. $f^\ast=f$ a.e. and $\|f^\ast\|_{C^k}\le C_{s,n,k}\|f\|_{H^s}$. In particular, there is an embedding $H^s(\RR^n)\hookrightarrow C^k(\RR^n)$.
+\end{thm}
+\begin{rem}\
+\begin{enumerate}
+    \item[$\{\varnothing\}$:] Have $H^s\subseteq C^{k,\eta}$ if $s>\frac n2+k+\eta$.
+    \item[$\{\varnothing,\{\varnothing\}\}$:]$\bigcap_{s>0}H^s\subseteq C^\infty(\RR^n)$
+\end{enumerate}
+\end{rem}
+\begin{proof}
+    Take $f\in \mathcal S(\RR^n)$ and note
+    \begin{align*}
+        |D^\alpha f(x)|&=|\mathcal F^{-1}[u^\alpha \hat f]|\\
+        &\overset{\text{R.L.}}{\le} \frac{1}{(2\pi)^n}\int_{\RR^n}|u|^{|\alpha|}|\hat f(u)|\frac{(1+|u|^2)^{s/2}}{(1+|u|^2)^{s/2}}du\\
+        &\overset{\text{C.S.}}{\le}\frac{1}{(2\pi)^n}\left(\int_{\RR^n}\frac{|u|^{2|\alpha|}}{(1+|u|^2)^s}du\right)\left(\int_{\RR^n}|\hat f(u)|^2(1+|u|^2)^sdu\right)\\
+        &\le C_{s,n,k}\|f\|_{H^s}
+    \end{align*}
+    For $f\in H^s$ take $f_n\in\mathcal S$ s.t. $f_n\to f$ in $H^s$ and a.e. (pass to a subseq if necessary). This is Cauchy in $H^s$ and by the same inequality in $C^k$, we have $f_n\to f^\ast$ in $C^k$ by completeness. By uniqueness of limit, we have $f^\ast=f$ a.e. so $f^\ast =f $.
+\end{proof}
 \end{document}

@@ -3,14 +3,14 @@
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath,amsfonts,amssymb,amsthm}
 \usepackage{enumerate,bbm}
-\usepackage{leftindex}
 \usepackage{tikz,tikz-cd,graphicx,color,mathrsfs,color,hyperref,boldline}
 \usepackage{caption,float}
 \usepackage[a4paper,margin=1in,footskip=0.25in]{geometry}
-
+\usepackage{stmaryrd}
 \usepackage{listings}
 \usepackage{xcolor}
 
+\usepackage{leftindex}
 \usepackage{tabularx,capt-of}
 
 \usepackage{blindtext}
@@ -546,8 +546,87 @@ $\Omega_f$ is an additive subgroup of $\CC$. If $X$ is Hausdorff and $f$ is cts,
     \begin{enumerate}
         \item[(0)] $P=\{0\}$
         \item[(1)] $P=\ZZ\langle\omega\rangle$ for some $\omega\in\CC^\times$
-        \item[(2)] $P=\ZZ\omega_1+\ZZ\omega_2$ for $\omega_i\in\CC^\times$ and $\omega_i$ are $\RR$-linearly independent.
+        \item[(2)] $P=\ZZ\omega_1+\ZZ\omega_2$ for $\omega_i\in\CC^\times$ and $\omega_i$ are $\RR$-linearly independent, i.e., $w_2/w_1\notin\RR$.
     \end{enumerate}
 \end{thm}
+\[\vert:\tag{Owen's Signature}\]
+\begin{proof}
+    Suppose $P\neq\{0\}$. $P$ is closed in $\CC$. Pick $\omega_1\in P\setminus\{0\}$ with minimal modulus. If $P=\ZZ\omega_1$, then done. Otherwise, choose $\omega_2\in P\setminus\ZZ\omega_1$ with minimal modulus. If $\omega_2\in\RR\omega_1$, then $\omega_2=(k+\delta)\omega_1$ for some $k\in\ZZ$ and $\delta\in[-1/2,1/2]$, then $\omega_2-k\omega_1=\delta\omega_1\in P$ and $|\delta\omega_1|<|\omega_1|$, so $\delta=0$ by minimality. So $\omega_1,\omega_2$ is $\RR$-linearly indep.
+
+    Now for any $\omega\in P$, write $\omega=\lambda_1\omega_1+\lambda_2\omega_2$. As before, can write the coeff as some integer plus something in $[-1/2,1/2]$, so wlog assume $\lambda_1,\lambda_2\in [-1/2,1/2]$. Then $|\omega|\le |\lambda_1||\omega_1|+|\lambda_2||\omega_2|\le |\omega_2|$, but $\omega\in P$, so $\omega\in \ZZ\omega_1$.
+\end{proof}
+\subsection{Simply Periodic Functions}
+Let $f:\CC\to X$ analytic with $\Omega_f=\ZZ\omega$, $\omega\neq 0$. Then $g(z)=f(z\omega)$ has periods $\Omega_g=\ZZ$.
+\begin{thm}
+    Let $q:\CC\to\CC^\times$ be $q(z)=e^{i2\pi z}$. Then given analytic function $f:\CC\to\CC_\infty$ with $\Omega_f=\ZZ$, there exists a unique analytic function $\bar f:\CC^\times\to \CC_\infty$ s.t. $f=\bar f\circ q$
+\end{thm}
+\begin{proof}
+    Set $\bar f(e^{i2\pi z})=f(z)$. Well defined. For any $w\in\CC^\times$, can define $\log$ in a nbd of $w$ on which $\bar f(w)=f((\log w)/2\pi i)$, so $\bar f$ is analytic.
+\end{proof}
+\begin{crly}
+    With $f$ as in thm 5.4. Suppose $f$ has no poles on some horizontal strip $S=\{z:\alpha<\Im z<\beta\}$. Then $f(z)=\sum_{k=-\infty}^\infty a_ke^{i2\pi kz}$, which converges loc. uniformly on $S$.
+\end{crly}
+\begin{proof}
+    Find $\bar f$ as in thm 5.4. which has no poles on $q(S)$ which is an annulus. Get Laurent expansion for $\bar f$ which is loc. unif. conv. Substitute.
+\end{proof}
+\subsection{Doubly Periodic Functions}
+\begin{defn}
+    An elliptic function $f:\CC\to\CC_\infty$ is an analytic function with set of periods $\Omega_f$ of type (2) thm 5.3 (or constants). Such a function is determined by its values on a fundamental parallelogram. $\rho=\{z+t_1\omega_1+t_2\omega_2:t_1,t_2\in[0,1)\}$ for $z\in\CC$. ($P=\ZZ\omega_1+\ZZ\omega_2$)
+\end{defn}
+\begin{lem}
+    Any nonconst elliptic function has at least one pole.
+\end{lem}
+\begin{proof}
+    If not, then $f:\CC\to\CC$ holo'c and bounded on a fundamental parallelogram, so constant by Liouville.
+\end{proof}
+\begin{defn}
+    A lattice $L\subseteq\CC$ is a discrete additive subgroup of $\RR^2$, i.e., $P$ of type (2) in 5.3.
+\end{defn}
+\begin{defn}
+    Given a lattice $L$, the $L-$torus is the Riemann surface $\CC/L$.
+\end{defn}
+Note that $q:\CC\to \CC/L$ is a covering map and is analytic.
+
+Note that the map $f:S^1\times S^1\to \CC/L$, $(e^{i2\pi \theta_1},e^{i2\pi\theta_2})\mapsto q(\theta_1\omega_1+\theta_2\omega_2)$. So $\CC/L$ nad $\CC/L'$ are homeomorphic as top. spaces but need not be conformally equivalent.
+\begin{thm}
+    Let $q:\CC\to\CC/L$ be as above. Given elliptic function $f:\CC\to\CC_\infty$ with $\Omega_f\supseteq L$, then there exists a unique analytic $\bar f:\CC/L\to\CC_\infty$ s.t. $f=\bar f\circ q$.
+\end{thm}
+(cf. thm 5.4)
+\begin{proof}
+    Let $\bar f(q(z))=f(z)$. This is well-defined by periodicity. $\bar f$ is cts since for $V\subseteq \CC_\infty$ open, $q^{-1}\bar f^{-1}(V)=f^{-1}(V)$. $\bar f$ is analytic since on a chart $(q|_U)^{-1}$ for suff small $U$, have $\bar f\circ (q|_U)^{-1}$ analytic. Uniqueness: if $\bar{\bar f}$ is another choice, then $\bar{\bar f}[z]=\bar f[z]$ is forced.
+\end{proof}
+\begin{crly}
+    There exists $n\ge 2$ s.t. $f$ maps each fundamental parallelogram $\rho_L$, $n$-to-$1$ to $\CC_\infty$.
+\end{crly}
+\begin{proof}
+    Have nonconst $\bar f$ from $\CC/L$ compact in
+\end{proof}
+\[\overset{\Rbag\overset{\sim}{**}\Lbag}{\Rbag\overset{\curlywedge}{\smile}\Lbag}\tag{Owen's Signature}\]
+\subsection{Weierstrass $\wp$-functions}
+\begin{defn}
+    For lattice $\Omega$, the Weierstrass $\wp$-function is given by
+    \[\wp_\Omega(z)=\frac{1}{z^2}+\sum_{\omega\in\Omega\setminus\{0\}}\left(\frac{1}{(z-\omega)^2}-\frac{1}{\omega^2}\right)\]
+\end{defn}
+\begin{lem}
+    For $t>0$, $\sum_{\omega\in\Omega\setminus\{0\}}\frac{1}{|\omega|}t$ converges iff $t>2$.
+\end{lem}
+\begin{proof}
+    Let $\Omega=\langle\omega_1,\omega_2\rangle$, $\omega_1,\omega_2$ indep. Let $S=\{(\lambda_1,\lambda_2)\in\RR^2:|\lambda_1|+|\lambda_2|=1\}$ (cpt) The map $(\lambda_1,\lambda_2)\mapsto(\lambda_1\omega_1+\lambda_2\omega_2)$ is cts and non-zero on $S$, so there exists $0<c\le C$ s.t. $\forall (k,l)\in\ZZ^3\setminus\{(0,0)\}$ $c(|k|+|l|)\le |k\omega_1+l\omega_2|\le C(|k|+|l|)$. [$\lambda_1=k/(|k|+|l|)$]. So $\sum_{(k,l)\in\ZZ^2\setminus\{(0,0)\}}\frac{1}{|k\omega_1+l\omega_2|}$ conv iff $\sum_{(k,l)\in\ZZ^2\setminus\{(0,0)\}}\frac{1}{(|k|+|l|)^t}$ conv iff $\sum_{m=1}^\infty\sum_{(k,l)\in\ZZ^2\setminus\{(0,0)\}, \|(k,l)\|_1=m}\frac{1}{(|k|+|l|)^t}$ conv iff $\sum_{m=1}^\infty 4m\frac{1}{m^t}$ conv. iff $t>2$.
+\end{proof}
+\begin{thm}
+    The function $\wp_\Omega$ is meromorphic, has period set $\Omega$, egen, and $2$-to-$1$ on $\CC/\Omega$.
+\end{thm}
+\begin{proof}
+    Fix $r>0$ and let $z\in D(0,r)$. Estimate the tail when $\omega\in\Omega$ with $|\omega|\ge 2r$:
+    \[\left|\frac{1}{(z-\omega)^2}-\frac{1}{\omega^2}\right|\le \frac{\frac{r|\omega|}{2}+2r|\omega|}{|\omega^4||z/\omega-1|^2}\le \frac{5r}{2|\omega|^3}\frac{1}{1/4}=\frac{10r}{\omega^3}\]
+    So $\wp_\Omega$ converges locally (abs) uniformly, so meromorphic (loc. unif. lim of meromorphic function).
+
+    Differentiate term by term. Get $\wp_{\Omega}(z)=-2\sum_{\omega\in\Omega}\frac{1}{(z-\omega)^3}$ which is elliptic with period set including $\Omega$. Consider $\wp_\Omega(z+\omega_1)=\wp_\Omega(z)+c$ Let $z=-\omega_1/2$, we see that $c=0$ as the function is even. By considering poles, see that $\Omega$ contains the set of period.
+
+    Note that $0$ is a double pole, so on $\CC/\Omega$ has degree $2$.
+\end{proof} 
+Note that $\wp_\Omega$ has a branch pt at $0$ and at the zeros of $\wp_\Omega'$. $\wp_\Omega'$ has a triple pole only at $\omega\in\Omega$, so degree $3$ on $\CC/\Omega$.
+Odd function, so have zeros at $\omega_1/2$, $\omega_2/2$ and $(\omega_1+\omega_2)/2$. They are simple since $\wp_\Omega'$ has deg $3$.
+Can check Riemann-Hurwitz formula.
 
 \end{document}

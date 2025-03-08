@@ -7,7 +7,6 @@
 \usepackage{tikz,tikz-cd,graphicx,color,mathrsfs,color,hyperref,boldline}
 \usepackage{caption,float}
 \usepackage[a4paper,margin=1in,footskip=0.25in]{geometry}
-
 \usepackage{listings}
 \usepackage{xcolor}
 
@@ -103,6 +102,7 @@
 \newcommand{\Ind}{\operatorname{Ind}}
 \newcommand{\Res}{\operatorname{Res}}
 \newcommand{\e}{\varepsilon}
+\newcommand{\cl}{\operatorname{Cl}}
 
 \newcommand{\calD}{\mathcal{D}}
 
@@ -113,7 +113,7 @@
 }}
 
 \title{Algebraic Geometry}
-\author{Kevin}
+\author{Kevin Song}
 \date{January 2025}
 
 \begin{document}
@@ -923,5 +923,128 @@ Local coord at $P$ $\implies \mathcal O_P$ is a discrete valuation ring.
     (i): $\varphi^{-1}(Q)$ is closed and $\varphi$ is nonconst, so finite.
 
     (ii): $\varphi(X)$ is dense in $Y$, so $\varphi$ is dominant, so $\varphi^\ast$ is inj. If $\in k(Y)\setminus k$, then $x=\varphi^\ast(t)\in K(X)\setminus k$. Since $k$ is alg closed, $x$ must be transcendental, so $k(X)/k(Y)$ is a finite extension by transcendence degree.
+\end{proof}
+\[):\text{Owen is ill today}\]
+\begin{defn}
+    The degree of a map $\varphi:V\to W$ between curves is $\deg\varphi=[k(V):\varphi^\ast(k(W))]$.
+\end{defn}
+\begin{defn}
+    Suppose $P\in V$ and $Q=\varphi(P)\in W$ are smooth points. The ramification degree of $\varphi$ at $P$ is $e_P=\nu_P(\varphi^\ast\pi_Q)$, where $\pi_Q\in\mathcal O_{W,Q}$ is a local parameter and $\nu_P:k(V)^\times\to \ZZ$ is the valuation at $P$. (so $\nu_P(t_p^n)=n$)
+\end{defn}
+Note that $e_P=\min\{\nu_P(x):x\in\varphi^\ast(\mathfrak m_Q)\mathcal O_{V,P}\}$, so $e_P$ doesn't depend on the choice of $\pi_Q$.
+
+ If $\varphi$ is an isomorphism, then $\varphi^\ast(\mathfrak m_Q)\mathcal O_{V,P}=\mathfrak m_P$, so $e_P=1$, so $e_P=1$
+\begin{defn}
+   If $e_P=1$, then we say that $\varphi$ is unramified at $P$. Otherwise, say $\varphi$ is ramified at $P$.
+\end{defn}
+Picture: $\deg\varphi=\#\varphi^{-1}(Q)$ for generic point $Q\in W$.
+\begin{example}
+    $E=Z(y^2-(x^3-x))$, $\varphi:E\to\bA^1$, $(x,y)\mapsto x$. $\varphi^\ast(x)=x$. Suppose $P=(x_0,y_0)\in E$ with $\varphi(P)=Q=x_0\in\bA^1$. Then $\e_P=\nu_P(\varphi^\ast(x-x_0))=\nu_p(x-x_0)$. $x-x_0$ is a local parameter of $\mathcal O_{E,P}$ iff $\partial_yf\neq 0$ where $f=y^2-x^3+x$. So $\nu_P(x-x_0)=1$ iff $y_0\neq 0$. At $(\pm 1,0), (0,0)$, $y$ is a local parameter. In $\mathcal O_{E,P}$, write $y^2=x^3-x=(x-x_0)U(x)$ where $U(x)\in k[x]$ doesn't vanish at $x_0$. Have
+    $\nu_P(y^2)=2\nu_P(y)=\nu_P(x^3-x)=\nu_P(x-x_0)+\nu_P(U)$, so $\nu_P(x-x_0)=2$ for $(\pm 1,0), (0,0)$.
+\end{example}
+\begin{thm}
+    Let $\varphi:V\to W$ be a non-constant map between irreducible projective (possibly singular) curves. \begin{enumerate}[(i)]
+        \item $\varphi$ is surjective and for all but finitely many $P\in V$, $e_P=1$.
+        \item If $V$ and $W$ are smooth, then for all $Q\in W$, $\sum_{P\in \varphi^{-1}(Q)}e_P=\deg\varphi$.
+    \end{enumerate}
+\end{thm}
+\begin{proof}[Proof of (i)]
+    Since $V$ is projective, completeness theorem shows that $\varphi(V)\subseteq W$ is closed. $\varphi(V)$ is also irreducible and not a point, so $\varphi(V)=W$.
+
+    Note $e_P=1$ iff $\varphi^\ast(\mathfrak m_Q)\mathcal O_{V,P}=\mathfrak m_P$. WLOG assume affine by intersecting with patches, so $V\subseteq \bA^n, W\subseteq \bA^m$. Have $\varphi=\pi_W\circ(\id\times\varphi)$. $\id\times \varphi$ is an iso onto its image, so may assume $V\subseteq \bA^{n+m}$ and $\varphi$ is the restriction of projection map $\bA^{n+m}\to\bA^m$. Suppose $P\in V$ and $Q=\varphi(P)=(q_1,...,q_m)$, then $\mathfrak m_Q=(y_1-q_1,....,y_m-q_m)$. So $e_P=1$ iff $(y_1-q_1,...,y_m-q_m)\mathcal O_{V,P}=\mathfrak m_P$. Apply primitive element theorem to $k(V)/k(W)$. Can write $k(V)\cong k(W)[\alpha]$. 
+    Away from the finite set of poles of $\alpha$, $\mathfrak m_P=(y_1-q_1,...,y_m-q_m,\alpha-\alpha(P))$. So $e_P=1$ iff $\alpha-\alpha(P)\in \mathfrak m_Q\mathcal O_{V,P}$. $\alpha$ has min poly $p(\vec y,x)=x^d+a_{d-1}(\vec y)x^{d-1}+\cdots+a_0(\vec y)$, where $a_i(\vec y)\in k(W)$. If degree $1$, then we are done, so wlog assume $d\ge 2$. By clearing denominators, assume $a_j(\vec y)\in k[y_1,...,y_m]$ Factorize $p(\vec y,x)=a_d(\vec y)\prod_{i=1}^d(x-\beta_i)$ in $\overline{k(W)}$. Then $\operatorname{disc}(p)=a_d(\vec y)\prod_{i\neq j}(\beta_i-\beta_j)=\operatorname{Res}(p,\partial_xp)$ This vanishes identically on $W$ iff $p$ and $\partial_xp$ share a non-trivial factor. % is an element of $k(W)$.
+
+    $p$ irred so $\Res(p,\partial_xp)\notin I(W)$, and so $\{Q\in W:\Res(p,\partial_xp)(Q)=0\}$ is closed proper so finite in $W$. Since preimages are finite, $U=\{P\in V:\Res(p,\partial_xp)(\varphi(P))=0\}$ is open dense in $V$, so $p$has no repeated root at any pt in $U$, so $\frac{p(\vec y,x)-p(\vec y,\alpha(P))}{\alpha-\alpha(P)}\in k(V)$ is a unit in $\mathcal O_{V,P}$ for all $P\in U$. Also have $p(\vec y,x)\in I(V)$ by defn, and $p(\vec y,\alpha(P))=p(y,\alpha(P))-p(\varphi(P),\alpha(P))\in\mathfrak m_{\varphi(P)}$, so $\alpha-\alpha(P)$ is a unit times an element of $\mathfrak m_{\varphi(P)}$.
+    %Claim that away from the poles of $a_i$, $\{P\in V:\operatorname{disc}(p)(\varphi(P))\neq 0\}$ consists of unramified pts and includes all but finitely elements.
+\end{proof}
+\begin{rem}
+    If remove the set $\{Q\in W:a_d(Q)=0\}$, then $Q$ has exactly $d$ preimages in $V$ under $\varphi$, all unramified, and so for the ramining points $Q\in W$, we have $\sum_{\varphi(P)=Q}e_P=\sum_{p_1,...,p_d}=1=d=\deg\varphi$.
+\end{rem}
+\begin{crly}
+    Let $V$ be a curve, and $f\in k(V)^\times$ is a non-zero rational function. \begin{enumerate}[(i)]
+        \item If $f$ is regular on $V$, then $f$ is constant.
+        \item The set of points $P$ with $\nu_P(f)\neq 0$is finite, and $\sum_{P\in V}\nu_P(f)=0$.
+    \end{enumerate}
+\end{crly}
+\begin{proof}
+    Use $\bA^1\to\PP^1, t\mapsto (1:t)$. View $f$ as a morphism $\varphi:V\to\PP^1$. For (i), $f$ is regular at $P$ iff $\varphi(P)\neq( 0:1)$, so $f$ regular on $V$ $\implies$ $\varphi$ not surj, so const.
+
+    For (ii) $\nu_P(f)\neq 0$ iff $f$ vanishes at $P$ or $1/f$ vanishes at $P$. $\varphi^{-1}(0)$, $\varphi^{-1}(\infty)$ are finite by hypothesis. If $f$ is const then $\nu_P(f)$ for all $P\in W$. If $f$ is nonconst, then so is $\varphi$. Let $t=x_1/x_0$ be a local coord at $(1:0)$, and $\varphi^\ast$ and $\varphi^\ast t= f$, so $e_P=\nu_P(\varphi^\ast t)=\nu_P(f)$. Similarly at $\infty$ $1/t=x_0/x_1$ is a local coord. $\varphi(P)=\infty\implies e_P=\nu_P(\varphi^\ast(1/t))=\nu_P(1/f)=-\nu_P(f)$, so $\sum_{p\in V}\nu_P(f)=\sum_{\varphi(P)=0}\nu_P(f)+\sum_{\varphi(P)=\infty}\nu_P(f)=\sum_{\varphi(P)}e_P-\sum_{\varphi(P)=\infty}e_P=0$ by previous thm.
+\end{proof}
+\subsection{Divisors on Curves}
+\begin{defn}
+    A divisor on a curve $V$ is a finite formal sum $\sum_{P\in V}n_PP$, $n_P\in\ZZ$. The set of divisors is the abelian group $\operatorname{Div}(V)=\bigoplus_{P\in V}\ZZ\langle P\rangle$. The degree $\sum n_PP$ is $\sum n_P$. 
+\end{defn}
+$D=\sum n_PP\mapsto \sum n_P$ is a hom, with kernel $\operatorname{Div}^0(V)$. The set $\{P\in V:n_P\neq 0\}$ is the support of the divisor $D$.
+\begin{defn}
+    Let $f\in k(V)^\times$ be a non-zero rational function. The divisor of $f$ is $\operatorname{div}(f)=\sum_{P\in V}\nu_P(f)P$. [By previous corollary, $\deg(\operatorname{div}(f))=0$.] Any $\operatorname{div}(f)$ is a principal divisor on $V$; the principal divisor form a subgroup of $\operatorname{Div}(V)$ (resp. $\operatorname{Div}^0(V)$). The quotient $\operatorname{Div}(V)/\{\text{principal divisors}\}$ is the divisor class group of $V$, $\cl(V)$ (or Picard group), (resp. degree $0$ divisor class group of $V$, $\cl^0(V)$). 
+\end{defn}
+\begin{defn}
+    $D$ is linearly equivalent to $D'$ if there exists $f\in k(V)^\times$ s.t. $D-D'=\operatorname{div}(f)$. Write $D\sim D'$.
+\end{defn}
+\[{}_\neg\%\tag{Owen's Signature}\]
+If $f,g\in k(V)$ on a curve $V$, then $\operatorname{div}(f)=\operatorname{div}(g)$, then $\nu_P(f)=\nu_P(g)$ for all $P\in V$, so $\nu_P(f/g)=0$ for all $P$, so $\operatorname{div}(f/g)=0$, so $f/g$ is constant since it doesn't give a surje morphism $V\to\PP^1$.
+\begin{prop}
+    Any degree $0$ divisor on $\PP^1$ is principal, so $\cl^0(\PP^1)=\{0\}$ and $\cl(\PP^1)\cong\ZZ$.
+\end{prop}
+\begin{proof}
+    Suppose $D$ is a degree $0$ divisor on $\PP^1$. Write $D=\sum n_PP=n_\infty\infty+\sum_{p\in\bA^1}n_PP$. Note that $n_\infty=-\sum_{p\in\bA^1}n_P$. Construct the poly $f(t)=\sum_{p\in\bA^1}(t-n_P)^{n_P}$, $t=x_1/x_0$. Since $1/t$ is a local coord at $\infty=(0:1)$, $\nu_\infty(f)=-\sum_{p\in\bA^1}n_P=n_\infty$ as needed
+\end{proof}
+\begin{rem}
+    If $V$ is a curve $\cl^0(V)=\{0\}$, then for $P\neq Q$ on $V$, $P-Q=\operatorname{div}(f)$ for some $f\in k(V)$. $f$ determines a morphism $\varphi:V\to\PP^1$ with $\varphi^{-1}(0)=P,e_P=1$, so $\deg\varphi=1$ so $k(V)=k(\PP^1)$, so $V\simeq\PP^1$.
+\end{rem}
+\begin{defn}
+    $V\subseteq\PP^n$ a curve  and consider a hyperplane $H=Z(L)\subseteq\PP^n$ not containing $V$. The hyperplane section of $V$ by $H$ is the divisor $\operatorname{div}(H)=\sum n_PP$, where $n_P=\nu_P(L/x_i)$ for any $x_i(P)\neq 0$.
+\end{defn}
+\begin{rem}\
+    \begin{enumerate}
+        \item $x_i(P),x_j(P)\neq 0\implies x_i/x_j\in\mathcal O_P^\times\implies \nu_P(L/x_i)=\nu_P(L/x_j)$ (well-defined)
+        \item All coeffs $n_P\ge 0$ for hyperplane section
+        \item If $H=Z(L),H'=Z(L')$ are two hyperplanes not containing $V$, then $\operatorname{div}(H')-\operatorname{div}(H)=\operatorname{div}(L'/L)$, so all hyperplane sections have the same divisor class. Call this the hyperplane class
+    \end{enumerate}
+\end{rem}
+\begin{defn}
+    The degree of $V\subseteq\PP^n$ (curve) is $\deg(V):=\deg(\operatorname{div}(H))$ for any hyperplane $H$ not containing $V$. 
+\end{defn}
+If $f:V\overset{\simeq}{\to} W$ is an isomorphism of curves, then $\operatorname{Div}(V)\cong\operatorname{Div}(W)$. Principal divisors are identified so $\cl(V)\cong\cl(W)$. However, degree need not be preserved, e.g., the twisted cubic in $\PP^3$ has degree $3$, but it's isomorphic to $\PP^1$. (cf. Veronese embedding)
+(linear) Change of coordinate on $\PP^n$ preserves degree.
+
+If $G$ is homogeneous of degree $m$, $V\subseteq\PP^n$ curve, then can define $\operatorname{div}(G)=\operatorname{div}(Z(G))=\sum n_PP$, where $n_P=\nu_P(G/x_i^m)$, $x_i(P)\neq0$, so $\operatorname{div}(G)\sim m\operatorname{div}(H)$.
+\begin{example}
+    Let $V\subseteq\PP^2$ be a curve. Claim that there exists a line not tangent to $V$ at any point. Recall can identify the space of lines $\{ax+by+cz=0\}$ in $\PP^2$ with points $(a:b:c)$. Consider the map $P\mapsto \text{line tangent to $V$ at $P$}$ is a morphism $V\to\PP^2$, which has image dimension $\le 1$, not surj.
+    
+    Apply a linear change of coords to assume $\{x_0=0\}$ is such a line. Write $V=Z(f)$, where $f$ is homogeneous of degree $d$. We have $f(0,x_1,x_2)$ is a deg $d$ homogeneous poly in $2$ variables with no repeated linear factors, so there exists exactly $d$ pts in $V\cap H$, so $\deg(V)=d$.
+\end{example}
+\begin{defn}
+    We say a divisor $D=\sum m_PP$ is effective if $n_P\ge 0$ for all $P$. 
+\end{defn}
+\begin{defn}
+    Let $D=\sum n_PP$ be a divisor on a curve $V$. The space of rational functions with poles bounded by $D$ is $L(D)=\{f\in k(V):\nu_P(f)+n_P\ge 0\}=\{f\in k(V):f=0\text{ or }\operatorname{div}(f)+D\text{ is effective}\}$.
+\end{defn}
+The map $f\mapsto \operatorname{div}(f)+D$ identifies $L(D)$ with the set of effective divisors equivalent to $D$.
+
+The inequality $\nu_P(f+g)\ge\min\{\nu_P(f),\nu_P(g)\}$ implies that $L(D)$ is a vector space over $k$.
+\begin{itemize}
+    \item If $P\notin\operatorname{supp}(D)$, this requires $f$ regular at $P$
+    \item If $n_P>0$, $f$ has a pole of order $\le n_P$ at $P$
+    \item $n_P<0$, $f$ has a zero of order $\ge -n_P$ at $P$
+\end{itemize}
+\begin{example}
+    $V=\PP^1$. Write $(0:1)=\infty$. Let $D=m(\infty)$, $m>0$. Write $x=x_1/x_0$. See that $L(D)$ is spanned by $1,x,x^2,...,x^m$, so $L(D)$ picks out polys of deg $\le m$, and $\dim L(D)=m+1$.
+\end{example}
+\begin{defn}
+    $\ell(D):=\dim L(D)$
+\end{defn}
+\begin{prop}
+    Let $D$ be a divisor on a curve $V$. \begin{enumerate}[(i)]
+        \item $\deg D<0\implies L(D)=\{0\}$
+        \item $\deg(D)\ge 0\implies \ell(D)\le \deg(D)+1$
+        \item $\ell(D)\le \ell(D-P)+1$ for all $P\in V$
+    \end{enumerate}
+\end{prop}
+\begin{proof}
+    (i) If $\deg (D)<0$, then no effective divisor can be equiv to $D$.
+    (iii) implies (ii) by induction on $\deg D$.
+    (iii) Have $\operatorname{ev}_P:L(D)\to k,\ f\mapsto (\pi_P^{n_P}f)(P)$ for any local parameter $\pi_P$ at $P$. This is a well-defined homomorphism, with kernel $\{f:\nu_P(f)+n_P\ge 1\}=\{f:\nu_P(f)+n_P-1\ge 0\}=\ell(D-P)$. The image has dimension $1$, so $\ell(D-P)\ge \ell(D)-1$.
 \end{proof}
 \end{document}

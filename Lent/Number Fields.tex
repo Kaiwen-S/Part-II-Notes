@@ -6,6 +6,7 @@
 \usepackage{leftindex}
 \usepackage{tikz,tikz-cd,graphicx,color,mathrsfs,color,hyperref,boldline}
 \usepackage{caption,float}
+\usepackage{stmaryrd}
 \usepackage[a4paper,margin=1in,footskip=0.25in]{geometry}
 
 \usepackage{listings}
@@ -109,7 +110,7 @@
 \newcommand{\sol}{\textit{Solution: }}
 
 \title{Number Fields}
-\author{Kevin}
+\author{Kevin (illustrations by Owen)}
 \date{January 2025}
 
 \begin{document}
@@ -509,5 +510,77 @@ $N(\mathfrak q)=N(\mathfrak p)^{f(\mathfrak q|\mathfrak p)}$.
 
     ??????????????????????????????????????
 \end{proof}
+\[\overset{\sim}{\overset{O\vert O}{\frown}}\tag{Owen's Signature}\]
+\begin{proof}[Proof of Dedekind thm]
+    There is an ideal $I$ s.t. $(\mathfrak p\mathcal O_L)I=\mathfrak q_1^{e_1}\cdots\mathfrak q_r^{e_r}$. Take norm, noting $N(\mathfrak q_j)\le N(\mathfrak p)^{\deg g_j}$
+    $N(\mathfrak p\mathcal O_L)N(I)=N(\mathfrak p)^{[L:K]}N(I)=\prod_{i=1}^rN(\mathfrak q_i)^{e_i}\le N(\mathfrak p)^{\sum e_i\deg g_i}=N(\mathfrak p)^{[L:K]}$. Note that none of the inequalities can be strict, so $N(I)=1$ and $N(\mathfrak q_j)=N(\mathfrak p)^{\deg g_j}$. $\mathcal O_L/\mathfrak q_j\cong \mathfrak p[x]/\langle \bar g_j\rangle$, so $\mathfrak q_j$ is a prime with inertial degree $\deg g_j$.
 
+    Need to prove $\mathfrak q_i\neq \mathfrak q_j$ for $i\neq j$. We prove $\mathfrak q_i+\mathfrak q_j=\mathcal O_L$.
+\end{proof}
+\newcommand{\cl}{\operatorname{Cl}}
+\section{Class Group}
+$K$ number field. Let $\mathcal I=\mathcal I_K$ be the group of fractional ideal nad $\mathcal P=\mathcal P_K$ the subgroup of principal fractional ideals. THe class group of $K$ is $\cl(K)=\mathcal I/\mathcal P$.
+
+Recall for all $I\in\mathcal I$, there exists $\alpha\in K$ s.t. $\langle\alpha\rangle I$ is an integral ideal. All classes in the class group contain integral ideals.
+Alternatively, consider the rel $I\sim J$ iff $\exists \alpha\in K$ with $\alpha I=J$, then $\cl(K)$ is the set of equiv classes of integral ideals under $\sim$.
+\begin{thm}
+    $K$ number field. Then $\cl(K)$ is finite.
+\end{thm}
+\begin{defn}
+    The class number of $K$ is $h(K)=|\cl(K)|$.
+\end{defn}
+\begin{thm}[Minkowski Bound 1]
+    $K$ number field, and $I\trianglelefteq\mathcal O_K$ ideal. Then there exists $\alpha\in I$ s.t. \[|N(\alpha)|\le\frac{d!}{d^d}\left(\frac{4}{\pi}\right)^s\disc(K)^{1/2}N(I)\] where $s$ is the number of \textbf{pairs} of complex embeddings of $K$
+\end{thm}
+We let $M(K)=\frac{d!}{d^d}(\frac{4}{\pi})^s\disc(K)^{1/2}$
+\begin{crly}[Minkowski Bound 2]
+    All ideal classes in $\cl(K)$ contain an integral ideal of norm $\le M(K)$.
+\end{crly}
+\begin{proof}
+    Let $\tilde I$ be a fractional ideal. Let $J$ be an integral ideal in the class of $\tilde I^{-1}$. Minkowski bound 1 says there exists $\alpha\in J$ with $N(\alpha)\le M(K)N(J)$ Since $J\supseteq \langle\alpha\rangle$, have $J\mid\langle\alpha\rangle$. Then $I=\langle\alpha\rangle J^{-1}$ is an integral ideal in the class of $\tilde I$. So $N(I)=|N(\alpha)||N(J)|^{-1}\le M(K)$.
+\end{proof}
+To show $|\cl(K)|<\infty$, suffices to show that the number of integral ideals of norm $\le X$ for some $X\in\RR_{>0}$ is finite. Each such ideal is the product of at most $\log_2X$ many primes. The primes that can occur lie over rational primes $\le X$. There are $\le X$ such rational primes and there are at most $\deg K$ many primes in $K$ lying over each.
+\begin{crly}[Minkowski Bound 3]
+    \[\disc(K)>\frac{d^{2d}}{(d!)^2}\dfrac{\pi^{2s}}{4^{2s}}\]
+    In particular, $\disc K>1$ if $K\neq \QQ$.
+\end{crly}
+\begin{proof}
+    $N(I)\ge 1$. Apply the previous result.
+\end{proof}
+\[\Lbag\tilde{\overset{\cdot.\cdot}{\frown}}\Rbag\tag{Owen's Signature}\]
+\begin{thm}
+    Let $I\trianglelefteq\mathcal O_K$ an ideal. Then there exists $\alpha\in I$ non-zero s.t. $|N(\alpha)|\le N(I)|\disc(K)|^{1/2}$.
+\end{thm}
+Recall $\Sigma:K\to\RR^d$ from a while ago. $\Sigma(\mathcal O_K)$ is a lattice in $\RR^d$ and $\operatorname{coVol}(\Sigma(\mathcal O_K))=2^{-s}|\disc K|^{1/2}$, where $s$ is the number of pairs of complex embedding (exclude real embeddings).
+$I$ is a submodule, so $\Sigma(I)$ is a sublattice of $\Sigma(\mathcal O_K)$, so $\operatorname{coVol}(\Sigma(I))=2^{-s}|\disc I|^{1/2}=2^{-s}N(I)|\disc K|^{1/2}$.
+
+Consider $\mathcal N:\RR^d\to\RR$, $(x_1,...,x_d)\mapsto\prod_{i=1}^r|x_i|\prod_{j=1}^s(x_{r+2j-1}^2+x_{r+2j}^2)$, so $|N(\alpha)|=\mathcal N(\Sigma(\alpha))$ for all $\alpha\in K$. WTS $\Sigma(I)$ contains a non-zero vector in the region $\{x\in\RR^d:\mathcal N(x)<X\}$.
+\begin{thm}[Minkowski]
+    Let $\Lambda\subseteq\RR^d$ be a lattice and $S\subseteq\RR^d$ a convex subset that is symmetric w.r.t. $0$. Assume that $\operatorname{Vol}(S)>2^d\operatorname{coVol}(\Lambda)$ Then $\Lambda\cap S$ contains a non-zero vector.
+\end{thm}
+\begin{lem}
+    Let $\Lambda\subseteq \RR^n$ be a lattice and $S\subseteq\RR^d$ a Borel set with $\operatorname{Vol}(S)>\operatorname{coVol}(\Lambda)$. Then $\exists x,y\in S$ and $x-y\in\Lambda$.
+\end{lem}
+\begin{proof}
+    $F$ fundamental domain. Consider $S(a)=(S\cap (F+a))-a$ for $a\in\Lambda$. $S(a)\subseteq F$. Have $\sum_{a\in\Lambda}\operatorname{Vol}(S(a))=\operatorname{Vol}(S)>\operatorname{Vol}(F)$. Then $\exists a\neq b$ in $\Lambda$ s.t. $S(a)\cap S(b)\neq\varnothing$. Let $x\in S(a)\cap S(b)$, then have $x+a,x+b\in S$ and $x+a-x-b\in\Lambda$.
+\end{proof}
+\begin{proof}[Proof of Minkowski]
+    Apply the lemma with $\frac12S$ in place of $S$. We fine $x\neq y$ in $S$ with $\frac12x-\frac12 y\in\Lambda$ and $\frac12x-\frac12y=\frac12x+\frac12(-y)\in S$ by symmetry and convexity.
+\end{proof}
+\begin{proof}[Proof of Minkowski Bound 1]
+    Consider the set $S=\{x:\forall i,\ |x_i|<Y\}$ for some suitable parameter $Y$. Observe $\operatorname{Vol}(S)=2^dY^d$ and $\mathcal N(x)\le 2^sY^d$ for all $x\in S$. By Minkowski theorem, find a non-zero element in $\Sigma(I)\cap S$ if we set $Y$ to satisfy $2^dY^d>2^{d-s}N(I)|\disc K|^{1/2}$. Find $\alpha\neq 0$ in $I$ s.t. $|N(\alpha)|=\mathcal N(\Sigma(\alpha))<N(I)|\disc K|^{1/2}+\e$ where $\e>0$ is arbitrary. $\Sigma(I)\cap S$ has finitely many non-zero point, so can take $\e=0$.
+\end{proof}
+\section{Units}
+$\alpha\in\mathcal O_K$ is a unit if  $\alpha^{-1}\in\mathcal O_K$.
+\begin{lem}
+    Let $\alpha\in\mathcal O_K$. TFAE,
+    \begin{enumerate}[(i)]
+        \item $\alpha\in\mathcal O_K^\times$
+        \item $\langle\alpha\rangle=\mathcal O_K$
+        \item $N(\alpha)=\pm1$.
+    \end{enumerate}
+\end{lem}
+\begin{proof}
+    (i) iff (ii) clear. (i) $\Rightarrow$ (iii) clear ($N(1)=N(\alpha)N(\alpha^{-1})$). (iii) $\Rightarrow$ (ii) also clear since $N(\langle\alpha\rangle)=1$
+\end{proof}
 \end{document}

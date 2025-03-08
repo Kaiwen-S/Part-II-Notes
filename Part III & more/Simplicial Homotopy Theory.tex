@@ -1095,6 +1095,105 @@ Construction: first consider the factorization of $\Delta^0\to B$ into a sequenc
 Note that $C_\ast^{i-1}/C_\ast^i$ has homology a direct sum of copies of homology of $F$ with the num of summand the number of non-degenerate  simplices in $B$. This looks like $N_\ast(B;H_\ast(F))$.
 
 \begin{rem}
-    Suppose $E\to B$ is any map of Kan complexes with $B$ simply connected. Then can factor the map as $E\to E'\to B$ such that the first map is anodyne and the second map is a Kan fibration. (Quillen's small object argument) In this case have a spectral sequence for $E'$. So Serre spectral seuquence can be applied to any map of Kan complexes.
+    Suppose $E\to B$ is any map of Kan complexes with $B$ simply connected. Then can factor the map as $E\to E'\to B$ such that the first map is anodyne and the second map is a Kan fibration. (Quillen's small object argument) In this case have a spectral sequence for $E'$. So Serre spectral sequence can be applied to any map of Kan complexes.
 \end{rem}
+
+-----------------------
+
+-----------------------
+
+There is a cohomology Serre spectral sequence.
+\[E^{p,q}_{2}=H^p(B;H^q(F;R))\Rightarrow H^{p+q}(E;R)\]
+with differentials $d_r:E^{p,q}_r\to E^{p+r,q-(r-1)}$. This is constructed in the same way as the homological spectral sequence.
+
+The cup product induces maps 
+\[E_r^{p,q}\otimes E_r^{p',q'}\to E_r^{p+p',q+q'}\] making $E_r$ page a graded ring. The $d_r$ differential satisfies $d_r(xy)=d_r(x)y+(-1)^{\deg (x)}xd_r(y)$.
+
+--------------------
+
+
+If $K$ is a Kan fibration, there is a map of Kan complexes $K\to \ZZ\{K\}$. Consider the induced map on homotopy groups. This gives a map $\pi_i K\to H_i(K;\ZZ)$ (Hurewicz map).
+\begin{thm}[Hurewicz Thm]
+    If $X$ is a simply connected pointed Kan complex with $\pi_i(X)=0$ for $i<n$, then the $H_i(X)=0$ for $0<i<n$ and $\pi_n(X)^{ab}=H_n(X)$.
+    The Hurewicz map $\pi_n(X)\to H_n(X)$ is an iso.
+\end{thm}
+
+Suppose $F\to E\to B$ is a fiber sequence with simply connected base space. For every $n>0$, there is a map $d^n:E_{n,0}^n\to E_{0,n-1}^n$ called the transgression. The domain of transgression is a subgroup of $E^2_{n,0}=H_n(B;H_0(F))=H_n(B)$ (assuming $F$ is connected?). The codomain is a quotient of $H_n(F)$. Thus the transgression can be throught of as a subgroup of $H_n(B)\times H_{n-1}(F)$.
+
+Another subgroup of $H_n(B)\times H_{n-1}(F)$ consisting of classes in the image of $\partial_\ast\times p_\ast :H_n(E,F)\to H_{n-1}(F)\times H_n(B,\ast)$.
+
+These subgroups are the same. Sketch: given $x\in H_n(B,\ast)=H_n(B)$, represent it by a cycle, lift it to an elt in $C_n(E)$ with boundary in $\operatorname{im}(C_{n-1}(F)\to C_{n-1}(E))$ The boundary gives the map to $H_{n-1}(F)$ (construction of the connecting hom)
+
+
+Suppose $H_p(B)=0$ for $0<p<s$ and $H_q(F)=0$ for $0<q<t$. Then for a range of degrees depending on $s,t$, we have exact sequence
+\[0\to E_{p,0}^\infty\to H_p(B)\overset{d^p}{\to}{H_{p-1}(F)}\to E_{0,p-1}^\infty\to0\]
+Also for $n$ in a range depending on $s,t$, we have \[0\to E_{0,n}^\infty\to H_n(E)\to E_{n,0}^\infty\to 0\]
+Putting these together, we get a LES.
+\[H_{s+t-1}(F)\to H_{s+t-1}(E)\to H_{s+t-1}(B)\overset{\text{transgression}}{\to} H_{s+t-2}(F)\to\cdots\]
+Note that this does not extend to the left.
+
+Note that Hurewicz gives a map between the LES of fibration and Serre exact sequence.
+
+\begin{thm}
+    Suppose $X$ is a simply-connected pointed Kan complex s.t. $H_i(X)=0$ for $0<i<n$. Then the transgression for $\Omega X\to \Delta^0\to X$ gives an isomorphism $H_i(X)\overset{\cong}{\to}H_{i-1}(\Omega X)$ for $0<i\le 2n-2$.
+\end{thm}
+\begin{proof}[Proof of Hurewicz]
+    Induction on $n$. Trivial for $n=1$ as $\pi_1(X)^{ab}=H_1(X)$. For larger $n$, consider $\Omega X$ and use the preceding thm.
+\end{proof}
+\begin{crly}
+    In $\mathcal S$, $K(G,n)$ can be characterized up to equivalence as
+    \begin{itemize}
+        \item the unique object representing cohomology with $G$ coeff
+        \item the unique object s.t. $\pi_iK(G,n)=\begin{cases}
+            G&i=n\\ 0&\text{o/w}
+        \end{cases}$
+    \end{itemize}
+\end{crly}
+\begin{proof}
+    If $X$ has a single non-zero homotopy group in degree $n$ isomorphic to $G$, then Hurewicz and UCT implies $H^n(X;G)=G$, giving a map $X\to K(G,n)$ which induces iso on $H^n$ and hence $\pi_n$, and we are done by Whitehead.
+\end{proof}
+\section{Whitehead Tower}
+Let $X$ be a simply connected pointed Kan complex. There is a canonical map $X\to K(\pi_2X,2)$ by Hurewicz. Let $X^{(2)}$ be its homotopy fiber Then $X^{(2)}$ is a $\pi_\ast$-iso for $\ast\ge 3$, but $\pi_i(X^{(2)})=0$ for $i<3$. Now there is a kanonical map $X^{(2)}\to K(\pi_3X,3)$ and we can consider its homotopy fiber. Iterating this construction, we get a sequence
+\[\cdots\to X^{(3)}\to X^{(2)}\to X\]
+s.t. $\pi_iX^{(n)}=\begin{cases}
+    0 & i\le n\\ \pi_iX & i>n
+\end{cases}$.
+
+\begin{thm}
+    Suppose $E\to B$ is a map of simply connected pointed Kan complexes s.t. the induced map $H_n(E;\ZZ)\to H_n(B;\ZZ)$ is an iso for all $n$. Then this map is a homotopy equivalence.
+\end{thm}
+\begin{proof}
+    Consider the homotopy fiber $F$. Using the LES of homotopy groups, we see that $F$ is connected. Consider the SSS. Since the induced maps $H_\ast(E)\to H_\ast(B)$ are isomorphisms, the elements in the bottom row of the SS survives to the $E_\infty$ page if it's in the image of this map of homology (which is an iso).
+    
+    The second row is zero in since $E$ is supposed to be simply connected, so nothing in the $0,1$ entry survives. On the other hand since $H_1(B)$ is zero, no differentials interact with $0,1$ entry, so $H_1(F)$ is zero. Hence the second row is zero. Inductively, can show that all other rows are zero.
+
+    Now use the LES of homotopy group to deduce that $\pi_n(E)\to \pi_n(B)$ is an iso for $n\ge 2$ and $n=0$. Note that near $\pi_1(F)$, we have $\pi_2(E)\to \pi_2(B)\to\pi_1(F)\to 0$ by simply connectedness assumption, so $\pi_2(B)$ surjects to $\pi_1(F)$, so $\pi_1(F)$ is abelian, so $\pi_1(F)\cong H_1(F)=0$, so $\pi_1(E)\to \pi_1(B)$ is an iso. The result then follows from Whitehead Thm.
+\end{proof}
+\subsection{Serre mod $\mathcal C$ theory}
+\begin{defn}
+     A collection of abelian groups is said to be an acyclic Serre class $\mathcal C$ if
+     \begin{enumerate}[(1)]
+         \item It is closed under taking subgroups
+         \item It is closed under taking quotients.
+         \item If $0\to A\to B\to C\to 0$ is an SES and $A,C\in\mathcal C$, then $B\in\mathcal C$.
+         \item It is closed under $\otimes$ and $\operatorname{Tor}$.
+         \item If $A\in\mathcal C$, then for each integer $n$, $H_n(K(A,1);\ZZ)\in\mathcal C$.
+     \end{enumerate}
+\end{defn}
+\begin{example}\
+    \begin{itemize}
+        \item $\mathcal C=$ finite abelian groups
+        \item $\mathcal C=$ f.g. abelian groups
+        \item $\mathcal C=$ collection of all finite groups $A$ s.t. $A\otimes_{\ZZ}\ZZ_{(p)}=0$ for a fixed prime $p$. (i.e., finite $p$ power torsion abelian groups)
+    \end{itemize}
+\end{example}
+To check (5), note that we can write any f.g. abelian group in a standard form using the structure theorem. Then by K\"unneth, we are reduced to understanding the homology $H_\ast(K(\ZZ/p^a,1);\ZZ)$. Can appeal to lens spaces. Alternatively, observe that we have a map of chain complexes $\ZZ[2]\overset{\times p^a}{\to}\ZZ[2]$. Apply $K(-)$, get a map $K(\ZZ,2)\overset{p^a}{\to}K(\ZZ,2)$. The homotopy fiber of this map is a $K(\ZZ/p^a,1)$ by LES.
+\begin{lem}
+    Let $\mathcal C$ be an acyclic Serre class. Suppose $E\to B$ is a map of pointed Kan complexes and $B$ is simply connected. Let $F$ be the homotopy fiber of this map. If any two of $\tilde H_\ast(F;\ZZ),\tilde H(E;\ZZ),\tilde H_\ast(B;\ZZ)$ belong to $\mathcal C$, then so is the third.
+\end{lem}
+\begin{proof}
+    Suppose $\tilde H_\ast(B),\tilde H(F)$ are in $\mathcal C$. Everything in $E_2$ page is in $\mathcal C$ by UCT and property (3) and (4). By construction of SS, everything remains in $\mathcal C$ by (1) and (2) apart from $E_{0,0}^\infty$.
+
+    Suppose $\tilde H(F),\tilde H(E)$ are in $\mathcal C$. Note that e.g. we have an exact sequence $H_2(B)\to H_1(F)\to H_1(E)\to H_1(B)\to 0$. Suppose by induction $H_p(B)\in\mathcal C$ for $0<p<k$. Note that $0\to E_{k,0}^{r+1}\to E_{k,0}^r\overset{d_r}{\to} E_{k-r,r-1}^r$. The latter group is a subquotient of $E_{k-r,r-1}^2$ which is in $\mathcal C$.
+\end{proof}
 \end{document}
