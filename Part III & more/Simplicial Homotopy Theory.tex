@@ -1196,4 +1196,86 @@ To check (5), note that we can write any f.g. abelian group in a standard form u
 
     Suppose $\tilde H(F),\tilde H(E)$ are in $\mathcal C$. Note that e.g. we have an exact sequence $H_2(B)\to H_1(F)\to H_1(E)\to H_1(B)\to 0$. Suppose by induction $H_p(B)\in\mathcal C$ for $0<p<k$. Note that $0\to E_{k,0}^{r+1}\to E_{k,0}^r\overset{d_r}{\to} E_{k-r,r-1}^r$. The latter group is a subquotient of $E_{k-r,r-1}^2$ which is in $\mathcal C$.
 \end{proof}
+
+--------------------
+
+\begin{crly}
+    If $A\in\mathcal C$, then $\tilde H_i(K(A,n))\in\mathcal C$ for all $n\ge 1$ and $i\in\ZZ$.
+\end{crly}
+\begin{proof}
+    Induction using the fiber sequence $K(A,n-1)\to\Delta^0\to K(A,n)$ (SSS + the previous lemma).
+\end{proof}
+\begin{defn}
+    A map $A\to B$ of abelian group is said to be an isomorphism mod $\mathcal C$ if $\ker (A\to B),\operatorname{coker}(A\to B)\in \mathcal C$.
+\end{defn}
+\begin{thm}[Mod $\mathcal C$ Hurewicz]
+    Let $X$ be a simply connected pointed Kan complex and $\pi_i(X)\in\mathcal C$ for $0<i<n$. Then $H_i(X;\ZZ)\in\mathcal C$ for $0<i<n$ and $\pi_n(X)\to H_n(X;\ZZ)$ is a mod $\mathcal C$ isomorphism.
+\end{thm}
+\begin{proof}
+    Consider the Whitehead tower
+    \[X^{(n-1)}\to\cdots\to X^{(3)}\to X^{(2)}\to X\]
+    By Hurewicz applied to $X^{(n-1)}$, we have $H_n(X^{(n-1)};\ZZ)\cong \pi_n(X^{(n-1)})$.
+
+    There is a fiber sequence $X^{(n-1)}\to X^{(n-2)}\to K(\pi_{n-2}X,n-2)$. Then SSS implies that $\pi_{i}X^{(n-1)}$ is isommorphic to $\pi_i(X^{(n-2})$ mod $\mathcal C$ for $0\le i\le n$ and $H_i(X^{(n-1)})\cong H_i(X^{(n-2)})$ mod $\mathcal C$ for $0<i\le n$. Induction.
+\end{proof}
+\begin{thm}[Serre]
+    For any $i,n\ge 1$, $\pi_i(S^n)$ is a f.g. abelian group.
+\end{thm}
+\begin{proof}
+    Trivial for $n=1$.
+    Suppose $n>1$. Then $S^n$ is simply connected. If $\pi_i(S^n)$ is not f.g. Then we choose the smallest such $i$. Then the map $\pi_i(S^n)\to H_i(S^n;\ZZ)$ will be an iso mod f.g. abelian group. Contradiction
+\end{proof}
+\begin{thm}
+    $\pi_iS^3$ is finite for every $i>3$.
+\end{thm}
+\begin{proof}
+    Consider the fiber sequence $(S^3)^{(3)}=F\to S^3\to K(\ZZ,3)$. By LES, suffices to prove that $\pi_i F$ is finite for all $i$. This is true iff $H_i(F;\ZZ)$ is finite for all $i$ (mod $\mathcal C$ Hurewicz for finite abelian groups) iff $H_i(F;\QQ)=0$ for all $i$ (since $H_i(F)$ is f.g. for all $i$ by the lemma).
+
+    Using SSS, suffices to prove that $H_i(K(\ZZ,3);\QQ)=\ZZ$ if $i=0,3$ and $0$ otherwise. Since $K(\ZZ,3)$ has f.g. homology, it suffices to consider the cohomology, so consider the fiber sequence $K(\ZZ,2)\to\Delta^0\to K(\ZZ,3)$. Deduce the desired result by SSS (stabilizes after $E_3$ page).
+\end{proof}
+\begin{thm}[Mod $\mathcal C$ Whitehead]
+    If $X\to Y$ is a map of simply connected pointed Kan complexes s.t. $H_i(X;\ZZ)\to H_i(Y;\ZZ)$ is a mod $\mathcal C$ isomorphism for all $i$, then $\pi_i(X)\to\pi_i(Y)$ is also.
+\end{thm}
+\begin{crly}
+    Suppose $X\to Y$ is a map of simply connected spaces s.t. $H_i(X;\ZZ_{(p)})\to H_i(X;\ZZ_{(p)})$ is an iso for all $i$. Then $\pi_i(X)\otimes\ZZ_{(p)}\to \pi_i(Y)\otimes\ZZ_{(p)}$ is an iso for all $i$.
+\end{crly}
+\begin{crly}
+    $\pi_{2p}(S^3)\otimes\ZZ_{(p)}\cong\ZZ/p$
+\end{crly}
+
+-----------------------
+
+If $X$ is a simply connected pointed Kan complex, then the computation of $\pi_iX$ can be transferred to the computation of homology of each stage of the Whitehead tower (by Hurewicz), and the homology can be computed using SSS applied to the fiber sequence $X^{(n)}\to X^{(n-1)}\to K(\pi_nX,n)$, so we need to understand the homology of Eilenberg-MacLane spaces. Understanding differentials and Adam's differentials are open in general.
+
+If $R$ is a field, e.g. $\QQ,\FF_2$, we could compute the cohomology $H^\ast(K(R,n);R)$. The rational case is relatively easy, $H^\ast(K(\QQ,2);\QQ)\cong H^\ast(K(\ZZ,2);\QQ)\cong \QQ[\iota_2]$. Can inductively compute the cohomology of $K(\QQ,n)$ with rational coeffs, e.g., $K(\QQ,3)$ has cohomology ring $\Lambda_\QQ[\iota_3]$. Inductively, can show that
+\[H^\ast(K(\QQ,n);\QQ)\cong\begin{cases}
+    \QQ[\iota_n] & n\equiv0\pmod2\\
+    \Lambda_\QQ[\iota] & n\equiv1\pmod2
+\end{cases}\]
+\begin{prop}
+    There are natural operations $Sq^i:H^n(X;\FF_2)\to H^{n+i}(X;\FF_2)$ (Steenrod squares) s.t.
+    \begin{enumerate}[(i)]
+        \item $Sq^i(x)=x^2$ if $i=|x|$
+        \item $Sq^i(x)=0$ if $i>|x|$
+        \item $Sq^0(x)=x$
+    \end{enumerate}
+\end{prop}
+We construct these operations using $Sq^i(x)=x^2$. This is a class in $H^{2i}(K(\FF_2,i),\FF_2)$ and we define $Sq^i:H^{i+1}(X;\FF_2)\to H^{2i+1}(X;\FF_2)$ which is a class in $H^{2i+1}(K(\FF_2,i+1),\FF_2)$. We consider the SSS associated with $K(\FF_2,i)\to\Delta^0\to K(\FF_2,i+1)$. We define $Sq^i:K(\FF_2,i+j)\to K(\FF_2,2i+j)$ to be the transgression on the previous one (inductively).
+\begin{defn}
+    Suppose $I=(i_1,...,i_r)$ a seq of integers. We write $Sq^I=Sq^{i_1}\circ Sq^{i_2}\circ\cdots\circ Sq^{i_r}$
+\end{defn}
+\begin{thm}[Serre]
+    $H^\ast(K(\FF_2,n);\FF_2)$ is a polynomial $\FF_2$-algebra generated by classes $Sq^I(\iota_n)$ s.t. (i) $i_j\ge 2i_{j+1}$ and (ii) $\sum(i_j-2i_{j+1})<n$
+\end{thm}
+e.g., $H^\ast(K(\FF_2,2);\FF_2)\cong\FF_2[\iota_2,Sq^1\iota_2,Sq^2Sq^1\iota_2,Sq^4Sq^2Sq^1\iota_2,...]$
+\begin{rem}[Adem relation]
+    If $0<i<2j$, then
+    \[Sq^iSq^j=\sum_{k=0}^{\lfloor i/2\rfloor}\binom{j-k-1}{i-2k}Sq^{i+j-k}Sq^k\]
+\end{rem}
+\begin{thm}
+    Suppose $X$ is a space s.t. $H^\ast(X;\FF_2)=\FF_2$ if $\ast=0,n,2n$ and $0$ otherwise and $H^\ast(X;\FF_2)\cong \FF_2[x_n]/(x_n^3)$. Then $n$ is a power of $2$. (e.g. $\RR P^2,\CC P^2,\mathbb HP^2,\mathbb OP^2$)
+\end{thm}
+Note if there exists a multiplication $\RR^n\times\RR^n\to\RR^n$ which is unital and every non-zero element has an inverse, then one can create such a space.
+
+
 \end{document}

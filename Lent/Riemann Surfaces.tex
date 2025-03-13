@@ -628,5 +628,80 @@ Note that the map $f:S^1\times S^1\to \CC/L$, $(e^{i2\pi \theta_1},e^{i2\pi\thet
 Note that $\wp_\Omega$ has a branch pt at $0$ and at the zeros of $\wp_\Omega'$. $\wp_\Omega'$ has a triple pole only at $\omega\in\Omega$, so degree $3$ on $\CC/\Omega$.
 Odd function, so have zeros at $\omega_1/2$, $\omega_2/2$ and $(\omega_1+\omega_2)/2$. They are simple since $\wp_\Omega'$ has deg $3$.
 Can check Riemann-Hurwitz formula.
+\section{Uniformization}
+\[\overset{\overset{\leftharpoonup}{\odot\odot}}{\overset{\cdot}{\frown}}\tag{Owen's signature}\]
+Let $\tilde X,X$ be topological spaces. Recall covering space (I have recalled pls hurrry up.) 
+\begin{thm}
+    For $X$ conn and loc. simp. conn, there is a universal cover.
+\end{thm}
+\begin{defn}
+    For $\pi:\tilde X\to X$ a (universal) covering map, a deck transformation is a homeo $f:\tilde X\to \tilde X$ s.t. $\pi f=f$. These form a group $\operatorname{Aut}_\pi(\tilde X)$.
+\end{defn}
+Suppose $G$ acts on $Y$ by homeomorphisms
+\begin{defn}
+    Recall faithful, free. An action is called a covering space action if every $y\in Y$ has an open nbd $U_y$ s.t. $gU_y\cap U_y=\varnothing$ for all $g\in G$.
+\end{defn}
+The quotient map is cts, surj, and open.
+\begin{thm}
+    If $\pi:\tilde X\to X$ is a covering map with $\tilde X$ conn. and Hausdorff, then the action of $\operatorname{Aut}_\pi(X)$ on $\tilde X$ is a covering space action.
+\end{thm}
+\begin{proof}
+    For $y\in\tilde X$, pick nbd $N$ of $\pi(y)$ which is evenly covered. Let $U_y$ be the component of $\pi^{-1}(N)$ containing $y$. If $g(U_y)\cap U_y\neq\varnothing$, then find $p_1,p_2\in U_y$ s.t. $gp_1=p_2$, but $\pi$ is inj on $U_y$, so $p_1=p_2$, so $g$ has a fixed point, so $g=e$.
+\end{proof} 
+\begin{thm}
+    $Y$ conn, loc. path conn, Hausdorff with a $G$ acting on $Y$ faithfully. 
+    \begin{enumerate}[(i)]
+        \item $q:Y\to Y/G$ is a covering map iff the action of $G$ is a covering space action
+        \item If $G$ is a covering space action, then $G=\operatorname{Aut}_q(Y)$
+    \end{enumerate}
+\end{thm}
+[Warning: $Y/G$ needs not be Hausdorff, cf. ES3.]
+\begin{proof}
+    (ii) $G$ acts transitively on the fiber $q^{-1}(z)$. For $y\in q^{-1}(z)$ and $\gamma\in\operatorname{Aut}_q(Y)$, have $q\gamma(y)=q(y)$, so there exists $g\in G$ with $\gamma(y)=g(y)$, so $\gamma=g$.
+\end{proof}
+\begin{crly}
+    If $\pi:\tilde X\to X$ is a universal cover, then $\tilde X/\operatorname{Aut}_\pi(\tilde X)\cong X$.
+\end{crly}
+\begin{proof}
+    Define $h:\tilde X/\operatorname{Aut}_\pi(\tilde X)\to X, [y]\mapsto \pi(y)$. Then $\pi=hq$. $h$ is open surjective, so check injectivity, i.e., $\pi y=\pi z\implies \exists \gamma\in\operatorname{Aut}_\pi(\tilde X)$ with $\gamma y=z$, i.e., the action on fiber is transitive. This is true as $\tilde X$ is simply connected.
+\end{proof}
+\begin{prop}
+     If $X$ is a metric space and $G$ acts by isometries and the action is a covering space action, then $X/G$ is Hausdorff.
+\end{prop}
+\[{}^{(-}\overset{\circ}{\circ}\tag{Owen's signature}\]
+If $R$ is a Riemann surface and $\pi:\tilde R\to R$ a universal cover, then $\tilde R$ is a Riemann surface and $\pi$ is analytic. If $\pi':\tilde R'\to R$ another universal cover with $\pi=\pi' H$. Have $H, H^{-1}$ analytic.
+\begin{prop}
+    Any $g\in\operatorname{Aut}_\pi(\tilde R)$ is analytic
+\end{prop}
+\begin{proof}
+    Check directly.
+\end{proof}
+So $\operatorname{Aut}_\pi(\tilde R)$ is a group of analytic automorphisms of $\tilde R$ giving a covering space action. Conversely, if $\tilde R$ is simply conn Riemann surface with charts $\rho_i$ and $G$ a group of analytic automorphisms of $\tilde R$ which gives a covering space action, then $q:\tilde R\to\tilde R/G$ is a covering map. If $\tilde R/G$ is Hausdorff, then it's a connected surface with charts of the form $\rho_i(q|_{U})^{-1}$. It's a Riemann surface since transition functions are of the form $\rho_i(q|_{U_y})^{-1}(q|_{U_z})\rho_j^{-1}$ (the map in the middle is given by some element $g\in G$) Can check that $R$ is analytically isomorphic to $\tilde R/G$. So Riemann surfaces are exactly simply connected Riemann surfaces/covering space actions of analytic automorphisms.
+\begin{thm}[Uniformization]
+    Up to analytic isomorphism, the simply connected Riemann surfaces are \begin{enumerate}[(i)]
+        \item $\CC$
+        \item $\CC_\infty$
+        \item $\mathbb H$ (upper half plane) or $\mathbb D$ (unit disk)
+    \end{enumerate}
+\end{thm}
+These three are distinct.
+
+Automorphisms
+\begin{enumerate}[(i)]
+    \item Automorphism groups of $\CC_\infty$ is given by $\mathcal M$ (Mobius transformations). All have fixed pts
+    \item $\operatorname{Aut}(\CC)=\{az+b:a\neq 0\}$. Have fixed pt if $a\neq 1$. So look at subgroups of $\{z\mapsto z+b\}\cong\CC$. For this to give a covering space action, consider 5.3, so we get $\CC, \CC\setminus\{0\}$ or various tori $\CC/L$.
+\end{enumerate}
+\begin{crly}
+    Any Riemann surface $R$ other than the above is given by $\mathbb H/T$ for $T\le\operatorname{Aut}(\mathbb H)=\{\frac{az+b}{cz+d}:a,b,c,d\in\RR,\ ad-bc=1\}$ with a covering space action.
+\end{crly}
+\begin{proof}
+    Schwarz lemma (cf. CA) $\implies \operatorname{Aut}(\mathbb H)$ is this group. It acts on $\mathbb H$ by isometries for $d_{\mathbb H}(z,w)=2\tanh^{-1}|\frac{z-w}{z-\bar w}|$ (cf. Geo).
+\end{proof}
+\begin{crly}[Riemann mapping thm]
+    If $U$ is a simply connected proper open subset of $\CC$, then $U$ is conformally equivalent to $\mathbb D$.
+\end{crly}
+\begin{proof}
+    $U$ is its own universal cover, so $U=U/\{\id\}$ so $U\cong \CC$ or $\mathbb D$. Can't be $\CC$ since any inj holo'c map $\CC\to\CC$ is surj.
+\end{proof}
 
 \end{document}

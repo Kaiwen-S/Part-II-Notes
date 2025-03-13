@@ -853,4 +853,86 @@ By Plancherel, for $s\ge 0$, $H^s(\RR^n)$ consists of elements of $L^2(\RR^n,dx)
     \end{align*}
     For $f\in H^s$ take $f_n\in\mathcal S$ s.t. $f_n\to f$ in $H^s$ and a.e. (pass to a subseq if necessary). This is Cauchy in $H^s$ and by the same inequality in $C^k$, we have $f_n\to f^\ast$ in $C^k$ by completeness. By uniqueness of limit, we have $f^\ast=f$ a.e. so $f^\ast =f $.
 \end{proof}
+Consider \[-\nabla^2v+v=f\tag{$\dagger$}\]
+where $f\in H^s(\RR^n)$. Have Fourier transform $\hat\nabla^2=-|u|^2$.
+\begin{thm}
+    There exists a unique solution $v$ in $H^{s+2}(\RR^n)$ to $(\dagger)$ and $\|v\|_{H^{s+2}}\le \|f\|_{H^s}$ (elliptic regularity estimate)
+\end{thm}
+\begin{proof}
+    Take FT get $(1+|u|^2)\hat v=\hat f$ in $\mathcal S'(\RR^n)$. For $f\in L^1_{\text{loc}}$ this has unique soln $\hat v(u)=\frac{\hat f(u)}{1+|u|^2}$, $u\in\RR^n$, so $v=\mathcal F^{-1}\hat v$.
+    \[\|v\|^2_{H^{s+2}}=\int_{\RR^n}(1+|u|^2)^{s+r}\frac{\hat f(u)}{(1+|u|^2)^{2}}=\|f\|^2_{H^s}\]
+\end{proof}
+To study eqns restricted to open sets $\Omega\subseteq\RR^n$ with boundary $\partial\Omega$, need to define the restriction of $f\in H^s$ to $\partial \Omega$. If $f\in H^s$ for $s>n/2$, then Sobolev embedding implies that $f\in C^\e$ for some $\e>0$ and the Sobolev trace $f|_{\partial\Omega}$ exists by uniform continuity. For general $s>1/2$, have
+\begin{thm}[Trace thm]
+    There exists a bounded linear operator $T:H^s(\RR^n)\to H^{s-1/2}(\RR^{n-1})$, $s>1/2$, s.t. for all $f\in \mathcal S(\RR^n)$, $Tf=f|_{\RR^{n-1}\times \{0\}}$
+\end{thm}
+\begin{proof}
+    ES
+\end{proof}
+Call $T= T_\Sigma$ for $\Sigma=\RR^{n-1}\times\{0\}$ the boundary trace of $f\in H^s$. By change of coords, this operator extends to $T_{\partial\Omega}$ for sufficiently regular $\Omega$. In particular, we have $T_{\partial\Omega}:H^1(\RR^n)\hookrightarrow H^{1/2}(\partial\Omega)\hookrightarrow L^2(\partial\Omega)$ is bounded linear.
+\subsection{$H_0^1(\Omega)$}
+Any $f\in C_c^\infty(\Omega)$ (sufficiently regular $\Omega$) extends by zero to an element of $H^1(\RR^n)$ (hence in $H^s(\RR^n)$ for all $s$). Have Hilbert norm
+\[\|f\|_{H^1(\RR^n)}=\int_{\RR^n}(1+|u|^2)||\hat f(u)|^2du=(2\pi)^n\int_\Omega(|f(x)|^2+|Df(x)|^2|)dx\] where $Df$ is the gradient vector. Define $H_0^1(\Omega)=\overline{C_c^\infty(\Omega)}^{\|\cdot\|_{H^1}}$ in $H^1(\RR^n)$. This is not $W^{1,2}$ because
+\begin{prop}
+    Let $f\in H_0^1(\RR^n)$. Then $f(x)=0$ for almost every $x\in\Omega^c$ and if $\partial \Omega$ is sufficiently regular, then $T_{\partial\Omega} f=0$.
+\end{prop}
+\begin{proof}
+    Take $\varphi\in C_c^\infty((\Omega^c)^\circ)$ and take $f_n\in C_c^\infty(\Omega)$ s.t. $f_n\to f$ in $H^1(\RR^n)$. Have $\Lambda_\varphi(h)=\int_{\RR^n}\varphi h$, then $\Lambda_\varphi\in (L^2)'\subseteq(H^1)'$, so $0=\int_{\RR^n}\varphi f_n=\Lambda_\varphi(f_n)\to\Lambda_\varphi f=\int\varphi f=0$, so $\operatorname{supp}(f)\subseteq\Omega$. Similarly, $0=T_{\partial \Omega}f_n\to T_{\partial \Omega}f=0$, so $f=0$ on $\partial\Omega$.
+\end{proof}
+Consider the BVP 
+\[\begin{cases}
+    -\nabla^2v+v=f & \text{on }\Omega\\
+    v=0 & \text{on }\partial\Omega
+\end{cases}\]
+Interpret this as
+\[\int_\Omega(-\nabla^2v+v)\varphi\overset{ibp}{=}\int_{\partial\Omega}\nabla v\cdot\nabla\varphi+\int_\Omega v\varphi=\int_\Omega f\varphi\] for $f\in L^2$, $v\in H^1$.
+
+Since $C_c^\infty$ is dense in $H_0^1$ and $L^2$, this equation is the same as solving 
+\[\langle v,\varphi\rangle_{H^1}=\langle f,\varphi\rangle_{L^2}\tag{$\dagger'$}\]
+ for all $\varphi\in H_0^1(\Omega)$.
+ \begin{thm}
+     For eveyr $f\in L^2(\Omega)$, there exists a unique $v\in H_0^1(\Omega)$ s.t. $(\dagger')$ holds and $\|v\|_{H^1}=\|f\|_{L^2}$. Therefore the solution map $S:f\mapsto v=v_f$ is a bounded linear form $L^2(\Omega)\to H_0^1(\Omega)$ and self-adjoint for $L^2(\Omega)$.
+ \end{thm}
+ \begin{proof}
+     Define $\Lambda_f(\phi)=\int_\Omega f\phi$ so that $\Lambda_f\in(H_0^1)'$ since 
+     \[|\Lambda_f(\phi)|\overset{\text{C.S.}}{\le}\|f\|_{L^2}\|\phi\|_{L^2}\le\|f\|_{L^2}\|\phi\|_{H^1}\]
+     Hence by Riesz representation thm on $H_0^1$, there exists a uniuque $v\in H_0^1$ s.t. $\langle v,\phi\rangle_{H^1}=\langle f,\phi\rangle_{L^2}$ for all $\phi\in H_0^1$.
+
+     Next take $f_1,f_2\in L^2(\Omega)$, $\alpha\in\RR$, and take $v_1=S(f_1)$ and $v_2=S(f_2)$ and define $v=v_1+\alpha v_2$. Then,
+     \[\langle v,\phi\rangle_{H^1}=\langle v_1+\alpha v_2,\phi\rangle_{H^1}=\langle v,\phi\rangle_{H^1}+\alpha\langle v_2,\phi\rangle_{H^1}==\langle f_1,\phi\rangle_{L^2}+\alpha\langle f_2,\phi\rangle_{L^2}=\langle f_1+\alpha f_2,\phi\rangle_{L^2}\]
+     So $S(f_1)+\alpha S(f_2)=S(f_1+\alpha f_2)$.
+     Also have 
+     \[\|S(f)\|_{H^1}=\|v_f\|_{H^1}\overset{\text{Riesz}}{=}\|\Lambda_f\|\le \|f\|_{L^2}\]
+
+    To see it's self-adjoint,
+     \[\langle S(f),g\rangle_{L^2}=\langle g, S(f)\rangle_{L^2}=\langle S(f),S(g)\rangle_{H^1}=\langle S(g),S(f)\rangle_{H^1}=\langle f,S(g)\rangle_{L^2}\]
+ \end{proof}
+ To study regularity of $v$, we introduce
+ \[H_{\text{loc}}^s(\Omega)=\{f\in L^2_{\text{loc}}(\Omega):\forall \xi\in C_c^\infty(\Omega),\ f\xi\in H^s(\RR^n)\}\]
+ \begin{prop}
+     If $f\in H_{\text{loc}}^s$ for $s>k+n/2$, then $f\in C^k(U)$ for any $U$ open s.t. $\bar U\subseteq \Omega$.
+ \end{prop}
+ \begin{proof}
+     Given $U$, pick $\xi\in C_c^\infty$ s.t. $\xi=1$ on $\bar U$ and note that $f\xi\in H^s(\RR^n)\subseteq C^k(\RR^n)$ (Sobolev embedding), so $f=f\xi $on $U$, the result then follows.
+ \end{proof}
+ \begin{crly}
+     $\bigcap_{s>0} H^s_{\text{loc}}(\Omega)\subseteq C^\infty(\Omega)$.
+ \end{crly}
+ Note that $f\in C^\infty(\Omega)$ may be unbounded at $\partial\Omega$.
+ \begin{thm}[Interior regularity]
+     Let $f\in L^2(\Omega)$ and suppose $v\in H_0^1$ solves $(\dagger')$. Then $v\in H^2_{\text{loc}}(\Omega)$. If additionally $f\in L^2(\Omega)\cap H^k_{\text{loc}}(\Omega)$, then $v\in H^{k+2}_{\text{loc}}(\Omega)$.
+ \end{thm}
+ \begin{proof}
+ Let $K\subseteq\Omega$ be any compact set, and take $\chi\in C_c^\infty(\Omega)$ s.t. $\chi=1$ on $K$. Take $\varphi\in S(\RR^n)$ and set $\phi=\chi\varphi\in H_0^1$. Then $(\dagger')$ implies
+ \[\int_\Omega(Dv\cdot D(\varphi\chi)+v\varphi\chi)dx=\int_\Omega f\varphi\chi dx\] for all $\varphi\in\mathcal S(\RR^n)$.
+ Using chain rule and IBP, we rearrange the equation above to get
+ \[\int_{\Omega}(D(v\chi)\cdot D\varphi+v\chi\varphi)dx=\int_\Omega g\varphi dx\]
+ where $g=-(Dv)\cdot(D\chi)-v D\chi+f\chi\in L^2(\RR^n)$. IBP again, can see that $v\chi$ solves $-\nabla^2(v\chi)+v\chi=g$ in $\mathcal S'(\RR^n)$. Hence by elliptic regularity estimate, $\|v\chi\|_{H^2}\le \|g\|_{L^2}<\infty$.
+
+ To prove $v\in H^2_{\text{loc}}$, take $\xi\in C^\infty_c(\Omega)$ and $K=\operatorname{supp}(\xi)$ s.t. $v\xi=v\chi\xi$. Then $\|v\xi\|_{H^2}=\|v\chi\xi\|_{H^2}\le C_n\|v\chi\|_{H^2}\|\xi\|_{L^2}<\infty$ ($\|fg\|_{L^2}\le \|f\|_{L^2}\|g\|_{L^\infty}$ + chain rule) We recognize that $g\in H^1_{\text{loc}}(\Omega)$ whenever $f\in H^1_{\text{loc}}(\Omega)$ so repeating the preceding argument given $v\in H^3_{\text{loc}}$. Can prove the rest of the theorem using the inequality $\|fg\|_{H^s}\le C_{n,s}\|f\|_{H^s}\|g\|_{C^s}$
+ \end{proof}
+ \begin{crly}
+     If $f\in C^\infty(\Omega)\cap L^2(\Omega)$, then $v\in H_0^1(\Omega)\cap C^\infty(\Omega)$ solves $-\nabla^2 v+v=f$ on $\Omega$ (pointwise)
+ \end{crly}
+ 
 \end{document}

@@ -597,5 +597,39 @@ so \[\begin{cases}
     A top. space $X$ is $T_1$ if for all $x,y\in X$ distinct, there exists an open set $U\subseteq X$ s.t. $x\notin U$ and $y\in U$.
 \end{defn}
 If $X$ is $T_1$, then normal implies regular implies Hausdorff. Recall from IB Anatop that any compact Hausdorff space is normal and regular.
+\section{Baire Category Theorem}
+\begin{defn}
+    $X$ a top. space, $Y\subseteq X$.
+    \begin{enumerate}[(1)]
+        \item $Y$ is dense if $Y\cap U\neq\varnothing$ for all $U$ non-empty open subset of $X$.
+        \item If $V\subseteq X$ is open, then $Y$ is said to be dense in $V$ if $Y\cap U\neq\varnothing$ for all $U\subseteq V$ is open and non-empty.
+        \item $Y$ is nowhere dense if for all open non-empty $V\subseteq X$, there exists open $U\subseteq V$ s.t. $U\cap Y=\varnothing$, i.e., $Y$ is not dense in any open subset of $X$.
+    \end{enumerate}
+\end{defn}
+The Cantor set $C$ is nowhere dense. For any $y_1<y_2$, we can find $p$ and $n$ s.t. $(\frac{p-1}{3^n},\frac{p+1}{3^n})\subseteq (y_1,y_2)$, then either $(\frac{p-1}{3^n},\frac{p}{3^n})\cap X=\varnothing$ or $(\frac{p}{3^n},\frac{p+1}{3^n})\cap X=\varnothing$.
+
+\begin{thm}[Baire (open set version)]
+    Suppose $X$ is a non-empty complete metric space. Suppose $(U_i)_{i\in\NN}$ is a sequence of open dense subsets of $X$. Then $\bigcap_{n=1}^\infty U_i=\varnothing$.
+\end{thm}
+\begin{proof}
+    Pick $x_1\in U_1$ and a closed ball $B_1=\overline{B_{\e_1}(x_1)}\subseteq U$ with $\e_1\le 1$. Pick $x_2\in B_{\e_1}(x)\cap U_2$ and consider $B_2=\overline{B_{\e_2}(x_2)}\subseteq B_{\e_1}(x_1)\cap U_2$ with $\e_2\le 1/2$. Inductively, given $x_{n-1}$ and $B_{n-1}$, can choose $x_n$ and $B_n$ s.t. $B_n\subseteq B_{\e_{n-1}}(x)\cap U_n$. Thus have a a nested sequence of closed balls $B_1\supseteq B_2\supseteq\cdots$. Note that $(x_n)_{n\in\NN}$ is Cauchy, so converges by completeness. Also, for all $k$, $n>k\implies x_n\in B_k$ (closed), so $x\in B_n$ for all $n$, so $x\in\bigcap_{n\in\NN} U_n$.
+
+
+    %Pick $x_1\in U_1$ and an open ball $B_{\e_1}(x_1)\subseteq U_1$ We can shrink the radius and find a closed ball $B_1\subseteq U_1$ containing $x$. Pick $x_2\in B_{\e_1}\cap U_2$. Pick $\e_2\le \e_1/2$ s.t. we have an open ball $B_2$ centered at $x_2$ s.t. $B_2\subseteq B_{\e_1}(x_1)\cap U_2$. Inductively, given $B_{n-1}$ of radius $\e_1/2^{n-1}$, can choo
+\end{proof}
+\begin{lem}
+    $X$ top. space. $Y\subseteq X$. If $Y$ is nowhere dense, then so is $\bar Y$. 
+\end{lem}
+\begin{proof}
+    Given $U\subseteq X$ open and non-empty, find $V\subseteq U$ open s.t. $V\cap Y=\varnothing$, so $Y\subseteq X\setminus V$, so $\bar Y\subseteq X\setminus V$ by property of closure, so $\bar Y\cap V=\varnothing$. 
+\end{proof}
+\begin{lem}
+    $X$ top. space, $U\subseteq X$. $U$ is open dense iff $X\setminus U$ is closed and nowhere dense.
+\end{lem}
+\begin{proof}
+    If $U$ is open dense, then $X\setminus U$ is certainly closed. If $W$ is non-empty open, then $U\cap W\neq\varnothing$, then $U\cap W\cap Y=\varnothing$.
+
+    Conversely, if $X\setminus U$ is closed and nowhere dense, then $U$ is certainly open. Given $W$ open and non-empty, there exists $V\subseteq W$ open s.t. $V\cap X\setminus U=\varnothing$, then $V\subseteq U$, so $W\cap U\neq\varnothing$.
+\end{proof}
 
 \end{document}
