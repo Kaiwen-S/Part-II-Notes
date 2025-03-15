@@ -632,4 +632,28 @@ The Cantor set $C$ is nowhere dense. For any $y_1<y_2$, we can find $p$ and $n$ 
     Conversely, if $X\setminus U$ is closed and nowhere dense, then $U$ is certainly open. Given $W$ open and non-empty, there exists $V\subseteq W$ open s.t. $V\cap X\setminus U=\varnothing$, then $V\subseteq U$, so $W\cap U\neq\varnothing$.
 \end{proof}
 
+-------
+
+\begin{crly}
+    $f_n\in C[0,1]$. If $f_n\to f$ pointwise on $[0,1]$, then there exists a subinterval $(a,b)$ on which $f$ is bounded.
+\end{crly}
+\begin{rem}
+    With some work, can show that the set of discontinuities must be meager. (e.g., Thomae's function is cts on irrational nums but discts on rational nums) 
+
+    Let $r_n$ be an enumeration of $\QQ\cap (0,1)$, and let $f_n$ be the unique piecewise linear function s.t. $f_n(r_k)=f(r_k)$ for all $k\le n$ and $f_n(0)=f_n(1)=0$ and $f_n$ is diff at each $x\neq r_k$
+\end{rem}
+\begin{thm}
+    There exists a cts $f:[0,1]\to\RR$ which is nowhere diff at any $x\in(0,1)$.
+\end{thm}
+We shall prove that in $C[0,1]$, the set $\{f\in C[0,1]:f'(x)\text{ exists at some }x\in(0,1)\}$ is meager.
+\begin{proof}
+    Define $A_n=\{f\in C[0,1]:\exists x\in (0,1),\ \forall y\in ([x-1/n,x)\cup(x,x+1/n])\cap [0,1],\ |\frac{f(x)-f(y)}{x-y}|\le n\}$.
+
+    (Lemma) $A_n$ is closed for all $n$. Fix $n$, let $(f_j)$ be a sequence in $A_n$ which converges uniformly in $C[0,1]$. We get a sequence $(x_k)$ s.t. $|\frac{f(x_k)-f(y)}{x_k-y}|\le n$ for all $y$ in proper range. By passing to a subsequence if necessary, may assume that $x_k\to x\in[0,1]$. By uniform convergence, $f_k(x_k)\to f(x)$, so we can show that for $0<|x-y|<1/n$, $|\frac{f(x)-f(y)}{x-y}|\le n$. By continuity it holds when $|x-y|=1/n$.
+
+    (Lemma) $A_n$ has empty interior.
+
+    Done by Baire.
+\end{proof}
+
 \end{document}

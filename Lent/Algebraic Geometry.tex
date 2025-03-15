@@ -1113,7 +1113,7 @@ If $\pi_P$ is a local parameter at $P$, then $\pi_P$ is transcendental over $k$,
     Let $\omega$ be a non-zero rational differential on a curve $V$. Then $\nu_P(\omega)=0$ for all but finitely many $P\in V$. $\nu_P(\omega)\ge=0$ iff $\omega$ is regular at $P$.
 \end{lem}
 \begin{proof}
-    Note taht if $\omega,\omega'\in\Omega_V^\times$, then write $\omega=hd\pi_P$, $\omega'=h'd\pi_P$, have $\nu_P(\omega+\omega')=\nu_P(h+h')\ge\min\{\nu_P(h),\nu_P(h')\}=\min_{\nu_P(\omega),\nu_P(\omega')}$.
+    Note that if $\omega,\omega'\in\Omega_V^\times$, then write $\omega=hd\pi_P$, $\omega'=h'd\pi_P$, have $\nu_P(\omega+\omega')=\nu_P(h+h')\ge\min\{\nu_P(h),\nu_P(h')\}=\min\{\nu_P(\omega),\nu_P(\omega')\}$.
 
     First, if $g\in k(V)$ is nonconst and $\omega=fdg$, then for any $P\in V$, have $\nu_P(\omega)=\nu_P(f)+\nu_P(dg)$, so suffices to show $\nu_P(dg)=0$ for all but finitely many $P$ and any nonconst $g$. By finiteness for curves, $g$ (when considered as a morphism $V\to\PP^1$) has finitely many poles and finitely many ramified pts. If $g(P)\neq\infty$ and $t$ is a local coord at $0$ on $\PP^1$, then $t-g(P)$ is a local coord at $g(P)$, and $f,g$ is also not ramified at $P$, and $g^\ast(t-g(P))=g-g(P)$ is a local parameter at $P$, so we have
     \[\nu_P(dg)=\nu_P(d(g-g(P)))=\nu_P(1)=0\]
@@ -1154,5 +1154,47 @@ This agrees with the defn in Riemann surfaces if $k=\CC$.
 \subsubsection{Plane Cubics}
 Let $F(x_0,x_1,x_2)=x_0x_2^2-\prod_{i=1}^3(x_1-\lambda_ix_0)$, $\lambda_1,\lambda_2,\lambda_3\in k$ are distinct. Can check $V=Z(F)$ is irreducible and smooth.
 
-Compute its geneus. Dehomogenize w.r.t. $x_0$, get $y^2=(x-\lambda_1)(x-\lambda_2)(x-\lambda_3)=g(x)$, where $y=x_2/x_0$, $x=x_1/x_0$, so $2ydy=g'(x)dx$ in $\Omega_V$. Choose $\omega=dx/y=2dy/g'(x)$. If $y(P)\neq 0$, then $x-x(P)$ is a loc. coord for $P\in V$ with $x_0\neq 0$. So $\nu_P(\omega)=\nu_P(dx/y)=0$. If $y(P)=0$, thne $y$ is a loc coord at $P$ and $\lambda_i$ distinct $\implies$ $g'(x(P))\neq 0$, so $\nu_P(\omega)=0$. If $x_0=0$, have a single point $\infty=(0:0:1)$ Dehomoginize w.r.t. $x_2$ to obtain $z-\prod_{i=1}^3(t-\lambda_iz)$, $z=x_0/x_2$ and $t=x_1/x_2$.
+Compute its geneus. Dehomogenize w.r.t. $x_0$, get $y^2=(x-\lambda_1)(x-\lambda_2)(x-\lambda_3)=g(x)$, where $y=x_2/x_0$, $x=x_1/x_0$, so $2ydy=g'(x)dx$ in $\Omega_V$. Choose $\omega=dx/y=2dy/g'(x)$. If $y(P)\neq 0$, then $x-x(P)$ is a loc. coord for $P\in V$ with $x_0\neq 0$. So $\nu_P(\omega)=\nu_P(dx/y)=0$. If $y(P)=0$, thne $y$ is a loc coord at $P$ and $\lambda_i$ distinct $\implies$ $g'(x(P))\neq 0$, so $\nu_P(\omega)=0$. If $x_0=0$, have a single point $\infty=(0:0:1)$. Dehomogenize w.r.t. $x_2$ to obtain $z-\prod_{i=1}^3(t-\lambda_iz)$, $z=x_0/x_2$ and $t=x_1/x_2$. $t$ is a local parameter at $\infty$, i.e., $\nu_\infty(t)=1$, $\nu_\infty(z)\ge 3$, so $\nu_\infty(t-\lambda_iz)=\nu_\infty(t)=1$, so $\nu_\infty(z)=3$. Note that $\nu_\infty(y)=-3$, $\nu_\infty(x)=-2$.
+\begin{lem}
+    If $h\in k(V)$ on a curve $V$, and $\nu_P(h)\ge 2$ for $P\in V$, then $\nu_P(dh)=\nu_P(h)-1$.
+\end{lem}
+\begin{proof}
+    If $\nu_P(h)=1$, then true by defn. If $\nu_P(h)\ge 2$, then write $h=u\pi_P^n$, $n=\nu_P(h)$. Have $dh=u\pi_Pd(\pi_P^{n-1})+\pi_P^{n-1}d(u\pi_P)=u\pi_P^{n-1}(n-1)d\pi_P+\pi_P^{n-1}d(u\pi_P)=\pi_P(n-1)(u(n-1)d\pi_P+ud\pi_P+\pi_Pdu)=\pi_P^{n-1}[und\pi_P+\pi_Pdu]$. $u$ is regular at $P$ so $\nu_P(du)\ge 0$, so $\nu_P(\pi_Pdu)\ge 1$, so $\nu_P(dh)=n-1$ ($\ast\ast\ast\ast$)
+\end{proof}
+$\nu_\infty(1/x)=2$ so $\nu_\infty(d(1/x))=1$, so $\nu_\infty(-dx/x^2)=\nu_\infty(1/x^2)+\nu_\infty(dx)=1$. Since $\nu_\infty(1/x^2)=4$, $\nu_\infty(dx)=-3$, so $\nu_\infty(\omega)=\nu_\infty(dx/y)=0$. So the canonical divisor is the zero divisor, so $L(0)=\{\text{rational functions on }V\text{ with no poles}\}=k$, so $\ell(K_V)=1=g(V)$. For a general plane curve, we have
+\begin{thm}
+    Let $V=Z(F)\subseteq\PP^2$ be a smooth plane curve of degree $d\ge 3$. Then $K_V=(d-3)H$, where $H$ is the divisor of a hyperplane section on $V$.
+\end{thm}
+\begin{rem}
+    Computation: given $x_0x_2^2-\prod_{i=1}^3(x_1-\lambda_ix_0)$. The projection to $(x_0:x_1)\in\PP^1$ has deg $2$ [$\infty\mapsto (0:1)$ with $\nu_\infty(x)=-2$]; the proj to $(x_0:x_2)$ has deg $3$ [$\infty\mapsto (0:1)$ and $\nu_\infty(y)=-3$].
+\end{rem}
+\begin{proof}
+    Change coords so $(0:1:0)\notin V$. Dehomogenize $x=x_1/x_0$ and $y=x_2/x_0$ to obtain $0=f(x,y)=F(1,x,y)$, so $\partial_x fdx+\partial_yfdy=0$, so consider $\omega=dx/\partial_yf=-dy/\partial_xf$. Let $H=\{x_0=0\}$, so $\divi(\omega)$ is supported on $H$. Now dehomogenizae w.r.t. $x_2$ to get $g(z,w)=F(z,w,1)$, $z=x_0/x_2=1/y$ and $w=x_1/x_2=x/y$ and consider $\eta=dz/\partial_wg=-dw/\partial_zg$. $\divi(\eta)$ is supported on $\{x_2=0\}$ not at any $P\in H\cap V$. Note that $f(x,y)=F(1,x,y)=y^dF(1/y,x/y,1)=y^dg(1/y,x/y)$. Compute
+    \begin{align*}
+        \partial_xf=y^d\partial_wg(1/y,x/y)1/y=\frac{1}{z^{d-1}}\partial_wg(z,w)
+    \end{align*} Since $y=1/z$, have $dy=-dz/z^2$, so 
+    \[\omega=\frac{dy}{\partial_xf}=\frac{-z^{-2}dz}{(z)^{1-d}\partial_wg(z,w)}=z^{d-3}\eta\] 
+    Since $\nu_P(\eta)=0$ for all $P\in H$, we have $\nu_P(\omega)=(d-3)\nu_P(x_0/x_2)$ for all $P\in H$, so $\omega=(d-3)H$ since $H=\divi(x_0)$.
+\end{proof}
+So $\deg(K_V)=d(d-3)$ for a smooth plane curve.
+\begin{prop}
+    Suppose $f(x,y)=0$ is an affine equation for a curve $V\subseteq\PP^2$. Assume $\deg V\ge3$. Then $\{x^ry^s:0\le r+s\le d-3,\ r,s\ge 0\}$ is a basis for $L(K_V)$
+\end{prop}
+\begin{proof}
+    By thm, all poles of any elt of $L(K_V)$ are at $\infty$ (if $x=x_1/x_0$, $y=x_2/x_0$, this means that they satisfy $x_0(P)=0$). $x,y$ generate $k(V)$ as a field, so any elt of $L(K_V)$ is a polynomial in $x,y$, so monomials $x^ry^s$ generate $L(K_V)$, since $x^ry^s=\frac{x_1^rx_2^s}{x_0^{r+s}}\in L(K_V)$ iff $0\le r+s\le d-3$. It suffices show independence. Note that any non-trivial dependence relation would give a degree $<d$ element of the (affine) ideal. Contradiction.
+\end{proof}
+\begin{crly}[Genus-degree formula for plane curves]
+    If $V$ is a smooth plane curve in $\PP^2$ of degree $\ge3$. Then $g(V)=\frac{(d-1)(d-2)}{2}$
+\end{crly}
+\begin{crly}
+    There exists infinitely many non-isomorphic curves.
+\end{crly}
+\section{Riemann-Roch}
+\begin{thm}[Riemann-Roch]
+    Let $V$ be a curve of genus $g$ with canonical divisor $K_V$. Then for any divisor $D$, $\ell(D)-\ell(K_V-D)=1-g+\deg(D)$.
+\end{thm}
+\begin{crly}[Genus-degree formula for curves in $\PP^2$]\end{crly}
+\begin{proof}
+    Take $D-K_V$, so R-R implies $\ell(K_V)-\ell(0)=1-g+\deg(K_V)$, so $g-1=1-g+d(d-3)$. 
+\end{proof}
 \end{document}

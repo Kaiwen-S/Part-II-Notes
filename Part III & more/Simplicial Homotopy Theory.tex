@@ -1277,5 +1277,43 @@ e.g., $H^\ast(K(\FF_2,2);\FF_2)\cong\FF_2[\iota_2,Sq^1\iota_2,Sq^2Sq^1\iota_2,Sq
 \end{thm}
 Note if there exists a multiplication $\RR^n\times\RR^n\to\RR^n$ which is unital and every non-zero element has an inverse, then one can create such a space.
 
+------------------------
+
+\section{(Co)limits}
+Suppose $\mathcal C$ is quasicategory, e.g., $\mathcal S$, $\text{HR}$-modules, $\mathcal S_\ast$. If $D$ is a simplicial set, then a functor $D\to\mathcal C$ is a map of simplicial set. Functors are objects of $\underline{\Hom}(D,\mathcal C)$ which is a quasicategory. The functor $\mathcal C\to\underline{\Hom}(D,\mathcal C)$ (sending objects of $\mathcal C$ to the constant diagram valued at that object). Have $\operatorname{Ho}(\mathcal C)\to \operatorname{Ho}\underline{\Hom}(D,\mathcal C)$. The left adjoint is homotopy colimit.
+
+\begin{rem}
+    Every object in $\mathcal S$ is the colimit of some diagram $N(\bdel^{op})\to N(\bset)\to \mathcal S$. There is a functor $N(\bset)\to\mathcal S,\ X\mapsto\coprod_{x\in X}\Delta^0$. Similarly, every object in $(\text{HR-mod})_{\ge0}$ is the colimit of a functor $N(\bdel^{op})\to\text{HR-mod}$ taking values in $\text{HR-mod}$ of the form $\bigoplus R[0]$. (Animation cf. Keredon)
+\end{rem}
+\begin{rem}
+    Suppose $D$ is a Kan complex. (Un)straightening: Functors from $D$ to $\mathcal S$ are equivalent data to Kan fibrations $E\to D$. If $D$ is a simplicial set then functors $D\to\mathcal S$ is the same data as left a left fibration $E\to D$.
+\end{rem}
+Homology and Cohomology:
+Given a Kan complex $X$, we can consider the functor $X\to \text{HR-mod}$ which is constant at $R[0]$. The colimit is $C_\ast(X;R)$, and the limit is $C^\ast(X;R)$.
+
+Vector bundles: There is a quasicategory $\operatorname{Vect}_\RR$ with objects $\RR^n$ for each $n\ge 0$, 1-simplices $\RR$-linear maps, 2-simplices a path in the space of matrices $\RR^n\to\RR^m$. Now if $X$ is a Kan complex, then a real vector bundle on $X$ is a functor $X\to\operatorname{Vect}_\RR$ (e.g. if $X$ is $\sing$ of some manifold, then the tangent bundle is such a functor).
+\begin{rem}
+    One-point compactification defines a functor $\operatorname{Vect}_\RR^\simeq\to\mathcal S_\ast$, where $\operatorname{Vect}_\RR^\simeq$ refers to only linear bijections.
+\end{rem}
+\begin{defn}
+    If $X$ is a Kan complex with a vector bundle $X\to\operatorname{Vect}_\RR^\simeq$, the Thom space is the colimit of of the composite functor $X\to\operatorname{Vect}_\RR^\simeq\to\mathcal S_\ast$
+\end{defn}
+Note that there is a map $\mathcal S_\ast\to H\FF_2\text{-mod}$, $X\mapsto \tilde C_\ast(X;\FF_2)$. Then $\tilde C_\ast(\text{Thom space})=\colim(X\to\operatorname{Vect}_\RR^\simeq\to\mathcal S_\ast\to H\FF_2\text{-mod})=\tilde C_\ast(X;\FF_2)$. The functor $\operatorname{Vect}_\RR\to H\FF_2\text{-mod}$ (when restricted to the path component of $\RR^n$) is the constant functor from that path component to $\FF_2[n]$ (This is roughly Thom isomorphism).
+
+If $X$ is an object in $\mathcal S_\ast$, then $\Sigma X=\colim(\ast\leftarrow X\rightarrow\ast)$. Then there is a bijection for any $X$, $Y$
+\[[\Sigma X,Y]_{\mathcal S_\ast}\to [X,\Omega Y]_{\mathcal S_\ast}\]
+\begin{prop}
+    $\Sigma S^n= S^{n+1}$.
+\end{prop}
+\begin{thm}[Freudenthal]
+    If $X$ is a pointed connected Kan complex s.t. $\pi_i X=0$ for $0<i<n$, then the map $\pi_i(X)\to\pi_{i+1}(\Sigma X)$ is an isomorphism for $i\le 2n-2$.
+\end{thm}
+\begin{crly}
+    For fixed $n$ and $k$ sufficiently large, $\pi_{i+k}(S^k)$ is independent of $k$.
+\end{crly}
+These are called the stable homotopy groups of spheres.
+
+------------------
+
 
 \end{document}

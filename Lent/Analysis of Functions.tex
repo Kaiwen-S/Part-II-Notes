@@ -934,5 +934,71 @@ Since $C_c^\infty$ is dense in $H_0^1$ and $L^2$, this equation is the same as s
  \begin{crly}
      If $f\in C^\infty(\Omega)\cap L^2(\Omega)$, then $v\in H_0^1(\Omega)\cap C^\infty(\Omega)$ solves $-\nabla^2 v+v=f$ on $\Omega$ (pointwise)
  \end{crly}
- 
+\begin{thm}[Rellich-Kondrashov]
+    Let $\Omega\subseteq\RR^n$ be open and bounded. Let $u_j\in H_0^1(\Omega)$ s.t. $\|u_j\|_{H^1}\le K$ for all $j=1,2,...$, and some $K>0$. Then $\exists u\in H_0^1(\Omega)$ s.t. $u_{j_k}\to u$ in $L^2(\Omega)$ along a subsequence.
+\end{thm}
+\begin{proof}
+    By Banach-Alaoglu in $H_0^1(\Omega)$, we obtain $u_{j_k}\rightharpoonup u$ in $H_0^1$ and then in $L^2$ (weakly), and $\|u\|_{H^1}\le K$. Also $u_{j_k}$, $u$ vanish a.e. on $\Omega^c$ so \begin{align*}\|u_{j_k}-u\|_{L^2(\Omega)}&=\|u_{j_k}-u\|_{L^2(\RR^n)}=\frac{1}{(2\pi)^n}\|\hat u_{j_k}-\hat u\|_{L^2(\RR^n)}\\ &=\frac{1}{(2\pi^n)}\left(\int_{|z|>R}|\hat u_{j_k}(z)-\hat u(z)|^2dz+\int_{|z|<R}|\hat u_{j_k}(z)-\hat u(z)|^2dz\right)\\ \end{align*}
+    
+    Given $\e>0$, have
+    \[\int_{|z|>R}|\hat u_{j_k}(z)-\hat u(z)|^2dz\le\int_{|z|>R}\frac{1+|z|^2}{1+|z|^2}(|\hat u_{j_k}(z)|^2+|\hat u(z)|^2)dz\le \frac{2}{1+R^2}(\|u_{j_k}\|_{H^1}^2+\|u\|_{H^1}^2)<\e\] for $R$ sufficiently large.
+    
+    For $z\in \RR^n$ fixed,
+    \begin{align*}
+        \hat u_{j_k}(z)=\int_{\RR^n}e^{-ix\cdot z}u_{j_k(x)}dx=\int_{\Omega}e^{-ix\cdot z}u_{j_k}(x)dx=\langle e^{-i\langle\cdot,z\rangle},u_{j_k}\rangle\to \langle e^{-i\langle\cdot,z\rangle},u\rangle_{L^2(\Omega)}=\hat u(z)
+    \end{align*}
+    by weak convergence. Also \[|\hat u_{j_k}(z)|+|\hat u(z)|\le \|u_{j_k}\|_{L^1(\Omega)}+\|u\|_{L^1(\Omega)}\overset{\text{C.S.}}{\le}C_\omega(\|u_{j_k}\|_{L^2(\Omega)}+\|u\|_{L^2(\Omega)})\le 2C_\Omega K\] which is $dz$-integrable on $\{z:|z|\le R\}$, so $\int_{|z|<R}|\hat u_{j_k}(z)-\hat u(z)|^2dz\to 0$ by DCT.
+\end{proof}
+\begin{crly}
+    The solution operator $S$ from $(\dagger')$ is a compact linear self-adjoint operator on $L^2(\Omega)$
+\end{crly}
+\begin{proof}
+    $S$ maps $L^2$ into $H_0^1$ (bounded linear) and use Rellich-Kondrashov.
+\end{proof}
+By spectral theorem, there exists ONB $\{w_k:k\in\NN\}$ of $L^2(\Omega)$ and real e-values $\mu_k\downarrow 0$ as $k\to\infty$ s.t. \[Sw_k=\mu_kw_k\] in $L^2(\Omega)$. Thus $w_k\in H_0^1$. For all $\varphi\in H_0^1$
+\begin{align*}
+    \langle w_k,\varphi\rangle_{L^2}\overset{(\dagger')}{=}\langle Sw_k,\varphi\rangle_{H^1}=\mu_k\langle w_k,\varphi\rangle_{H^1}
+\end{align*} Tes $\varphi=w_k$, see that $1=\langle w_k,w_k\rangle_{L^2}=\mu_k\|w_k\|_{H^1}$, so $\mu_k>0$ for all $k$. In $\calD'(\Omega)$,
+\begin{align*}
+    (-\nabla^2+I)w_k=(-\nabla^2+I)\frac{\mu_k}{\mu_k}w_k=\frac{1}{\mu_k}(-\nabla^2+I)Sw_k=\frac{w_k}{\mu_k}
+\end{align*}
+Therefore, \[-\nabla^2w_k=\left(\frac{1}{\mu_k}-1\right)w_k=\lambda_kw_k\]
+where $\lambda_k=\frac{1}{\mu_k}-1\uparrow\infty$ are the e-values of $-\nabla^2$. The weak form is
+\[\langle Dw_k,D\varphi\rangle_{L^2}=\lambda_k\langle w_k,\varphi\rangle_{L^2}\] for all $k$ and all $\varphi\in\calD(\Omega)$ (in fact $H_0^1(\Omega)$)
+Note that $w_k=f$ in $(\dagger')$ and in $H_0^1$, so iterating the interior regularity thm, $w_k\in C^\infty(\Omega)$. Thus $-\nabla^2w_k=\lambda_kw_k$ is true on $\Omega$ ptwise.
+\begin{thm}[Poincare inequality]
+    For all $u\in H_0^1(\Omega)$, \[\frac{\langle Du,Du\rangle_{L^2}}{\langle u,u\rangle_{L^2}}\ge\lambda_1>0\]
+\end{thm}
+\begin{proof}
+    ES
+\end{proof}
+We can now solve the Dirichlet problem for the Laplace equation
+\[\begin{cases}
+    -\nabla^2 v=f & \text{on }\Omega\\
+    v=0 & \text{on }\partial\Omega
+\end{cases}\]
+or the weak form: find $v\in H_0^1$ $\langle Dv,D\varphi\rangle_{L^2}=\langle f,\varphi\rangle_{L^2}$ for all $\varphi\in\calD(\Omega)$. Denote this by $(\ast)$
+\begin{thm}
+    There exists a unique solution $v\in H_0^1(\Omega)$ to $(\ast)$, for any $f\in L^2(\Omega)$. 
+    \[v=\sum_{k=1}^\infty\frac{1}{\lambda_k}\langle w_k,f\rangle_{L^2}w_k\]
+\end{thm}
+\begin{proof}
+    Take partial sums $v_J=\sum_{n=1}^J\lambda_k^{-1}\langle w_k,f\rangle_{L^2}w_k$, $J\in\NN$, then (for $J'<J$) 
+    \begin{align*}
+        \|v_J-v_{J'}\|_{H^1}^2&=\langle v_J-v_{J'},v_J-v_{J'}\rangle_{L^2}+\langle D(v_J-v_{J'}),D(v_J-{v_{J'}})\rangle\\
+        &=\sum_{k=J'+1}^J\lambda_k^{-1}\langle w_k,f\rangle^2+\sum_{k,k'=J'+1}^J\lambda_k^{-1}\lambda_{k'}^{-1}\langle f,w_k\rangle\langle f,w_{k'}\rangle\langle Dw_k,Dw_{k'}\rangle_{L^2}\\
+        &=\sum_{k=J'+1}^J\lambda_k^{-1}\langle w_k,f\rangle^2+\sum_{k,k'=J'+1}^J\lambda_k^{-1}\lambda_{k'}^{-1}\langle f,w_k\rangle\langle f,w_{k'}\rangle\lambda_k^{-1}\langle w_k,w_{k'}\rangle_{L^2}\\
+        &\le \sum_{k=J'+1}^\infty(\lambda_k^{-2}+\lambda_k^{-1}\langle w_k,f\rangle_{L^2}^2\\
+        &\le C(\lambda_1)\sum_{k=J'+1}^\infty\langle f,w_k\rangle^2\overset{J'\to\infty}{\longrightarrow}0
+    \end{align*}
+    So $v_J$ is Cauchy in $H_0^1$, so $v\in H_0^1$
+    Can check
+    \begin{align*}
+        \langle Dv,D\varphi\rangle_{L^2}&\overset{ibp}{=}\langle v,-\nabla^2\varphi\rangle_{L^2}=\sum_{k=1}^\infty\lambda_k^{-1}\langle v,w_k\rangle_{L^2}\langle w_{k},-\nabla^2\varphi\rangle_{L^2}\\
+        &=\sum_{k=1}^\infty\langle v,w_k\rangle_{L^2}\langle w_k,\varphi\rangle_{L^2}\\
+        &=\langle v,\varphi\rangle_{L^2}
+    \end{align*}
+    We used that $\langle w_k,-\nabla^2\varphi\rangle_{L^2}=\langle Dw_k,D\varphi\rangle_{L^2}=\lambda_k\langle w_k,\varphi\rangle_{L^2}$.
+\end{proof}
+
 \end{document}
