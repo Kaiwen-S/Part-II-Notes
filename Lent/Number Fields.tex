@@ -631,7 +631,39 @@ so $\alpha\in\mathcal O_K^\times$ iff $\Log(\alpha)\in V= \{x_1+\cdots+x_{r+s}=0
 
 \section{Cyclotomic Fields}
 $\theta_n=e^{i2\pi/n}$
+\[\overset{\overset{\overset{\sqcap}{--}}{\overset{\smallfrown}{\circ}\overset{\smallfrown}{\circ}}}{\overset{*}{-}}\tag{Owen's emoji}\]
 \begin{thm}
     Let $p\ge 3$ be a prime, $K=\QQ(\theta_p)$. Have $\mathcal O_K=\ZZ[\theta_p]$ and $\disc K=(-1)^{(p-1)/2}p^{p-2}$. There is a prime $\mathfrak p\trianglelefteq\mathcal O_K$ s.t. $\langle p\rangle=\mathfrak p^{p-1}$. For all $i\neq j$ in $\{0,1,...,p-1\}$, $\mathfrak p=\langle \theta_p^i-\theta_p^j\rangle$. The roots of unity in $K$ are $\{\pm\theta_p^j:j=0,...,p-1\}$
 \end{thm}
+\begin{proof}
+    Let $t\in\RR_{>0}$ be the smallest s.t. $e^{2\pi i t}\in W$. Claim that for all $s\in\RR_{>0}$ s.t. $e^{2\pi i s}$ we have $\frac{s}{t}\in\ZZ$. Have $e^{2\pi i(s-\lfloor s/t\rfloor t)}\in W$ and $s-\lfloor s/t\rfloor t\in[0,t)$, so $s-\lfloor s/t\rfloor t=0$, so $s/t\in\ZZ$. 
+    
+    Remains to show that $t=\frac{1}{2p}$. By the claim, for $s=\frac{1}{2p}$, have $t=\frac{1}{2kp}$. WTS $k=1$. Consider $[\QQ(e^{2\pi i/(2\pi p)}):\QQ]=\varphi(2kp)\le \varphi(p)$. Since $p\nmid k$, have $\varphi(2k)=1$, so $k=1$.
+\end{proof}
+\begin{prop}
+    $(1-\theta_p)\cdots(1-\theta_p^{m-1})=p$. Moreover, for all $i\neq j\in\{0,...,p-1\}$ there is a unit $u_{ij}\in\ZZ[\theta_p]$ s.t. $u_{ij}(\theta_p^i-\theta_p^j)^{p-1}=p$.
+\end{prop}
+\begin{lem}
+    For all $i,j,k,l\in[0,...,p-1]$ with $i\neq j$, $k\neq l$, have $\frac{\theta^i-\theta^j}{\theta^k-\theta^l}\in\ZZ[\theta]^\times$
+\end{lem}
+\begin{proof}
+    By symmetry, suffices to prove $\in\ZZ[\theta]$. Multiply by a suitable power of $\theta$ assume $\theta^i=1=\theta^k$.
+\end{proof}
+\[\sum\Sigma\prod\Pi\coprod\bigoplus\bigotimes\boxtimes\boxplus\]
+\begin{proof}[Proof of prop]
+    Evaluate the min poly at $1$.
+
+    $u_{ij}=\frac{(1-\theta)\cdots(1-\theta^{p-1})}{(\theta^i-\theta^j)^{p-1}}$ is a unit.
+\end{proof}
+\begin{lem}
+    $\disc(\ZZ[\theta])=(-1)^{(p-1)/2}p^{p-2}$
+\end{lem}
+\begin{proof}
+    Write $f(x)=x^n-1$, $g(x)=\frac{f(x)}{x-1}$.
+    Have $f'(\theta)=g'(\theta)(\theta-1)+g(\theta)=g'(\theta)(\theta-1)$. $N(\theta-1)=(-1)^{p-1}p, N(f'(\theta))=p^{p-1^{p-1}}$
+    Compute $\disc(\ZZ[\theta])=(-1)^{(p-1)(p-2)/2}N(g'(\theta))$.
+\end{proof}
+\begin{proof}[Proof of 7.1 ct'd]
+    Claim $\mathcal O_K=\ZZ[\theta]$.
+\end{proof}
 \end{document}

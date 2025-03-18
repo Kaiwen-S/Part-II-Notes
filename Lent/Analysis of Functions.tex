@@ -999,6 +999,25 @@ or the weak form: find $v\in H_0^1$ $\langle Dv,D\varphi\rangle_{L^2}=\langle f,
         &=\langle v,\varphi\rangle_{L^2}
     \end{align*}
     We used that $\langle w_k,-\nabla^2\varphi\rangle_{L^2}=\langle Dw_k,D\varphi\rangle_{L^2}=\lambda_k\langle w_k,\varphi\rangle_{L^2}$.
-\end{proof}
 
+    Need to show uniqueness. Suppose $v'\in H_0^1(\Omega)$ s.t. $(\ast)$ holds. Then let $w=v-v'\in H_0^1(\Omega)$ where $\langle Dw, D\varphi\rangle_{L^2}=\langle f-f,\varphi\rangle_{L^2}=0$ for all $\varphi\in H_0^1(\Omega)$.
+    Now $\|w\|^2_{H^1}=\langle w,w\rangle_{L^2}+\langle Dw,Dw\rangle_{L^2}\le (\frac{1}{\lambda_1}+1)\langle Dw,Dw\rangle_{L^2}=0$, so $w=0$ a.e.
+\end{proof}
+\begin{rem}
+    One can also show interior regularity estimates to deduce that for $f\in C^\infty(\Omega)\cap L^2(\Omega)$ then $v\in C^\infty(\Omega)$.
+\end{rem}
+\section{Variational Problems* (non-examinable)}
+Consider minimizing a functional $F(u)=\|u\|_{H^2}^2-\langle f,u\rangle_{L^2}$ over $H_0^1(\Omega)$, where $f$ is fixed in $L^2(\Omega)$
+\begin{thm}
+    Let $f\in L^2(\Omega)$. Then $\inf\{F(u):u\in H_0^1(\Omega)\}\ge\sigma>-\infty$. Moreover, there exists a unique $w\in H_0^1$ s.t. $F(w)=\sigma$, and $w$ solves the PDE $-\nabla^2 w+w=f$ in the weak sense.
+\end{thm}
+\begin{proof}
+    Use the inequality $ab\le a^2/2+b^2/2$ for $a,b\ge 0$. By Cauchy-Schwarz, $F(u)=\|u\|_{H^1}^2-2\langle f,u\rangle_{L^2}\ge\|u\|_{H^1}^2-2\|f\|_{L^2}\|u\|_{L^2}\ge \|u\|_{H^1}^2-2\|f\|_{L^2}^2-\frac{1}{2}\|u\|_{L^2}^2\ge \frac12\|u\|_{H^1}^2-2\|f\|_{L^2}^2\ge -2\|f\|_{L^2}>-\infty$.
+
+    Then take $u_k\in H_0^1$ s.t. $F(u_k)\to\sigma$. WLOg, assume $|F(u_k)|\le\bar F<\infty$. Then, 
+    $\|u_k\|_{H^1}^2=F(u_k)+2\langle f,u_k\rangle_{L^2}\le \bar F+2\|f\|_{L^2}\|u_k\|_{L^2}\le \bar F+2\|f\|_{L^2}^2+\frac{1}{2}\|u_k\|_{H^1??}^2$. Subtracting we see $\|u_k\|_{H^1}^2\le 2\bar F+4\|f\|_{L^2}^2$ for all $k$, so $u_k$ is bounded in $H_0^1$. By Banach-Alaoglu, there exists $u_{k_j}\rightharpoonup w$ weakly in $H_0^1$ and $L^2$ for some $w\in H_0^1(\Omega)$. By sheet 2, know that $\|w\|_{H^1}^2\le\liminf\|u_{k_j}\|_{H^1}^2$ and $\langle f,w\rangle=\lim\langle f,u_{k_j}\rangle_{L^2}$. We have $F(w)=\|w\|_{H^1}^2-2\langle f,w\rangle_{L^2}\le\liminf(\|u_{k_j}\|_{H^1}-2\langle f, u_{k_j}\rangle_{L^2})=\sigma$, and $F(w)\ge\sigma$ by defn of inf, so $F(w)=\sigma$.
+
+    To prove uniqueness, it suffices to show that $w$ solves the PDE. For all $v\in H_0^1$, $t\in \RR$, we have $F(w)\le F(w+tv)$ and $\frac{d}{dt}F(w+tv)|_{t=0}=0$. Then $F(w+tv)=\|w+tv\|_{H^1}^2-2\langle f,w+tv\rangle_{L^2}=\|w\|_{H^1}^2+t^2\|v\|_{H^1}^2+2t\langle w,v\rangle_{H^1}-2t\langle f,v\rangle_{L^2}-2\langle f,w\rangle_{L^2}$, so
+    $\frac{d}{dt}(F(w+tv))=2t\|v\|_{H^1}+2(\langle w,v\rangle_{H^1}-\langle f,v\rangle_{L^2})$. At $t=0$, must have $\langle w,v\rangle_{H^1}=\langle f,v\rangle_{L^2}$ for all $v\in H_0^1$.
+\end{proof}
 \end{document}

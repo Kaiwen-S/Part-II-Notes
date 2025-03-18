@@ -1315,5 +1315,54 @@ These are called the stable homotopy groups of spheres.
 
 ------------------
 
+Kervaire-Milnor: If $n\ge 5$, the group (under connected sum) of diffeo classes of oriented manifolds htpy equivalent to $S^n$ differs from $\pi_n^{st}$ via two cyclic groups.
+(By the 80s the order of these groups is known unless $n$ is 2 less than a power of 2. In 2009 (Hills-Hopkins-Ravenel) solved every case except $n=126$. The final case was resolved in 2024 (Wang-Xu-Weilen))
 
+\section{$H\ZZ$-localization}
+\begin{defn}
+    Say that a Kan complex $W$ is $H\ZZ$-local if for every map of Kan complexes $X\to Y$ s.t. $H_\ast(X;\ZZ)\to H_\ast(Y;\ZZ)$ is an iso, $[Y,W]\to [X,W]$ is a bijection
+\end{defn}
+\begin{thm}[Bousfield]
+    For any space $X$ there exists a map $X\to L_{H\ZZ}X$ (to the $H\ZZ$-localization of $X$) which is initial among every map to $H\ZZ$-local objects.
+\end{thm}
+\begin{lem}
+    If $X\to Y$ is a map of $H\ZZ$-local spaces, then $X\to Y$ is a homotopy equivalence if and only if it is a homology iso.
+\end{lem}
+\begin{thm}
+    All simply connected spaces are $H\ZZ$-local.
+\end{thm}
+\begin{example}
+    $G$ be the group of permutations of $\NN$ which fix all but finitely many integers (the limit of symmetric groups) Can think of it as one object category and take the nerve to get a Kan complex $X$, and 
+    \begin{thm}
+        For $i>0$, $\pi_i L_{H\ZZ}X\cong \pi_i^{st}$
+    \end{thm}
+\end{example}
+\begin{rem}
+    Can do something similar for any group $G$, when $G$ is the limit of $\operatorname{GL}_n(\RR)$, i.e., $G=\operatorname{GL}_\infty(\RR)$ Then $\pi_iL_{H\ZZ}N(BG)=K_i(\RR)$, the $i$th algebraic $K$ group of $\RR$.
+\end{rem}
+\section{Higher Algebra}
+\begin{rem}
+    A simplicial abelian group is a Kan complex $A_\bullet$ with a map $+:A_\bullet\times A_\bullet\to A_\bullet$ which is commutative, associative, etc.
+\end{rem}
+We could instead ask that $+$ be commutative (etc.) only up to coherent homotopy, e.g. $x+y$ and $y+x$ are connected by a specified path.
+
+A space with a commutative, associative,..., addition up to coherent homotopy is called a (connected) spectrum.
+
+$\mathbb E_\infty$-rings: a space with $+,\cdot: A\times A\to A$ s.t. $+,\cdot$ are comm, associative, etc. and $\cdot$ distributes over $+$. (up to coherent homotopy)
+\begin{example}
+    Any classical ring, simplicial ring, and $\mathbb S$. $\mathbb S$ is the initial $\mathbb E_\infty$-ring (compare $\ZZ$ is the initial classical ring).
+\end{example}
+\begin{thm}
+    $\pi_i\mathbb S$ is $\pi_i^{st}$.
+\end{thm}
+We can try to do algebra with $\mathbb E_\infty$-ring spectra and associative rings.
+\begin{example}
+    In classical algebra, every field is a $\FF_p$-module or $\QQ$-module. We say that a ring spectrum is a field if every module over it is free.
+\end{example}
+\begin{thm}
+    Every field is a direct sum of $\QQ$s or direct sum of $\FF_p$s or a direct sum of Morava $K$-theories $K(n,p)$ of which there is one for every $n\ge 1$ and prime $p$.
+\end{thm}
+\begin{rem}
+    Hill-Hopkins-Ravanel computed the order of the Kervaire-Milnor cyclic group by computing after $\otimes$ with $K(4,2)$.
+\end{rem}
 \end{document}
