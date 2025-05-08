@@ -9,7 +9,7 @@
 \usepackage[a4paper,margin=1in,footskip=0.25in]{geometry}
 \usepackage{listings}
 \usepackage{xcolor}
-
+\usepackage{wasysym}
 \usepackage{tabularx,capt-of}
 
 \usepackage{blindtext}
@@ -1266,5 +1266,87 @@ Proof omitted.
 \begin{defn}
     An elliptic curve is a curve of genus $1$ together with a base point $P_0\in E$ (written $\mathcal O_E$).
 \end{defn}
-Suppose $P,Q\in E$ elliptic curve $(E,P_0)$. The divisor $P+Q-P_0$ has degree $1$, so $\ell(P+Q-P_0)=1$, so $\exists$ an effective deg 1 divisor equivalent to $P+Q-P_0$, i.e., $R\in E$ s.t. $P+Q-P_0\sim R$. Distinct pts on $E$ are inequivalent (since $E\not\cong\PP^1$), so $R$ is unique. Define $P\oplus_E Q=R$, i.e., $P+Q=R$. 
+Suppose $P,Q\in E$ elliptic curve $(E,P_0)$. The divisor $P+Q-P_0$ has degree $1$, so $\ell(P+Q-P_0)=1$, so $\exists$ an effective deg 1 divisor equivalent to $P+Q-P_0$, i.e., $R\in E$ s.t. $P+Q-P_0\sim R$. Distinct pts on $E$ are inequivalent (since $E\not\cong\PP^1$. For any curve of genus $>0$, if $P\sim Q$, then there exists $f$ with a simple pole, which would imply that $f$ is an isomorphism to $\PP^1$), so $R$ is unique. Define $P\oplus_E Q=R$, i.e., $P+Q=R$. 
+\begin{thm}
+    $\oplus_E$ makes $E$ into an abelian group with identity $\mathcal O_E=P_0$. The map $P\mapsto [P-P_0]\in\cl^0(E)$ is an isomorphism of groups.
+\end{thm}
+\begin{proof}
+    Define $\beta(P)=[P-P_0]$. If $P,Q\in E$, then $\beta(P+Q)=\beta(R)=[R-P_0]=[P+Q-P_0-P_0]=[P-P_0]+[Q-Q_0]=\beta(P)+\beta(Q)$. $\beta$ is injective since $P-P_0\sim Q-P_0\implies P\sim Q\implies P=Q$. $\beta$ is surjective [let $D$ be a divisor of deg $0$, $D+P_0$ has degree $1$, so $\ell(D+P_0)=1$, so there exists a pt $P\in E$ s.t. $D+P_0\sim P$, so $D=\beta(P-P_0)$].
+\end{proof}
+\begin{rem}
+    In genus $>1$, the injectivity argument still applies, so $V$ injects into a group. One can show that this group is a projective variety of dimension $g$, called the Jacobian of $V$.
+\end{rem}
+\[\underset{\cdot.}{\frown}\tag{Owen's signature}\]
+\begin{thm}
+    Let $(E,P_0)$ be an elliptic curve, then $3P_0$ provides an embedding of $E$ into $\PP^2$ as a plane cubic.
+\end{thm}
+\begin{proof}
+    If $\deg D=m>0$, then $\ell(D)=\deg(D)$, so $mP_0$ is an embedding if $m\ge 3$. $\ell(mP_0)=m$ for $m>1$, so $L(3P_0)$ has a basis $1,x,y$ where $1,x$ is a basis for $L(2P_0)$, so $x$ is a degree $2$ morphism to $\PP^1$; $y$ is a degree 3 morphism to $\PP^1$ by considering preimages of $\infty$. So $(1:x:y):E\to\PP^2$ is an embedding.
+
+    \begin{enumerate}
+        \item $L(4P_0)$ has basis $1,x,y,x^2$
+        \item $L(5P_0)$ has basis $1,x,y,x^2,xy$
+        \item $L(6P_0)$ contains these and $x^3$ and $y^2$, but $\ell(6P_0)=6$, so there exists a non-trivial linear dependence relation necessarily involving both $y^2$ and $x^3$.
+    \end{enumerate}
+    Homogenizing, this is a cubic, so $E\subseteq Z(F)$ for a cubic $F$. The components of $Z(F)$ (if smooth) have genus $0$. $E$ is an isomrophism onto its image, so onto a smooth component, which cannot have genus $0$, so $Z(F)$ is irreducible and $E$ maps onto $Z(F)$.
+\end{proof}
+
+Note $P_0$ is the unique pt of $E$ sent to line at $\infty$. We may assume $P_0=(0:1:0)$ and that the cubic has no $yz^2$ term. ($P_0$ unique, $z=0\implies F(x,y,0)=x^3$), so $F:ay^2z+byz^2=G(x,z)$, so can make $b=0$ by affine change of coord and assume $F:y^2z=\prod_{i=1}^3(x-\lambda_iz)$.
+\begin{thm}
+     Let $E=Z(F)$, $F:y^2z=\prod_{i=1}^3(x-\lambda_iz)$ an elliptic curve with $P_0=(0:1:0)$. Then $P+Q+R=\mathcal O_E$ iff $P,Q,R$ are collinear.
+\end{thm}
+\begin{proof}
+    Consider the map $\beta$. See that $P+Q+R=\mathcal O_E$ iff $P+Q+R\sim 3P_0$ iff $\exists$ rational function $f$ with $\divi(f)=P+Q+R-3P_0$. Note $f\in L(3P_0)$. So $f$ is a linear combination of $1,x,y$, i.e., $L(x,y,z)/z$ for a linear $L$. The zero set of $f$ is precisely $P,Q,R$, so $P,Q,R$ exists iff such an $f$ exists.
+\end{proof}
+\subsection{More Consequences of Riemann-Roch}
+\begin{defn}
+    A curve $V$ of genus $g\ge 2$ is hyperelliptic if $\exists\pi:V\to\PP^1$ nonconst of degree $2$.
+\end{defn}
+If $V$ is hyperelliptic, consider $D=\pi^\ast(\infty)$ (poles of $\pi$), then $L(D)$ has dim $\ge 2$ since $1,\pi\in L(D)$. On the other hand, for $Q\in V$, $\ell(Q)=1$ since $V$ doesn't have deg $1$ map to $\PP^1$. So $\ell(D)\le \ell(D-P)+1\le 2$, so $\ell(D)=2$.
+\begin{prop}
+    Let $g(V)>1$ and suppose there exists an effective divisor $D$ of degree $2$ on $V$ with $\ell(D)=2$. Then $\varphi_D:V\to\PP^1$ has degree $2$ (and $\varphi_D^\ast(\infty)=D$), so $V$ is hyperelliptic. All genus $2$ curves are hyperelliptic, and there exists hyperelliptic curve of every genus.
+\end{prop}
+\begin{proof}
+    ES4
+\end{proof}
+\begin{prop}
+    $g\ge 3$, $\varphi_{K_V}$ is an embedding iff $V$ is not hyperelliptic.
+\end{prop}
+\begin{proof}
+    Suppose $\varphi_{K_V}$ is not an embedding. Then $\exists P,Q\in V$ s.t. $\ell(K_V-P-Q)\ge g-1$. $\ell(P+Q)=\ell(K_V-P-Q)+1-g+2\ge 2$ by R-R. Since $\ell(P+Q)\le \ell(P)+1=2$. Then the previous proposition implies that $V$ is hyperelliptic.
+
+    Conversely, suppose $V$ is hyperelliptic. Then have $\pi:V\to\PP^1$ of degree $2$ with $\pi^\ast(\infty)$ effective divisor of degree $2$ and $\ell(D)=2$, so $\ell(K_V-D)\ge g-1$ working conversely.
+\end{proof}
+
+\[\overset{\rotatebox[origin=c]{60}{$\sim$}}{\rotatebox[origin=c]{90}{\aquarius}}\overset{\overset{\overset{\backslash\ /}{\aquarius}}{O\vert O}}{\smile}\overset{\rotatebox[origin=c]{120}{$\sim$}}{\rotatebox[origin=c]{90}{\aquarius}}\tag{Owen's signature final version}\]
+
+\section{Blow-ups and Completeness of Projective Variety}
+\begin{defn}
+    A variety $V$ is complete if for all varieties $Y$, $\pi_2:X\times Y\to Y$ is closed.
+\end{defn}
+\begin{thm}
+    Every projective variety is complete. (proper over the base field)
+\end{thm}
+
+Blowup of a point on groj space: Let $P=(0:\cdots:1)\in\PP^n$ and $H=Z(x_n)$. Projection $\pi_P$ from $P$. $\pi_P:\PP^n\dashto\PP^{n-1}$ regular away from $P$.
+\begin{defn}
+    The blowup of $\PP^n$ at $P$ is $Bl_P(\PP^n)=\overline{\Gamma_{\pi_P}}\subseteq \PP^n\times\PP^{n-1}$.
+\end{defn}
+Note that $Bl_P(\PP^n)=Z(\{x_iy_j-y_ix_j:0\le i,j\le n-1\})$. The first projection $\pi_1$ is a birational map $Bl_P(\PP^n)\to\PP^n$ with $\pi^{-1}(Q)=Q$ for all $Q\neq P$, and $\pi^{-1}(P)=\PP^{n-1}$. [$Bl_p(\PP^n)=\{Q,[L]:Q\in L\}\subseteq \PP^n\times \PP^{n-1}$. Parametrizes the lines through $P$.] The second projection $q:Bl_P(\PP^n)\to\PP^{n-1}$ is the projection of a locally trivial $\PP^1$-bundle. 
+
+Primary use: birationally identify potentially singular varieties with smooth varieties.
+
+\begin{proof}
+    Step 1: $\PP^1$ is complete. First assume $Y=\PP^m$. Closed subsets are precisely the zero loci of bihomogeneous polys $F(x_0,x_1,\vec y)=a_d(y)x_0^d+a_{d-1}(y)x_0^{d-1}x_1+\cdots +a_0(y)x_1^d$. Two (one-variable) polys share a root/common factor iff $\Res(f,g)=0$. Claim that for $Z\subseteq \PP^1\times\PP^m=Z(\{\Res(f,g):f,g\text{ dehomogenization of }F,G\in I(Z)\})$. Can assume wlog that $Y=\PP^m$ and closed subsets in $Y$ are restrictions of closed set in $\PP^m$, so $\PP^1$ is complete.
+
+    It suffices to show that the second proj of $\PP^n\times \PP^{m}\to\PP^m$ is a closed map for all $n$. Notice that if $V$ is a proj variety and $W\subset V$ a subset with $W\cap U_i$ closed in $U_i$ then $W$ is closed.
+    \begin{center}
+        % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZARgBoAGAXVJADcBDAGwFcYkQAhRgfTQAoAOgIAKwgHpgAlELwBbeAAIhosbJABfUuky58hFACYK1Ok1btl4sDKzy4l1Rq0gM2PASJHiJhizaIQBzVNbTc9IjJvGl9zAIdgMABaYnUbOyURcWDnV10PFHJSKNM-dgBVbgM0+CCnULz9ZEKqaLN-QMyxYmq4BQqsHoyVYJMYKABzeCJQADMAJwg1RABWGhwIJHIQkHnFzbWNxDIS2I60AYE5GoEsKDqdhaWAZgOkIxP2oXPK+92lgBZXognts-vsQOskC8PuwAI6DIS3X6PJDHSGId4xT4Cb4GZF7FZA-7qSjqIA
+\begin{tikzcd}
+\PP^1\times U_i\times \PP^m \arrow[r] \arrow[d] & Bl_p(\PP^n)\times \PP^m \arrow[r, "\pi\times\id"] \arrow[d, "q\times \id"] & \PP^n\times\PP^m \arrow[d, "\pi_2"] \\
+U_2\times\PP^m \arrow[r]                        & \PP^{n-1}\times \PP^m \arrow[r, "\pi_2"]                                   & \PP^m                              
+\end{tikzcd}
+    \end{center}
+    Assume $Z$ is closed in $\PP^n$
+\end{proof}
 \end{document}

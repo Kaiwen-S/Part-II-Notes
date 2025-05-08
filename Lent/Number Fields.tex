@@ -666,4 +666,53 @@ $\theta_n=e^{i2\pi/n}$
 \begin{proof}[Proof of 7.1 ct'd]
     Claim $\mathcal O_K=\ZZ[\theta]$.
 \end{proof}
+
+\section{Special Case of Fermat's Last Thm}
+
+\begin{defn}
+    $p$ is a regular prime if $p\nmid h(K)$.
+\end{defn}
+\begin{thm}
+    Assume $p\ge 5$ is a regular prime. Then there are no integer $x,y,z\in\ZZ$ s.t. $\gcd(x,y,z)=1$ and $p\nmid xyz$ and $x^p+y^p=z^p$.
+\end{thm}
+In this section, assume $p\ge 5$ is a regular prime, $x,y,z\in\ZZ$, $\gcd(x,y,z)=1$, $p\nmid xyz$, $x^p+y^p=z^p$. $P$ is the unique prime ideal lying above $p$
+\begin{prop}
+    $\exists\alpha\in\mathcal O_K$, $a\in\mathcal O_K^\times$ s.t. $x+\theta y=u\alpha^p$
+\end{prop}
+\begin{proof}
+    Have factorization $(x+y)(x+\theta y)\cdots(x+\theta^{p-1}y)=z^p$. 
+    
+    Claim: $\langle x+\theta^iy\rangle,\langle x+\theta^jy\rangle$ are coprime for $i\neq j$. Suppose $Q$ is a prime ideal dividing both. Then note that $Q\neq P$ as otherwise $P\mid \langle z\rangle$, so $p\nmid z$, contradiction. We have $x+\theta^iy,x+\theta^jy\in Q$, so taking proper linear combinations we see that $(\theta^i-\theta^j)y\in Q$, $(\theta^i-\theta^{-j})x\in Q$. Since $Q\neq P$, we have $Q\mid \langle x\rangle,\langle y\rangle$, But $\gcd(x,y)=1$, so $\exists a,b\in\ZZ$ s.t. $ax+by=1$, so $Q\mid \langle q\rangle$. Contradiction.
+
+    By unique factorization of ideals, any prime in the factorization of $\langle x+\theta y\rangle$ appears with multiplicity divisible by $p$. So $\langle x+\theta y\rangle= I^p$. Claim: $I=\langle\alpha\rangle$ is principal. Consider $[I]$, the class of $I$ in $\cl(K)$. We have $[I^p]=[\langle 1\rangle]$. There is no element in $\cl(K)$ of order $P$. Hence $[I]=[\langle 1\rangle]$, so $I$ is principal.
+\end{proof}
+\begin{prop}
+    $x\equiv y\pmod p$
+\end{prop}
+\begin{proof}[Proof of Thm]
+    Apply the proposition for $x,y,z$ and $x,-z,-y$. $x\equiv y\equiv z\pmod p$ Then $0=x^p+y^p-z^p\equiv 3x^p\pmod p$. Contradiction.
+\end{proof}
+Let $\tau:K\to K, z\mapsto\bar z$
+\begin{lem}
+    Let $\alpha\in\mathcal O_K$. Then $\alpha^p\equiv \tau(\alpha^p)\pmod p$.
+\end{lem}
+\begin{proof}
+    Let $\alpha=a_0+a_1\theta+\cdots+a_{p-2}\theta^{p-2}$, $a_i\in\ZZ$. For any $\beta_1,\beta_2\in\mathcal O_K$, $(\beta_1+\beta_2)^p\equiv \beta_1^p+\beta_2^p\pmod p$. So $\alpha^p\equiv a_0^p+a_1^p+\cdots a_{p-2}^p\mod\langle p\rangle$, so it's congruent to something in $\ZZ$. $\tau$ is an automorphism of $\mathcal O_K$, so from $\alpha^p\equiv b\mod \langle p\rangle$ we get $\tau(\alpha^p)\equiv b\mod\langle\tau(p)\rangle$ and $\langle\tau(p)\rangle=\langle p\rangle$.
+\end{proof}
+\begin{lem}
+    Let $u\in\mathcal O_K^\times$. Then $\tau(u)=\e u$ for some $\e\in W$.
+\end{lem}
+\begin{proof}
+    Just look at Galois group...
+\end{proof}
+\begin{lem}
+    Assume $a_0+a_1\theta+a_2\theta^2+\cdots+a_{p-1}\theta^{p-1}\equiv b_0+b_1\theta+\cdots b_{p-1}\theta^{p-1}\mod\langle p\rangle$ for some $a_i,b_i\in\ZZ$ and there exists $j\in{0,...,p-1}$ s.t. $a_j=b_j=0$. Then $a_i\equiv b_i\pmod p$ for all $i=0,1,...,p-1$.
+\end{lem}
+\begin{proof}
+    May assume $j=p-1$ (multiply by some power of $\theta$ if necessary). Note that $1,...,\theta^{p-1}$ is an integral basis, so $p,p\theta,...,p\theta^{p-2}$ is a $\ZZ$-module basis of $\langle p\rangle$, so $(a_0-b_0)+\cdots+(a_{p-2}-b_{p-2})\theta^{p-2}\in\langle p\rangle$ iff $p\mid (a_i-b_i)$ for all $i$.
+\end{proof}
+\begin{proof}[Proof of Prop]
+    $x+\theta^{p-1}y=\tau(x+\theta y)=\tau(u\alpha^p)=\e u\alpha^p=\e(x+\theta y)\pmod p$. So $\e=\theta^j$ or $\e=-\theta^j$. In the first case, since $p\ge 5$, there is a term with $0$ coeff on both sides of $x+\theta^{p-1}y=x\theta^j+y\theta^{j+1}$. By the third lemma, $\{0,p-1\}\equiv \{j,j+1\}\pmod p$. This is possible only if $j\equiv  p-1\pmod p$. So, $x+\theta^{p-1}y\equiv x\theta^{p-1}+y\pmod p$. By the third lemma again, get $x\equiv y\pmod p$. In the case of $\e=-\theta^j$, we get $x\equiv -y\pmod p$. Then $x^p+y^p-z^p=0\pmod p$. Contradiction.
+\end{proof}
+
 \end{document}
