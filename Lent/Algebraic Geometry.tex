@@ -988,7 +988,7 @@ If $f,g\in k(V)$ on a curve $V$, then $\operatorname{div}(f)=\operatorname{div}(
     Any degree $0$ divisor on $\PP^1$ is principal, so $\cl^0(\PP^1)=\{0\}$ and $\cl(\PP^1)\cong\ZZ$.
 \end{prop}
 \begin{proof}
-    Suppose $D$ is a degree $0$ divisor on $\PP^1$. Write $D=\sum n_PP=n_\infty\infty+\sum_{p\in\bA^1}n_PP$. Note that $n_\infty=-\sum_{p\in\bA^1}n_P$. Construct the poly $f(t)=\sum_{p\in\bA^1}(t-n_P)^{n_P}$, $t=x_1/x_0$. Since $1/t$ is a local coord at $\infty=(0:1)$, $\nu_\infty(f)=-\sum_{p\in\bA^1}n_P=n_\infty$ as needed
+    Suppose $D$ is a degree $0$ divisor on $\PP^1$. Write $D=\sum n_PP=n_\infty\infty+\sum_{p\in\bA^1}n_PP$. Note that $n_\infty=-\sum_{p\in\bA^1}n_P$. Construct the poly $f(t)=\prod_{p\in\bA^1}(t-P)^{n_P}$, $t=x_1/x_0$. Since $1/t$ is a local coord at $\infty=(0:1)$, $\nu_\infty(f)=-\sum_{p\in\bA^1}n_P=n_\infty$ as needed
 \end{proof}
 \begin{rem}
     If $V$ is a curve $\cl^0(V)=\{0\}$, then for $P\neq Q$ on $V$, $P-Q=\operatorname{div}(f)$ for some $f\in k(V)$. $f$ determines a morphism $\varphi:V\to\PP^1$ with $\varphi^{-1}(0)=P,e_P=1$, so $\deg\varphi=1$ so $k(V)=k(\PP^1)$, so $V\simeq\PP^1$.

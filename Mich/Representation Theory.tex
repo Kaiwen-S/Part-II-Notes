@@ -1252,6 +1252,38 @@ Let \[s=\begin{pmatrix}
 Based on the above proposition, we introduce some notation for the conj. classes in $SU(2)$.
 Define $\mathcal O_x=\{A\in SU(2):\operatorname{tr}(A)=2x\}$ for some $x\in[-1,1]$.
 
+The following statements are immediate
+\begin{lem}
+    \begin{enumerate}[(i)]
+        \item If $\chi:SU(2)\to \CC$ is a cts class function, then $\chi$ is uniquely determined by its values on $T$, so $\chi_T$ is even.
+        \item If $\chi$ is a character, then $\chi_T\in \NN_0[z,z^{-1}]^{ev}$
+    \end{enumerate}
+\end{lem}
+
+
+We can construct complex representations of $SU(2)$. Let $V_n$ be the vector space of homogeneous polnomials in $x,y$ with complex coefficients. $SU(2)$ acts on $V_n$ by 
+\[\begin{pmatrix}
+    a&b\\c&d
+\end{pmatrix}\cdot p(x,y)=p(ax+cy,bx+dy)\]
+Note that this is the restriction of representations of $GL_n(\CC)$ on $V_n$.
+
+\begin{thm}
+    $V_n$ is irreducible as a rep of $SU(2)$.
+\end{thm}
+\begin{proof}
+    Suppose $W\le V_n$ is a non-trivial subrep. We consider $\Res^{SU(2)}_T V_n=\bigoplus_{j=0}^n\CC\langle x^jy^{n-j}\rangle$ as representations. Note that $T$ acts on each $\CC\langle x^jy^{n-j}\rangle$. $W$ must contain $\CC\langle x^jy^{n-j}\rangle$ for some $j$. Note that we have 
+    \[\frac{1}{\sqrt 2}\begin{pmatrix}
+        1&1\\-1&1
+    \end{pmatrix}\in SU(2)\]
+    So from $x^jy^{n-j}\in W$ we deduce that $(x-y)^j(x+y)^{n-j}\in W$ By considering degree in $x$, we see that $x^n\in W$. Repeating the same argument, we have $(x+y)^n\in W$, so $W$ contains all $x^jy^{n-j}$, so $W=V_n$.
+\end{proof}
+\begin{thm}
+    $V_n$, $n\in\NN$ are all irreps of $SU(2)$ over $\CC$
+\end{thm}
+\begin{proof}
+    Suppose $\chi$ is a character of an irrep $V$, then $\chi\in\NN_0[z,z^{-1}]^{ev}$. We observe that $\{\chi_{V_n}\}$ is a basis for $\QQ_0[z,z^{-1}]^{ev}$ as a $\QQ$-vector space, so $\chi=\sum_{n=0}^\infty a_n\chi_{V_n}$ for $a_n\in\QQ$. (This is actually a finite sum) Clearing denominators and move the negative terms to LHS, we have $m\chi+\sum_{n\in I}a_n\chi_{V_n}=\sum_{m\in J}a_m\chi_{V_m}$, so $mV\oplus \bigoplus_{n\in I}V_n\cong \bigoplus_{m\in J}V_m$. By irreducibility $V=V_j$ for some $j\in J$. 
+\end{proof}
+
 \section{Characters Table of $\operatorname{GL}_2(\FF_q)$}
 
 \end{document}

@@ -427,7 +427,7 @@ Warning: 1st iso fails, e.g., $l_1\to l_2, x\mapsto x$ is injective, but the ima
     $X$ non-empty complete metric space and $O_1,O_2,...$ a sequence of dense open sets. Then $\bigcap_{n\ge 0}O_n\neq\varnothing$.
 \end{thm}
 \begin{proof}
-    $O_1\neq\varnothing$, so $\exists \overline{B(x_1,\epsilon_1)}\subseteq O_1$ for some $x_1$ and $\epsilon<1$. $O_2$ is dense, so can find $\overline{B(x_2,\epsilon)}\subseteq B(x_1,\epsilon_1)\cap O_2$ for some $x_2$ and $\epsilon_2<1/2$. Continue, get a nested sequence of closed balls. We have $\epsilon_n\to 0$ and $\overline{B(x_n,\epsilon_n)}\subseteq O_n$. $(x_n)$ is Cauchy so converges by completeness, so $x_n\in x\in\bigcap_nO_n$.
+    $O_1\neq\varnothing$, so $\exists \overline{B(x_1,\epsilon_1)}\subseteq O_1$ for some $x_1$ and $\epsilon<1$. $O_2$ is dense, so can find $\overline{B(x_2,\epsilon)}\subseteq B(x_1,\epsilon_1)\cap O_2$ for some $x_2$ and $\epsilon_2<1/2$. Continue, get a nested sequence of closed balls. We have $\epsilon_n\to 0$ and $\overline{B(x_n,\epsilon_n)}\subseteq O_n$. $(x_n)$ is Cauchy so converges by completeness, so $x_n\to x\in\bigcap_nO_n$.
 \end{proof}
 \begin{rem}
     Cannot omit ``dense'' (e.g., $(0,1),(2,3)$ in $\RR$) or ``open'' (e.g. $\QQ,\RR\setminus\QQ\subseteq\RR$), or ``complete'' (e.g. $O_n=\QQ\setminus\{q_n\}$, where $q_1,...$ is an enumeration of rationals in $\QQ$.)
@@ -620,6 +620,57 @@ Let $K$ be compact Hausdorff.
     A subalgebra of $C(K)$ is a subspace such that $f,g\in A\implies fg\in A$.
 \end{defn}
 \begin{example}
-    
+    \begin{enumerate}[(i)]
+        \item $\{f\in C[0,1]:\text{poly}\}$ (dense)
+    \end{enumerate}
 \end{example}
+\begin{defn}
+    For $f,g\in C_{\RR}(K)$ define $f\vee g$ `$f$ max/meet $g$' by $(f\vee g)(x)=\max(f(x),g(x))$ and $f\wedge g$ `$f$ min/join $g$' by $(f\wedge g)(x)=\min(f(x),g(x))$.
+\end{defn}
+Note that $\wedge$ and $\vee$ acts on $C_\RR(K)$. (They are called lattice operations.)
+\begin{defn}
+    A sublattice of $C_\RR(K)$ is a subset $A$ s.t. $f,g\in A\implies f\vee g, f\wedge g\in A$.
+\end{defn}
+\begin{example}
+    \begin{enumerate}[(i)]
+        \item $\{f\in C_\RR(K):\forall x,f(x)\ge 0\}$
+        \item $\{f\in C_\RR(K): \|f\|_\infty\le 1\}$
+        \item $\{f\in C_\RR[0,1]:f\text{ poly}\}$ is not a sublattice.
+    \end{enumerate}   
+\end{example}
+Note that the concept of sublattice makes sense for $C_\RR(K)$ but not for $C_\CC(K)$.
+\begin{lem}
+    $K$ compact Hausdorff, $A\subseteq C_\RR(K)$ sublattice. Suppose $A$ approximates $f$ at every pair of pts (i.e., $\forall \epsilon>0$, $\forall x,y\in K$, $\exists g\in A$ s.t. $|g(x)-f(x)|,|g(y)-f(y)|<\epsilon$). Then $A$ approximates $f$ uniformly.
+\end{lem}
+\begin{proof}
+    Let $\epsilon>0$. For each $x,y\in K$, find $g_{xy}\in A$ s.t. $|g_{xy}(x)-f(x)|,|g_{xy}(y)-f(y)|<\epsilon$. Define $V_{xy}=\{z\in K:|g_{xy}(z)-f(z)|<\epsilon\}$. Then $V_{xy}$ is an open nbd of $x$ and $y$. Fix $x\in K$, we have an open cover $\{V_{xy}:y\in K\}$. Pass to a finite subcover $V_{xy_1},...,V_{xy_n}$. Put $g_x=g_{xy_1}\wedge\cdots\wedge g_{xy_n}$. Then $g_x$ satisfies the property $\forall y\in K$, $g_x(y)<f(x)+\epsilon$. Define $U_x=\{z:|g_x(z)-f(z)|<\epsilon\}$. Pass to a finite cover $K=U_{x_1}\cup\cdots\cup U_{x_m}$. Put $g=g_{x_1}\vee\cdots\vee g_{x_m}$. Then $\forall y\in K$, have $g(x)>f(x)-\epsilon$.
+    Therefore $|f(x)-g(x)|<\epsilon$ for all $x\in K$.
+\end{proof}
+Aim to prove that closed subalgebra are always sublattices.
+\begin{lem}
+    $x\mapsto |x|$ on $[-1,1]$ can be unif. approximated by poly.
+\end{lem}
+\begin{proof}
+    Enough to approximate $\sqrt{x^2+\epsilon}$ for $\epsilon>0$ because $|\sqrt{x^2+\epsilon}-|x||=|\frac{\epsilon}{\sqrt{x^2+\epsilon}+|x|}|\le \sqrt\epsilon$.
+    Use the holo'c function $(z+\epsilon)^{1/2}$ on $\Re(z)>-\epsilon$ to obtain a uniformly convergent series expansion on $[0,1]$, e.g., Taylor expand at $1/2$. (It is locally uniformly convergent on the disk of radius $1/2+\epsilon$, so restrict to the closed disk of radius $1/2$ it is unif. convergent.) Now, the same truncated series evaluated at $x^2$ is unif. convergent on $[-1,1]$
+\end{proof}
+\begin{crly}
+    $K$ is compact Hausdorff, $A\subseteq C(K)$ closed subalgebra. Then $A$ is a sublattice.
+\end{crly}
+\begin{proof}
+    Enough to show that $f\in A\implies |f|\in A$ because $f\vee g$ and $f\wedge g$ can be expressed in terms of $f,g$ and $|f-g|$. WLOG, assume $\|f\|_\infty\le 1$. Given $\epsilon>0$, find $P(t)$ poly s.t. $|P(t)-|t||<\epsilon$ on $[-1,1]$. $|P(f)-|f(t)||<\epsilon$ since $\|f\|_\infty\le 1$.
+\end{proof}
+\begin{thm}[Stone-Weierstrass]
+    $K$ compact Hausdorff. $A\subseteq C(K)$ subalgebra s.t. \begin{enumerate}[(i)]
+        \item $A$ contains the constants
+        \item $A$ separates points of $K$, i.e., $\forall x,y\in K$ $x\neq y$, $\exists f\in A$ s.t. $f(x)\neq f(y)$.
+    \end{enumerate}
+    Then $A$ is dense in $C(K)$.
+\end{thm}
+\begin{proof}
+    $\bar A$ closed subalgebra, so a sublattice. Given $x,y\in K$ and $\epsilon>0$, can find $g\in A$ s.t. $g(x)=f(x)$ and $g(y)=f(y)$. The previous lemma implies that $\bar A$ approximates $f$ unif. so $\bar A$ is dense in $C(K)$, so $\bar A=C(K)$.
+\end{proof}
+\begin{rem}
+    
+\end{rem}
 \end{document}
