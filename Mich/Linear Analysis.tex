@@ -955,6 +955,181 @@ Thus, $Te_j=\sum_{i=1}^\infty a_{ij}e_i$, so the matrix of $T$ determines $T$.
 \end{rem}
 
 \section{Spectral Theory}
+Let $X$ be a Banach space, $T\in L(X)$. We know that $T\in L(X)$ is invertible if and only if $T$ is a bijection and $T^{-1}$ is continuous. This is equivalent to $T$ being bijective by inversion theorem. So: $T\in L(X)$ is invertible if and only if $T$ is injective and surjective. Note that both conditions are necessary (e.g., left shift and right shift).
+\begin{thm}
+    $X$ Banach space, $T\in L(X)$. Then $\|T\|<1$ implies that $I-T$ is invertible with $(I-T)^{-1}=\sum_{n=0}^\infty T^n$
+\end{thm}
+\begin{proof}
+    Note that $(I-T)\sum_{n=0}^k T^n=I-T^{k+1}$. Let $k\to \infty$, this expression converges to $I$ in operator norm. Similar argument holds for the other composition.
+\end{proof}
+For a Banach space $X$, we write $GL(X)$ for the set of invertible bounded linear operators $X\to X$.
+\begin{thm}
+    $X$ Banach, then
+    \begin{enumerate}[(i)]
+        \item $G$ is open in $L(X)$
+        \item The function $T\to T^{-1}$ from $G$ to itself is continuous,
+        \item Let $(T_n)$ in $G$, $T\in L(X)$ with $T_n\to T$ but $T\notin G$, then $\|T_n^{-1}\|\to \infty$.
+    \end{enumerate}
+\end{thm}
+\begin{proof}
+    (i): For $T\in G$, have $T-S=T(I-T^{-1}S)$ for all $S\in L(X)$. Choose $S$ with sufficiently small operator norm, in particular, $\|S\|<\frac{1}{\|T^{-1}\|}$, then $I-T^{-1}S$ is invertible. This shows that $B(T,\frac{1}{\|T^{-1}\|})\subseteq G$.
 
- 
+    (ii): For $\|S\|<\|T^{-1}\|^{-1}$, $(T-S)^{-1}-T^{-1}=\sum_{n=1}^\infty (T^{-1}S)^nT$ Taking operator norm, see that
+    \[\|(T-S)^{-1}-T^{-1}\|\le\sum_{n=1}^\infty\|S\|^n\|T^{-1}\|^{n+1}\to 0\] as $\|S\|\to0$.
+
+    (iii): Given $\epsilon>0$, for $n$ sufficiently large s.t. $\|T_n-T\|<\epsilon$ we have $B(T_n,\frac{1}{\|T_n^{-1}\|})\subseteq G$ and $T\notin G$ so $\|T_n^{-1}\|^{-1}<\epsilon$, so $\|T_n^{-1}\|>\frac1\epsilon$.
+\end{proof}
+Now we restrict out attention to complex Banach spaces.
+
+\begin{defn}
+    Let $X$ be a (complex) Banach space, $T\in L(X)$, $\lambda\in \CC$. $\lambda$ is an eigenvalue of $T$ if there exists $x\in X$ non-zero with $Tx=\lambda x$. Such an $x$ is called an eigenvector of $T$.
+\end{defn}
+\begin{example}
+    $X=\ell_2$, $T=$ Right shift. Then $0$ is not an eigenvalue of $T$, but $T$ is not surjective and hence not invertible. In fact, $T$ has no eigenvalues.
+\end{example}
+\begin{defn}
+    $X$ complex Banach space with $T\in L(X)$. The spectrum of $T$ is $\sigma(T)=\{\lambda\in \CC:(T-\lambda I)\text{ not invertible}\}$.
+\end{defn}
+Observe that for finite dimensional space, this is just the set of eigenvalues.
+\begin{rem}
+    $\lambda\in\sigma(T)$ iff either $T-\lambda I$ not injective ($\lambda$ is an e-value) or $T-\lambda I$ not surjective.
+\end{rem}
+\begin{prop}
+    $X$ a (complex) Banach space; $T\in L(X)$. Then $\sigma(T)$ is a closed subset of $\{z\in\CC: |z|\le \|T\|\}$. In particular, $\sigma(T)$ is compact.
+\end{prop}
+\begin{proof}
+    $\lambda\notin \sigma(T)$ iff $T-\lambda I\in G$. But $G$ is open and $\lambda\mapsto T-\lambda I$ is a continuous function $\CC\to L(X)$, so $\CC\setminus \sigma(T)$ is open.
+
+    For $|\lambda|>\|T\|$, $T-\lambda I=-\lambda (I-\frac{I}{\lambda})$ which is invertible.
+\end{proof}
+\begin{defn}
+    $\CC\setminus\sigma(T)$ is the resolvent set of $T$. The function $R:\CC\setminus\sigma(T)\to L(X)$, $\lambda\mapsto (\lambda I-T)^{-1}$ is the resolvent function of $T$.
+\end{defn}
+For $|\lambda |>\|T\|$, $R(\lambda)=\sum_{n=0}^\infty \frac{T^n}{\lambda^{n+1}}$.
+\begin{example}
+    The spectrum of the left shift operator is the closed unit disk. Note that every value in the open unit disk is an eigenvalue (consider $(1,\lambda,\lambda^2,...)$), and $\sigma(T)$ is a closed subset of $\{z\in \CC:|z|\le 1\}$.
+\end{example}
+\begin{defn}
+    $X$ complex Banach space; $T\in L(X)$; $\lambda\in\CC$. $\lambda$ is an approximate eigenvalue of $T$ if 
+    \[\forall\epsilon>0,\exists x\in X, \|x\|=1\text{ s.t. }\|Tx-\lambda x\|<\epsilon\]
+    Equivalently, $\lambda$ is an approximate eigenvalue if there exists a sequence $(x_n)$ in $X$ with $\|x_n\|=1$ for all $n$ s.t. $\|Tx_n-\lambda x_n\|\to 0$. Such a sequence $(x_n)$ is an approximate eigenvector of $T$.
+\end{defn}
+\begin{prop}
+    $X$ complex Banach; $T\in L(X)$; $\lambda\in\CC$. Then
+    \begin{enumerate}[(i)]
+        \item $\lambda$ is an eigenvalue of $T\implies$ $\lambda$ is an approximate eigenvalue of $T$.
+        \item $\lambda $ is an approximate eigenvalue of $T\implies$ $\lambda\in\sigma(T)$.
+    \end{enumerate}
+\end{prop}
+\begin{proof}
+    (i): Trivial.
+
+    (ii): If $\lambda$ is an approx. e-value of $T$, then find sucha sequence $(x_n)$. If $T-\lambda I$ is invertible, then $(T-\lambda I)^{-1}(Tx_n-\lambda x_n)\to 0$, so $x_n\to 0$. Contradiction.
+\end{proof}
+\begin{example}
+    \begin{enumerate}
+        \item $Te_n=\frac1{2^n}e_n$, then $0$ is an approx e-value but not an e-value.
+        \item $T$ Right shift. $0$ is not an approx e-value, but $0\in\sigma(T)$.
+    \end{enumerate}
+\end{example}
+\begin{defn}
+    Write $\sigma_{ap}(T)$ for the set of approximate eigenvalues. This is called the approximate point spectrum of $T$. Somtie write $\sigma_p(T)$ for the set of eigenvalues, called the point spectrum of $T$.
+\end{defn}
+\begin{thm}
+    $X$ a complex Banach space; $T\in L(X)$. Then $\partial\sigma(T)\subseteq \sigma_{ap}(T)$.
+\end{thm}
+\begin{proof}
+    For $\lambda \in \partial\sigma(T)$, there exists $\lambda_n\in \CC\setminus\sigma(T)$ with $\lambda_n\to \lambda$. Then $T-\lambda_n I\to T-\lambda I$, so $\|(T-\lambda_nI)^{-1}\|\to \infty$ as $n\to\infty$. So there exists a sequence $(x_n)$ in $X$ s.t. $\|x_n\|\to 0$ and $\|(T-\lambda_nI)^{-1}x_n\|=1$ for all $n$. Put $y_n=(T-\lambda_nI)^{-1}x_n$, then $\|y_n\|=1$ for all $n$ and $(T-\lambda_n I)y_n=x_n\to 0$, so $(T-\lambda I)y_n=0$ (note: $(T-\lambda I)y_n=(T-\lambda_n I)y_n+(\lambda_n-\lambda) y_n$)
+\end{proof}
+\begin{example}
+    Let $T$ be the right shift operator. Any value in the open unit disk is not an approximate e-value, so $\partial\sigma(T)\subseteq S^1$. Then either $D^1\subseteq \sigma(T)$ or $D^1\cap \sigma(T)=\varnothing$. Note that $0\in\sigma(T)$, so the whole open unit disk must be in $\sigma(T)$, so $\sigma(T)$ is the closed unit disk.
+\end{example}
+\begin{thm}[Spectral Mapping Theorem]
+    $X$ complex Banach space; $T\in L(X)$. Let $p$ be a non-constant complex polynomial. Then $\sigma(p(T))=\{p(\lambda):\lambda\in\sigma(T)\}$.
+\end{thm}
+\begin{proof}
+    For a fixed $\mu\in \CC$, write $p(z)-\mu=c(z-\lambda_1)\cdots(z-\lambda_n)$, where $c,\lambda_1,...,\lambda_n\in \CC$ and $c\neq 0$. Then $p(T)-\mu I=c(T-\lambda_1I)\cdots(T-\lambda_nI)$.
+
+    We claim that $p(T)-\mu I$ is invertible if and only if $T-\lambda_iI$ is invertible for all $i$.
+    \begin{proof}[Proof of claim]
+        `$\Leftarrow$': Trivial
+
+        `$\Rightarrow$': If $T-\lambda_iI$ is not invertible, then $(T-\lambda_1I)\cdots(T-\lambda_nI)$ is not invertible. Note that for all $A,B$, $A$ not invertible implies that $A$ not injective or $A$ not surjective, which implies that $BA$ or $AB$ not invertible. Also note that $T-\lambda_j I$ commute.
+    \end{proof}
+    So $\mu\in\sigma(p(T))$ iff $T-\lambda_i$ not invertible for some $i$, but $\{\lambda_1,...,\lambda_n\}=\{\lambda\in\CC:p(\lambda)=\mu$. This shows that $\mu\in\sigma(p(T))\Leftrightarrow \lambda\in\sigma(T)$ for some $\lambda$ with $p(\lambda)=\mu$.
+\end{proof}
+\begin{rem}
+    We did not cheat here. It is not true that $A$ not invertible implies $AB$ not invertible, e.g., $A$ left shift, $B$ right shift.
+\end{rem}
+\begin{defn}
+    $X$ a complex Banach space; $T\in L(X)$. The spectral value of $T$ is $r(T)=\sup\{|\lambda|:\lambda\in\sigma(T)\}$.
+\end{defn}
+Certainly, $r(T)\le \|T\|$.
+\begin{example}
+    $r(\text{Left shift})=r(\text{Right shift})=1$.
+\end{example}
+\begin{crly}
+    $X$ a complex Banach space, $T\in L(X)$. Then $r(T)\le \inf_{n\ge 1}\|T^n\|^{1/n}$.
+\end{crly}
+\begin{proof}
+    $r(T^n)\le \|T^n\|$, but $r(T^n)=r(T)^n$ by spectral mapping theorem, so $r(T)\le \|T^n\|^{1/n}$.
+\end{proof}
+\begin{example}
+    For $T$ nilpotent, then $r(T)=0$, so we can have strict inequality $r(T)\le \|T\|$.
+\end{example}
+\begin{thm}[Non-emptiness of the spectrum]
+    $H$ a (non-zero) Hilbert space, $T\in L(H)$. Then $\sigma(T)\neq\varnothing$.
+\end{thm}
+\begin{rem}
+    If $\dim H<\infty$, then we are done by FTA, which can be proved by Liouville's theorem. We will carry out a similar argument here.
+\end{rem}
+\begin{proof}
+    Suppose $\sigma(T)=\varnothing$. Then the resolvent function $R$ is defined on $\CC$. Observe that
+    \[R(\lambda)-R(\mu)=(\lambda I-T)^{-1}((\mu I-T)-(\lambda I-T))(\mu I-T)^{-1}\]
+    so 
+    \[\dfrac{R(\lambda)-R(\mu)}{\lambda-\mu}=-R(\lambda)R(\mu)\to -R(\lambda)^2\]
+     as $\mu\to \lambda$.
+     For fixed $x,y\in H$, define $f:\CC\to \CC$ by $f(\lambda)=(R(\lambda)x,y)$. Then by direct computation, we see that $f$ is entire.
+
+    Now, for $|\lambda|>\|T\|$, we have $\|(\lambda I-T)u\|\ge (|\lambda|-\|T\|)\|u\|$ for all $u\in H$, so $\|(\lambda I-T)^{-1}\|\le \frac{1}{|\lambda|-\|T\|}\to 0$ as $|\lambda|\to\infty$. Thus $|f(\lambda)|\le \|R(\lambda)\|\|x\|\|y\|\to 0$ as $|\lambda|\to\infty$. By Liouville, $f\equiv 0$. Thus $(R(\lambda)x,y)=0$ for all $\lambda,x,y$, so $R(\lambda)x=0$ for all $\lambda,x$. This is a massive contradiction.
+\end{proof}
+\begin{rem}
+    \begin{enumerate}[1)]
+        \item If $T\in L(X)$, $X$ Banach, we could look at $f(\lambda)=\phi(R(\lambda)x)$, where $x\in X$ and $\phi\in X^\ast$. We would get $f\equiv 0$, i.e., $\phi(R(\lambda)x)$ for all $\lambda, x$. By Hahn-Banach, $R(\lambda)x=0$ for all $\lambda, x$, a contradiction.
+        \item Can rephrase the above proof in terms of $L(H)$-valued analytic functions. A function is called analytic  if for all $\lambda\in\CC$, there exists $S\in L(H)$ s.t. $\frac{g(\lambda)-g(\mu)}{\lambda-\mu}\to S$ as $\mu\to\lambda$. We proved that an $L(H)$-valued Liouville's theorem.
+        \item Have $R(\lambda)=\sum_{n=0}^\infty\frac{T^n}{\lambda^{n+1}}$ for $|\lambda|>\|T\|$.  By considering $L(H)$-valued analytic functions one can show that this Laurent series converges for $|\lambda|>r(T)$. But one can also show that $\sum_{n=0}^\infty\frac{T^n}{\lambda^{n+1}}$ has radius of convergence $\limsup\|T^n\|^{1/n}$. Hence $r(T)\ge \limsup\|T^n\|^{1/n}$. But $r(T)\le \inf_{n\ge 1}\|T^n\|^{1/n}$ by spectral mapping theorem, so $r(T)=\lim_{n\to\infty} \|T^n\|^{1/n}$. This is the spectral radius formula.
+    \end{enumerate}
+\end{rem}
+\subsection{Spectral Theory of Hermitian Operators}
+In this section all spaces are over $\CC$.
+\begin{prop}
+    $H$ Hilbert space; $T\in L(H)$. Then $\sigma(T^\ast)=\{\bar\lambda:\lambda\in\sigma(T)\}$.
+\end{prop}
+\begin{proof}
+    For any $T\in L(H)$, $T$ invertible iff $T^\ast $ invertible. Thus $T-\lambda I$ is invertible iff $T^\ast-\bar\lambda I$ is invertible.
+\end{proof}
+\begin{example}
+    We can deduce the spectrum of right shift using this result.
+\end{example}
+\begin{thm}
+    $H$ Hilber space, $T\in L(H)$ Hermitian. Then $\sigma(T)\subseteq \RR$.
+\end{thm}
+\begin{proof}
+    For $\lambda$ an approximate eigenvalue of $T$, there exists $(x_n)$ in $H$, $\|x_n\|=1$ with $Tx_n-\lambda x_n\to 0$. Thus $(Tx_n-\lambda x_n,x_n\to 0)$, so $(Tx_n,x_n)\to \lambda$. But $\forall x\in H$, $(Tx,x)=(x,Tx)$, so $(Tx_n,x_n)\in \RR$ for all $n$, so $\lambda\in \RR$. We have $\partial\sigma(T)\subseteq\sigma_{ap}(T)\subseteq \RR$, so $\sigma(T)\subseteq \RR$.
+\end{proof}
+\begin{crly}
+    $H$ Hilbert space, $T\in L(H)$ Hermitian. Suppose $\lambda,\mu$ are distinct evalues with e-vectors $x,y$, then $x\perp y$
+\end{crly}
+\begin{proof}
+    Just compute.
+\end{proof}
+\begin{rem}
+    For $T$ Hermitian, $\sigma(T)=\partial\sigma(T)$ since it's a subset of $\RR$.
+\end{rem}
+\begin{prop}
+    $H$ Hilbert, $T\in L(H)$ Hermitian. Then $r(T)=\|T\|$.
+\end{prop}
+\begin{proof}
+    WLOG, $\|T\|=1$. We will show that $1$ or $-1$ is an approximate eigenvalue.
+\end{proof}
 \end{document}
