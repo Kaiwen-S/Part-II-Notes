@@ -673,4 +673,288 @@ Aim to prove that closed subalgebra are always sublattices.
 \begin{rem}
     
 \end{rem}
+\section{Hilbert Spaces}
+Let $X$ be a real or complex vector space.
+\begin{defn}
+    An inner product on $X$ is a function $(-,-):X\times X\to \FF$ (where $\FF=\RR$ or $\CC$) s.t. for all $x,y,z\in X$ and $\lambda,\mu\in\FF$,
+    \begin{enumerate}[(i)]
+        \item $(\lambda x+\mu y,z)=\lambda(x,z)+\mu(y,z)$
+        \item $(y,x)=\overline{(x,y)}$
+        \item $(x,x)\ge 0$, with $(x,x)=0$ iff $x=0$.
+    \end{enumerate}
+\end{defn}
+Examples include the usual inner product on $\ell^2$ and $L^2$. Note that an inner product induces a norm by $\|x\|=(x,x)^{1/2}$.
+\begin{thm}
+    Let $X$ be an inner product space. Then
+    \begin{enumerate}[(i)]
+        \item (Cauchy-Schwarz) $\forall x,y\in X$, $|(x,y)|\le \|x\|\|y\|$
+        \item (Triangle inequality) $\forall x,y\in X$, $\|x+y\|\le \|x\|+\|y\|$
+    \end{enumerate}
+\end{thm}
+\begin{proof}
+    (i): WLOG, assume $(x,y)\in \RR$. Then $\forall y\neq 0$ and $t\in\RR$, have $\|x+ty\|^2=(x+ty,x+ty)=\|x\|^2+t^2\|y\|^2+2t(x,y)\ge 0$. Hence $4(x,y)^2-4\|x\|^2\|y\|^2\le 0$. Rearrange.
+
+    (ii) $\|x+y\|^2=(x+y,x+y)=\|x\|^2+\|y\|^2+2\Re(x,y)\le \|x\|^2+\|y\|^2+2\|x\|\|y\|=(\|x\|+\|y\|)^2$
+\end{proof}
+\begin{defn}
+    A Hilbert space is a complete inner product space.
+\end{defn}
+\begin{example}
+    $\ell^2$ is Hilbert, but $C[0,1]$ with $(f,g)=\int_0^1 f\bar g$ is not Hilbert.
+\end{example}
+\begin{prop}[Polarization identity]
+    Let $X$ be an inner product space; $x,y\in X$. Then
+    \begin{enumerate}
+        \item[Real Case:] $(x,y)=\frac12(\|x+y\|^2-\|x\|^2-\|y\|^2)$
+        \item[Complex Case:] $(x,y)=\frac14(\|x+y\|^2-\|x-y\|^2+i\|x+iy\|^2-i\|x-iy\|^2)$
+    \end{enumerate}
+\end{prop}
+\begin{proof}
+    Expand $\|x+y\|^2$ in each case.
+\end{proof}
+\begin{prop}[Parallelogram Law]
+    Let $X$ be an inner product space; $x,y\in X$. Then $\|x+y\|^2+\|x-y\|^2=2\|x\|^2+2\|y\|^2$
+\end{prop}
+\begin{proof}
+    Compute.
+\end{proof}
+\begin{rem}
+    The parallelogram law characterizes inner product spaces in the sense that if a normed space $X$ satisfies the conclusion of the parallelogram law, then the polarization identity defines a valid inner product on $X$ which induces its norm. In particular, a normed space $X$ is an inner product space if and only if every 2-dimensional subspace of $X$ is an inner product space.
+\end{rem}
+\begin{defn}
+    $X$ inner product space. $x,y\in X$ are said to be orthogonal, written $x\perp y$ if $(x,y)=0$.
+\end{defn}
+\begin{prop}[Pythagoras]
+    $X$ an inner product space; $x,y\in X$. Then $x\perp y\implies \|x+y\|^2=\|x\|^2+\|y\|^2$
+\end{prop}
+\begin{proof}
+    Compute.
+\end{proof}
+Similarly, if $x_1,...,x_n$ are pairwise orthogonal, then $\|\sum_ix_i\|^2=\sum_i\|x_i\|^2$.
+\begin{thm}
+    Let $X$ be an inner product space. Then its completion $\tilde X$ is also an inner product space.
+\end{thm}
+\begin{proof}
+    For $x,y\in\tilde X$, choose $(x_n)$ and $(y_n)$ in $X$ s.t. $x_n\to x$ and $y_n\to y$. Define $(x,y)=\lim_{n\to\infty}(x_n,y_n)$. Easy to check various properties and that the induced norm is complete.
+\end{proof}
+\begin{example}
+    $L^2$ is the completion of $C[0,1]$ with respect to $\|\cdot\|_2$.
+\end{example}
+Recall that the distance from a point to a closed set needs not be attained even in $\ell^2$.
+\begin{thm}[Closest Point Theorem]
+    Let $H$ be a Hilbert space, $S$ a closed subspace of $H$, $x\in H$. Then there exists a unique $y\in S$ s.t. $\|x-y\|=d(x,S)$.
+\end{thm}
+\begin{proof}
+    Let $d=d(x,S)$. Choose $(y_n)$ in $S$ s.t. $\|x-y_n\|\to d$.
+    We now use the parallelogram law to prove that $y_n$ is Cauchy. The key ingredient is the parallelogram law. We have
+    \[2\|x-y_n\|^2+2\|x-y_m\|^2=\|2x-y_n-y_m\|^2+\|y_n-y_m\|^2\]
+    Rearrange,
+    \begin{align*}\|y_n-y_m\|^2&=2\|x-y_n\|^2+2\|x-y_m\|^2-4\|x-\frac12(y_n+y_m)\\ &\le 2\|x-y_n\|^2+2\|x-y_m\|-4d^2\end{align*}
+    By completeness and closedness, this sequence has a limit $y\in S$ s.t. $d(x,y)=d$.
+
+    To see uniqueness, note that if $z$ also satisfies the above, then $\|y-z\|^2=2\|x-y\|^2+2\|x-z\|^2-4\|x-\frac12(y+z)\|^2\le 2d^2+2d^2-4d^2=0$, so $y=z$.
+\end{proof}
+\begin{rem}
+    The same proof shows that the distance to a closed convex set is attained.
+\end{rem}
+If $X$ is an inner product space, $x\in X$, then we define $x^\perp=\{y\in X:(x,y)=0\}$, which is a closed subspace.
+For $S\subseteq X$, $S^\perp=\{y\in X:\forall x\in S,\ (x,y)=0\}=\bigcap_{x\in S}x^\perp$, and $S^\perp$ is a closed subspace of $X$. It is clear that $S\subseteq S'\implies S'^\perp\subseteq S^\perp$.
+\begin{thm}
+    Let $H$ be a Hilbert space, $F$ a closed subspace of $H$. Then $H=F\oplus F^\perp$, i.e., $F$ has an orthogonal complement.
+\end{thm}
+\begin{proof}
+    It is clear that $F\cap F^\perp=\{0\}$.
+    WTS $F+F^\perp=H$. Let $x\in H$. Choose $y\in F$ s.t. $\|x-y\|=d(x,F)$. We claim that $x-y\in F^\perp$. If not, then pick $z\in F$ s.t. $(x-y,z)\neq 0$. WLOG, assume $(x-y,z)$ is real and $>0$. Let $t\in \RR^+$. We have $\|x-y\|^2\le \|x-(y+tz)\|^2\le \|x-y\|^2+t^2\|z\|^2-2t(x-y,z)$. So: $2t(x-y,z)-t^2\|z\|^2\le 0$. False for sufficiently small $t$.
+\end{proof}
+Note that $S\subseteq X\implies S\subseteq (S^\perp)^\perp$.
+\begin{crly}
+    $H$ a Hilbert space. Then
+    \begin{enumerate}[(i)]
+        \item $F$ a closed subspace of $H\implies (F^\perp)^\perp=F$
+        \item $S\subseteq H\implies (S^\perp)^\perp=\overline{\langle S\rangle}$
+        \item $S\subseteq H$ has dense linear span $\Leftrightarrow S^\perp=\{0\}$
+    \end{enumerate}
+\end{crly}
+\begin{proof}
+    Just check.
+\end{proof}
+If $H$ is a Hilbert space, then for each $y\in H$ one may define $\theta_y:H\to \CC$ by $\theta_y(x)=(x,y)$, which is bounded linear by Cauchy-Schwarz. We also deduce that $\|\theta_y\|\le \|y\|$. But note that $\theta_y(y)=\|y\|^2$, so $\|\theta_y\|=\|y\|$.
+
+\begin{thm}[Riesz Representation Theorem]
+    $H$ a Hilbert space, $f\in H^\ast$. Then $\exists y\in H$ s.t. $f=\theta_y$.
+\end{thm}
+\begin{proof}
+    WLOG $f\neq 0$. Put $E=\ker f$. Then $E$ is a closed subspace of $H$ and $E\neq H$, so $E^\perp\neq \{0\}$. Also, $\dim E<2$ because $x,y\in H\implies f(\lambda x+\mu y)=0$ for some $\lambda,\mu\neq 0$, so $E^\perp=\langle y\rangle$ for some $y\in H$. WLOG, assume $\|y\|=1$. Define $u=\overline{f(y)}y$. Then $f(u)=\|u\|^2$. Now, for any $x\in H$, write $x=z+\lambda u$ for some $z\in E$, $\lambda\in \CC$. Then, $(x,y)=(z=\lambda y,y)=\lambda\|y\|^2=f(x)$. Hence, we are done.
+\end{proof}
+\begin{crly}
+    $H$ Hilbert. The map $\Theta:H\to H^\ast$, $y\mapsto\theta_y$ is an isometric, conjugate-linear isomorphism, i.e., $H$ is self-dual.
+\end{crly}
+\begin{proof}
+    Have $\|\theta_y\|=\|y\|$ $\forall y\in H$, so $\Theta$ is an isometry. It's surjective by Riesz Representation Theorem. Clearly conj. linear by definition.
+\end{proof}
+
+\subsection{Orthonormal Bases}
+\begin{defn}
+    A sequence $(x_n)$ in an inner product space $X$ is an orthonormal sequence if it consists of pairwise orthogonal unit vectors. It is an orthonormal basis if $\langle x_n:n\in\NN\rangle$ has dense linear span.
+\end{defn}
+We use the same terminology for finite sequences.
+\begin{thm}[Gram-Schmidt Process]
+    Let $(x_n)$ be a linearly independent sequence in an inner product space $X$. Then there exists an orthonormal sequence $(e_n)$ s.t. $\langle e_1,...,e_n\rangle=\langle x_1,...,x_n\rangle$ for all $n$.
+\end{thm}
+\begin{proof}
+    Let $e_1=x_1/\|x_1\|$. Then let $e_2'=x_2-(x_2,e_1)e_1$ and define $e_2=e_2'/\|e_2'\|$. Continue inductively.
+\end{proof}
+\begin{crly}
+    Let $X$ be a separable inner product space. Then $X$ has an orthonormal basis
+\end{crly}
+\begin{proof}
+    Let $(x_n)$ be a sequence which is dense in $X$. WLOG, assume $(x_n)$ is linearly independent by removing any $x_n$ depending on its predecessors. Apply Gram-Schmidt.
+\end{proof}
+\begin{example}
+    The normalized Legendre polynomials are obtained by performing Gram-Schmidt on the dense sequence $1,t^2,t^3,...$ in $X=C_\RR[-1,1]$ with the $2$-norm. In fact, the $n$th one is a multiple of $\frac{d^n}{dt^n}((t^2-1)^n)$.
+\end{example}
+\begin{crly}
+    Let $X$ be an $n$-dimensional inner product space. Then $X$ is isometrically isomorphic to $\ell_2^n$.
+\end{crly}
+\begin{proof}
+    Let $e_1,...,e_n$ be an orthonormal basis of $X$. Define $T:X\to \ell_2^n$ by $T(\sum_i\lambda_ie_i)=(\lambda_1,...,\lambda_n)$. $T$ is linear and bijective. Also, $\|(\lambda_1,...,\lambda_n)\|_2^2=\sum_i|\lambda_i|^2=\|\sum_i\lambda_ie_i\|^2$, i.e., $T$ is norm-preserving.
+\end{proof}
+\begin{rem}
+    Isometric isomorphism also preserves the inner product by polarization.
+\end{rem}
+We now aim to show that every separable infinite-dimensional Hilbert space is isometrically isomorphic to $\ell_2$.
+\begin{prop}
+    $H$ Hilbert space; $(e_n)$ an orthonormal sequence in $H$. Then for any $\lambda_1,\lambda_2,...,\in\CC$,
+    \[\sum_n\lambda_ne_n\text{ converges }\Leftrightarrow (\lambda_n)\in\ell_2\]
+\end{prop}
+\begin{proof}
+    `$\Rightarrow$': $\|\sum_{n=1}^N\lambda_ne_n\|\to \|\sum_{n=1}^\infty\lambda_ne_n\|$ as $N\to \infty$. But $\|\sum_{n=1}^N\lambda_ne_n\|=\sum_{n=1}^N|\lambda_n|^2$, so $\sum_{n=1}^\infty|\lambda_n|^2<\infty$.
+
+    `$\Leftarrow$': $\|\sum_{n=N}^M\lambda_ne_n\|^2=\sum_{n=N}^M|\lambda_n|^2\to 0$ as $M,N\to \infty$, so $\sum_{n=1}^N\lambda_ne_n$ is Cauchy.
+\end{proof}
+\begin{crly}[Riesz-Fisher Theorem]
+    $H$ Hilbert; $(e_n)$ an orthonormal sequence in $H$. Then for all $c\in \ell_2$, there exists $x\in H$ s.t. $(x,e_n)=c_n$ for all $n$.
+\end{crly}
+\begin{proof}
+    Let $x=\sum_nc_ne_n$ which converges as $c\in \ell_2$. Then $(\sum_{n=1}^Nc_ne_n,e_k)=c_k$ for all $N\ge k$, so $(x,e_k)=c_k$ for all $k$.
+\end{proof}
+\begin{defn}
+    For an orthonormal sequence $(e_n)$ in an inner product space $X$, we call $(x,e_k)$ the $k$th (Fourier) coefficient of $x$ with respect to $(e_n)$.
+\end{defn}
+We will show that for an orthonormal basis, $x=\sum_n(x,e_n)e_n$ for all $x$. 
+\begin{rem}
+    This is false in a general Banach space. For instance, $1,t,t^2,...,$ have dense linear span in $C_\RR[-1,1]$ but $|t|\neq \sum c_kt^k$.
+\end{rem}
+\begin{thm}[Bessel's inequality]
+    $H$ Hilbert; $(e_n)$ an orthonormal sequence. Then for all $x\in H$, $\sum_{n=1}^\infty|(x,e_n)|^2\le \|x\|^2$. In particular, $((x,e_n))_{n=1}^\infty\in\ell_2$.
+\end{thm}
+\begin{proof}
+    Put $y=\sum_{n=1}^k(x,e_n)e_n$. We have $(y,e_n)=(x,e_n)$ for all $n\le k$, so $(x-y)\perp e_n$ for all $n\le k$, so $(x-y)\perp y$, so By Pythagoras, $\|x\|^2=\|x-y\|^2+\|y\|^2\ge \|y\|^2$, and we are done.
+\end{proof}
+\begin{thm}
+    $H$ Hilbert; $(e_n)$ an orthonormal basis in $H$. Then for all $x\in H$, $x=\sum_{n=1}^\infty(x,e_n)e_n$.
+\end{thm}
+\begin{proof}
+    $((x,e_n))_{n=1}^\infty\in\ell_2$ by Bessel, so $\sum_{n}(x,e_n)e_n$ converges to some $y\in H$. Note that $(y,e_n)=(x,e_n)$ for all $n$, so $(y-x)\perp e_n$ for all $n$, so $y-x\in \overline{\langle e_n:n\in\NN\rangle}^\perp=\{0\}$, so $y=x$.
+\end{proof}
+\begin{rem}
+    The previous two theorems also hold for inner product spaces: if $(e_n)$ is an orthonormal basis in $X$, then $(e_n)$ is an orthonormal basis in its completion $\tilde X$ as $X$ is dense in $\tilde X$.
+\end{rem}
+\begin{example}
+    $C_\CC[0,2\pi]$ with the $2$-norm. Then $(e^{in\theta})_{n\in \ZZ}$ is an orthonormal basis. So we get Fourier series which converges in $\|\cdot\|_2$. The same holds for any $f\in L^2[0,2\pi]$.
+
+    For $f\in C_\CC[0,2\pi]$, $f(0)=f(2\pi)$. Write $$S_k=\sum_{n=-k}^k(f,e^{in\theta})e^{-in\theta}$$
+    The above says $S_k\to f$ in $\|\cdot\|_2$. Need not have uniform convergence or even pointwise convergence. Fejer's Theorem says that 
+    \[\dfrac{S_1+\cdots+S_k}{k}\to f\] uniformly.
+\end{example}
+\begin{crly}[Parseval]
+    $H$ Hilbert, $(e_n)$ orthonormal basis for $H$. Then
+    \begin{enumerate}[(i)]
+        \item For all $x\in H$, $\|x\|^2=\sum_n|(x,e_n)|^2$
+        \item For all $x,y\in H$, $(x,y)=\sum_n(x,e_n)\overline{(y,e_n)}$.
+    \end{enumerate}
+\end{crly}
+\begin{proof}
+    (i): $\|\sum_{n=1}^k(x,e_n)e_n\|^2=\sum_{n=1}^k|(x,e_n)|^2$. Let $k\to \infty$, $\|x\|^2=\sum_n|(x,e_n)|^2$.
+
+    (ii): $(\sum_{n=1}^k(x,e_n)e_n,\sum_{n=1}^k(y,e_n)e_n)=\sum_{n=1}^k(x,e_n)\overline{(y,e_n)}$. Let $k\to\infty$.
+\end{proof}
+\begin{crly}
+    Let $H$ be a separable infinite dimensional Hilbert space. Then $H$ is isometrically isomorphic to $\ell_2$.
+\end{crly}
+\begin{proof}
+    Choose an orthonormal basis $(e_n)$ for $H$. Define $T:H\to \ell_2$ by $T(x)=((x,e_n))_{n=1}^\infty$.
+    This is well-defined by Bessel. $T$ is clearly linearl and norm preserving. It is surjective by Riesz-Fischer.
+\end{proof}
+
+\subsection{Matrices of Linear Operators}
+\begin{defn}
+    Let $H$ be a Hilbert space with an orthonormal basis $(e_n)$. For $T\in L(H)$, the matrix of $T$ w.r.t. $(e_n)$ is $A=(a_{ij})_{i,j=1}^\infty$ where $a_{ij}=(Te_j,e_i)$.
+\end{defn}
+Thus, $Te_j=\sum_{i=1}^\infty a_{ij}e_i$, so the matrix of $T$ determines $T$.
+\begin{rem}
+    Not every matrix comes from a $T\in L(H)$.
+\end{rem}
+\subsection{Adjoints}
+\begin{thm}
+    $H$ Hilbert, $T\in L(H)$. Then there exists a unique map $T^\ast$ s.t. for all $x,y\in H$, $(Tx,y)=(x,T^\ast y)$. Moreover, $T^\ast\in L(H)$.
+\end{thm}
+\begin{rem}
+    If $T$ has a matrix $A$ with respect to orthonormal basis, then $T^\ast$ has matrix $A^\dagger$ with respect to this basis. However, we cannot define $T^\ast$ this way because
+    \begin{enumerate}[1)]
+        \item Might depend on the orthonormal basis
+        \item $H$ might not have an orthonormal basis (e.g. if it's not separable)
+        \item $A^\dagger$ might not be the matrix of a continuous linear map
+    \end{enumerate}
+\end{rem}
+\begin{defn}
+    $T^\ast$ is the adjoint of $T$.
+\end{defn}
+\begin{proof}
+    For each $y\in H$, $x\mapsto (Tx,y)$ is a bounded linear functional. By Riesz representation, there exists $z\in H$ s.t. $\theta_z=(x\mapsto (Tx,y))$ so that $(Tx,y)=(x,z)$. Define $T^\ast y=z$.
+
+    Uniqueness: note that $(Tx,y)=(x,z)$ for all $x$. If $z'$ is another candidate, then $(x,z)=(x,z')$ for all $x$, so $z=z'$.
+
+    Linearity: just compute.
+
+    Boundedness: For fixed $y\in H$, $|(x,T^\ast y)|=|(Tx,y)|\le \|T\|\|x\|\|y\|$ for all $x\in H$, so $|(x,T^\ast y)|\le \|T\|\|y\|$ for all $x\in H$ with $\|x\|\le 1$, so $\|T^\ast y\|\le \|T\|\|y\|$ (using that $\|z\|>k\implies(\frac{z}{\|z\|},z)>k$). So $T^\ast \in L(H)$ with $\|T^\ast \|\le \|T\|$.
+\end{proof}
+\begin{example}
+    $H=\ell_2$. The adjoint of the left shift operator is the right shift operator.
+\end{example}
+\begin{prop}
+    $H$ Hilbert, $S,T\in L(H)$. Then
+    \begin{enumerate}[(i)]
+        \item $(\lambda S+\mu T)^\ast =\bar \lambda S^\ast+\bar\mu T^\ast$ for all $\lambda,\mu\in\CC$.
+        \item $(ST)^\ast=T^\ast S^\ast$
+        \item $(T^\ast)^\ast= T$
+        \item $\|T^\ast\|=\|T\|$
+        \item $\|T^\ast T\|=\|T\|^2$
+    \end{enumerate}
+\end{prop}
+\begin{proof}
+    (i), (ii), and (iii) are easy to prove. (iv) follows from (iii) since the reversed inequality $\|T\|\le \|T^\ast\|$ also holds. For (v), certainly $\|T^\ast T\|\le \|T\|^2$. Also, $\|Tx\|^2=(x,T^\ast T x)\le \|x\|^2\|T^\ast T\|$, so $\|T\|^2\le \|T^\ast T\|$.
+\end{proof}
+\begin{rem}
+    It's not true in general that $\|T^2\|=\|T\|^2$, e.g., consider a nilpotent operator.
+\end{rem}
+\begin{defn}
+    $H$ Hilbert; $T\in L(H)$. Then $T$ is Hermitian (or self-adjoint) if $T^\ast =T$.
+\end{defn}
+\begin{example}
+    Orthogonal projections onto a closed subspace is Hermitian.
+\end{example}
+\begin{prop}
+    $H$ complex Hilbert space; $T\in L(H)$. Then there exists $T_1,T_2$ Hermitian with $T=T_1+iT_2$
+\end{prop}
+\begin{proof}
+    $T=\frac12(T+T^\ast)+i\cdot\frac i2(T^\ast -T)$.
+\end{proof}
+\begin{rem}
+    This decomposition is unique. If $T_1+iT_2=T_1'+iT_2'$, then taking adjoint and manipulate a little bit, you get $T_1-T_1'=0$ and $T_2-T_2'=0$.
+\end{rem}
+
+\section{Spectral Theory}
+
+ 
 \end{document}

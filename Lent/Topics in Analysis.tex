@@ -473,6 +473,25 @@ We write u.a.p. for "unif. approximable by polys".
 \end{proof}
 Recall the defn of algebraic number and the defn of transcendental numbers.
 
+\begin{thm}[Liouville]
+    Let $\alpha$ be an irrational root of the equation $a_nx^n+\cdots+a_0=0$, where $a_n\neq 0$ and $a_j\in \ZZ$ for all $j$. Then there exists a constant $c$ s.t. $|\alpha-p/q|\ge c/q^n$ for all $p,q\in \ZZ$ with $q\neq 0$.
+\end{thm}
+\begin{proof}
+    Pick $R\ge 1$ s.t. all the roots of $P$ lie in $[-R+1,R+1]$. If we take $0<c\le 1$, then the result holds outside of $[-R,R]$.
+
+    By compactness of $[-R,R]$, we find a bound $M>1$ s.t. $|P'|\le M$ on $[-R,R]$. If $\alpha$ is an irrational root and $p,q\in \ZZ$ with $q\neq 0$ and $P(p/q)\neq 0$, then MVT says
+    \[|P(\alpha)-P(p/q)|\le M\Big|\alpha-\frac pq\Big|\]
+    i.e.,
+    \[|P(p/q)|\le M\Big|\alpha-\frac pq\Big|\]
+    Note that $q^nP(p/q)\in\ZZ$ is a non-zero integer, so $|q^nP(p/q)|\ge 1$, so we have
+    \[M^{-1}q^{-n}\le \Big|\alpha-\frac pq\Big|\]
+    Since there are only finitely many roots, we know that there is a $c'>0$ s.t. $|\alpha-\frac pq|\ge c'q^{-n}$ for all such $\alpha$ and valid $p,q$.
+
+    We are now done by taking $c=\min\{M^{-1},c',1\}$. 
+\end{proof}
+\begin{crly}
+    The number $\sum_{n=0}^\infty\frac{1}{10^{n!}}$ is transcendental.
+\end{crly}
 
 
 \begin{crly}
