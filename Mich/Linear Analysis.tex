@@ -1130,6 +1130,110 @@ In this section all spaces are over $\CC$.
     $H$ Hilbert, $T\in L(H)$ Hermitian. Then $r(T)=\|T\|$.
 \end{prop}
 \begin{proof}
-    WLOG, $\|T\|=1$. We will show that $1$ or $-1$ is an approximate eigenvalue.
+    WLOG, $\|T\|=1$. We will show that $1$ or $-1$ is an approximate eigenvalue. Choose a sequence $(x_n)$ in $X$ s.t. $\|x_n\|=1$ for all $n$ and $\|Tx_n\|\to 1$. Then
+    \[(Tx_n,Tx_n)=(T^2x_n,x_n)\to 1\] as $n\to\infty$.
+    Now:
+    \begin{align*}\|(T^2-I)x_n\|^2&=(T^2x_n-x_n,T^2x_n-x_n)\\
+    &=\|T^2x_n\|^2+1-2\Re(T^2x_n,x_n)
+    \end{align*}
+    Note that $\|T^2x_n\|\le \|T\|^2\|x_n\|\le 1$, so $\|(T^2-I)x_n\|^2\to 0$ as $n\to \infty$, i.e., $(T+I)(T-I)x_n\to 0$. If $(T-I)x_n\to 0$, then $1$ is an approximate eigenvalue. If $(T-I)x_n\not\to 0$, then by passing to a subsequence if necessary, choose $\delta>0$ s.t. $\|(T-I)x_n\|\ge \delta$ for all $n$. Then $(T+I)(T-I)x_n\to 0$ and thus $-1$ is an approxiamte eigenvalue.
+\end{proof}
+\begin{rem}
+    For $T$ Hermitian, have $\|T^2\|=\|T\|^2$. Repeat to get $\|T^{2^n}\|=\|T\|^{2^n}$ for all $n$. The spectral radius formula gives $r(T)=\lim_{n\to\infty}\|T^n\|^{1/n}=\|T\|$
+\end{rem}
+\begin{defn}
+    $X$ Banach, $T\in L(X)$, $Y\le X$ subspace. We say that $T$ acts on $Y$ (or equivalently, $Y$ is an invariant subspace for $T$) if $TY\subseteq Y$.
+\end{defn}
+Examples include eigenspaces.
+\begin{rem}[Invariant subspace problem]
+    Does every operator $T$ on a Banach space $X$ of dimension $>1$ have a closed invariant subspace? The answer is false due to Enflo, Read. The answer is unknown for Hilbert spaces.
+\end{rem}
+\begin{prop}
+    $H$ Hilbert; $T\in L(H)$; $Y\le H$. Then $T$ acts on $Y\implies T^\ast$ acts on $Y^\perp$.
+    In particular, for $T$ Hermitian, $T$ acts on $Y\implies$ $T$ acts on $Y^\perp$
+\end{prop}
+\begin{proof}
+    Compute.
+\end{proof}
+\begin{crly}
+    Let $T$ be a Hermitian operator on an $n$-dimensional Hilbert space, then $H$ has an orthonormal basis of eigenvectors.
+\end{crly}
+\begin{proof}
+    Inductive proof, c.f. Linear algebra.
+\end{proof}
+We aim to generalize this to infinite dimensions.
+\subsection{Spectral Theory of Compact Operators}
+$X$ Banach, $T\in L(X)$. Recall that any limit of finite rank operators is compact.
+\begin{prop}
+    $X$ an infinite dimensional Banach space; $T\in L(X)$ compact. Then $0$ is an approximate eigenvalue of $T$.
+\end{prop}
+\begin{proof}
+    Since $\dim X=\infty$, there exists $(x_n)$ s.t. $\|x_n\|=1$ with $\|x_n-x_m\|\ge 1$ for all $n\neq m$. Then there exists a subsequence $(x_{n_i})$ with $(Tx_{n_i})$ convergent. Then consider the sequence $x_{n_i}-x_{n_{i+1}}$. This shows that $0\in\sigma_{ap}(T)$.
+\end{proof}
+Note that $0$ needs not be an eigenvalue, e.g., $T(\sum_nx_ne_n)=\sum_n\frac{1}{2^n}x_ne_n$ on $\ell_2$.
+\begin{prop}
+    $X$ Banach; $T\in L(X)$ compact; $\lambda\in\CC$ with $\lambda\neq0$. Then $\lambda$ is an approximate eigenvalue $\implies\lambda$ is an eigenvalue.
+\end{prop}
+\begin{proof}
+    $\lambda$ is an approximate eigenvalue of $T$, so there exists $(x_n)$ with $\|x_n\|=1$ with $Tx_n-\lambda x_n\to 0$ as $n\to\infty$, so there exists a subsequence $x_{n_i}$ with $Tx_{n_i}\to y$ for some $y\in X$, so $\lambda x_{n_i}\to y$. In particular, $y\neq 0$. Then $x_{n_i}\to y/\lambda$ and $T(y/\lambda)-\lambda(y/\lambda)=0$.
+\end{proof}
+\begin{prop}
+    $X$ a Banach space; $T\in L(X)$ compact. Then every eigen space $E(\lambda)$ for $\lambda\neq0$ is finite dimensional.
+\end{prop}
+\begin{proof}
+    If not, then $T(B_X)\supseteq T(B_{E(\lambda)})=\lambda B_{E(\lambda)}$ which would contradicts compactness assumption.
+\end{proof}
+A more elaborate version is the following.
+\begin{lem}
+    $X$ Banach space; $T\in L(X)$ compact. Then for all $\delta>0$, $T$ has only finitely many eigenvalues with $|\lambda|>\delta$.
+\end{lem}
+\begin{proof}
+    Suppose $\lambda_1,\lambda_2,...,$ are distinct eigenvalues of $T$ with $|\lambda_n|>\delta$ for all $n$. For each $n$, there exists $x_n\in X$ s.t. $Tx_n=\lambda x_n$. Then $x_n$ are linearly independent. Define $X_n=\langle x_1,...,x_n\rangle$. There exists $y_n\in X_n$, $\|y_n\|=1$ s.t. $d(y_n,X_{n-1})=1$ by Riesz's lemma.
+
+    We claim that $Ty_n$ has no convergent subsequence.
+    \begin{proof}[Proof of claim]
+        Suppose $y_n=c_1x_1+\cdots+c_nx_n$ for some $c_i\in\CC$. Then $Ty_n=\lambda_1c_1x_1+\cdots+\lambda_nc_nx_n$, so $Ty_n\in X_n$, so $d(Ty_n,X_{n-1})=d(\lambda_ny_n,X_{n-1})=|\lambda_n|$. For any $m<n$, we now have $Ty_m\in X_m$ and $d(Ty_n,X_{n-1})=|\lambda_n|>\delta$, so $\|Ty_n-Ty_m\|>\delta$.
+    \end{proof}
+    This contradicts the assumption that $T$ is compact.
+\end{proof}
+\begin{thm}[Spectral Theorem for Compact Operators]
+    $X$ Banach; $T\in L(X)$ compact. Then
+    \begin{enumerate}[(i)]
+        \item Either $\sigma(T)$ is finite or $\sigma(T)=\{0,\lambda_1,\lambda_2,...\}$ where $\lambda_n\to 0$
+        \item $\lambda\in\sigma(T)$; $\lambda\neq0\implies \lambda$ is an eigenvalue of $T$.
+        \item $\lambda\in\sigma(T),\lambda\neq0\implies \dim E(\lambda)<\infty$
+    \end{enumerate}
+\end{thm}
+\begin{proof}
+    We have already proved (iii). Note that (ii) implies (i). If $\sigma(T)$ is infinite, then any non-zero value in $\sigma(T)$ is an eigenvalue. For each $\delta>0$, only finitely many e-values can have modulus larger than $\delta$. So the eigenvalues form a sequence $\to0$. $0\in\sigma(T)$ since $\sigma(T)$ is closed.
+
+    To prove (ii), we show that $\forall\delta>0$, $\lambda\in\sigma(T);|\lambda|>\delta\implies\lambda$ is an eigenvalue of $T$. Have $\partial\sigma(T)\cap\{z\in\CC:|z|>\delta\}\subseteq\sigma_{ap}(T)\cap\{z\in\CC:|z|>\delta\}\subseteq\{\lambda_1,...,\lambda_k\}$
+    So $\sigma(T)\cap\{z\in\CC:|z|>\delta\}=\{\lambda_1,...,\lambda_k\}$.
+\end{proof}
+We now consider compact Hermitian operators.
+\begin{example}
+    Suppose $T:\ell_2\to \ell_2$ is defined by $T(\sum_nx_ne_n)=\sum_n\lambda_nx_ne_n$ where $\lambda_n$ real and $\lambda_n\to0$. This is clearly Hermitian and compact (being the limit of finite rank operators). We will show that this is the only example.
+\end{example}
+\begin{thm}[Spectral Theorem for Compact Hermitian Operators]
+    $H$ separable Hilbert space; $T\in L(H)$ compact Hermitian. Then
+    \begin{enumerate}[(i)]
+        \item $H$ has an orthonormal basis $(e_n)$ consisting of eigenvectors of $T$.
+        \item The corresponding eigenvalues $\lambda_n\to 0$ if $\dim H=\infty$.
+    \end{enumerate}
+\end{thm}
+\begin{rem}
+Note that (i) $\implies$ (ii). Using a proposition we proved earlier.
+\end{rem}
+\begin{proof}
+    Let the eigenvalues of $T$ be $\lambda_1,\lambda_2,...$ (could be finite or even empty). Then the eigenspaces $E(\lambda_i)$ are pairwise orthogonal. Pick an orthonormal basis for each $E(\lambda_i)$, then their union is an orthonormal sequence which has closed linear span $Y$. We claim that $Y=H$.
+    \begin{proof}[Proof of claim]
+        $T$ acts on $E(\lambda_n)$ for each $n$, so $T$ acts on $E(\lambda_n)^\perp$, so $T$ acts on $\bigcap_nE(\lambda_n)^\perp=Y^\perp$. Now $T|_{Y^\perp}$ is compact since $Y^\perp$ is closed and $T$ is compact, and $T|_{Y^\perp}$ has no eigenvalues. Therefore, $r(T|_{Y^\perp})=0$, i.e., $T|_{Y^\perp}=0$, so $Y^\perp=\{0\}$ because $0$ is not an eigenvalue of $T|_{Y^\perp}$.
+    \end{proof}
+\end{proof}
+\begin{thm}
+    $H$ Hilbert; $T\in L(H)$ compact Hermitian. Then there exists a closed subspace $Y$ of $H$ and an orthonormal basis $(e_n)$ of $Y$ and $(\lambda_n)$ in $\RR$ s.t. $\forall x\in H$, $x=\sum_nx_ne_n+z;\ z\in Y^\perp\implies Tx=\sum_n\lambda_nx_ne_n$.
+\end{thm}
+\begin{proof}
+    Let the non-zero eigenvalues of $T$ be $\lambda_1,\lambda_2,...$ (could be finite or even empty). Pick an orthonormal basis of each $E(\lambda_i)$ ($\dim E(\lambda_i)<\infty$). Their union $(e_n)$ is an orthonormal basis for $Y=\overline{\langle E(\lambda_i):\lambda_i\in\sigma(T),\ \lambda\neq0\rangle}$. Note that $T$ acts on $Y^\perp$ with $T|_{Y^\perp}$ having no non-zero eigenvalues, so $r(T|_{Y^\perp})=0$, so $\|T|_{Y^\perp}\|=0$ (since $T|_{Y^\perp}$ is Hermitian), so $T|_{Y^\perp}=0$.
 \end{proof}
 \end{document}
