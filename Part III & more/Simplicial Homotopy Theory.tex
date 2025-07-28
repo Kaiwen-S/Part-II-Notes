@@ -179,6 +179,7 @@ Given a topological space $X$, there is an associated homotopy type s.t.
 
 We want to study homotopy types. These can be presented as topological spaces (that are homeo to CW complexes) up to homotopy equivalence. SInce spaces are complicated unwieldy objects, we will seek to describe homotopy types in combinatorial terms. We will desribe homotopy types as special sorts of simplicial sets up to an appropriate notion of equivalence.
 
+\section{Simplicial Sets}
 \begin{defn}
     The simplex category $\mathbf{\Delta}$ has 
     \begin{itemize}
@@ -257,7 +258,7 @@ This functor will allow us to visualize simplicial sets constructed by combinato
     If $n=1$, then any non-surjective order preserving function is constantly $0$ or $1$.
 
     If $n\ge 2$, then we have
-    \[\partial \Delta^n=\operatorname{colim}\left(\coprod_{0\le i<j\le n}\Delta^{n-2}\overset{\rightarrow}{\rightarrow}\coprod_{0\le i\le n}\Delta^{n-1}\right)\]
+    \[\partial \Delta^n=\operatorname{colim}\left(\coprod_{0\le i<j\le n}\Delta^{n-2}\rightrightarrows\coprod_{0\le i\le n}\Delta^{n-1}\right)\]
 \end{proof}
 \begin{example}
     For $n\ge1$ and $0\le i\le n$, we define $\Lambda_i^n$, the $i$th horn in $\Delta^n$ to send $[m]$ to the set of order-preserving functions $\{0\le1\le...\le m\}\to\{0\le 1\le...\le n\}$ such that $\im(\alpha)\not\supseteq\{0\le...\le i-1\}\cup\{i+1\le...\le n\}$.
@@ -331,6 +332,7 @@ Note that $N([n])=\Delta^n$.
     A map $\Lambda)i^n\to N(\mathscr C)$ is a diagram.
 \end{proof}
 
+\subsection{Anodyne Maps and Fibrations}
 We will define a collection of morhpisms of simplicial sets $A\to B$ (including the horn inclusion). If $K$ is a Kan complex and $A\to K$ a map, then there will be a lift to $B$.
 \begin{defn}
     The collection of anodyne morphisms is the smallest collection of morphisms in $s\bset$ s.t.
@@ -369,7 +371,15 @@ Given simplicial sets $A, B$, the product simplicial set $A\times B$ is the func
 \begin{defn}
     Given two maps $i:A\to B$, $j:X\to Y$ in $s\bset$, the pushout product is the morphism
     \[i\boxtimes j:(A\times Y)\coprod_{A\times X} (B\times X)\to B\times Y\]
-    arising from the commuting square.
+    arising from the commutative diagram:
+    \begin{center}
+        % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZARgBoAGAXVJADcBDAGwFcYkQBBAHS7wFt4AAgCaIAL6l0mXPkIpypYtTpNW7AEI9+QgBrjJIDNjwEiCqjQYs2iTlqwC4gvRKnHZRAEylPyq2ttNXgchUVdDaRM5EkU-VRs7YMcRHgBjCDQAJ2gAfWBuJN0xIO0nF2UYKABzeCJQADNsviRvEBwIJHJwxohmxAU2jsQAFm6mlpp2pGIx3unJodGDHr7hhaQAZkt49iweACMIAA9SwQArfQbx-vXELZB9mDAoTa7l67JBzZpH56QAWg2XUoYiAA
+\begin{tikzcd}
+A\times X \arrow[r] \arrow[d]               & A\times Y \arrow[d] \arrow[rdd, bend left]                       &           \\
+B\times X \arrow[r] \arrow[rrd, bend right] & A\times Y\coprod_{A\times X}B\times X \arrow[rd, "i\boxtimes j"] &           \\
+                                            &                                                                  & B\times Y
+\end{tikzcd}
+    \end{center}
 \end{defn}
 \begin{prop}
     Suppose $i:A\to B$ is a monomorphism and $j:X\to Y$ is anodyne, then the $i\boxtimes j$ is anodyne.
@@ -768,7 +778,7 @@ F' \arrow[r] \arrow[d] & F \arrow[d] \arrow[r] & \Delta^0 \arrow[d] \\
     Apply the previous proposition, noting that $\pi_n$ can be expressed as $\pi_0$ of some iterated loop space.
 \end{proof}
 
-Category theory aside.
+\section{A Category theory Aside}
 
 \begin{defn}
     An inner horn inclusion is a map $\Lambda_i^n\hookrightarrow\Delta^n$ with $0<i<n$.
@@ -817,14 +827,7 @@ Examples include $s\bset$, and $\textbf{Kan}$ (of Kan complexes)
 We have functors
 \[\btop\overset{\sing}{\longrightarrow}\mathbf{Kan}\overset{}{\longrightarrow}\mathcal S\overset{}{\longrightarrow}\operatorname{Ho}(\mathcal S)\]
 
-\section{Homotopy colimit and limit}
-Let $\mathscr C$ be a quasicategory. Then $\underline{\Hom}(\Lambda_2^2,\mathscr C)$ is a quasicategory The right-adjoint to the constant diagram functor $\operatorname{Ho}\mathscr C\to\operatorname{Ho}\underline{\Hom}(\Lambda_2^2,\mathscr C)$ is the homotopy pullback functor. 
-\begin{rem}
-    This defines the homotopy pullback as a functor
-    \[\operatorname{Ho}\underline{\Hom}(\Lambda_2^2,\mathscr C)\to\operatorname{Ho}\mathscr C\] Can go futher into objects and define it as a functor $\underline{\Hom}(\Lambda_2^2,\mathscr C)\to\mathscr C$. This allows us to define a Kan complex of homotopy pullbacks that is contractible (equivalent to $\Delta^0$)
-\end{rem}
-\section{Quasicategories}
-A simplicial category is a category where morphisms are simplicial sets.
+Recall that a simplicial category is a category where morphisms between two objects are simplicial sets.
 \begin{defn}
     Given a simplicial category $\mathscr C$, its homotopy coherent nerve is the simplicial set with $[n]$ simplices, functors of simplicial categories from $\operatorname{Path}(\Delta^m)$ to $\mathscr C$.
 \end{defn}
@@ -837,6 +840,15 @@ A simplicial category is a category where morphisms are simplicial sets.
 \begin{proof}[Proof Sketch]
     \textbf{[later]}
 \end{proof}
+
+\subsection{Homotopy colimit and limit}
+Let $\mathscr C$ be a quasicategory. Then $\underline{\Hom}(\Lambda_2^2,\mathscr C)$ is a quasicategory The right-adjoint to the constant diagram functor $\operatorname{Ho}\mathscr C\to\operatorname{Ho}\underline{\Hom}(\Lambda_2^2,\mathscr C)$ is the homotopy pullback functor. 
+\begin{rem}
+    This defines the homotopy pullback as a functor
+    \[\operatorname{Ho}\underline{\Hom}(\Lambda_2^2,\mathscr C)\to\operatorname{Ho}\mathscr C\] Can go futher into objects and define it as a functor $\underline{\Hom}(\Lambda_2^2,\mathscr C)\to\mathscr C$. This allows us to define a Kan complex of homotopy pullbacks that is contractible (equivalent to $\Delta^0$)
+\end{rem}
+%\section{Quasicategories}
+
 \subsection{Diagrams in a Quasicategory}
 If $K$ is a simplicial set and $\mathscr C$ is a quasicategory, then $\underline{\Hom}(K,\mathscr C)$ is a quasicategory. This is the quasicategory of $K$-shaped diagram in $\mathscr C$.
 \begin{example}
@@ -1169,7 +1181,9 @@ s.t. $\pi_iX^{(n)}=\begin{cases}
 
     Now use the LES of homotopy group to deduce that $\pi_n(E)\to \pi_n(B)$ is an iso for $n\ge 2$ and $n=0$. Note that near $\pi_1(F)$, we have $\pi_2(E)\to \pi_2(B)\to\pi_1(F)\to 0$ by simply connectedness assumption, so $\pi_2(B)$ surjects to $\pi_1(F)$, so $\pi_1(F)$ is abelian, so $\pi_1(F)\cong H_1(F)=0$, so $\pi_1(E)\to \pi_1(B)$ is an iso. The result then follows from Whitehead Thm.
 \end{proof}
-\subsection{Serre mod $\mathcal C$ theory}
+\subsection{An Application of Whitehead Tower}
+Wilson space.
+\section{Serre mod $\mathcal C$ theory}
 \begin{defn}
      A collection of abelian groups is said to be an acyclic Serre class $\mathcal C$ if
      \begin{enumerate}[(1)]
@@ -1278,8 +1292,8 @@ e.g., $H^\ast(K(\FF_2,2);\FF_2)\cong\FF_2[\iota_2,Sq^1\iota_2,Sq^2Sq^1\iota_2,Sq
 Note if there exists a multiplication $\RR^n\times\RR^n\to\RR^n$ which is unital and every non-zero element has an inverse, then one can create such a space.
 
 ------------------------
-
-\section{(Co)limits}
+\section{An Outlook}
+\subsection{(Co)limits}
 Suppose $\mathcal C$ is quasicategory, e.g., $\mathcal S$, $\text{HR}$-modules, $\mathcal S_\ast$. If $D$ is a simplicial set, then a functor $D\to\mathcal C$ is a map of simplicial set. Functors are objects of $\underline{\Hom}(D,\mathcal C)$ which is a quasicategory. The functor $\mathcal C\to\underline{\Hom}(D,\mathcal C)$ (sending objects of $\mathcal C$ to the constant diagram valued at that object). Have $\operatorname{Ho}(\mathcal C)\to \operatorname{Ho}\underline{\Hom}(D,\mathcal C)$. The left adjoint is homotopy colimit.
 
 \begin{rem}
@@ -1318,7 +1332,7 @@ These are called the stable homotopy groups of spheres.
 Kervaire-Milnor: If $n\ge 5$, the group (under connected sum) of diffeo classes of oriented manifolds htpy equivalent to $S^n$ differs from $\pi_n^{st}$ via two cyclic groups.
 (By the 80s the order of these groups is known unless $n$ is 2 less than a power of 2. In 2009 (Hills-Hopkins-Ravenel) solved every case except $n=126$. The final case was resolved in 2024 (Wang-Xu-Weilen))
 
-\section{$H\ZZ$-localization}
+\subsection{$H\ZZ$-localization}
 \begin{defn}
     Say that a Kan complex $W$ is $H\ZZ$-local if for every map of Kan complexes $X\to Y$ s.t. $H_\ast(X;\ZZ)\to H_\ast(Y;\ZZ)$ is an iso, $[Y,W]\to [X,W]$ is a bijection
 \end{defn}
@@ -1340,7 +1354,7 @@ Kervaire-Milnor: If $n\ge 5$, the group (under connected sum) of diffeo classes 
 \begin{rem}
     Can do something similar for any group $G$, when $G$ is the limit of $\operatorname{GL}_n(\RR)$, i.e., $G=\operatorname{GL}_\infty(\RR)$ Then $\pi_iL_{H\ZZ}N(BG)=K_i(\RR)$, the $i$th algebraic $K$ group of $\RR$.
 \end{rem}
-\section{Higher Algebra}
+\subsection{Higher Algebra}
 \begin{rem}
     A simplicial abelian group is a Kan complex $A_\bullet$ with a map $+:A_\bullet\times A_\bullet\to A_\bullet$ which is commutative, associative, etc.
 \end{rem}
